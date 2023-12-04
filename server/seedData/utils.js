@@ -119,6 +119,7 @@ const seedOrderData = (seededProducts) => {
     const status = getRandomItem(statusSet);
     const products = getRandomCartProducts(seededProducts);
 
+    // HELPER FUNCTION: CALCULATE THE TOTAL PRICE OF THE ORDER
     const calculateTotalPrice = () => {
       return products
         .reduce(
