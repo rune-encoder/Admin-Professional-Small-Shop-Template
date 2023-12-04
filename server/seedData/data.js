@@ -1,13 +1,13 @@
 const bcrypt = require("bcrypt");
 
-// !IMPORTANT! TEST ADMIN DATA
+// |===== ADMIN COLLECTION DATA (TEST ADMIN) =====|
 const admin = {
   username: "admin",
   email: "admin@code.com",
   password: bcrypt.hashSync("password1234", 10),
 };
 
-// CATEGORY DATA
+// |===== CATEGORY COLLECTION DATA =====|
 const categories = [
   { name: "Plates" },
   { name: "Bowls" },
@@ -15,7 +15,7 @@ const categories = [
   { name: "Pots" },
 ];
 
-// PRODUCT DATA
+//  |===== PRODUCT COLLECTION DATA =====|
 const products = {
   platesProductNames: [
     "Dinner Plate",
@@ -76,7 +76,9 @@ const shortDescription = [
 const details =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nis";
 
-// ORDER DATA
+// |===== ORDER COLLECTION DATA =====|
+const statusSet = ["pending", "completed", "cancelled"];
+
 const firstNameSet = [
   "Chris",
   "John",
@@ -151,21 +153,19 @@ const emailSet = [
   "@protonmail.com",
 ];
 
-const statusSet = ["pending", "completed", "cancelled"];
-
-// HELPER FUNCTION TO GET A RANDOM ITEM FROM AN ARRAY
+// HELPER FUNCTION: GET A RANDOM ITEM FROM AN ARRAY
 const getRandomItem = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-// HELPER FUNCTION TO GENERATE A RANDOM PRICE
+// HELPER FUNCTION: GENERATE A RANDOM PRICE
 const getRandomPrice = () => {
   // Generate a random price between 0 and 130.00
   const randomPrice = +(Math.random() * 130).toFixed(2);
   return randomPrice;
 };
 
-// GENERATE RANDOM USERNAME
+// HELPER FUNCTION: GENERATE A RANDOM USERNAME
 const getRandomUsername = () => {
   const randomSetOne = getRandomItem(userNames.wordSetOne);
   const randomSetTwo = getRandomItem(userNames.wordSetTwo);
@@ -177,7 +177,7 @@ const getRandomUsername = () => {
   return username;
 };
 
-// GENERATE RANDOM EMAIL FOR A USER
+// HELPER FUNCTION: GENERATE A RANDOM EMAIL
 const getRandomEmail = (username) => {
   const randomEmailDomain = getRandomItem(emailSet);
   const email = username.toLowerCase() + randomEmailDomain;
@@ -185,7 +185,7 @@ const getRandomEmail = (username) => {
   return email;
 };
 
-// GENERATE RANDOM PHONE NUMBER
+// HELPER FUNCTION: GENERATE A RANDOM PHONE NUMBER
 const getRandomPhoneNumber = () => {
   const phoneNumber =
     Math.floor(Math.random() * 900 + 100) + // Area code (3 digits)
@@ -197,7 +197,9 @@ const getRandomPhoneNumber = () => {
   return phoneNumber;
 };
 
-// SEED PRODUCT DATA TO PRODUCT COLLECTION
+// |===== SEED DATA FUNCTIONS =====|
+
+// SEED PRODUCT DATA TO THE PRODUCT COLLECTION
 const seedProductData = (categories) => {
   const productData = [];
 
@@ -231,7 +233,7 @@ const seedProductData = (categories) => {
   return productData;
 };
 
-// GET RANDOM PRODUCTS FOR THE CART NEEDED FOR THE ORDER
+// HELP FUNCTION: GET RANDOM PRODUCTS FOR THE CART IN THE ORDER COLLECTION
 const getRandomCartProducts = (products) => {
   const randomProducts = [];
   const numberOfProducts = Math.floor(Math.random() * 3 + 1); // Between 1 and 3
@@ -289,6 +291,27 @@ const seedOrderData = (seededProducts) => {
   return orderData;
 };
 
+// SEED SHOP DATA TO SHOP COLLECTION
+const seedShopData = (seededAdmin, seededProducts, seededCategories, seededOrders) => {
+  const shopData = {
+    name: "My Shop Template",
+    moto: "The convenient shop template for your business!",
+    address: "123 Fake Street",
+    city: "Fake City",
+    state: "Fake State",
+    zipCode: "12345",
+    phoneNumber: "123-456-7890",
+    email: "myshop@email.com",
+    admin: seededAdmin[0]._id,
+    products: seededProducts.map((product) => product._id),
+    categories: seededCategories.map((category) => category._id),
+    guests: [],
+    orders: seededOrders.map((order) => order._id),
+  };
+  return shopData;
+}
+
+
 module.exports = {
   admin,
   categories,
@@ -298,4 +321,5 @@ module.exports = {
   getRandomEmail,
   seedProductData,
   seedOrderData,
+  seedShopData,
 };

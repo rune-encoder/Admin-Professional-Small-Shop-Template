@@ -6,6 +6,7 @@ const {
   categories,
   seedProductData,
   seedOrderData,
+  seedShopData,
 } = require("./data.js");
 
 // IMPORT THE HELPER FUNCTIONS
@@ -76,22 +77,12 @@ const seedDatabase = async () => {
     );
 
     // SEED SHOP COLLECTION WITH SHOP DATA
-    const shop = {
-      name: "My Shop Template",
-      moto: "The convenient shop template for your business!",
-      address: "123 Fake Street",
-      city: "Fake City",
-      state: "Fake State",
-      zipCode: "12345",
-      phoneNumber: "123-456-7890",
-      email: "myshop@email.com",
-      admin: seededAdmin[0]._id,
-      products: seededProducts.map((product) => product._id),
-      categories: seededCategories.map((category) => category._id),
-      guests: [],
-      orders: seededOrders.map((order) => order._id),
-    };
-
+    const shop = seedShopData(
+      seededAdmin,
+      seededProducts,
+      seededCategories,
+      seededOrders
+    );
     await Shop.collection.insertOne(shop);
     const seededShop = await serializeData(Shop);
 
