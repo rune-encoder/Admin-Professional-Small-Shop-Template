@@ -7,6 +7,10 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  orderNumber: {
+    type: Number,
+    required: true,
+  },
   products: [productInCartSchema],
   totalPrice: {
     type: Number,
