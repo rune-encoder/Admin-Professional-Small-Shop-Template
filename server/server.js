@@ -1,18 +1,18 @@
-// Import Express.js and Apollo Server
+// IMPORT EXPRESS.JS AND APOLLO SERVER
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 
-// Import Schema and Resolvers from the schema folder
+// IMPORT TYPEDEFS AND RESOLVERS
 const { typeDefs, resolvers } = require("./schemas");
 
-// Import middleware function for authentication.
-const { authMiddleware } = require("./utils/auth");
+// IMPORT MIDDLEWARE FUNCTION FOR AUTHENTICATION
+const { authMiddleware } = require("./utils/authentication");
 
-// Database connection and "path" to serve up static assets
+// DATABASE CONNECTION AND "PATH" TO SERVE UP STATIC ASSETS
 const db = require("./config/connection");
 const path = require("path");
 
-// Create a new instance of an Apollo server with the GraphQL schema
+// CREATE A NEW INSTANCE OF APOLLO SERVER AND PASS IN THE SCHEMA DATA
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -21,13 +21,15 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-// Start the Apollo server
+// START APOLLO SERVER
 const startApolloServer = async () => {
   await server.start();
 
   app.use(express.urlencoded({ extended: false }));
+  // !Revisit: May need to increase or decrease the limit.
   app.use(express.json({ limit: "5mb" }));
 
+  // Tell Apollo server to use the Express application as middleware.
   server.applyMiddleware({ app });
 
   if (process.env.NODE_ENV === "production") {

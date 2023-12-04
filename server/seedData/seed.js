@@ -7,7 +7,7 @@ const { Admin, Category, Product, Order, Shop } = require("../models/index.js");
 const { admin, categories } = require("./data.js");
 
 // IMPORT THE HELPER FUNCTIONS TO SEED DATA (PRODUCTS, ORDERS, AND SHOP)
-const { seedProductData, seedOrderData, seedShopData } = require("./utils.js");
+const { seedProductData, seedOrderData, seedShopData } = require("./seedUtils.js");
 
 // IMPORT THE HELPER FUNCTIONS
 const dropCollectionIfExists = require("./dropCollectionIfExists.js");
