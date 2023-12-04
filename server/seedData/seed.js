@@ -1,13 +1,13 @@
 const connection = require("../config/connection.js");
 
+// IMPORT THE MODELS
 const { Admin, Category, Product, Order, Shop } = require("../models/index.js");
-const {
-  admin,
-  categories,
-  seedProductData,
-  seedOrderData,
-  seedShopData,
-} = require("./data.js");
+
+// IMPORT THE DATA (ADMIN AND CATEGORIES)
+const { admin, categories } = require("./data.js");
+
+// IMPORT THE HELPER FUNCTIONS TO SEED DATA (PRODUCTS, ORDERS, AND SHOP)
+const { seedProductData, seedOrderData, seedShopData } = require("./utils.js");
 
 // IMPORT THE HELPER FUNCTIONS
 const dropCollectionIfExists = require("./dropCollectionIfExists.js");
