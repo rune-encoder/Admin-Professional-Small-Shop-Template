@@ -5,6 +5,27 @@ const shopSchema = new Schema({
     type: String,
     required: true,
   },
+  moto: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  state: {
+    type: String,
+  },
+  zipCode: {
+    type: String,
+  },
+  phoneNumber: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
   admin: {
     type: Schema.Types.ObjectId,
     ref: "Admin",

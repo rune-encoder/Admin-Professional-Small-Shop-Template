@@ -15,7 +15,10 @@ const productSchema = new Schema({
     required: true,
     trim: true,
   },
-  description: {
+  shortDescription: {
+    type: String,
+  },
+  details: {
     type: String,
   },
   price: {
@@ -28,9 +31,17 @@ const productSchema = new Schema({
     min: 0,
     default: 0,
   },
+
+  // IMAGE FOR THE PRODUCT 
   image: {
     cloudinaryId: String,
     url: String,
+  },
+
+  // IS THE PRODUCT FEATURED (FOR CAROUSEL)
+  isFeatured: {
+    type: Boolean,
+    default: false,
   },
 });
 
