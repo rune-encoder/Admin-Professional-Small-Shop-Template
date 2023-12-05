@@ -78,7 +78,7 @@ const seedDatabase = async () => {
     try {
       const products = seedProductData(seededCategories);
 
-      // Ensure validations are run on the data and default values are saved. (createdAt)
+      // Ensure validations are run on the data and default values are saved. (createdAt, price)
       for (let productData of products) {
         const newProduct = new Product(productData);
         await newProduct.save();
@@ -99,7 +99,7 @@ const seedDatabase = async () => {
     try {
       const orders = seedOrderData(seededProducts);
 
-      // Ensure validations are run on the data and default values are saved. (createdAt)
+      // Ensure validations are run on the data and default values are saved. (totalPrice)
       for (let orderData of orders) {
         const newOrder = new Order(orderData);
         await newOrder.save();
@@ -124,7 +124,11 @@ const seedDatabase = async () => {
         seededCategories,
         seededOrders
       );
-      await Shop.collection.insertOne(shop);
+
+      // Ensure validations are run on the data and default values are saved.
+      const newShop = new Shop(shop);
+      await newShop.save();
+
     } catch (error) {
       console.error(error);
     }
