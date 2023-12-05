@@ -12,6 +12,10 @@ const { AuthenticationError } = require("apollo-server-express");
 const resolvers = {
   Query: {
     categories: async (parent, args, context, info) => {
+      if (context.admin._id !== process.env.ADMIN_ID) {
+        throw new AuthenticationError('Admin authentication required');
+      }
+
       return await Category.find();
     },
 

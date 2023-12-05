@@ -1,6 +1,13 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const adminLevels = {
+  OWNER: "owner",
+  MANAGER: "manager",
+  EDITOR: "editor",
+  VIEWER: "viewer",
+}
+
 const adminSchema = new Schema({
   username: {
     type: String,
@@ -18,12 +25,11 @@ const adminSchema = new Schema({
     required: true,
     minlength: 8,
   },
-  // profilePicture: {
-  //   type: String,
-  // },
-  // contactNumber: {
-  //   type: String,
-  // },
+  permission: {
+    type: String,
+    enum: Object.values(adminLevels),
+    default: adminLevels.VIEWER,
+  },
 });
 
 // ENCRYPTS PASSWORD BEFORE SAVING TO DB

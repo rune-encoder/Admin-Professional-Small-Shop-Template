@@ -6,7 +6,7 @@ const secret = process.env.JWT_SECRET;
 const expiration = "1h"; // 1 HOUR SESSION
 
 module.exports = {
-  // AUTHENTICATION MIDDLEWARE TO VERIFY TOKEN
+  // AUTHENTICATION MIDDLEWARE TO VERIFY TOKEN FOR ADMIN
   authMiddleware: function ({ req }) {
     // ["Bearer", "<tokenvalue>"]
     let token = req.headers.authorization?.split(" ").pop().trim();
@@ -15,13 +15,17 @@ module.exports = {
       return req;
     }
 
+    // VERIFY TOKEN AND ADD DATA TO THE REQUEST
     try {
       const { authenticatedAdmin } = jwt.verify(token, secret, {
         maxAge: expiration,
       });
-      req.user = authenticatedAdmin;
+
+      req.admin = authenticatedAdmin;
+
     } catch (error) {
       if (error.name === "TokenExpiredError") {
+        
         // !Revisit: Refresh token or prompt the user to log in again.
         throw new AuthenticationError("Session expired. Please log in again.");
       } else {

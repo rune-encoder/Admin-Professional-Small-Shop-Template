@@ -6,7 +6,7 @@ const { ApolloServer } = require("apollo-server-express");
 const { typeDefs, resolvers } = require("./schemas");
 
 // IMPORT MIDDLEWARE FUNCTION FOR AUTHENTICATION
-const { authMiddleware } = require("./utils/authentication");
+const { authMiddleware, verifyToken } = require("./utils/authentication");
 
 // DATABASE CONNECTION AND "PATH" TO SERVE UP STATIC ASSETS
 const db = require("./config/connection");

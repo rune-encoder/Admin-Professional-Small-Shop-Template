@@ -122,41 +122,10 @@ const seedOrderData = (seededProducts) => {
     const status = getRandomItem(statusSet);
     const productIds = getRandomCartProducts(seededProducts);
 
-    // HELPER FUNCTION TO MATCH ID WITH SEEDED PRODUCT
-    const findProductById = (productId) => {
-      return seededProducts.find((product) => product._id === productId);
-    };
-
-    // HELPER FUNCTION: CALCULATE THE TOTAL PRICE OF THE ORDER
-    const calculateTotalPrice = () => {
-      let orderedProducts = []
-
-      for (let i = 0; i < productIds.length; i++) {
-        let product = findProductById(productIds[i].product);
-        orderedProducts.push(product);
-      }
-
-      let products = orderedProducts.map((product) => {
-        return {
-          product: product,
-          quantity: productIds.find((item) => item.product === product._id)
-            .quantity,
-        };
-      });
-
-      return products
-        .reduce(
-          (totalPrice, products) =>
-            totalPrice + products.product.price * products.quantity,
-          0
-        )
-        .toFixed(2);
-    };
-
     const order = {
       products: productIds,
-      totalPrice: calculateTotalPrice(),
       status: status,
+      totalPrice: 0, // Calculated in the Order model
       contactFirstName: firstName,
       contactLastName: lastName,
       contactEmail: email,
