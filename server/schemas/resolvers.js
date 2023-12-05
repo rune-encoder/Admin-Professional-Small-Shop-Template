@@ -11,10 +11,10 @@ const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
-    categories: async () => {
+    categories: async (parent, args, context, info) => {
       return await Category.find();
     },
-    
+
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate("category");
     },
@@ -37,14 +37,15 @@ const resolvers = {
 
     order: async (parent, { _id }) => {
       return await Order.findById(_id).populate("products.product");
+    },
+
+    orders: async () => {
+      return await Order.find({}).sort({ purchaseDate: -1 }).populate("products.product");
     }
-
-
 
   },
 
   Mutation: {
-    // LOGIN ADMIN
     adminLogin: async (parent, { username, password }) => {
       const admin = await Admin.findOne({ username });
 

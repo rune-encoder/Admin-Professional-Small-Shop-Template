@@ -91,13 +91,11 @@ type Response {
 
 type Query {
     admin: Admin
-
     categories: [Category]
     product(_id: ID!): Product
     products(category: ID, name: String): [Product]
     order(_id: ID!): Order
     orders: [Order]
-
 
     shop: Shop
 }
