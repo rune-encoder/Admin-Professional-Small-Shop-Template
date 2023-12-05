@@ -1,4 +1,5 @@
 // |===== IMPORTS FOR SEED DATA =====|
+const { find } = require("../models/Admin");
 const {
   products,
   shortDescription,
@@ -94,8 +95,10 @@ const getRandomCartProducts = (products) => {
   const numberOfProducts = Math.floor(Math.random() * 3 + 1); // Between 1 and 3
 
   for (let i = 0; i < numberOfProducts; i++) {
+    let orderedProduct = getRandomItem(products);
+
     const randomProduct = {
-      product: getRandomItem(products),
+      product: orderedProduct._id,
       quantity: Math.floor(Math.random() * 5 + 1), // Between 1 and 5
     };
 
@@ -117,10 +120,30 @@ const seedOrderData = (seededProducts) => {
     const email = getRandomEmail(username);
     const phoneNumber = getRandomPhoneNumber();
     const status = getRandomItem(statusSet);
-    const products = getRandomCartProducts(seededProducts);
+    const productIds = getRandomCartProducts(seededProducts);
+
+    // HELPER FUNCTION TO MATCH ID WITH SEEDED PRODUCT
+    const findProductById = (productId) => {
+      return seededProducts.find((product) => product._id === productId);
+    };
 
     // HELPER FUNCTION: CALCULATE THE TOTAL PRICE OF THE ORDER
     const calculateTotalPrice = () => {
+      let orderedProducts = []
+
+      for (let i = 0; i < productIds.length; i++) {
+        let product = findProductById(productIds[i].product);
+        orderedProducts.push(product);
+      }
+
+      let products = orderedProducts.map((product) => {
+        return {
+          product: product,
+          quantity: productIds.find((item) => item.product === product._id)
+            .quantity,
+        };
+      });
+
       return products
         .reduce(
           (totalPrice, products) =>
@@ -131,7 +154,7 @@ const seedOrderData = (seededProducts) => {
     };
 
     const order = {
-      products: products,
+      products: productIds,
       totalPrice: calculateTotalPrice(),
       status: status,
       contactFirstName: firstName,

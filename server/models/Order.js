@@ -7,10 +7,6 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  orderNumber: {
-    type: Number,
-    required: true,
-  },
   products: [productInCartSchema],
   totalPrice: {
     type: Number,
@@ -56,7 +52,7 @@ orderSchema.pre("save", function (next) {
 // VIRTUAL PROPERTY TO CALCULATE THE TOTAL PRICE
 orderSchema.virtual("calculateTotalPrice").get(function () {
   return this.products.reduce(
-    (totalPrice, product) => totalPrice + product.price * product.quantity,
+    (totalPrice, product) => totalPrice + product.product.price * product.quantity,
     0
   );
 });
