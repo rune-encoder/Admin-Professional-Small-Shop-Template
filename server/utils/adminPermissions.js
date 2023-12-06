@@ -1,7 +1,7 @@
 const { ForbiddenError } = require("apollo-server-express");
 
 // ADMIN PERMISSION LEVELS
-// IMPORTANT FOR ADMIN MODEL: CHANGES WILL AFFECT ADMIN MODEL
+// IMPORTANT FOR ADMIN MODEL: CHANGES WILL AFFECT ADMIN MODEL AND ADMIN QUERY & MUTATION RESOLVERS
 const adminLevels = {
   OWNER: "owner",
   MANAGER: "manager",
@@ -10,7 +10,8 @@ const adminLevels = {
 };
 
 // CHECKS IF THE ADMIN HAS THE REQUIRED PERMISSION
-const checkPermission = (admin, requiredPermission) => {
+// (Default permission is "viewer")
+const checkPermission = (admin, requiredPermission = "viewer" ) => {
   // PERMISSION LEVEL HIERARCHY
   const permissionLevel = {
     owner: 1,
@@ -22,7 +23,7 @@ const checkPermission = (admin, requiredPermission) => {
   // IF THE ADMIN'S PERMISSION LEVEL IS LOWER IN HIERARCHY (HIGHER NUMBER) THAN THE REQUIRED PERMISSION LEVEL, THROW AN ERROR
   // IF THE ADMIN'S PERMISSION LEVEL IS HIGHER IN HIERARCHY (LOWER NUMBER OR EQUAL) THAN THE REQUIRED PERMISSION LEVEL, ALLOW ACCESS
   if (permissionLevel[admin.permission] > permissionLevel[requiredPermission]) {
-    throw new ForbiddenError("You are not authorized to perform this action");
+    throw new ForbiddenError("You are not authorized to perform this action!");
   }
 };
 
