@@ -1,20 +1,21 @@
 const { Admin, Shop, Category, Product, Order, Guest } = require("../models");
-const { signToken } = require("../utils/authentication");
-const { AuthenticationError } = require("apollo-server-express");
-// const { uploadImage, cloudConfig } = require("../utils/imageUploader");
 
+const { signToken } = require("../utils/authentication");
+const { checkPermission, adminLevels } = require("../utils/adminPermissions");
+
+const { AuthenticationError, ForbiddenError } = require("apollo-server-express");
+
+// const { uploadImage, cloudConfig } = require("../utils/imageUploader");
 // require("dotenv").config();
 // const fs = require("fs");
 // const cloudinary = require("cloudinary").v2;
-
-// TODO: const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
+// ! const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
 const resolvers = {
   Query: {
     categories: async (parent, args, context, info) => {
-      if (context.admin._id !== process.env.ADMIN_ID) {
-        throw new AuthenticationError('Admin authentication required');
-      }
+
+      checkPermission(context.admin, adminLevels.MANAGER);
 
       return await Category.find();
     },
@@ -44,9 +45,10 @@ const resolvers = {
     },
 
     orders: async () => {
-      return await Order.find({}).sort({ purchaseDate: -1 }).populate("products.product");
-    }
-
+      return await Order.find({})
+        .sort({ purchaseDate: -1 })
+        .populate("products.product");
+    },
   },
 
   Mutation: {

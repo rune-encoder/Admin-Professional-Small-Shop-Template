@@ -4,6 +4,7 @@ type Admin {
     _id: ID
     username: String!
     email: String!
+    permission: String!
 }
 
 type Shop {

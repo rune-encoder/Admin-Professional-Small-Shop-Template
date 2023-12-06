@@ -37,8 +37,8 @@ module.exports = {
   },
 
   // FUNCTION TO CREATE TOKEN WHEN USER LOGS IN
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signToken: function ({ _id, username, email, permission }) {
+    const payload = { _id, username, email, permission };
 
     return jwt.sign({ authenticatedAdmin: payload }, secret, {
       expiresIn: expiration,

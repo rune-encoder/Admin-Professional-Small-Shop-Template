@@ -1,28 +1,26 @@
-const bcrypt = require("bcrypt");
-
 // |===== ADMIN COLLECTION DATA (TEST ADMIN) =====|
 const admin = [
   {
     username: "owner",
     email: "owner@admin.com",
-    password: bcrypt.hashSync("password1234", 10),
+    password: "password1234",
     permission: "owner",
   },
   {
     username: "manager",
-    password: bcrypt.hashSync("password1234", 10),
+    password: "password1234",
     email: "manager@admin.com",
     permission: "manager",
   },
   {
     username: "editor",
-    password: bcrypt.hashSync("password1234", 10),
+    password: "password1234",
     email: "editor@admin.com",
     permission: "editor",
   },
   {
     username: "viewer",
-    password: bcrypt.hashSync("password1234", 10),
+    password: "password1234",
     email: "viewer@admin.com",
   },
 ];
