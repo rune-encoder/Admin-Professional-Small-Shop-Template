@@ -7,7 +7,11 @@ const { Admin, Category, Product, Order, Shop } = require("../models/index.js");
 const { admin, categories } = require("./data.js");
 
 // IMPORT THE HELPER FUNCTIONS TO SEED DATA (PRODUCTS, ORDERS, AND SHOP)
-const { seedProductData, seedOrderData, seedShopData } = require("./seedUtils.js");
+const {
+  seedProductData,
+  seedOrderData,
+  seedShopData,
+} = require("./seedUtils.js");
 
 // IMPORT THE HELPER FUNCTIONS
 const dropCollectionIfExists = require("./dropCollectionIfExists.js");
@@ -37,17 +41,33 @@ const seedDatabase = async () => {
     await dropCollectionIfExists("shops");
 
     // SEED ADMIN COLLECTION WITH ADMIN DATA
-    await Admin.collection.insertOne(admin);
+    try {
+      // Ensure validations are run on the data and default values are saved. (permissions)
+      for (let adminData of admin) {
+        const newAdmin = new Admin(adminData);
+        await newAdmin.save();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     const seededAdmin = await serializeData(Admin);
+
     logMessage(
-      `CREATED ADMIN COLLECTION: SEEDED "${seededAdmin.length}" ADMIN!`,
+      `CREATED ADMIN COLLECTION: SEEDED "${seededAdmin.length}" ADMINS!`,
       setGreen,
       setGreen
     );
 
     // SEED CATEGORY COLLECTION WITH CATEGORY DATA
-    await Category.collection.insertMany(categories);
+    try {
+      await Category.collection.insertMany(categories);
+    } catch (error) {
+      console.error(error);
+    }
+
     const seededCategories = await serializeData(Category);
+
     logMessage(
       `CREATED CATEGORY COLLECTION: SEEDED "${seededCategories.length}" CATEGORIES!`,
       setGreen,
@@ -55,8 +75,18 @@ const seedDatabase = async () => {
     );
 
     // SEED PRODUCT COLLECTION WITH PRODUCT DATA
-    const products = seedProductData(seededCategories);
-    await Product.collection.insertMany(products);
+    try {
+      const products = seedProductData(seededCategories);
+
+      // Ensure validations are run on the data and default values are saved. (createdAt, price)
+      for (let productData of products) {
+        const newProduct = new Product(productData);
+        await newProduct.save();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     const seededProducts = await serializeData(Product);
 
     logMessage(
@@ -66,8 +96,18 @@ const seedDatabase = async () => {
     );
 
     // SEED ORDER COLLECTION WITH ORDER DATA
-    const orders = seedOrderData(seededProducts);
-    await Order.collection.insertMany(orders);
+    try {
+      const orders = seedOrderData(seededProducts);
+
+      // Ensure validations are run on the data and default values are saved. (totalPrice)
+      for (let orderData of orders) {
+        const newOrder = new Order(orderData);
+        await newOrder.save();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     const seededOrders = await serializeData(Order);
 
     logMessage(
@@ -77,13 +117,22 @@ const seedDatabase = async () => {
     );
 
     // SEED SHOP COLLECTION WITH SHOP DATA
-    const shop = seedShopData(
-      seededAdmin,
-      seededProducts,
-      seededCategories,
-      seededOrders
-    );
-    await Shop.collection.insertOne(shop);
+    try {
+      const shop = seedShopData(
+        seededAdmin,
+        seededProducts,
+        seededCategories,
+        seededOrders
+      );
+
+      // Ensure validations are run on the data and default values are saved.
+      const newShop = new Shop(shop);
+      await newShop.save();
+
+    } catch (error) {
+      console.error(error);
+    }
+
     const seededShop = await serializeData(Shop);
 
     logMessage(

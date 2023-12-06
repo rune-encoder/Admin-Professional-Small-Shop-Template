@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const { adminLevels } = require("../utils/adminPermissions");
+
 const adminSchema = new Schema({
   username: {
     type: String,
@@ -18,14 +20,14 @@ const adminSchema = new Schema({
     required: true,
     minlength: 8,
   },
-  // profilePicture: {
-  //   type: String,
-  // },
-  // contactNumber: {
-  //   type: String,
-  // },
+  permission: {
+    type: String,
+    enum: Object.values(adminLevels),
+    default: adminLevels.VIEWER,
+  },
 });
 
+// |===== MIDDLEWARE =====|
 // ENCRYPTS PASSWORD BEFORE SAVING TO DB
 adminSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("password")) {
@@ -35,6 +37,7 @@ adminSchema.pre("save", async function (next) {
   next();
 });
 
+// |===== METHODS =====|
 // METHOD TO COMPARE AND VALIDATE PASSWORD FOR LOGGING IN
 adminSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);

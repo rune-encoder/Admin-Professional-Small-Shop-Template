@@ -1,11 +1,29 @@
-const bcrypt = require("bcrypt");
-
 // |===== ADMIN COLLECTION DATA (TEST ADMIN) =====|
-const admin = {
-  username: "admin",
-  email: "admin@code.com",
-  password: bcrypt.hashSync("password1234", 10),
-};
+const admin = [
+  {
+    username: "owner",
+    email: "owner@admin.com",
+    password: "password1234",
+    permission: "owner",
+  },
+  {
+    username: "manager",
+    password: "password1234",
+    email: "manager@admin.com",
+    permission: "manager",
+  },
+  {
+    username: "editor",
+    password: "password1234",
+    email: "editor@admin.com",
+    permission: "editor",
+  },
+  {
+    username: "viewer",
+    password: "password1234",
+    email: "viewer@admin.com",
+  },
+];
 
 // |===== CATEGORY COLLECTION DATA =====|
 const categories = [
