@@ -44,6 +44,7 @@ const orderSchema = new Schema(
     },
   },
   {
+    // ! Revisit: Virtuals
     toJSON: {
       virtuals: true,
     },
@@ -81,8 +82,7 @@ orderSchema.methods.calculateTotalPrice = async function () {
       
       return this.totalPrice;
     } catch (error) {
-      console.error("Error calculating total price:", error);
-      throw error; // Rethrow the error to prevent saving the document
+      throw error; 
     }
   };
   

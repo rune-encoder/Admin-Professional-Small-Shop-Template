@@ -19,7 +19,7 @@ type Shop {
     email: String
 
     #!Revisit: Do we need to include the admin here?
-    admin: Admin
+    admin: Admin!
 
     products: [Product]
     categories: [Category]
@@ -60,16 +60,15 @@ type Order {
     _id: ID
     purchaseDate: String
     products: [Cart]
-    totalPrice: Float
+    totalPrice: Float!
     status: String
-    contactFirstName: String
-    contactLastName: String
-    contactEmail: String
-    contactPhone: String
-    shippingAddress: String
-    paymentDetails: String
+    contactFirstName: String!
+    contactLastName: String!
+    contactEmail: String!
+    contactPhone: String!
+    shippingAddress: String!
+    paymentDetails: String!
 
-    #calculateTotalPrice: Float
     fullName: String
 }
 
@@ -88,19 +87,40 @@ type Response {
     errors: [String]
 }
 
-# TODO: The input type for the products being passed to the checkout session
+# |=============== INPUTS ===============|
+input CartInput {
+    product: ID
+    quantity: Int
+}
 
+input OrderFilterInput {
+    _id: ID
+    purchaseDate: String
+    products: [CartInput]
+    totalPrice: Float
+    status: String
+    contactFirstName: String
+    contactLastName: String
+    contactEmail: String
+    contactPhone: String
+    shippingAddress: String
+    paymentDetails: String
+    fullName: String
+}
+
+# |=============== QUERIES ===============|
 type Query {
     admin: Admin
     categories: [Category]
     product(_id: ID!): Product
     products(category: ID, name: String): [Product]
     order(_id: ID!): Order
-    orders: [Order]
+    orders(filters: OrderFilterInput): [Order]
 
     shop: Shop
 }
 
+# |=============== MUTATIONS ===============|
 type Mutation {
     adminLogin(username: String!, password: String!): Auth
 }

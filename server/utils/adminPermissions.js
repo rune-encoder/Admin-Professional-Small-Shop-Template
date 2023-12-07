@@ -2,7 +2,7 @@ const { ForbiddenError } = require("apollo-server-express");
 
 // ADMIN PERMISSION LEVELS
 // IMPORTANT FOR ADMIN MODEL: CHANGES WILL AFFECT ADMIN MODEL AND ADMIN QUERY & MUTATION RESOLVERS
-const adminLevels = {
+const adminLevel = {
   OWNER: "owner",
   MANAGER: "manager",
   EDITOR: "editor",
@@ -12,6 +12,7 @@ const adminLevels = {
 // CHECKS IF THE ADMIN HAS THE REQUIRED PERMISSION
 // (Default permission is "viewer")
 const checkPermission = (admin, requiredPermission = "viewer" ) => {
+
   // PERMISSION LEVEL HIERARCHY
   const permissionLevel = {
     owner: 1,
@@ -29,5 +30,5 @@ const checkPermission = (admin, requiredPermission = "viewer" ) => {
 
 module.exports = {
   checkPermission,
-  adminLevels,
+  adminLevel,
 };
