@@ -88,6 +88,13 @@ type Response {
 }
 
 # |=============== INPUTS ===============|
+input AdminFilterInput {
+    _id: ID
+    username: String
+    email: String
+    permission: String
+}
+
 input ProductFilterInput {
     _id: ID
     createdAt: String
@@ -123,7 +130,8 @@ input OrderFilterInput {
 
 # |=============== QUERIES ===============|
 type Query {
-    admin: Admin
+    admin(_id: ID!): Admin
+    admins(filters: AdminFilterInput): [Admin]
     categories: [Category]
     product(_id: ID!): Product
     products(filters: ProductFilterInput): [Product]

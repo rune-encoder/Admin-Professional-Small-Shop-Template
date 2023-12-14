@@ -25,6 +25,22 @@ const withAuth = (resolverFunction, requiredPermission) => {
 
 const resolvers = {
   Query: {
+    admin: withAuth(async (parent, { _id }, context) => {
+      return await Admin.findById(_id);
+    }, adminLevel.OWNER),
+
+    admins: withAuth(async (parent, { filters }, context) => {
+      const query = {};
+
+      for (let key in filters) {
+        if (filters[key]) {
+          query[key] = filters[key];
+        }
+      }
+
+      return await Admin.find(query);
+    }, adminLevel.OWNER),
+
     categories: withAuth(async (parent, args, context) => {
       return await Category.find();
     }),
@@ -100,11 +116,6 @@ const resolvers = {
     adminCreate: withAuth(async (parent, args, context) => {
       return await Admin.create(args);
     }, adminLevel.OWNER),
-
-
-
-
-
   },
 };
 
