@@ -88,6 +88,19 @@ type Response {
 }
 
 # |=============== INPUTS ===============|
+input ProductFilterInput {
+    _id: ID
+    createdAt: String
+    category: ID
+    name: String
+    #shortDescription: String
+    #details: String
+    price: Float
+    quantity: Int
+    isFeatured: Boolean
+    inStock: Boolean
+}
+
 input CartInput {
     product: ID
     quantity: Int
@@ -113,7 +126,7 @@ type Query {
     admin: Admin
     categories: [Category]
     product(_id: ID!): Product
-    products(category: ID, name: String): [Product]
+    products(filters: ProductFilterInput): [Product]
     order(_id: ID!): Order
     orders(filters: OrderFilterInput): [Order]
 
@@ -123,6 +136,7 @@ type Query {
 # |=============== MUTATIONS ===============|
 type Mutation {
     adminLogin(username: String!, password: String!): Auth
+    adminCreate(username: String!, email: String!, password: String!, permission: String!): Admin
 }
 `;
 

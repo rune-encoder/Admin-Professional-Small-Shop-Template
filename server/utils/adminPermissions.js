@@ -10,7 +10,7 @@ const adminLevel = {
 };
 
 // CHECKS IF THE ADMIN HAS THE REQUIRED PERMISSION
-// (Default permission is "viewer")
+// (Default permission level to "viewer")
 const checkPermission = (admin, requiredPermission = "viewer" ) => {
 
   // PERMISSION LEVEL HIERARCHY

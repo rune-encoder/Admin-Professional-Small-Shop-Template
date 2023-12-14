@@ -3,7 +3,7 @@ const { AuthenticationError } = require("apollo-server-express");
 require("dotenv").config();
 
 const secret = process.env.JWT_SECRET;
-const expiration = "1h"; // 1 HOUR SESSION
+const expiration = "2h"; // 2 HOUR SESSION
 
 module.exports = {
   // AUTHENTICATION MIDDLEWARE TO VERIFY TOKEN FOR ADMIN
