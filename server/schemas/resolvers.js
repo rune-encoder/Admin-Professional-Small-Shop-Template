@@ -185,14 +185,14 @@ const resolvers = {
       return await Category.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
 
-    createProduct: withAuth(async (parent, args, context) => {
-      return await Product.create(args);
+    createProduct: withAuth(async (parent, { input }, context) => {
+      return await Product.create(input);
     }, adminLevel.EDITOR),
 
-    updateProduct: withAuth(async (parent, args, context) => {
+    updateProduct: withAuth(async (parent, { _id, input }, context) => {
       return await Product.findByIdAndUpdate(
-        args._id,
-        args.product,
+        _id,
+        input,
         { new: true, runValidators: true }
       );
     }, adminLevel.EDITOR),

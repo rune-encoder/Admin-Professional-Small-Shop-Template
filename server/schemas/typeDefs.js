@@ -119,13 +119,18 @@ input OrderFilterInput {
 }
 
 # <=== INPUTS FOR MUTATIONS ===>
+input ImageInput {
+    cloudinaryId: String
+    url: String
+}
+
 input ProductInput {
-    category: ID!
-    name: String!
+    category: ID
+    name: String
     shortDescription: String
     details: String
-    price: Float!
-    quantity: Int!
+    price: Float
+    quantity: Int
     image: ImageInput
     isFeatured: Boolean
 }
@@ -154,8 +159,8 @@ type Mutation {
     updateCategory(_id: ID!, name: String!): Category
     deleteCategory(_id: ID!): Category
 
-    createProduct(product: ProductInput!): Product
-    updateProduct(_id: ID!, product: ProductInput!): Product
+    createProduct(input: ProductInput!): Product
+    updateProduct(_id: ID!, input: ProductInput!): Product
     deleteProduct(_id: ID!): Product
 }
 `;
