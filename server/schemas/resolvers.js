@@ -3,7 +3,10 @@ const { Admin, Shop, Category, Product, Order, Guest } = require("../models");
 const { signToken } = require("../utils/authentication");
 const { checkPermission, adminLevel } = require("../utils/adminPermissions");
 
-const { AuthenticationError } = require("apollo-server-express");
+const {
+  AuthenticationError,
+  ForbiddenError,
+} = require("apollo-server-express");
 
 // const { uploadImage, cloudConfig } = require("../utils/imageUploader");
 // require("dotenv").config();
@@ -23,6 +26,42 @@ const withAuth = (resolverFunction, requiredPermission) => {
   };
 };
 
+// QUERY HELPER FUNCTION: USES SELECTED FILTERS TO CREATE A QUERY
+const createQueryFromFilters = (filters) => {
+  const query = {};
+
+  for (let key in filters) {
+    if (filters[key]) {
+      query[key] = filters[key];
+    }
+  }
+
+  return query;
+};
+
+// QUERY HELPER FUNCTION (SPECIFIC TO ORDERS): USES SELECTED FILTERS TO CREATE A QUERY
+const createQueryForOrders = (filters) => {
+  const query = {};
+
+  for (let key in filters) {
+    const value = filters[key];
+
+    if (value) {
+      if (key === "products") {
+        value.forEach((item) => {
+          for (let subKey in item) {
+            query[`products.${subKey}`] = item[subKey];
+          }
+        });
+      } else {
+        query[key] = value;
+      }
+    }
+  }
+
+  return query;
+};
+
 const resolvers = {
   Query: {
     admin: withAuth(async (parent, { _id }, context) => {
@@ -30,14 +69,7 @@ const resolvers = {
     }, adminLevel.OWNER),
 
     admins: withAuth(async (parent, { filters }, context) => {
-      const query = {};
-
-      for (let key in filters) {
-        if (filters[key]) {
-          query[key] = filters[key];
-        }
-      }
-
+      const query = createQueryFromFilters(filters);
       return await Admin.find(query);
     }, adminLevel.OWNER),
 
@@ -50,14 +82,7 @@ const resolvers = {
     }),
 
     products: withAuth(async (parent, { filters }, context) => {
-      const query = {};
-
-      for (let key in filters) {
-        if (filters[key]) {
-          query[key] = filters[key];
-        }
-      }
-
+      const query = createQueryFromFilters(filters);
       return await Product.find(query).populate("category");
     }),
 
@@ -69,25 +94,7 @@ const resolvers = {
     }, adminLevel.MANAGER),
 
     orders: withAuth(async (parent, { filters }, context) => {
-      const query = {};
-
-      for (let key in filters) {
-        // Checks the filters object. If value is falsy, it will skip the key and move on to the next key in the object.
-        if (filters[key]) {
-          // If the key is "products", it will loop through the array of products and add each product to the query object.
-          if (key === "products") {
-            filters[key].forEach((item) => {
-              for (let subKey in item) {
-                query[`products.${subKey}`] = item[subKey];
-              }
-            });
-            // If the key is another field, it will add the key and value to the query object.
-          } else {
-            query[key] = filters[key];
-          }
-        }
-      }
-
+      const query = createQueryForOrders(filters);
       return await Order.find(query)
         .sort({ purchaseDate: -1 })
         .populate({ path: "products.product", populate: "category" });
@@ -99,13 +106,13 @@ const resolvers = {
       const admin = await Admin.findOne({ username });
 
       if (!admin) {
-        throw AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const correctPw = await admin.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(admin);
@@ -114,8 +121,67 @@ const resolvers = {
     },
 
     adminCreate: withAuth(async (parent, args, context) => {
+      // Prevent creation of the "OWNER" permission level
+      if (args.permission === adminLevel.OWNER) {
+        throw new ForbiddenError("Permission level is locked.");
+      }
+
       return await Admin.create(args);
     }, adminLevel.OWNER),
+
+    adminUpdate: withAuth(async (parent, args, context) => {
+      // Prevent modification of the "OWNER" permission level
+      if (args.permission === adminLevel.OWNER) {
+        throw new ForbiddenError("Permission level is locked");
+      }
+
+      const adminData = await Admin.findById(args._id);
+
+      // Prevent modification of the permission level as the "OWNER"
+      if (context.admin.permission === adminData.permission) {
+        throw new ForbiddenError("Permission level is already the highest.");
+      }
+
+      // If the field is specified in the args, update the field in the adminData object
+      // Exclude the password field, which is handled separately
+      const fieldsToUpdate = ["username", "email", "permission"];
+
+      fieldsToUpdate.forEach((field) => {
+        if (args[field]) {
+          adminData[field] = args[field];
+        }
+      });
+
+      // If the password is being updated, encrypt it before saving to the database
+      if (args.password) {
+        adminData.password = args.password;
+        adminData.markModified("password");
+      }
+
+      // Save the updated adminData object to the database
+      await adminData.save();
+      return adminData;
+    }, adminLevel.OWNER),
+
+    adminDelete: withAuth(async (parent, { _id }, context) => {
+      return await Admin.findByIdAndDelete(_id);
+    }, adminLevel.OWNER),
+
+    createCategory: withAuth(async (parent, args, context) => {
+      return await Category.create(args);
+    }, adminLevel.EDITOR),
+
+    updateCategory: withAuth(async (parent, { _id, name }, context) => {
+      return await Category.findByIdAndUpdate(
+        _id,
+        { name },
+        { new: true, runValidators: true }
+      );
+    }, adminLevel.EDITOR),
+
+    deleteCategory: withAuth(async (parent, { _id }, context) => {
+      return await Category.findByIdAndDelete(_id);
+    }, adminLevel.EDITOR),
   },
 };
 

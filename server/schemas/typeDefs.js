@@ -1,5 +1,6 @@
 const typeDefs = `#graphql
 
+# |=============== TYPES ===============|
 type Admin {
     _id: ID
     username: String!
@@ -81,22 +82,16 @@ type Auth {
     admin: Admin
 }
 
-# ! Revisit: Response for Delete Mutation
-type Response {
-    data: String
-    errors: [String]
-}
-
 # |=============== INPUTS ===============|
-input AdminFilterInput {
-    _id: ID
+input AdminInput {
+    #_id: ID
     username: String
     email: String
     permission: String
 }
 
-input ProductFilterInput {
-    _id: ID
+input ProductInput {
+    #_id: ID
     createdAt: String
     category: ID
     name: String
@@ -113,8 +108,8 @@ input CartInput {
     quantity: Int
 }
 
-input OrderFilterInput {
-    _id: ID
+input OrderInput {
+    #_id: ID
     purchaseDate: String
     products: [CartInput]
     totalPrice: Float
@@ -131,12 +126,12 @@ input OrderFilterInput {
 # |=============== QUERIES ===============|
 type Query {
     admin(_id: ID!): Admin
-    admins(filters: AdminFilterInput): [Admin]
+    admins(filters: AdminInput): [Admin]
     categories: [Category]
     product(_id: ID!): Product
-    products(filters: ProductFilterInput): [Product]
+    products(filters: ProductInput): [Product]
     order(_id: ID!): Order
-    orders(filters: OrderFilterInput): [Order]
+    orders(filters: OrderInput): [Order]
 
     shop: Shop
 }
@@ -145,6 +140,13 @@ type Query {
 type Mutation {
     adminLogin(username: String!, password: String!): Auth
     adminCreate(username: String!, email: String!, password: String!, permission: String!): Admin
+    adminUpdate(_id: ID!, username: String, email: String, password: String, permission: String): Admin
+    adminDelete(_id: ID!): Admin
+
+    createCategory(name: String!): Category
+    updateCategory(_id: ID!, name: String!): Category
+    deleteCategory(_id: ID!): Category
+
 }
 `;
 
