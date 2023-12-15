@@ -130,6 +130,8 @@ const resolvers = {
     }, adminLevel.OWNER),
 
     adminUpdate: withAuth(async (parent, args, context) => {
+      // || ===== PREVENTED FROM MODIFYING THE "OWNER" ADMIN ===== ||
+      
       // Prevent modification of the "OWNER" permission level
       if (args.permission === adminLevel.OWNER) {
         throw new ForbiddenError("Permission level is locked");
@@ -182,6 +184,23 @@ const resolvers = {
     deleteCategory: withAuth(async (parent, { _id }, context) => {
       return await Category.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
+
+    createProduct: withAuth(async (parent, args, context) => {
+      return await Product.create(args);
+    }, adminLevel.EDITOR),
+
+    updateProduct: withAuth(async (parent, args, context) => {
+      return await Product.findByIdAndUpdate(
+        args._id,
+        args.product,
+        { new: true, runValidators: true }
+      );
+    }, adminLevel.EDITOR),
+
+    deleteProduct: withAuth(async (parent, { _id }, context) => {
+      return await Product.findByIdAndDelete(_id);
+    }, adminLevel.EDITOR),
+
   },
 };
 

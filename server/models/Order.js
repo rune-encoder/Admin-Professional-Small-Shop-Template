@@ -17,6 +17,7 @@ const orderSchema = new Schema(
       type: String,
       enum: ["pending", "completed", "cancelled"],
       default: "pending",
+      required: true,
     },
     contactFirstName: {
       type: String,

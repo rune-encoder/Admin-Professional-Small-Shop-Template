@@ -1,10 +1,11 @@
 const typeDefs = `#graphql
 
-# |=============== TYPES ===============|
+# |==================== TYPES ====================|
 type Admin {
     _id: ID
     username: String!
     email: String!
+    #password: String!
     permission: String!
 }
 
@@ -19,13 +20,8 @@ type Shop {
     phoneNumber: String
     email: String
 
-    #!Revisit: Do we need to include the admin here?
+    # !Revisit: Do we need to include the admin here?
     admin: Admin!
-
-    products: [Product]
-    categories: [Category]
-    #guests: [Guest]
-    orders: [Order]
 }
 
 type Category {
@@ -46,7 +42,7 @@ type Product {
     shortDescription: String
     details: String
     price: Float!
-    quantity: Int
+    quantity: Int!
     image: Image
     isFeatured: Boolean
     inStock: Boolean
@@ -62,54 +58,53 @@ type Order {
     purchaseDate: String
     products: [Cart]
     totalPrice: Float!
-    status: String
+    status: String!
     contactFirstName: String!
     contactLastName: String!
     contactEmail: String!
     contactPhone: String!
     shippingAddress: String!
     paymentDetails: String!
-
     fullName: String
 }
 
+# !Revisit: Checkout 
 type Checkout {
     session: ID
 }
 
+# <=== AUTHENTICATION: JWT TOKEN ===>
 type Auth {
     token: ID!
     admin: Admin
 }
 
-# |=============== INPUTS ===============|
-input AdminInput {
-    #_id: ID
+# |==================== INPUTS ====================|
+input CartInput {
+    product: ID
+    quantity: Int
+}
+
+# <=== FILTERS: INPUTS FOR QUERIES ===>
+input AdminFilterInput {
     username: String
     email: String
     permission: String
 }
 
-input ProductInput {
-    #_id: ID
+input ProductFilterInput {
     createdAt: String
     category: ID
     name: String
-    #shortDescription: String
-    #details: String
+    shortDescription: String
+    details: String
     price: Float
     quantity: Int
     isFeatured: Boolean
     inStock: Boolean
 }
 
-input CartInput {
-    product: ID
-    quantity: Int
-}
-
-input OrderInput {
-    #_id: ID
+input OrderFilterInput {
     purchaseDate: String
     products: [CartInput]
     totalPrice: Float
@@ -123,20 +118,32 @@ input OrderInput {
     fullName: String
 }
 
-# |=============== QUERIES ===============|
+# <=== INPUTS FOR MUTATIONS ===>
+input ProductInput {
+    category: ID!
+    name: String!
+    shortDescription: String
+    details: String
+    price: Float!
+    quantity: Int!
+    image: ImageInput
+    isFeatured: Boolean
+}
+
+# |==================== QUERIES ====================|
 type Query {
     admin(_id: ID!): Admin
-    admins(filters: AdminInput): [Admin]
+    admins(filters: AdminFilterInput): [Admin]
     categories: [Category]
     product(_id: ID!): Product
-    products(filters: ProductInput): [Product]
+    products(filters: ProductFilterInput): [Product]
     order(_id: ID!): Order
-    orders(filters: OrderInput): [Order]
+    orders(filters: OrderFilterInput): [Order]
 
     shop: Shop
 }
 
-# |=============== MUTATIONS ===============|
+# |==================== MUTATIONS ====================|
 type Mutation {
     adminLogin(username: String!, password: String!): Auth
     adminCreate(username: String!, email: String!, password: String!, permission: String!): Admin
@@ -147,6 +154,9 @@ type Mutation {
     updateCategory(_id: ID!, name: String!): Category
     deleteCategory(_id: ID!): Category
 
+    createProduct(product: ProductInput!): Product
+    updateProduct(_id: ID!, product: ProductInput!): Product
+    deleteProduct(_id: ID!): Product
 }
 `;
 
