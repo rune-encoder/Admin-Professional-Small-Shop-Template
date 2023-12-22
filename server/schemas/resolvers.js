@@ -14,8 +14,8 @@ const {
 // const cloudinary = require("cloudinary").v2;
 // ! const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
-// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION
-// SYNTAX: query/resolver: withAuth(resolverFunction, requiredPermission = (default) "viewer"))
+// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION: 
+// MUST BE LOGGED IN. DEFAULT: "VIEWER"
 const withAuth = (resolverFunction, requiredPermission) => {
   return async (parent, args, context, info) => {
     if (!context.admin) {
@@ -64,36 +64,36 @@ const createQueryForOrders = (filters) => {
 
 const resolvers = {
   Query: {
-    admin: withAuth(async (parent, { _id }, context) => {
+    getAdmin: withAuth(async (parent, { _id }, context) => {
       return await Admin.findById(_id);
     }, adminLevel.OWNER),
 
-    admins: withAuth(async (parent, { filters }, context) => {
+    getAdmins: withAuth(async (parent, { filters }, context) => {
       const query = createQueryFromFilters(filters);
       return await Admin.find(query);
     }, adminLevel.OWNER),
 
-    categories: withAuth(async (parent, args, context) => {
+    getCategories: withAuth(async (parent, args, context) => {
       return await Category.find();
     }),
 
-    product: withAuth(async (parent, { _id }, context) => {
+    getProduct: withAuth(async (parent, { _id }, context) => {
       return await Product.findById(_id).populate("category");
     }),
 
-    products: withAuth(async (parent, { filters }, context) => {
+    getProducts: withAuth(async (parent, { filters }, context) => {
       const query = createQueryFromFilters(filters);
       return await Product.find(query).populate("category");
     }),
 
-    order: withAuth(async (parent, { _id }, context) => {
+    getOrder: withAuth(async (parent, { _id }, context) => {
       return await Order.findById(_id).populate({
         path: "products.product",
         populate: "category",
       });
     }, adminLevel.MANAGER),
 
-    orders: withAuth(async (parent, { filters }, context) => {
+    getOrders: withAuth(async (parent, { filters }, context) => {
       const query = createQueryForOrders(filters);
       return await Order.find(query)
         .sort({ purchaseDate: -1 })

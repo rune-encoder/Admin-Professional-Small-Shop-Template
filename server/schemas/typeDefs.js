@@ -5,7 +5,7 @@ type Admin {
     _id: ID
     username: String!
     email: String!
-    #password: String!
+    #password: Does not return the password
     permission: String!
 }
 
@@ -137,14 +137,15 @@ input ProductInput {
 
 # |==================== QUERIES ====================|
 type Query {
-    admin(_id: ID!): Admin
-    admins(filters: AdminFilterInput): [Admin]
-    categories: [Category]
-    product(_id: ID!): Product
-    products(filters: ProductFilterInput): [Product]
-    order(_id: ID!): Order
-    orders(filters: OrderFilterInput): [Order]
+    getAdmin(_id: ID!): Admin
+    getAdmins(filters: AdminFilterInput): [Admin]
+    getCategories: [Category]
+    getProduct(_id: ID!): Product
+    getProducts(filters: ProductFilterInput): [Product]
+    getOrder(_id: ID!): Order
+    getOrders(filters: OrderFilterInput): [Order]
 
+    # !Revisit: SHOP
     shop: Shop
 }
 
