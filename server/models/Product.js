@@ -24,10 +24,11 @@ const productSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 0.99,
+    min: 0,
   },
   quantity: {
     type: Number,
+    required: true,
     min: 0,
     default: 0,
   },
@@ -45,6 +46,7 @@ const productSchema = new Schema({
   },
 });
 
+//  |===== VIRTUALS =====|
 productSchema.virtual("inStock").get(function () {
   return this.quantity > 0;
 });

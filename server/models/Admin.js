@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const { adminLevels } = require("../utils/adminPermissions");
+const { adminLevel } = require("../utils/adminPermissions");
 
 const adminSchema = new Schema({
   username: {
@@ -22,8 +22,9 @@ const adminSchema = new Schema({
   },
   permission: {
     type: String,
-    enum: Object.values(adminLevels),
-    default: adminLevels.VIEWER,
+    enum: Object.values(adminLevel),
+    default: adminLevel.VIEWER,
+    required: true,
   },
 });
 

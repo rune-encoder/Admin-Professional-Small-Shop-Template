@@ -142,9 +142,6 @@ const seedOrderData = (seededProducts) => {
 // |===== SEED SHOP DATA TO SHOP COLLECTION =====|
 const seedShopData = (
   seededAdmin,
-  seededProducts,
-  seededCategories,
-  seededOrders
 ) => {
   const shopData = {
     name: "My Shop Template",
@@ -156,10 +153,6 @@ const seedShopData = (
     phoneNumber: "123-456-7890",
     email: "myshop@email.com",
     admin: seededAdmin[0]._id,
-    products: seededProducts.map((product) => product._id),
-    categories: seededCategories.map((category) => category._id),
-    guests: [],
-    orders: seededOrders.map((order) => order._id),
   };
   return shopData;
 };

@@ -118,17 +118,11 @@ const seedDatabase = async () => {
 
     // SEED SHOP COLLECTION WITH SHOP DATA
     try {
-      const shop = seedShopData(
-        seededAdmin,
-        seededProducts,
-        seededCategories,
-        seededOrders
-      );
+      const shop = seedShopData(seededAdmin);
 
       // Ensure validations are run on the data and default values are saved.
       const newShop = new Shop(shop);
       await newShop.save();
-
     } catch (error) {
       console.error(error);
     }
