@@ -85,6 +85,11 @@ input CartInput {
     quantity: Int
 }
 
+input ImageInput {
+    cloudinaryId: String
+    url: String
+}
+
 # <=== FILTERS: INPUTS FOR QUERIES ===>
 input AdminFilterInput {
     username: String
@@ -119,11 +124,6 @@ input OrderFilterInput {
 }
 
 # <=== INPUTS FOR MUTATIONS ===>
-input ImageInput {
-    cloudinaryId: String
-    url: String
-}
-
 input ProductInput {
     category: ID
     name: String

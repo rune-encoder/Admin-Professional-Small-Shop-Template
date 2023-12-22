@@ -130,18 +130,16 @@ const resolvers = {
     }, adminLevel.OWNER),
 
     adminUpdate: withAuth(async (parent, args, context) => {
-      // || ===== PREVENTED FROM MODIFYING THE "OWNER" ADMIN ===== ||
-      
-      // Prevent modification of the "OWNER" permission level
+      // Prevents permission level from being updated to "OWNER" (locked)
       if (args.permission === adminLevel.OWNER) {
         throw new ForbiddenError("Permission level is locked");
       }
 
       const adminData = await Admin.findById(args._id);
 
-      // Prevent modification of the permission level as the "OWNER"
-      if (context.admin.permission === adminData.permission) {
-        throw new ForbiddenError("Permission level is already the highest.");
+      // Prevents modification of the "OWNER" permission level to a lower level.
+      if (adminData.permission === adminLevel.OWNER && args.permission !== adminLevel.OWNER) {
+        throw new ForbiddenError("Permission level is the highest level and cannot be lowered.");
       }
 
       // If the field is specified in the args, update the field in the adminData object
