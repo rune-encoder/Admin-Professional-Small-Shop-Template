@@ -27,5 +27,4 @@ package-lock.json
 
 .env
 
-client
 imageUploader.js
