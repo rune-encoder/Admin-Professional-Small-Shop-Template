@@ -1,10 +1,10 @@
-import Sidebar from "../components/UI/Sidebar";
-
 export default function Home(props) {
   return (
     <>
-      <Sidebar />
-      <div>Home</div>
+      <div>
+        <h1>Home</h1>
+        <p>Lorism asom </p>
+      </div>
     </>
   );
 }

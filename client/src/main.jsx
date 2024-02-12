@@ -18,7 +18,7 @@ import "./styles/Header.css";
 import "./styles/Footer.css";
 
 // <===== UTILITIES STYLES =====>
-
+import "./styles/Sidebar.css";
 
 const router = createBrowserRouter([
   {
