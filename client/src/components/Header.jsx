@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { PiUserCircleLight } from "react-icons/pi";
-import { IoLogOutOutline } from "react-icons/io5";
 
-import { GrClose } from "react-icons/gr";
+import MiniNavbar from "./header-components/MiniNavbar";
+import MiniNavDropdown from "./header-components/MiniNavDropdown";
 
-export default function Header(props) {
+export default function Header({ children }) {
+  /* <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> */
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -22,62 +21,15 @@ export default function Header(props) {
 
         <div>Admin Portal</div>
 
-        <div className="mini-nav-bar">
-          <div className="mini-nav-text-group">
-            <span className="mini-nav-username">Username</span>
-            <span className="header-subtle-text ">Permission</span>
-          </div>
-
-          <PiUserCircleLight className="mini-nav-user-icon" />
-
-          <div className="dropdown-container">
-            {isDropdownOpen ? (
-              <GrClose 
-                className="mini-nav-toggle-icon"
-                onClick={toggleDropdown}
-              />
-            ) : (
-              <RxHamburgerMenu
-                className="mini-nav-toggle-icon"
-                onClick={toggleDropdown}
-              />
-            )}
-
-            {/* <=== Dropdown menu content ===> */}
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                {props.children} {/* Light and Dark Mode */}
-                <button className="dropdown-menu-items">
-                  <IoLogOutOutline /> Logout
-                </button>
-                <span className="header-subtle-text ">
-                  Build Version v1.0.0 beta
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
+        {/* <======= MINI NAVIGATION BAR: RIGHT SIDE =======> */}
+        <MiniNavbar>
+          <MiniNavDropdown
+            isDropdownOpen={isDropdownOpen}
+            toggleDropdown={toggleDropdown}
+            ThemeBtn={children} // Render the ThemeBtn Component
+          />
+        </MiniNavbar>
       </header>
     </>
   );
-}
-
-// ! DELETE LATER
-
-{
-  /* <Navbar
-links={links}
-isLinkDisabled={isLinkDisabled}
-toggleSlidingMenu={toggleSlidingMenu}
-/> */
-}
-
-{
-  /* <aside
-className={`sliding-menu-content ${
-  isSlidingMenuOpen ? "sliding-menu-open" : ""
-}`}
->
-<NavLinks links={links} isLinkDisabled={isLinkDisabled} />
-</aside> */
 }
