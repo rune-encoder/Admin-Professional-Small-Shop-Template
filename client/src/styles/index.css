@@ -220,7 +220,7 @@ p {
 .roboto-condensed-250 {
   font-family: "Roboto Condensed", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 250;
+  font-weight: 250; /* 100-900 */
   font-style: normal;
 }
 

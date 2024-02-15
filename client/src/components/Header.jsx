@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FaUserCircle } from "react-icons/fa";
+import { PiUserCircleLight } from "react-icons/pi";
+import { IoLogOutOutline } from "react-icons/io5";
+
+import { GrClose } from "react-icons/gr";
 
 export default function Header(props) {
-  const location = useLocation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // const [isSlidingMenuOpen, setIsSlidingMenuOpen] = useState(false);
-
-  // const toggleSlidingMenu = () => {
-  //   setIsSlidingMenuOpen(!isSlidingMenuOpen);
-  // };
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <>
@@ -22,15 +23,39 @@ export default function Header(props) {
         <div>Admin Portal</div>
 
         <div className="mini-nav-bar">
-
           <div className="mini-nav-text-group">
             <span className="mini-nav-username">Username</span>
-            <span className="mini-nav-admin-level">Permission</span>
+            <span className="header-subtle-text ">Permission</span>
           </div>
 
-          <FaUserCircle className="mini-nav-user-icon" />
+          <PiUserCircleLight className="mini-nav-user-icon" />
 
-          <RxHamburgerMenu className="mini-nav-toggle-icon" />
+          <div className="dropdown-container">
+            {isDropdownOpen ? (
+              <GrClose 
+                className="mini-nav-toggle-icon"
+                onClick={toggleDropdown}
+              />
+            ) : (
+              <RxHamburgerMenu
+                className="mini-nav-toggle-icon"
+                onClick={toggleDropdown}
+              />
+            )}
+
+            {/* <=== Dropdown menu content ===> */}
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                {props.children} {/* Light and Dark Mode */}
+                <button className="dropdown-menu-items">
+                  <IoLogOutOutline /> Logout
+                </button>
+                <span className="header-subtle-text ">
+                  Build Version v1.0.0 beta
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </header>
     </>

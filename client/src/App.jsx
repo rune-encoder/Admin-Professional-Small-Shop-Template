@@ -44,13 +44,13 @@ function App() {
     <>
       <Sidebar />
       <div className="main-container">
-        <Header />
+        <Header>
+          <ThemeBtn darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </Header>
         <div className="main-content">
           <Outlet />
         </div>
-        <Footer>
-          <ThemeBtn darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        </Footer>
+        <Footer />
       </div>
     </>
   );

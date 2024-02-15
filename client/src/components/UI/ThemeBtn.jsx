@@ -1,11 +1,12 @@
-import { FaMoon, FaSun } from "react-icons/fa";
+import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 
 export default function ThemeBtn({ darkMode, toggleDarkMode }) {
   return (
-    <div className="">
-      <button onClick={toggleDarkMode}>
-        {darkMode ? <FaSun /> : <FaMoon />}
+    <>
+      <button className="dropdown-menu-items" onClick={toggleDarkMode}>
+        {darkMode ? <IoSunnyOutline  /> : <IoMoonOutline />}{" "}
+        {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
-    </div>
+    </>
   );
 }
