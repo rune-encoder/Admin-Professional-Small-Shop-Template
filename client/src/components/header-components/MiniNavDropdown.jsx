@@ -23,7 +23,7 @@ export default function MiniNavDropdown({
       {/* <======= DROPDOWN MENU CONTENT =======> */}
       {isDropdownOpen && (
         <div className="dropdown-menu">
-          {ThemeBtn} {/* Light and Dark Mode Component*/}
+          {ThemeBtn} {/* ThemeBtn Component */}
           <button className="dropdown-menu-items">
             <IoLogOutOutline /> Logout
           </button>
