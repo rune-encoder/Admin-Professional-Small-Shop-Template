@@ -1,0 +1,41 @@
+@mixin apply-theme-colors($theme-colors) {
+  @each $key, $value in $theme-colors {
+    --#{$key}: #{$value};
+  }
+}
+
+@mixin apply-font-family($font) {
+  font-family: map.get($font-families, $font);
+}
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// =================== Media Queries Mixin =================== 
+@mixin responsive-to($breakpoint) {
+  @if $breakpoint == small-phone {
+    @media (max-width: 576px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == large-phone {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == tablet {
+    @media (max-width: 992px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == laptop {
+    @media (max-width: 1280px) {
+      @content;
+    }
+  }
+  
+}

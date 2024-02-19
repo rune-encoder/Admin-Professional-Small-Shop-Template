@@ -1,0 +1,115 @@
+@use "sass:map";
+@use 'sass:math';
+
+@import url('https://fonts.googleapis.com/css2?family=Exo&family=Exo+2&family=Roboto&family=Ysabeau&family=Ysabeau+Infant&family=Ysabeau+Office&family=Ysabeau+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "./utilities/variables";
+@import "./utilities/functions";
+@import "./utilities/mixins";
+
+@import "./base/reset";
+@import "./base/root";
+@import "./base/typography";
+
+@import "./Header.scss";
+
+
+/* ! ===================  =================== */
+/* WRAP ALL WEB CONTENT IN ".container*/
+.main-container {
+  display: flex;
+  flex-direction: column;
+  
+  /* Expand to fill available space */
+  flex-grow: 1; 
+  min-height: 100vh;
+
+    /* ! Revisit */
+  /* border: solid red 1px; */
+}
+
+
+/* WRAP PAGES CONTENT IN ".main-content*/
+.main-content {
+  flex-grow: 1;
+
+  /* ! Revisit */
+  /* border: solid blue 1px; */
+}
+/* ! ===================  =================== */
+
+/* MAIN: FULL PAGE STYLE CONFIGURATION */
+
+
+// DARK THEME COLORS
+.dark {
+  @include apply-theme-colors($dark-theme-colors);
+}
+
+/* LIGHT MODE THEME: COLORS */
+.light {
+
+}
+
+/* =================== UTILITIES =================== */
+/* ACTIVE NAV LINK */
+.active {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--accent);
+}
+
+/* DISABLED BUTTON, TAB, OR SELECTION */
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* GLASS EFFECT */
+.frost {
+  /* From https://css.glass */
+  background: var(--opacity-medium);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* FLEX-GRID LAYOUT */
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.col {
+  box-sizing: border-box;
+}
+
+/* ! Revisit */
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+/* =================== DEFAULT STYLES =================== */
+/* REMOVE LINK UNDERLINE */
+a {
+  text-decoration: none;
+  color: var(--link);
+}
+
+
+
+/* DEFAULT PARAGRAPH SIZE */
+// p {
+//   filter: drop-shadow(5px 3px 10px var(--opacity-medium));
+// }

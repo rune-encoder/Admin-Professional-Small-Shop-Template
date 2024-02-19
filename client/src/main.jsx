@@ -8,17 +8,17 @@ import Home from "./pages/Home.jsx";
 
 // |========== IMPORT CSS STYLES ==========|
 // <===== MAIN GLOBAL STYLE =====>
-import "./styles/index.css";
+import "./styles/index.scss";
 
 // <===== PAGES STYLES =====>
-import "./styles/Home.css";
+import "./styles/Home.scss";
 
 // <===== COMPOENT GROUP STYLES =====>
-import "./styles/Header.css";
-import "./styles/Footer.css";
+// import "./styles/Header.scss";
+import "./styles/Footer.scss";
 
 // <===== UTILITIES STYLES =====>
-import "./styles/Sidebar.css";
+import "./styles/Sidebar.scss";
 
 const router = createBrowserRouter([
   {

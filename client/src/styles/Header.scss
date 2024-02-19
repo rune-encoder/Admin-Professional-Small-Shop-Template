@@ -8,6 +8,22 @@ header {
   justify-content: space-between;
   width: 100%;
   background-color: var(--opacity-medium);
+
+  // ! Revisit
+  h1 {
+    @include responsive-to(laptop) {
+      color: green;
+    }
+    @include responsive-to(tablet) {
+      color: blue;
+    }
+    @include responsive-to(large-phone) {
+      color: red;
+    }
+    @include responsive-to(small-phone) {
+      color: yellow;
+    }
+  }
 }
 
 /* HEADER UTILITY: DE-EMPHASIZE TEXT STYLE */

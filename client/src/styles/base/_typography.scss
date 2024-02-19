@@ -1,0 +1,20 @@
+// HEADERS (H1 - H6): TYPOGRAPHY
+@each $header, $step in $header-steps {
+  #{$header} {
+    font-size: modular-scale($step);
+    line-height: calc(1.2 * modular-scale($step));
+    font-weight: if($step > 3, 550, 500);
+  }
+}
+
+//   PARAGRAPH: TYPOGRAPHY
+p {
+  font-size: $base-font-size;
+  line-height: calc(1.5 * $base-font-size);
+}
+
+//   LABEL: TYPOGRAPHY
+:root label {
+  font-size: modular-scale(-1);
+  line-height: calc(1.2 * modular-scale(-1));
+}

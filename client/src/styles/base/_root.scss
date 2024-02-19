@@ -1,0 +1,18 @@
+:root {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    @include apply-theme-colors($light-theme-colors);
+    @include apply-font-family(inter);
+  }
+  
+  #root {
+    display: flex;
+    flex-grow: 1; // Expand to fill available space
+    overflow-x: hidden; // Prevent horizontal scrollbar
+    max-width: 100%; 
+    min-height: 100vh; 
+    color: var(--light);
+    background-color: var(--medium-dark);
+  }
