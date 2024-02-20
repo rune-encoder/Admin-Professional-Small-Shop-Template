@@ -1,8 +1,8 @@
-/* ~~~~~~~~~~~~~~~~~~~ HEADER CSS~~~~~~~~~~~~~~~~~~~ */
-
-/* HEADER CONTAINER AND CONTENT WITHIN */
+// ~~~~~~~~~~~~~~~~~~~ HEADER CSS~~~~~~~~~~~~~~~~~~~
+// HEADER CONTAINER AND CONTENT WITHIN */
 header {
   @include apply-flex(row, space-between, center);
+  
   position: relative;
   width: 100%;
   background-color: var(--opacity-medium);
@@ -12,15 +12,19 @@ header {
     @include respond-to("xlarge") {
       color: gray;
     }
+
     @include respond-to("large") {
       color: green;
     }
+
     @include respond-to("medium") {
       color: blue;
     }
+
     @include respond-to("small") {
       color: red;
     }
+
     @include respond-to("xsmall") {
       color: yellow;
     }
@@ -28,14 +32,15 @@ header {
 }
 
 /* HEADER UTILITY: DE-EMPHASIZE TEXT STYLE */
-.header-subtle-text {
+.header__text--subtle {
   font-size: modular-scale(-2);
   color: var(--medium);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~ MINI-NAVIGATION-BAR ~~~~~~~~~~~~~~~~~~~ */
+
 /* MINI-NAV-BAR CONTAINER AND CONTENT WITHIN */
-.mini-nav-bar {
+.mini-navbar {
   @include apply-flex(row, null, center);
   @include apply-space("margin", -5, "x");
   @include apply-space("padding", -5, "x");
@@ -44,15 +49,15 @@ header {
   border: solid red 1px;
 }
 
-/* MINI-NAV-BAR TEXT GROUP: (USERNAME & ADMIN LEVEL)*/
-.mini-nav-text-group {
+/* MINI-NAV-BAR TEXT GROUP: (USERNAME & ADMIN LEVEL) */
+.mini-navbar__section {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0rem;
+  padding: 0.5rem 0;
 }
 
 /* USER ICON: MINI-NAV-BAR */
-.mini-nav-user-icon {
+.mini-navbar__icon {
   font-size: 2.5rem;
 }
 
@@ -64,6 +69,7 @@ header {
 }
 
 /* ~~~~~~~~~~~~~~~~~~~ DROPDOWN MENU ~~~~~~~~~~~~~~~~~~~ */
+
 /* DROPDOWN MENU AND CONTENT WITHIN */
 .dropdown-menu {
   position: absolute;
@@ -76,9 +82,9 @@ header {
   gap: 0.1rem;
   z-index: 1;
   background-color: var(--dark);
-
   border: 1px solid var(--medium);
   border-radius: 0.25rem;
+
   /* border: solid red 1px; */
 }
 
@@ -89,29 +95,35 @@ header {
   gap: 0.3rem;
 
   /* !Revisit */
+
   /* width: 100%; */
+
   /* border: solid red 1px; */
 }
 
 /* !======================================= */
 
-/* LEFT ON HEADER: LOGO SECTION*/
+/* LEFT ON HEADER: LOGO SECTION */
 .logo h1 {
   /* padding: 12px; */
+
   /* font-weight: normal; */
+
   /* font-size: 2em; */
+
   /* color: var(--theme); */
 }
 
 /* =================== Media Queries =================== */
 
 /* Large smartphones */
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
 }
 
 /* ! Small smartphones */
-@media screen and (max-width: 576px) {
+@media screen and (width <= 576px) {
   /* MAKE LOGO SMALLER */
+
   /* .logo h1 {
     font-size: 1.5em;
   } */

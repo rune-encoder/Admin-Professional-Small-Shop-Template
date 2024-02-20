@@ -27,7 +27,7 @@ export default function MiniNavDropdown({
           <button className="dropdown-menu-items">
             <IoLogOutOutline /> Logout
           </button>
-          <span className="header-subtle-text ">Build Version v1.0.0 beta</span>
+          <span className="header__text--subtle">Build Version v1.0.0 beta</span>
         </div>
       )}
     </div>
