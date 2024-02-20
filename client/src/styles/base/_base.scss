@@ -1,0 +1,12 @@
+// WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
+.content {
+  @include apply-flex(column);
+
+  flex-grow: 1; // Expand to fill available space
+  min-height: 100vh;
+
+  // WRAPS APP'S MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
+  &__main {
+    flex-grow: 1;
+  }
+}
