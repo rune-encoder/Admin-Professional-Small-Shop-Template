@@ -48,7 +48,7 @@ $breakpoints: (
 // SHARED COLORS ACROSS THEMES
 $shared-colors: (
   // BASE COLORS
-  "always-light": #ffffff,
+  "always-light": #fff,
   "always-dark": #000000b9,
 
   // SEMANTIC COLORS
@@ -64,7 +64,7 @@ $light-theme-colors: map.merge(
     "medium": #404040,
     "opacity-medium": #bfbfbf86,
     "medium-dark": rgb(218, 218, 218),
-    "dark": #ffffff,
+    "dark": #fff,
 
     // !Revisit 
     "unique":

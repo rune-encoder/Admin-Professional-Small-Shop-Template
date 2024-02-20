@@ -10,7 +10,7 @@ export default function MiniNavbar({ children }) {
         <span className="header__text--subtle">Permission</span>
       </section>
       {/* <======= USER ICON =======> */}
-      <PiUserCircleLight className="mini-navbar__icon" />
+      <PiUserCircleLight className="mini-navbar__user-icon" />
       {/* <======= RENDER MININAVDROPDOWN COMPONENT =======> */}
       {children}
     </nav>

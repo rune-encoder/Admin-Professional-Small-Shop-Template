@@ -39,6 +39,26 @@
   }
 }
 
+// APPLY POSITION PROPERTY
+@mixin apply-position($position: "static", $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+
+  @if $position == "absolute" or $position == "fixed" or $position == "sticky" {
+    $properties: (
+      "top": $top,
+      "right": $right,
+      "bottom": $bottom,
+      "left": $left
+    );
+
+    @each $property, $value in $properties {
+      @if $value {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
 // APPLY MEDIA QUERY BREAKPOINTS
 @mixin respond-to($breakpoint) {
   $raw-query: map.get($breakpoints, $breakpoint);
@@ -55,4 +75,5 @@
     @error "No breakpoint found for `#{$breakpoint}`.";
   }
 }
+
 

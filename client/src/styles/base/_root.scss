@@ -3,7 +3,7 @@
     text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     
     @include apply-theme-colors($light-theme-colors); // Light Mode Theme Colors
     @include apply-font-family("inter");
