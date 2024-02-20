@@ -1,0 +1,87 @@
+@charset 'utf-8';
+@use "sass:map";
+@use 'sass:math';
+@use 'sass:meta';
+
+@import url('https://fonts.googleapis.com/css2?family=Exo&family=Exo+2&family=Roboto&family=Ysabeau&family=Ysabeau+Infant&family=Ysabeau+Office&family=Ysabeau+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "./abstracts/functions";
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+
+@import "./base/reset";
+@import "./base/root";
+@import "./base/content";
+@import "./base/typography";
+
+@import "./layout/sidebar";
+@import "./layout/header";
+@import "./layout/footer";
+
+// DARK THEME COLORS
+.dark {
+  @include apply-theme-colors($dark-theme-colors);
+}
+
+/* =================== abstracts =================== */
+/* ACTIVE NAV LINK */
+.active {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--accent);
+}
+
+/* DISABLED BUTTON, TAB, OR SELECTION */
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* GLASS EFFECT */
+.frost {
+  /* From https://css.glass */
+  background: var(--opacity-medium);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* FLEX-GRID LAYOUT */
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.col {
+  box-sizing: border-box;
+}
+
+/* ! Revisit */
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+/* =================== DEFAULT STYLES =================== */
+/* REMOVE LINK UNDERLINE */
+a {
+  text-decoration: none;
+  color: var(--link);
+}
+
+
+
+/* DEFAULT PARAGRAPH SIZE */
+// p {
+//   filter: drop-shadow(5px 3px 10px var(--opacity-medium));
+// }

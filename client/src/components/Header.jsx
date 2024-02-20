@@ -1,51 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "./Header/Navbar";
-import NavLinks from "./Header/NavLinks";
 
-export default function Header(props) {
-  const location = useLocation();
+import MiniNavbar from "./header-components/MiniNavbar";
+import MiniNavDropdown from "./header-components/MiniNavDropdown";
 
-  const [isSlidingMenuOpen, setIsSlidingMenuOpen] = useState(false);
+export default function Header({ children }) {
+  /* <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> */
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleSlidingMenu = () => {
-    setIsSlidingMenuOpen(!isSlidingMenuOpen);
-  };
-
-  const links = [
-    { id: 1, path: "/Home", text: "Home" },
-    { id: 2, path: "/About", text: "About" },
-    { id: 3, path: "/Shop", text: "Shop" },
-    { id: 4, path: "/Contact", text: "Contact" },
-  ];
-
-  const isLinkDisabled = (link) => {
-    if (location.pathname === "/" && link.path === "/Home") {
-      return true;
-    }
-
-    return link.path === location.pathname;
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
     <>
-      <header>
+      <header className="roboto-condensed-250">
         <Link to="/" className="logo">
           <h1>ᚱuᚢe Eᚢcᛟdeᚱ</h1>
         </Link>
-        <Navbar
-          links={links}
-          isLinkDisabled={isLinkDisabled}
-          toggleSlidingMenu={toggleSlidingMenu}
-        />
+
+        <span>Admin Portal</span>
+
+        {/* <======= MINI NAVIGATION BAR: RIGHT SIDE =======> */}
+        <MiniNavbar>
+          <MiniNavDropdown
+            isDropdownOpen={isDropdownOpen}
+            toggleDropdown={toggleDropdown}
+            ThemeBtn={children} // Render the ThemeBtn Component
+          />
+        </MiniNavbar>
       </header>
-      <aside
-        className={`sliding-menu-content ${
-          isSlidingMenuOpen ? "sliding-menu-open" : ""
-        }`}
-      >
-        <NavLinks links={links} isLinkDisabled={isLinkDisabled} />
-      </aside>
     </>
   );
 }

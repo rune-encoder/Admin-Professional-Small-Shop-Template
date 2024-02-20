@@ -1,0 +1,34 @@
+// ~~~~~~~~~~~~~~~~~~~ SIDEBAR CSS ~~~~~~~~~~~~~~~~~~~ 
+
+// LEFT NAVIGATION SIDEBAR
+.sidebar {
+  @include apply-flex(column, null, center);
+
+  // ! Revisit
+  padding-top: modular-scale(10); // OFFSET FROM TOP
+  background-color: #1c212c;
+}
+
+// SIDEBAR INDIVIDUAL BUTTONS/LINKS
+.menu-item {
+  @include apply-flex(column, center, center);
+  text-align: center;
+  margin: 5px 0;
+  padding: 5px 0;
+  gap: 1px; /* Gap Between Icon and Text */
+  min-width: 75px; /* Size of Menu Button */
+  cursor: pointer;
+
+  /* transition: background-color 0.3s; */
+  /* color: #8c8c8c;  */
+}
+
+// SIDEBAR BUTTONS/LINKS ICONS
+.menu-item-icon {
+  font-size: 3rem; /* Menu Icon Size */
+}
+
+// SIDEBAR BUTTONS/LINKS TEXT
+.menu-item-text {
+  font-size: 0.875rem;
+}

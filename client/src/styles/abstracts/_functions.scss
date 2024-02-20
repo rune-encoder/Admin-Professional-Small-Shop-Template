@@ -1,0 +1,12 @@
+// CONVERT PIXELS TO REM
+@function rem($pixels) {
+  @return math.div($pixels, 16px) * 1rem;
+}
+
+// CALCULATE MODULAR SCALE: FOR TYPOGRAPHY (SEE VARIABLES.SCSS FOR MODULAR SCALE)
+@function modular-scale($step) {
+  $base: $base-font-size; // Base font size
+  $scale: $modular-scale; // Modular scale
+  
+  @return $base * pow($modular-scale, $step);
+}
