@@ -7,18 +7,7 @@ import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 
 // |========== IMPORT CSS STYLES ==========|
-// <===== MAIN GLOBAL STYLE =====>
-import "./styles/index.scss";
-
-// <===== PAGES STYLES =====>
-import "./styles/Home.scss";
-
-// <===== COMPOENT GROUP STYLES =====>
-// import "./styles/Header.scss";
-import "./styles/Footer.scss";
-
-// <===== UTILITIES STYLES =====>
-import "./styles/Sidebar.scss";
+import "./styles/main.scss";
 
 const router = createBrowserRouter([
   {

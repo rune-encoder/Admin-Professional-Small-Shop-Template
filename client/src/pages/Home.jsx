@@ -18,13 +18,15 @@ export default function Home(props) {
         <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
 
         <br></br>
+        <div>
+
         <label>labels</label>
-        <br></br>
-        <label>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</label>
-        <br></br>
-        <label>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</label>
-        <br></br>
-        <label>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</label>
+        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
+        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
+        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
+        </div>
+
+        
       </div>
     </>
   );

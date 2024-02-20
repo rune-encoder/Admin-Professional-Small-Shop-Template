@@ -1,4 +1,5 @@
-// HEADERS (H1 - H6): TYPOGRAPHY
+// ~~~~~~~~~~~~~~~~~~~ TYPOGRAPHY CSS ~~~~~~~~~~~~~~~~~~~ 
+// HEADERS (H1 - H6)
 @each $header, $step in $header-steps {
   #{$header} {
     font-size: modular-scale($step);
@@ -7,14 +8,14 @@
   }
 }
 
-//   PARAGRAPH: TYPOGRAPHY
+// PARAGRAPHS
 p {
   font-size: $base-font-size;
-  line-height: calc(1.5 * $base-font-size);
+  line-height: calc(1.5 * modular-scale(0));
 }
 
-//   LABEL: TYPOGRAPHY
-:root label {
+// LABELS
+label, span {
   font-size: modular-scale(-1);
   line-height: calc(1.2 * modular-scale(-1));
 }

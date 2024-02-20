@@ -19,7 +19,7 @@ export default function Header({ children }) {
           <h1>ᚱuᚢe Eᚢcᛟdeᚱ</h1>
         </Link>
 
-        <div>Admin Portal</div>
+        <span>Admin Portal</span>
 
         {/* <======= MINI NAVIGATION BAR: RIGHT SIDE =======> */}
         <MiniNavbar>

@@ -1,0 +1,11 @@
+// WRAPPER FOR HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
+.content {
+  @include apply-flex(column);
+  flex-grow: 1; // Expand to fill available space
+  min-height: 100vh;
+}
+
+// WRAPS MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
+.content__main {
+  flex-grow: 1;
+}

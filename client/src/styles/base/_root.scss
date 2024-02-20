@@ -1,10 +1,17 @@
+// ~~~~~~~~~~~~~~~~~~~ ROOT CSS ~~~~~~~~~~~~~~~~~~~ 
 :root {
-    text-rendering: optimizeLegibility;
+    text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    @include apply-theme-colors($light-theme-colors);
-    @include apply-font-family(inter);
+    
+    @include apply-theme-colors($light-theme-colors); // Light Mode Theme Colors
+    @include apply-font-family("inter");
+
+    // ! Revisit (Not sure if this is necessary)
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: $base-font-weight;
   }
   
   #root {
