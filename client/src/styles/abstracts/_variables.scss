@@ -55,7 +55,7 @@ $breakpoints: (
   ),
 );
 
-// |========== LIGHT/DARK COLOR THEMES ==========|
+// <===== THEME COLOR SECTION =====>
 // SHARED COLORS ACROSS THEMES
 $shared-colors: (
   // BASE COLORS
@@ -64,6 +64,7 @@ $shared-colors: (
   "theme": #618adf
 );
 
+// <===== LIGHT THEME COLOR SECTION =====>
 // LIGHT THEME COLORS
 $light-theme: (
   /* BASE COLORS */ "light": hsl(0deg 0% 100%),
@@ -82,7 +83,7 @@ $light-theme: map.merge($light-theme, $light-shades);
 // MERGE LIGHT/DARK THEME SHARED COLORS INTO LIGHT THEME
 $light-theme: map.merge($light-theme, $shared-colors);
 
-// DARK THEME COLORS
+// <===== DARK THEME COLOR SECTION =====>
 $dark-theme: (
   // BASE COLORS
   "light": hsl(0deg 0% 0%),

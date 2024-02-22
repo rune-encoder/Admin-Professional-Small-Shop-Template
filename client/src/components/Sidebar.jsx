@@ -3,11 +3,11 @@ import sidebarContent from "../content/sidebarContent";
 
 const Sidebar = () => {
   return (
-    <aside className="sidebar">
+    <aside className="sidebar__aside">
       {sidebarContent.map((item) => (
-        <Link to={item.path} key={item.id} className="menu-item">
-          <item.icon className="menu-item-icon" />
-          <span className="menu-item-text">{item.text}</span>
+        <Link to={item.path} key={item.id} className="sidebar__links">
+          <item.icon className="sidebar__icon" />
+          <span className="sidebar__text">{item.text}</span>
         </Link>
       ))}
     </aside>

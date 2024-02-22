@@ -1,35 +1,29 @@
 // <===== LEFT-SIDEBAR SECTION =====>
-.sidebar {
+.sidebar__aside {
   @include apply-flex(column, null, center);
-
-  // ! Revisit
-  padding-top: modular-scale(10); // OFFSET FROM TOP
+  
+  padding-top: 10%;
+  min-width: 6.5%;
   background-color: var(--light);
-  color: var(--shade-19);
+  color: var(--shade-22);
 }
 
-// SIDEBAR INDIVIDUAL BUTTONS/LINKS
-.menu-item {
+// SIDEBAR LINKS/BUTTONS GROUP
+.sidebar__links{
   @include apply-flex(column, center, center);
+  @include apply-space("padding", -2, "y");
+  @include apply-space("gap", -10);
 
+  width: 100%;
   text-align: center;
-  margin: 5px 0;
-  padding: 5px 0;
-  gap: 1px; /* Gap Between Icon and Text */
-  min-width: 75px; /* Size of Menu Button */
-  cursor: pointer;
-
-  /* transition: background-color 0.3s; */
-
-  /* color: #8c8c8c;  */
 }
 
-// SIDEBAR BUTTONS/LINKS ICONS
-.menu-item-icon {
-  font-size: 3rem; /* Menu Icon Size */
+// SIDEBAR ICONS
+.sidebar__icon {
+  font-size: modular-scale(4); 
 }
 
-// SIDEBAR BUTTONS/LINKS TEXT
-.menu-item-text {
+// SIDEBAR TEXT
+.sidebar__text {
   font-size: 0.875rem;
 }
