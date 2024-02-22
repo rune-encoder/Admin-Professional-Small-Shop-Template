@@ -1,21 +1,19 @@
-// ~~~~~~~~~~~~~~~~~~~ HEADER CSS~~~~~~~~~~~~~~~~~~~
-// HEADER CONTAINER AND CONTENT WITHIN */
+// <===== HEADER SECTION =====>
 header {
   @include apply-flex(row, space-between, center);
   
   position: relative;
   width: 100%;
-  background-color: var(--opacity-medium);
+  background-color: var(--shade-1);
 }
 
-// HEADER UTILITY: DE-EMPHASIZE TEXT STYLE
+// HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
 .header__text--subtle {
   font-size: modular-scale(-2);
-  color: var(--medium);
+  color: var(--shade-15);
 }
 
-// ~~~~~~~~~~~~~~~~~~~ MINI-NAVIGATION-BAR ~~~~~~~~~~~~~~~~~~~
-// MINI-NAV-BAR CONTAINER AND CONTENT WITHIN
+// <===== MINI-NAVIGATION-BAR SECTION =====>
 .mini-navbar {
   @include apply-flex(row, center, center);
   @include apply-space("margin", -5, "x");
@@ -23,31 +21,27 @@ header {
   @include apply-space("gap", -10);
 }
 
-// MINI-NAV-BAR TEXT GROUP: (USERNAME & ADMIN LEVEL)
+// MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
 .mini-navbar__section {
   @include apply-flex(column, center);
   @include apply-space("padding", -5, "y");
 }
 
-/* USER ICON: MINI-NAV-BAR */
+// MINI-NAVBAR: USER ICON
 .mini-navbar__user-icon {
   font-size: modular-scale(4);
 }
 
-/* TOGGLE ICON & CLOSE ICON: MINI-NAV-BAR */
-.mini-navbar__toggle-icon {
-  @include apply-space("margin-top", -10);
+// MINI-NAVBAR: OPEN  & CLOSE DROPDOWN BUTTON
+.mini-navbar__button {
+  @include apply-space("padding-top", -5);
 
+  color: var(--shade-19);
   font-size: modular-scale(3);
-
-  // !Revisit
-  user-select: none;
-  cursor: pointer;
 }
 
-// ~~~~~~~~~~~~~~~~~~~ DROPDOWN MENU ~~~~~~~~~~~~~~~~~~~
-// DROPDOWN MENU AND CONTENT WITHIN */
-.dropdown-menu {
+// <===== DROPDOWN MENU SECTION =====>
+.dropdown-menu__section {
   @include apply-position(absolute, calc(100% + modular-scale(-5)), modular-scale(-5));
   @include apply-flex(column, center, start);
   @include apply-space("padding", -5, "y");
@@ -55,13 +49,13 @@ header {
   @include apply-space("gap", -10);
 
   z-index: 1;
-  background-color: var(--dark);
-  border: 1px solid var(--medium);
+  background-color: var(--light);
+  border: 1px solid var(--shade-10);
   border-radius: modular-scale(-5);
 }
 
-// ORGANIZE ICONS AND TEXT FOR DROP DOWN MENU
-.dropdown-menu__buttons {
+// DROPDOWN MENU: BUTTONS
+.dropdown-menu__button {
   @include apply-flex(row, center, center);
   @include apply-space("gap", -10);
 }

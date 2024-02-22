@@ -1,4 +1,4 @@
-// ~~~~~~~~~~~~~~~~~~~ TYPOGRAPHY CSS ~~~~~~~~~~~~~~~~~~~ 
+// <===== TYPOGRAPHY SECTION =====>
 // HEADERS (H1 - H6)
 @each $header, $step in $header-steps {
   #{$header} {

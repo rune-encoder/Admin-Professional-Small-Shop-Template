@@ -10,23 +10,42 @@ export default function Home(props) {
         <h6>Header 6</h6>
         <br></br>
 
-<p>paragraphs</p>
-        <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
-        <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
-        <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
-        <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
-        <p>Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd hfksda fh lasd</p>
-
+        <div>
+          <p>paragraphs</p>
+          <p>
+            Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd
+            hfksda fh lasd
+          </p>
+          <p>
+            Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd
+            hfksda fh lasd
+          </p>
+          <p>
+            Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd
+            hfksda fh lasd
+          </p>
+          <p>
+            Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd
+            hfksda fh lasd
+          </p>
+          <p>
+            Lorism asom asdf lkajsdfh akjhdsgf asdf halsdhf lasdhfa sdf lasd
+            hfksda fh lasd
+          </p>
+        </div>
         <br></br>
         <div>
-
-        <label>labels</label>
-        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
-        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
-        <span>asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a</span>
+          <label>labels</label>
+          <span>
+            asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a
+          </span>
+          <span>
+            asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a
+          </span>
+          <span>
+            asdf asdf asdf asdf asdf asd fasd f asdfasdfasdf dsafa sdf asdf a
+          </span>
         </div>
-
-        
       </div>
     </>
   );

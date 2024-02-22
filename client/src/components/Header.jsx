@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import MiniNavbar from "./header-components/MiniNavbar";
 import MiniNavDropdown from "./header-components/MiniNavDropdown";
@@ -16,7 +16,7 @@ export default function Header({ children }) {
     <>
       <header className="roboto-condensed-250">
         <Link to="/" className="logo">
-          <h1>ᚱuᚢe Eᚢcᛟdeᚱ</h1>
+          <h5>ᚱuᚢe Eᚢcᛟdeᚱ</h5>
         </Link>
 
         <span>Admin Portal</span>

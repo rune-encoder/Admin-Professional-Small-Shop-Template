@@ -1,17 +1,17 @@
-// ~~~~~~~~~~~~~~~~~~~ SIDEBAR CSS ~~~~~~~~~~~~~~~~~~~ 
-
-// LEFT NAVIGATION SIDEBAR
+// <===== LEFT-SIDEBAR SECTION =====>
 .sidebar {
   @include apply-flex(column, null, center);
 
   // ! Revisit
   padding-top: modular-scale(10); // OFFSET FROM TOP
-  background-color: #1c212c;
+  background-color: var(--light);
+  color: var(--shade-19);
 }
 
 // SIDEBAR INDIVIDUAL BUTTONS/LINKS
 .menu-item {
   @include apply-flex(column, center, center);
+
   text-align: center;
   margin: 5px 0;
   padding: 5px 0;
@@ -20,6 +20,7 @@
   cursor: pointer;
 
   /* transition: background-color 0.3s; */
+
   /* color: #8c8c8c;  */
 }
 

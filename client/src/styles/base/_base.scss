@@ -1,3 +1,4 @@
+// <===== BASE APP STRUCTURE SECTION =====>
 // WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
 .content {
   @include apply-flex(column);
@@ -7,6 +8,27 @@
 
   // WRAPS APP'S MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
   &__main {
-    flex-grow: 1;
+    flex-grow: 1; // Expand to fill available space
   }
+}
+
+// <===== BASE UTILITIES SECTION =====>
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+// BASE LINK STYLES 
+a {
+  text-decoration: none;
+  color: inherit;
 }

@@ -7,6 +7,55 @@
 @function modular-scale($step) {
   $base: $base-font-size; // Base font size
   $scale: $modular-scale; // Modular scale
-  
+
   @return $base * pow($modular-scale, $step);
+}
+
+// FUNCTION TO GENERATE SHADES OF GRAY FOR LIGHT/DARK THEMES
+@function generate-shades($theme) {
+  @if not index("light" "dark", $theme) {
+    @error "Invalid theme: `#{$theme}`. Expected 'light' or 'dark'.";
+  }
+
+  // !REVISIT
+  // IMPORTANT: DETERMINE THE AMOUNT OF SHADES BASED ON THE INCREMENT VALUE
+  $increment: 4;
+  $name-value: 1;
+  $prefix: "shade";
+  
+  $shade-range: (
+    "light": (
+      (100 - $increment),
+      (0 + $increment),
+    ),
+    "dark": (
+      (0 + $increment),
+      (100 - $increment),
+    ),
+  );
+  
+  $start: list.nth(map.get($shade-range, $theme), 1);
+  $end: list.nth(map.get($shade-range, $theme), 2);
+  $shades: ();
+  $i: $start;
+
+  @while $theme == "light" and $i >= $end or $theme == "dark" and $i <= $end {
+    $color-name: #{$prefix}-#{$name-value};
+    $value: hsl(0deg 0% $i * 1%);
+    $shades: map.merge(
+      $shades,
+      (
+        $color-name: $value,
+      )
+    );
+    $name-value: $name-value + 1;
+    
+    @if $theme == "light" {
+      $i: $i - $increment;
+    } @else if $theme == "dark" {
+      $i: $i + $increment;
+    }
+  }
+
+  @return $shades;
 }

@@ -10,30 +10,28 @@ export default function MiniNavDropdown({
 }) {
   return (
     /* <======= DROPDOWN MENU CONTAINER =======> */
-    <div className="dropdown-container">
+    <div className="dropdown-menu">
       {/* <======= ICON: OPEN AND CLOSE MENU =======> */}
       {isDropdownOpen ? (
-        <GrClose
-          className="mini-navbar__toggle-icon"
-          onClick={toggleDropdown}
-        />
+        <button className="mini-navbar__button">
+          <GrClose onClick={toggleDropdown} />
+        </button>
       ) : (
-        <RxHamburgerMenu
-          className="mini-navbar__toggle-icon"
-          onClick={toggleDropdown}
-        />
+        <button className="mini-navbar__button">
+          <RxHamburgerMenu onClick={toggleDropdown} />
+        </button>
       )}
       {/* <======= DROPDOWN MENU CONTENT =======> */}
       {isDropdownOpen && (
-        <div className="dropdown-menu">
+        <section className="dropdown-menu__section">
           {ThemeBtn} {/* ThemeBtn Component */}
-          <button className="dropdown-menu__buttons">
+          <button className="dropdown-menu__button">
             <IoLogOutOutline /> Logout
           </button>
           <span className="header__text--subtle">
             Build Version v1.0.0 beta
           </span>
-        </div>
+        </section>
       )}
     </div>
   );
