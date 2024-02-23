@@ -2,7 +2,9 @@
 header {
   @include apply-flex(row, space-between, center);
   @include apply-box-shadow($color: var(--shade-8));
+  @include apply-font-family("ysabeau-sc");
   
+  font-weight: 600;
   position: relative;
   width: 100%;
   background-color: var(--shade-1);

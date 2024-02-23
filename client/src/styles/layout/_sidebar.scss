@@ -4,9 +4,11 @@
   @include apply-space("padding-top",19);
   @include apply-space("min-width", 13);
   @include apply-box-shadow($color: var(--shade-5));
+  @include apply-font-family("roboto-condensed");
 
-  background-color: var(--light);
+  font-weight: 600;
   color: var(--shade-22);
+  background-color: var(--light);
   z-index: 1;
 }
 
@@ -21,11 +23,7 @@
 
   &:hover {
     color: var(--shade-4);
-    background-color: var(--shade-20);
-  }
-
-  &:focus {
-    color: var(--accent);
+    background: linear-gradient(140deg, var(--shade-18) 0%, var(--shade-22) 100%);
   }
 }
 

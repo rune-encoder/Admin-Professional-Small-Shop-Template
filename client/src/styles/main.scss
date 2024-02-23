@@ -4,12 +4,11 @@
 @use "sass:string";
 @use 'sass:math';
 @use 'sass:meta';
-@import 'https://fonts.googleapis.com/css2?family=Exo&family=Exo+2&family=Roboto&family=Ysabeau&family=Ysabeau+Infant&family=Ysabeau+Office&family=Ysabeau+SC&display=swap';
-@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap';
 @import "./abstracts/functions";
 @import "./abstracts/variables";
 @import "./abstracts/mixins";
 @import "./abstracts/placeholders";
+@import "./vendor/google-fonts";
 @import "./base/reset";
 @import "./base/root";
 @import "./base/base";
