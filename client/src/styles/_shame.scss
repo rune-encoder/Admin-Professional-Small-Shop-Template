@@ -1,26 +1,26 @@
 // // ! Revisit
-// header h1 {
-//   @include respond-to("xlarge") {
-//     color: gray;
-//   }
+header h5 {
+  @include respond-to("xlarge") {
+    color: gray;
+  }
 
-//   @include respond-to("large") {
-//     color: green;
-//   }
+  @include respond-to("large") {
+    color: green;
+  }
 
-//   @include respond-to("medium") {
-//     color: blue;
-//   }
+  @include respond-to("medium") {
+    color: blue;
+  }
 
-//   @include respond-to("small") {
-//     color: red;
-//   }
+  @include respond-to("small") {
+    color: red;
+  }
 
-//   @include respond-to("xsmall") {
-//     color: yellow;
-//   }
-// }
+  @include respond-to("xsmall") {
+    color: yellow;
+  }
+}
 
-// .bd {
-//   border: solid 1px purple;
-// }
+.bd {
+  border: solid 1px purple;
+}

@@ -39,19 +39,19 @@ $header-steps: (
 // MEDIA QUERY BREAKPOINTS
 $breakpoints: (
   "xsmall": (
-    "max-width": rem(480px),
+    max-width: rem(480px),
   ),
   "small": (
-    "max-width": rem(770px),
+    max-width: rem(770px),
   ),
   "medium": (
-    "max-width": rem(1025px),
+    max-width: rem(1025px),
   ),
   "large": (
-    "max-width": rem(1280px),
+    max-width: rem(1280px),
   ),
   "xlarge": (
-    "max-width": rem(1440px),
+    max-width: rem(1440px),
   ),
 );
 
@@ -64,6 +64,7 @@ $shared-colors: (
   "theme": #618adf
 );
 
+// !REVISIT
 // <===== LIGHT THEME COLOR SECTION =====>
 // LIGHT THEME COLORS
 $light-theme: (
@@ -89,7 +90,9 @@ $dark-theme: (
   "light": hsl(0deg 0% 0%),
   "dark": hsl(0deg 0% 100%),
 
-  "selection": hsl(352, 23%, 26%) 
+  "primary": hsl(258, 54%, 18%),
+  "secondary": 	hsl(320, 74%, 21%),
+  "selection": hsl(352, 23%, 26%),
   // "selection": hsl(327, 45%, 54%)
 );
 

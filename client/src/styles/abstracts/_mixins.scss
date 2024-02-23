@@ -75,3 +75,8 @@
     @error "No breakpoint found for `#{$breakpoint}`.";
   }
 }
+
+// APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y, BLUR, AND SPREAD)
+@mixin apply-box-shadow($x: 0, $y: 0, $blur: 0.5rem, $spread: -0.3rem, $color) {
+  box-shadow: #{$x} #{$y} #{$blur} #{$spread} #{$color};
+}

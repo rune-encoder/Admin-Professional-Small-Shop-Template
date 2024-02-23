@@ -1,11 +1,13 @@
 // <===== LEFT-SIDEBAR SECTION =====>
 .sidebar__aside {
   @include apply-flex(column, null, center);
-  
-  padding-top: 10%;
-  min-width: 6.5%;
+  @include apply-space("padding-top",19);
+  @include apply-space("min-width", 13);
+  @include apply-box-shadow($color: var(--shade-5));
+
   background-color: var(--light);
   color: var(--shade-22);
+  z-index: 1;
 }
 
 // SIDEBAR LINKS/BUTTONS GROUP
@@ -16,6 +18,15 @@
 
   width: 100%;
   text-align: center;
+
+  &:hover {
+    color: var(--shade-4);
+    background-color: var(--shade-20);
+  }
+
+  &:focus {
+    color: var(--accent);
+  }
 }
 
 // SIDEBAR ICONS
@@ -25,5 +36,5 @@
 
 // SIDEBAR TEXT
 .sidebar__text {
-  font-size: 0.875rem;
+  font-size: modular-scale(-1);
 }
