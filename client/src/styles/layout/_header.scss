@@ -2,9 +2,7 @@
 header {
   @include apply-flex(row, space-between, center);
   @include apply-box-shadow($color: var(--shade-8));
-  @include apply-font-family("ysabeau-sc");
-  
-  font-weight: 600;
+
   position: relative;
   width: 100%;
   background-color: var(--shade-1);
@@ -16,12 +14,21 @@ header {
   color: var(--shade-15);
 }
 
+// <===== TITLE SECTION =====>
+.header__title {
+    @include apply-font-family("ysabeau-sc");
+
+    font-weight: 700;
+}
+
 // <===== MINI-NAVIGATION-BAR SECTION =====>
 .mini-navbar {
   @include apply-flex(row, center, center);
   @include apply-space("margin", -5, "x");
   @include apply-space("padding", -5, "x");
   @include apply-space("gap", -10);
+
+  font-weight: 450;
 }
 
 // MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
@@ -52,6 +59,7 @@ header {
   @include apply-space("gap", -10);
   @include apply-box-shadow($color: var(--shade-15));
 
+  font-weight: 400;
   z-index: 1;
   background-color: var(--light);
   border: 1px solid var(--shade-10);

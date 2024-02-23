@@ -6,7 +6,7 @@
   @include apply-box-shadow($color: var(--shade-5));
   @include apply-font-family("roboto-condensed");
 
-  font-weight: 600;
+  font-weight: 500;
   color: var(--shade-22);
   background-color: var(--light);
   z-index: 1;
