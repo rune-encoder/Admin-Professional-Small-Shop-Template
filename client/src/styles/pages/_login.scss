@@ -1,0 +1,76 @@
+$login__section-width: 30rem;
+$login__section-height: 20rem;
+$login__main-width: calc($login__section-width - 1rem);
+$login__main-height: math.div($login__section-height, 2) - 1rem;
+$login__button-width: math.div($login__main-width, 2);
+$border-radius: modular-scale(-5);
+
+.login__section--wrapper{
+    @include apply-font-family("roboto");
+    @include apply-flex(row, center, center);
+
+    width: 100%;
+}
+
+.login__section {
+    @include apply-flex(column, space-evenly, center);
+
+    min-width: $login__section-width;
+    min-height: $login__section-height;
+    border-radius: $border-radius;
+    background: var(--light);
+    background: linear-gradient(to right bottom, var(--light), var(--shade-1));
+    border: 1px solid var(--shade-10);
+}
+
+.login__header {
+    // !Revisit
+}
+
+.login__main {
+    @include apply-flex(column, space-evenly, center);
+
+    width: $login__main-width;
+    height: $login__main-height;
+    border-radius: $border-radius;
+    background: var(--shade-5);
+    background: linear-gradient(to right top, var(--shade-5), var(--shade-7));
+    border: 1px solid var(--shade-10);
+
+}
+
+.login__welcome-text {
+    font-size: $base-font-size;
+}
+
+.login__footer {
+    // !Revisit
+}
+
+.login__button {
+    width: $login__button-width;
+    border: none;
+    background: #9733ee;
+    background: linear-gradient(to right, #da22ff, #9733ee);
+    opacity: 0.75;
+    border-radius: $border-radius;
+    color: var(--dark);
+    font-size: modular-scale(1);
+    text-align: center;
+    transition: all 0.6s ease-out;
+
+    &:hover {
+        background: #e0eafc;
+        background: linear-gradient(to right, #cfdef3, #c0d4fa);
+        box-shadow: 0 1px 30px 1px #00000052;
+        width: $login__button-width - 1rem;
+        opacity: 1;
+        border: 0.2px solid #353434;
+        color: var(--light);
+    }
+
+    &:active {
+        background: #fff;
+        background: linear-gradient(to right, #abbaab, #fff);
+    }
+}

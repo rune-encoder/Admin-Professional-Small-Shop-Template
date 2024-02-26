@@ -59,7 +59,6 @@
   }
 }
 
-// ! REVISIT
 // APPLY MEDIA QUERY BREAKPOINTS
 @mixin respond-to($breakpoint) {
   $raw-query: map.get($media-breakpoints, $breakpoint);

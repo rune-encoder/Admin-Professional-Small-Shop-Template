@@ -1,5 +1,17 @@
 import { Outlet } from "react-router-dom";
+
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+
+import { setContext } from "@apollo/client/link/context";
+
 import { useState, useEffect } from "react";
+
+import Login from "./pages/Login.jsx";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -7,6 +19,39 @@ import ThemeBtn from "./components/UI/ThemeBtn";
 import Sidebar from "./components/Sidebar";
 
 function App() {
+  const httpLink = createHttpLink({
+    uri: "/graphql",
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem("id_token");
+
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+
+  const [isLoggedIn, setIsLoggedIn] =  useState(false);
+  // useState(!!localStorage.getItem("token"));
+
+  const handleLogin = (token) => {
+    localStorage.setItem("token", token);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
+
   // Check if user prefers dark mode in their Operating System and set the theme accordingly.
   const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)");
   const [darkMode, setDarkMode] = useState(prefersDarkMode.matches);
@@ -41,18 +86,24 @@ function App() {
   }, [setDarkMode]);
 
   return (
-    <>
-      <Sidebar />
-      <div className="content">
-        <Header>
-          <ThemeBtn darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        </Header>
-        <main className="content__main">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </>
+    <ApolloProvider client={client}>
+      {!isLoggedIn ? (
+        <Login onLogin={handleLogin} />
+      ) : (
+        <>
+          <Sidebar />
+          <div className="content">
+            <Header>
+              <ThemeBtn darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+            </Header>
+            <main className="content__main">
+              <Outlet />
+            </main>
+            <Footer />
+          </div>
+        </>
+      )}
+    </ApolloProvider>
   );
 }
 
