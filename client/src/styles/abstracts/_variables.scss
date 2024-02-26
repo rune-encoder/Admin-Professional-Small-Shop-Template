@@ -35,24 +35,22 @@ $header-steps: (
   "h6": 1,
 );
 
-// !REVISIT BROKEN
+// MEDIA QUERY BREAKPOINT VALUES
+$xs-min: 0;
+$sm-min: 576px;
+$md-min: 768px;
+$lg-min: 992px;
+$xl-min: 1200px;
+$xxl-min: 1400px;
+
 // MEDIA QUERY BREAKPOINTS
-$breakpoints: (
-  "xsmall": (
-    max-width: rem(480px),
-  ),
-  "small": (
-    max-width: rem(770px),
-  ),
-  "medium": (
-    max-width: rem(1025px),
-  ),
-  "large": (
-    max-width: rem(1280px),
-  ),
-  "xlarge": (
-    max-width: rem(1440px),
-  ),
+$media-breakpoints: (
+  "xs": '(min-width: #{0}) and (max-width: #{rem($sm-min - 1)})',
+  "sm": '(min-width: #{rem($sm-min)}) and (max-width: #{rem($md-min - 1)})',
+  "md": '(min-width: #{rem($md-min)}) and (max-width: #{rem($lg-min - 1)})',
+  "lg": '(min-width: #{rem($lg-min)}) and (max-width: #{rem($xl-min - 1)})',
+  "xl": '(min-width: #{rem($xl-min)}) and (max-width: #{rem($xxl-min - 1)})',
+  "xxl": '(min-width: #{rem($xxl-min)})',
 );
 
 // <===== THEME COLOR SECTION =====>

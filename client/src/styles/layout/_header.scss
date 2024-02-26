@@ -55,11 +55,11 @@ header {
   @include apply-position(absolute, calc(100% + modular-scale(-5)), modular-scale(-5));
   @include apply-flex(column, center, start);
   @include apply-space("padding", -5, "y");
-  @include apply-space("padding", 0, "x");
+  @include apply-space("padding", -5, "x");
   @include apply-space("gap", -10);
   @include apply-box-shadow($color: var(--shade-15));
 
-  font-weight: 400;
+  font-weight: 300;
   z-index: 1;
   background-color: var(--light);
   border: 1px solid var(--shade-10);
@@ -70,4 +70,10 @@ header {
 .dropdown-menu__button {
   @include apply-flex(row, center, center);
   @include apply-space("gap", -10);
+
+  transition: transform 0.2s ease-out;
+
+  &:hover {
+    transform: translateX(5px);
+  }
 }

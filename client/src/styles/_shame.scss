@@ -1,26 +1,84 @@
-// // ! Revisit
+// ! Revisit
 header h5 {
-  @include respond-to("xlarge") {
+  @include respond-to("xl") {
     color: gray;
   }
 
-  @include respond-to("large") {
+  @include respond-to("lg") {
     color: green;
   }
 
-  @include respond-to("medium") {
+  @include respond-to("md") {
     color: blue;
   }
 
-  @include respond-to("small") {
+  @include respond-to("sm") {
     color: red;
   }
 
-  @include respond-to("xsmall") {
+  @include respond-to("xs") {
     color: yellow;
+  }
+
+  @include respond-to("xxl") {
+    color: purple;
   }
 }
 
-.bd {
-  border: solid 1px purple;
+.container {
+  background-color: rgb(78 82 81);
 }
+
+.test {
+  color: rgb(0 0 0);
+  border: solid 1px rgb(105 105 100);
+
+  @media (width >= 0) {
+    background-color: rgb(233, 229, 229);
+    
+    &::after {
+      content: " xs"
+    }
+  }
+
+  @media (width >= 576px) {
+    background-color: rgb(221 44 44);
+    
+    &::after {
+      content: " sm"
+    }
+  }
+
+  @media (width >= 768px) {
+    background-color: rgb(203 224 15);
+
+    &::after {
+      content: " md"
+    }
+  }
+
+  @media (width >= 992px) {
+    background-color: rgb(5 226 79);
+
+    &::after {
+      content: " lg"
+    }
+  }
+
+  @media (width >= 1200px) {
+    background-color: rgb(13 198 211);
+
+    &::after {
+      content: " xl"
+    }
+  }
+
+  @media (width >= 1400px) {
+    background-color: rgb(8 40 221);
+
+    &::after {
+      content: " xxl"
+    }
+  }
+}
+

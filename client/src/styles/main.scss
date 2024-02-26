@@ -13,13 +13,13 @@
 @import "./base/root";
 @import "./base/base";
 @import "./base/typography";
+@import "./layout/grid";
 @import "./layout/sidebar";
 @import "./layout/header";
 @import "./layout/footer";
 @import "./shame";
 
 // !Revisit
-
 // DARK THEME COLORS
 .dark {
   @include apply-theme-colors($dark-theme);
@@ -48,17 +48,39 @@
 }
 
 /* FLEX-GRID LAYOUT */
-.flex-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+// .flex-grid {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-around;
+// }
 
-.col {
-  box-sizing: border-box;
-}
+// .col {
+//   box-sizing: border-box;
+// }
 
 /* DEFAULT PARAGRAPH SIZE */
 // p {
 //   filter: drop-shadow(5px 3px 10px var(--opacity-medium));
+// }
+
+// @mixin make-row($gutter: 0) {
+//   display: flex;
+//   flex-wrap: wrap;
+//   margin-left: calc(-1 * #{$gutter});
+//   margin-right: calc(-1 * #{$gutter});
+// }
+
+// @mixin make-col($size, $columns: 12, $gutter: 0) {
+//   flex: 0 0 math.percentage($size / $columns);
+//   max-width: math.percentage($size / $columns);
+//   padding-left: #{$gutter};
+//   padding-right: #{$gutter};
+// }
+
+// .row {
+//   @include make-row(15px); // Set your gutter width here
+// }
+
+// .col {
+//   @include make-col(1, 12, 15px); // Adjust size and total columns as needed
 // }
