@@ -38,8 +38,7 @@ export default function Login() {
           password: formState.password,
         },
       });
-      console.log(mutationResponse);
-      
+
       const token = mutationResponse.data.adminLogin.token;
       Auth.login(token);
 

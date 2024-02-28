@@ -20,7 +20,6 @@ import ThemeBtn from "./components/UI/ThemeBtn";
 import Sidebar from "./components/Sidebar";
 
 function App() {
-
   // <========== APOLLO CLIENT SECTION ==========>
   const httpLink = createHttpLink({
     uri: "/graphql",
@@ -42,10 +41,19 @@ function App() {
     cache: new InMemoryCache(),
   });
 
-  // <========== LOGIN SECTION ==========>
-  // !Revisit
-  // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("id_token"));
+  // <========== LOGGED-IN ADMIN SECTION ==========>
+  const [adminData, setAdminData] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("id_token");
+    if (token) {
+      const { username, permission } =
+        Auth.getProfile(token).authenticatedAdmin;
+      setAdminData({ username, permission });
+    } else {
+      setAdminData(false);
+    }
+  }, []);
 
   // <========== THEME SECTION ==========>
   // Check if user prefers dark mode in their Operating System and set the theme accordingly.
@@ -85,12 +93,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {!Auth.loggedIn() ? (
-        <Login />
+        <Login adminData={adminData} setAdminData={setAdminData} />
       ) : (
         <>
           <Sidebar />
           <div className="content">
-            <Header>
+            <Header adminData={adminData}>
               <ThemeBtn darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             </Header>
             <main className="content__main">

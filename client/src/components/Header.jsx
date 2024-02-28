@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import MiniNavbar from "./header-components/MiniNavbar";
 import MiniNavDropdown from "./header-components/MiniNavDropdown";
 
-export default function Header({ children }) {
+export default function Header({ children, adminData }) {
   // <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -22,7 +22,7 @@ export default function Header({ children }) {
         <span className="header__title">Admin Portal</span>
 
         {/* <======= MINI NAVIGATION BAR: RIGHT SIDE =======> */}
-        <MiniNavbar>
+        <MiniNavbar adminData={adminData}>
           <MiniNavDropdown
             isDropdownOpen={isDropdownOpen}
             toggleDropdown={toggleDropdown}
