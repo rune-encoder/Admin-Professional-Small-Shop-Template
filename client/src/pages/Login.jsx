@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { LOGIN_ADMIN } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 
 export default function Login() {
   const [formState, setFormState] = useState({
@@ -15,6 +18,8 @@ export default function Login() {
     );
   }, [formState.username, formState.password]);
 
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_ADMIN);
+
   const handleInputChange = async (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -23,8 +28,23 @@ export default function Login() {
     });
   };
 
-  console.log(formState);
-  console.log(isFormValid);
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const mutationResponse = await loginUser({
+        variables: {
+          username: formState.username,
+          password: formState.password,
+        },
+      });
+      
+      const token = mutationResponse.data.adminLogin.token;
+      Auth.login(token);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -35,7 +55,7 @@ export default function Login() {
             <span className="login__welcome-text">
               Welcome. Please login...
             </span>
-            <form className="">
+            <form onSubmit={handleFormSubmit}>
               <div className="login__form-section">
                 <label>Username:</label>
                 <input
