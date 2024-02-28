@@ -5,7 +5,7 @@ import MiniNavbar from "./header-components/MiniNavbar";
 import MiniNavDropdown from "./header-components/MiniNavDropdown";
 
 export default function Header({ children }) {
-  /* <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> */
+  // <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {

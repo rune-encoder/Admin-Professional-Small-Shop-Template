@@ -1,7 +1,9 @@
 // <===== HEADER SECTION =====>
 header {
   @include apply-flex(row, space-between, center);
-  @include apply-box-shadow($color: var(--shade-8));
+
+  // !REVISIT
+  // @include apply-box-shadow($color: var(--shade-8));
 
   position: relative;
   width: 100%;
@@ -57,7 +59,9 @@ header {
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
   @include apply-space("gap", -10);
-  @include apply-box-shadow($color: var(--shade-15));
+
+  // !REVISIT
+  // @include apply-box-shadow($color: var(--shade-15));
 
   font-weight: 300;
   z-index: 1;

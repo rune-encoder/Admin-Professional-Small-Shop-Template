@@ -40,7 +40,13 @@
 }
 
 // APPLY POSITION PROPERTY
-@mixin apply-position($position: "static", $top: null, $right: null, $bottom: null, $left: null) {
+@mixin apply-position(
+  $position: "static",
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
   position: $position;
 
   @if $position == "absolute" or $position == "fixed" or $position == "sticky" {
@@ -48,7 +54,7 @@
       "top": $top,
       "right": $right,
       "bottom": $bottom,
-      "left": $left
+      "left": $left,
     );
 
     @each $property, $value in $properties {
@@ -64,9 +70,11 @@
   $raw-query: map.get($media-breakpoints, $breakpoint);
 
   @if $raw-query {
-    $query: if(meta.type-of($raw-query) == "string",
-    string.unquote($raw-query),
-    meta.inspect($raw-query));
+    $query: if(
+      meta.type-of($raw-query) == "string",
+      string.unquote($raw-query),
+      meta.inspect($raw-query)
+    );
 
     @media #{$query} {
       @content;
@@ -76,7 +84,34 @@
   }
 }
 
-// APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y, BLUR, AND SPREAD)
-@mixin apply-box-shadow($x: 0, $y: 0, $blur: 0.5rem, $spread: -0.3rem, $color) {
-  box-shadow: #{$x} #{$y} #{$blur} #{$spread} #{$color};
+// APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y)
+@mixin apply-box-shadow($color, $strength: 1, $x: 0, $y: 0) {
+  $base-blur: 0.5rem;
+  $base-spread: -0.3rem;
+
+  // !REVISIT explain magic numbers and change function
+  $adjusted-blur: $base-blur + calc(0.05rem * $strength);
+  $adjusted-spread: $base-spread - calc(0.02rem * $strength);
+
+  box-shadow: #{$x} #{$y} #{$adjusted-blur} #{$adjusted-spread} var(--#{$color});
+}
+
+// APPLY LINEAR GRADIENT BASED ON AVAILABLE COLOR THEMES
+@mixin apply-gradient($color, $alteration, $direction: to right bottom) {
+  background: var(--#{$color});
+  background: linear-gradient(
+    $direction,
+    var(--#{$color}),
+    var(--#{$alteration})
+  );
+}
+
+// APPLY BORDER RADIUS AND BORDER
+@mixin apply-border($color, $radius: 0, $width: 1px) {
+  border: solid rem($width) var(--#{$color});
+  border-radius: $radius;
+}
+
+@mixin apply-text-shadow($color, $x: 1px, $y: 1px, $blur: 1px) {
+  text-shadow: #{rem($x)} #{rem($y)} #{rem($blur)} var(--#{$color});
 }

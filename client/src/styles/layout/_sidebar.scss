@@ -3,7 +3,9 @@
   @include apply-flex(column, null, center);
   @include apply-space("padding-top",19);
   @include apply-space("min-width", 13);
-  @include apply-box-shadow($color: var(--shade-5));
+
+  // !REVISIT
+  // @include apply-box-shadow($color: var(--shade-5));
   @include apply-font-family("roboto-condensed");
 
   font-weight: 500;
