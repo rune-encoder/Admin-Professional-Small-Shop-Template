@@ -59,15 +59,16 @@ $shared-colors: (
   // BASE COLORS
   "always-light": hsl(0deg 0% 100%),
   "always-dark": hsl(0deg 0% 7%),
+
+  // !REVISIT THEME COLOR
   "theme": #618adf,
 
   // UTILITY COLORS
   "hover-primary": hsl(180, 80%, 75%),
   "hover-secondary": hsl(180, 60%, 60%),
-  "hover-selection": hsl(352, 23%, 26%),
 );
 
-// !REVISIT
+// !REVISIT AND REFACTOR
 // <===== LIGHT THEME COLOR SECTION =====>
 // LIGHT THEME COLORS
 $light-theme: (

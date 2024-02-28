@@ -84,12 +84,11 @@
   }
 }
 
+// ! REVISIT: CHANGE STRENGTH AND EXPLAIN MAGIC NUMBERS
 // APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y)
 @mixin apply-box-shadow($color, $strength: 1, $x: 0, $y: 0) {
   $base-blur: 0.5rem;
   $base-spread: -0.3rem;
-
-  // !REVISIT explain magic numbers and change function
   $adjusted-blur: $base-blur + calc(0.05rem * $strength);
   $adjusted-spread: $base-spread - calc(0.02rem * $strength);
 
@@ -106,12 +105,13 @@
   );
 }
 
-// APPLY BORDER RADIUS AND BORDER
+// APPLY BORDER RADIUS AND BORDER BASED ON AVAILABLE COLOR THEMES
 @mixin apply-border($color, $radius: 0, $width: 1px) {
   border: solid rem($width) var(--#{$color});
   border-radius: $radius;
 }
 
+// APPLY DEFAULT TEXT SHADOW BASED ON AVAILABLE COLOR THEMES
 @mixin apply-text-shadow($color, $x: 1px, $y: 1px, $blur: 1px) {
   text-shadow: #{rem($x)} #{rem($y)} #{rem($blur)} var(--#{$color});
 }
