@@ -2,6 +2,7 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose } from "react-icons/gr";
 import { IoLogOutOutline } from "react-icons/io5";
+import Auth from "../../utils/auth";
 
 export default function MiniNavDropdown({
   isDropdownOpen,
@@ -25,7 +26,10 @@ export default function MiniNavDropdown({
       {isDropdownOpen && (
         <section className="dropdown-menu__section">
           {ThemeBtn} {/* ThemeBtn Component */}
-          <button className="dropdown-menu__button">
+          <button
+            className="dropdown-menu__button"
+            onClick={() => Auth.logout()}
+          >
             <IoLogOutOutline /> Logout
           </button>
           <span className="header__text--subtle">

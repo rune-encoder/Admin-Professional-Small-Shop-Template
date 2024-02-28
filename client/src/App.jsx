@@ -10,6 +10,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import { useState, useEffect } from "react";
+import Auth from "./utils/auth";
 
 import Login from "./pages/Login.jsx";
 
@@ -43,7 +44,8 @@ function App() {
 
   // <========== LOGIN SECTION ==========>
   // !Revisit
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("id_token"));
+  // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("id_token"));
+
 
   // <========== THEME SECTION ==========>
   // Check if user prefers dark mode in their Operating System and set the theme accordingly.
@@ -79,9 +81,10 @@ function App() {
     };
   }, [setDarkMode]);
 
+  // ! Revisit Auth Loggedin
   return (
     <ApolloProvider client={client}>
-      {!isLoggedIn ? (
+      {!Auth.loggedIn() ? (
         <Login />
       ) : (
         <>

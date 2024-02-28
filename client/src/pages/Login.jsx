@@ -31,12 +31,14 @@ export default function Login() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
+      // !REVISIT: Returns ID, email, username, and permission (change)
       const mutationResponse = await loginUser({
         variables: {
           username: formState.username,
           password: formState.password,
         },
       });
+      console.log(mutationResponse);
       
       const token = mutationResponse.data.adminLogin.token;
       Auth.login(token);
