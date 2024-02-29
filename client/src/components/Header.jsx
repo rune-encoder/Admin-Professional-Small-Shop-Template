@@ -15,8 +15,8 @@ export default function Header({ children, adminData }) {
   return (
     <>
       <header className="roboto-condensed-250">
-        <Link to="/" className="logo">
-          <h5>ᚱuᚢe Eᚢcᛟdeᚱ</h5>
+        <Link to="/" className="header__logo">
+          <h5>ᚱuᚢe-Eᚢcᛟdeᚱ</h5>
         </Link>
 
         <span className="header__title">Admin Portal</span>

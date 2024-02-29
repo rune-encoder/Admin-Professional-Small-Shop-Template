@@ -40,6 +40,7 @@ export default function Login() {
       });
 
       const token = mutationResponse.data.adminLogin.token;
+      localStorage.removeItem("id_token");
       Auth.login(token);
 
     } catch (error) {

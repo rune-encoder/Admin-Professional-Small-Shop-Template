@@ -3,14 +3,13 @@
   @include apply-flex(column, null, center);
   @include apply-space("padding-top",19);
   @include apply-space("min-width", 13);
-
-  // !REVISIT
-  // @include apply-box-shadow($color: var(--shade-5));
+  @include apply-gradient("light", "shade-1", 60deg);
   @include apply-font-family("roboto-condensed");
+  @include apply-box-shadow("shade-10", 15);
 
   font-weight: 500;
+  border-right: solid rem(1px) var(--shade-11);
   color: var(--shade-22);
-  background-color: var(--light);
   z-index: 1;
 }
 
@@ -24,8 +23,9 @@
   text-align: center;
 
   &:hover {
+    @include apply-gradient("shade-18", "shade-22", 140deg);
+
     color: var(--shade-4);
-    background: linear-gradient(140deg, var(--shade-18) 0%, var(--shade-22) 100%);
   }
 }
 

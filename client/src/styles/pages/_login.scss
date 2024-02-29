@@ -1,10 +1,8 @@
-// ! REVISIT VARIABLE (MOVE?)
+// <===== LOGIN PAGE: VARIABLES SECTION =====>
 $login__section-width: 30rem;
 $login__section-height: 30rem;
 $login__form-width: calc($login__section-width - 5rem);
 $login__button-width: math.div($login__form-width, 2);
-$border-radius: rem(15px);
-$border-radius-form: rem(5px);
 
 .login__section--wrapper {
   @include apply-font-family("roboto");
@@ -13,10 +11,11 @@ $border-radius-form: rem(5px);
   width: 100%;
 }
 
+// <===== LOGIN PAGE: STYLE SECTION =====>
 .login__section {
   @include apply-flex(column, space-evenly, center);
   @include apply-gradient("light", "shade-1");
-  @include apply-border("shade-10", $border-radius);
+  @include apply-border("shade-10", $border-radius-card);
   @include apply-box-shadow("shade-8", 25);
 
   min-width: $login__section-width;
@@ -35,7 +34,7 @@ $border-radius-form: rem(5px);
   @include apply-space("padding", 6, "y");
   @include apply-space("padding", 4, "x");
   @include apply-gradient("shade-15", "shade-17", to right top);
-  @include apply-border("shade-15", $border-radius);
+  @include apply-border("shade-15", $border-radius-card);
   @include apply-box-shadow("shade-15", 25);
 
   width: $login__form-width;
@@ -65,7 +64,7 @@ $border-radius-form: rem(5px);
   @include apply-text-shadow("shade-14");
 
   border: none;
-  border-radius: $border-radius-form;
+  border-radius: $border-radius;
   background-color: var(--light);
   color: var(--dark);
 
@@ -85,7 +84,7 @@ $border-radius-form: rem(5px);
   // !REVISIT BUTTON STYLE (MAKE MODULAR)
   border: solid rem(1px) hsl(0deg 0% 10% / 0%);
   outline: solid rem(1px) var(--shade-10);
-  border-radius: $border-radius-form;
+  border-radius: $border-radius;
   background-color: var(--always-light);
   color: var(--always-dark);
   transition: all 0.2s ease-in;

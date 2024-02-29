@@ -12,6 +12,10 @@ $base-font-weight: 400;
 // MODULAR SCALE (MAJOR THIRD)
 $modular-scale: 1.25;
 
+// BORDER RADIUS
+$border-radius: rem(5px);
+$border-radius-card: rem(15px);
+
 // FONT FAMILIES
 $font-families: (
   "inter": ("Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif),
@@ -75,8 +79,8 @@ $light-theme: (
   /* BASE COLORS */ "light": hsl(0deg 0% 100%),
   "dark": hsl(0deg 0% 0%),
 
-  "selection": hsl(192, 24%, 88%),
-  // "selection": hsl(195deg 53% 79%),
+  // UTILITY COLORS
+  "selection": hsl(352, 23%, 26%),
 );
 
 // LIGHT THEME SHADES OF GRAY
@@ -94,10 +98,11 @@ $dark-theme: (
   "light": hsl(0deg 0% 0%),
   "dark": hsl(0deg 0% 100%),
 
+  // UTILITY COLORS
+  "selection": hsl(180, 80%, 75%),
+  
   "primary": hsl(258, 54%, 18%),
   "secondary": 	hsl(320, 74%, 21%),
-  "selection": hsl(352, 23%, 26%),
-  // "selection": hsl(327, 45%, 54%)
 );
 
 // DARK THEME SHADES OF GRAY
