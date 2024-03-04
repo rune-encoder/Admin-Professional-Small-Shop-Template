@@ -19,6 +19,7 @@
   @include apply-space("padding", -2, "y");
   @include apply-space("gap", -10);
 
+  position: relative;
   width: 100%;
   text-align: center;
 

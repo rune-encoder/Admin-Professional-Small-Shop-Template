@@ -32,6 +32,7 @@ export default function Login() {
     event.preventDefault();
     try {
       // !REVISIT: Returns ID, email, username, and permission (change)
+      // !REVISIT: bug if you log out by timer, token still stored, cannot login
       const mutationResponse = await loginUser({
         variables: {
           username: formState.username,
