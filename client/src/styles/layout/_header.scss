@@ -54,8 +54,7 @@ header {
 
   color: var(--shade-19);
   font-size: modular-scale(3);
-  transition: transform 0.5s ease-in;
-
+  
   &:hover {
     color: var(--selection);
   }
@@ -68,27 +67,14 @@ header {
     calc(100% + modular-scale(-5)),
     modular-scale(-5)
   );
-  @include apply-flex(column, center, start);
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
-  @include apply-space("gap", -10);
-  @include apply-gradient("light", "shade-1", to right top);
-  @include apply-border("shade-10", $border-radius);
-  @include apply-box-shadow("shade-10", 10);
-
-  font-weight: 300;
-  z-index: 1;
+  @extend %toggle-menu--layout;
+  @extend %toggle-menu--style;
 }
 
 // DROPDOWN MENU: BUTTONS
 .dropdown-menu__button {
-  @include apply-flex(row, center, center);
-  @include apply-space("gap", -10);
-
-  transition: transform 0.2s ease-out;
-
-  &:hover {
-    transform: translateX(5px);
-    color: var(--selection);
-  }
+  @extend %toggle-menu__button--layout;
+  @extend %toggle-menu__button--style;
 }

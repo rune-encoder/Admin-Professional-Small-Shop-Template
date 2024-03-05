@@ -1,7 +1,7 @@
-// <===== LEFT-SIDEBAR SECTION =====>
+// <===== SIDEBAR SECTION =====>
 .sidebar__aside {
   @include apply-flex(column, null, center);
-  @include apply-space("padding-top",19);
+  @include apply-space("padding-top", 19);
   @include apply-space("min-width", 13);
   @include apply-gradient("light", "shade-1", 60deg);
   @include apply-font-family("roboto-condensed");
@@ -13,8 +13,8 @@
   z-index: 1;
 }
 
-// SIDEBAR LINKS/BUTTONS GROUP
-.sidebar__links{
+// SIDEBAR LINK/BUTTON: GROUP
+.sidebar__links {
   @include apply-flex(column, center, center);
   @include apply-space("padding", -2, "y");
   @include apply-space("gap", -10);
@@ -22,6 +22,8 @@
   position: relative;
   width: 100%;
   text-align: center;
+  cursor:pointer;
+  user-select: none;
 
   &:hover {
     @include apply-gradient("shade-18", "shade-22", 140deg);
@@ -30,12 +32,46 @@
   }
 }
 
-// SIDEBAR ICONS
+// SIDEBAR LINK/BUTTON: ICON
 .sidebar__icon {
-  font-size: modular-scale(4); 
+  font-size: modular-scale(4);
 }
 
-// SIDEBAR TEXT
+// SIDEBAR LINK/BUTTON: TEXT
 .sidebar__text {
   font-size: modular-scale(-1);
+}
+
+// <===== HOVER MENU SECTION =====>
+.sidebar-menu__section {
+  @include apply-position(
+    absolute,
+    $top: 0,
+    $left: calc(100% + modular-scale(-5)) // GAP BETWEEN SIDEBAR & MENU
+  );
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding-right", 5);
+  @include apply-space("padding-left", -5);
+  @extend %toggle-menu--layout;
+  @extend %toggle-menu--style;
+}
+
+// HOVER MENU: BUTTONS
+.sidebar-menu__button {
+  @extend %toggle-menu__button--layout;
+  @extend %toggle-menu__button--style;
+}
+
+// HOVER MENU: FILLER (PREVENTS HOVER FROM DISAPPEARING DUE TO GAP)
+.sidebar-menu__hover-filler {
+  @include apply-position(
+    absolute,
+    $top: 0,
+    $left: calc(0% - modular-scale(-4)),
+  );
+
+  min-width: modular-scale(-4);
+  min-height: 100%;
+  opacity: 0;
+  z-index: 1;
 }
