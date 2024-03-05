@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaUsers, FaShoppingCart } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import {
   MdLocalShipping,
   MdQueryStats,
-  MdCategory,
-  MdStore,
+  MdOutlineStore,
+  MdOutlineCategory,
+  MdOutlineShoppingCart,  
 } from "react-icons/md";
 
 // const sidebarContent = [
@@ -57,13 +58,13 @@ const Sidebar = () => {
           <section className="sidebar-menu__section">
             <div className="sidebar-menu__hover-filler"></div>
             <button className="sidebar-menu__button">
-              <MdStore /> Shop
+              <MdOutlineStore /> Shop
             </button>
             <button className="sidebar-menu__button">
-              <MdCategory /> Categories
+              <MdOutlineCategory /> Categories
             </button>
             <button className="sidebar-menu__button">
-              <FaShoppingCart /> Products
+              <MdOutlineShoppingCart /> Products
             </button>
           </section>
         )}
