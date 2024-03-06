@@ -7,6 +7,9 @@ import { QUERY_PRODUCTS } from "../utils/queries";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
+import { IoIosArrowDown, IoIosAddCircleOutline } from "react-icons/io";
+import { PiArrowsDownUpLight } from "react-icons/pi";
+
 // !Revisit: INCOMPLETE ====================================
 export default function Home(props) {
   // <======= QUERY SECTION=======>
@@ -29,34 +32,42 @@ export default function Home(props) {
   return (
     <>
       <div className="window">
-        <h6>Products</h6>
+        <h6>Placeholder</h6>
         <div className="sub-window">
-          <div>
+          <div className="window-tools">
             <div>
-              <input type="text" />
-              <button>Search</button>
+              <button>
+                <PiArrowsDownUpLight /> Sort
+              </button>
+              <button>
+                <IoIosAddCircleOutline /> New
+              </button>
+              <button>
+                <IoIosArrowDown /> View
+              </button>
             </div>
+
             <div>
-              <span>view</span>
-            </div>
-            <div>
-              <span>create</span>
+              <input type="text" placeholder="Search" />
             </div>
           </div>
 
-          <div>
-            <h6>List</h6>
-            {products.map((product) => (
-              <div key={product._id}>
-                <span>{product.name}</span>
-                <FiEdit />
-                <BsTrash />
-              </div>
-            ))}
-          </div>
+          <div className="window-work">
+            <div className="left">
+              <h6>Content</h6>
+              <div>Some content....</div>
+            </div>
 
-          <div>
-            something
+            <div className="right">
+              <h6>List</h6>
+              {products.map((product) => (
+                <div key={product._id}>
+                  <span>{product.name}</span>
+                  <FiEdit />
+                  <BsTrash />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
