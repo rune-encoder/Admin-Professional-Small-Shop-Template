@@ -36,6 +36,7 @@ $header-steps: (
 );
 
 // MEDIA QUERY BREAKPOINT VALUES
+// ! IMPORTANT: INDEPENDENT FROM BOOTSTRAP GRID BREAKPOINTS
 $xs-min: 0;
 $sm-min: 576px;
 $md-min: 768px;
@@ -45,12 +46,12 @@ $xxl-min: 1400px;
 
 // MEDIA QUERY BREAKPOINTS
 $media-breakpoints: (
-  "xs": '(min-width: #{0}) and (max-width: #{rem($sm-min - 1)})',
-  "sm": '(min-width: #{rem($sm-min)}) and (max-width: #{rem($md-min - 1)})',
-  "md": '(min-width: #{rem($md-min)}) and (max-width: #{rem($lg-min - 1)})',
-  "lg": '(min-width: #{rem($lg-min)}) and (max-width: #{rem($xl-min - 1)})',
-  "xl": '(min-width: #{rem($xl-min)}) and (max-width: #{rem($xxl-min - 1)})',
-  "xxl": '(min-width: #{rem($xxl-min)})',
+  "xs": '(min-width: #{0}) and (max-width: #{$sm-min - 1})',
+  "sm": '(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})',
+  "md": '(min-width: #{$md-min}) and (max-width: #{$lg-min - 1})',
+  "lg": '(min-width: #{$lg-min}) and (max-width: #{$xl-min - 1})',
+  "xl": '(min-width: #{$xl-min}) and (max-width: #{$xxl-min - 1})',
+  "xxl": '(min-width: #{$xxl-min})',
 );
 
 // <===== THEME COLOR SECTION =====>

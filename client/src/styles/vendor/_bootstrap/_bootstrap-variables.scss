@@ -1,0 +1,26 @@
+// This file contains grid variables that are part of Bootstrap v4 grid system.
+// Bootstrap File: Breadcrumbsbootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+// Source: https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+
+$grid-gutter-width: 30px !default;
+$grid-columns: 12 !default;
+
+// <===== MAX WIDTH OF CONTAINER =====>
+// Small screen / tablet        
+$container-sm: (720px + $grid-gutter-width) !default;
+
+// Medium screen / desktop
+$container-md: (940px + $grid-gutter-width) !default;
+
+// Large screen / wide desktop
+$container-lg: (1140px + $grid-gutter-width) !default;
+
+// <===== MIN SCREEN WIDTHS =====>
+// Small screen 
+$screen-sm-min: 768px !default;
+
+// Medium screen 
+$screen-md-min: 992px !default;
+
+// Large screen         
+$screen-lg-min: 1200px !default;

@@ -13,7 +13,6 @@
 @import "./base/root";
 @import "./base/base";
 @import "./base/typography";
-@import "./layout/grid";
 @import "./layout/sidebar";
 @import "./layout/header";
 @import "./layout/footer";
@@ -21,6 +20,8 @@
 @import "./pages/store";
 @import "./components/scrollbar";
 @import "./shame";
+
+@import "./vendor/_bootstrap/index.scss";
 
 // !Revisit
 // DARK THEME COLORS
