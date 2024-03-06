@@ -7,7 +7,7 @@ import {
   MdQueryStats,
   MdOutlineStore,
   MdOutlineCategory,
-  MdOutlineShoppingCart,  
+  MdOutlineShoppingCart,
 } from "react-icons/md";
 
 // const sidebarContent = [
@@ -37,28 +37,35 @@ import {
 //   },
 // ];
 
-const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(false);
+{
+  /* <aside className="sidebar__aside">
+{sidebarContent.map((item) => (
+  <Link to={item.path} key={item.id} className="sidebar__links">
+    <item.icon className="sidebar__icon" />
+    <span className="sidebar__text">{item.text}</span>
+  </Link>
+))}
+</aside> */
+}
 
-  useEffect(() => {
-    console.log(isHovered);
-  }, [isHovered]);
+export default function Sidebar() {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <aside className="sidebar__aside">
       <div
         className="sidebar__links"
-         onMouseEnter={() => setIsHovered(true)}
-         onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <FaShop className="sidebar__icon" />
-        <span className="sidebar__text">Shop</span>
+        <span className="sidebar__text">Store</span>
 
         {isHovered && (
           <section className="sidebar-menu__section">
             <div className="sidebar-menu__hover-filler"></div>
             <button className="sidebar-menu__button">
-              <MdOutlineStore /> Shop
+              <MdOutlineStore /> Store
             </button>
             <button className="sidebar-menu__button">
               <MdOutlineCategory /> Categories
@@ -86,17 +93,4 @@ const Sidebar = () => {
       </Link>
     </aside>
   );
-};
-
-{
-  /* <aside className="sidebar__aside">
-{sidebarContent.map((item) => (
-  <Link to={item.path} key={item.id} className="sidebar__links">
-    <item.icon className="sidebar__icon" />
-    <span className="sidebar__text">{item.text}</span>
-  </Link>
-))}
-</aside> */
 }
-
-export default Sidebar;

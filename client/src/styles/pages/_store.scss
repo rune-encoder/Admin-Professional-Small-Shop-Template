@@ -1,0 +1,30 @@
+$window-height: rem(600px);
+$window-width: 50rem;
+
+.window {
+    margin: 3rem;
+
+    // @include apply-space("padding", -5, "x");
+    @include apply-space("padding", -5, "y");
+
+    width: $window-width;
+    background: var(--shade-10);
+
+    @include apply-gradient ("shade-2", "shade-4", to bottom right);
+    @include apply-border("light", $border-radius-window);
+}
+
+.sub-window {
+    @include apply-gradient ("shade-1", "shade-2", to bottom right);
+    @include apply-border("light", $border-radius);
+    
+    overflow: auto;
+
+    // width: 100%;
+    height: $window-height;
+
+
+    // background: var(--shade-2);
+}
+
+
