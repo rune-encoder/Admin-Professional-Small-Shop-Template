@@ -2,7 +2,6 @@ $window-height: rem(600px);
 $window-width: 50rem;
 
 .window {
-    @include apply-space("padding", -10, "x");
     @include apply-space("padding", -5, "y");
     @include apply-gradient ("shade-2", "shade-4", to bottom right);
     @include apply-border("light", $border-radius-window);
@@ -10,9 +9,9 @@ $window-width: 50rem;
     @include apply-font-family("roboto");
     
     // ! Remove the following
-    margin: 3rem;
-    width: $window-width;
-    height: auto;
+    margin-top: 3rem;
+    // max-width: $window-width;
+    // height: auto;
 }
 
 .sub-window {
@@ -20,12 +19,12 @@ $window-width: 50rem;
     @include apply-border("light", $border-radius);
     
     overflow: auto;
-    height: $window-height;
+    // height: $window-height;
 }
 
 // ! Revisit - change to grid
 .window-tools {
-    @include apply-flex(row, space-around, center);
+    // @include apply-flex(row, null, center);
 
     border-bottom: solid 1px white;
 }

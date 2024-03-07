@@ -7,16 +7,25 @@
 // Used only by Bootstrap to generate the correct number of grid classes given
 // any value of `$grid-columns`.
 
+// **
+// * Note: Source Code is Modified
+// * Added col-#{$i}, to line 17 and 19 as it was not generating regular (col-1 through col-12)
+// * Added width to line 24
+// * Added flex to line 44 and changed width to max-width on line 45
+// */
+
 // [converter] This is defined recursively in LESS, but Sass supports real loops
-@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+@mixin make-grid-columns($i: 1, $list: ".col-#{$i}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
   @for $i from (1 + 1) through $grid-columns {
-    $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+    $list: "#{$list}, .col-#{$i}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
   }
+  
   #{$list} {
     position: relative; // Prevent columns from collapsing when empty
+    width: 100%;
     min-height: 1px; // Inner gutter via padding
-    padding-right: floor(math.div($grid-gutter-width, 2));
-    padding-left: ceil(math.div($grid-gutter-width, 2));
+    padding-right: math.floor(math.div($grid-gutter-width, 2));
+    padding-left: math.ceil(math.div($grid-gutter-width, 2));
   }
 }
 
@@ -33,13 +42,14 @@
 @mixin calc-grid-column($index, $class, $type) {
   @if ($type == width) and ($index > 0) {
     .col-#{$class}-#{$index} {
-      width: percentage(math.div($index, $grid-columns));
+      flex: 0 0 math.div($index, $grid-columns) * 100%;
+      max-width: math.percentage(math.div($index, $grid-columns));
     }
   }
 
   @if ($type == push) and ($index > 0) {
     .col-#{$class}-push-#{$index} {
-      left: percentage(math.div($index, $grid-columns));
+      left: math.percentage(math.div($index, $grid-columns));
     }
   }
 
@@ -51,7 +61,7 @@
 
   @if ($type == pull) and ($index > 0) {
     .col-#{$class}-pull-#{$index} {
-      right: percentage(math.div($index, $grid-columns));
+      right: math.percentage(math.div($index, $grid-columns));
     }
   }
 
@@ -63,7 +73,7 @@
 
   @if ($type == offset) {
     .col-#{$class}-offset-#{$index} {
-      margin-left: percentage(math.div($index, $grid-columns));
+      margin-left: math.percentage(math.div($index, $grid-columns));
     }
   }
 }

@@ -3,6 +3,12 @@
 // Source: https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/mixins/_grid.scss
 // It contains Bootstrap's grid system.
 
+// **
+// * Note: Source Code is Modified
+// * Added display flex and flex-wrap wrap to make-row mixin.
+// * See line 27-28
+// */
+
 // Grid system
 // Generate semantic grid columns with these mixins.
 
@@ -18,6 +24,8 @@
 
 // Creates a wrapper for a series of columns
 @mixin make-row($gutter: $grid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
   margin-right: math.floor(math.div($gutter, -2));
   margin-left: math.ceil(math.div($gutter, -2));
 

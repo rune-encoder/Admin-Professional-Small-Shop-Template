@@ -31,23 +31,23 @@ export default function Home(props) {
   // !Revisit: INCOMPLETE ====================================
   return (
     <>
-      <div className="window">
+      <div className="window container">
         <h6>Placeholder</h6>
         <div className="sub-window">
           <div className="window-tools">
-            <div>
-              <button>
+            <div className="row">
+              <button className="col-3">
                 <PiArrowsDownUpLight /> Sort
               </button>
-              <button>
+              <button className="col-3">
                 <IoIosAddCircleOutline /> New
               </button>
-              <button>
+              <button className="col-3">
                 <IoIosArrowDown /> View
               </button>
             </div>
 
-            <div>
+            <div className="col-6">
               <input type="text" placeholder="Search" />
             </div>
           </div>
@@ -72,27 +72,22 @@ export default function Home(props) {
         </div>
       </div>
 
-      <div>
-        <h4 className="test">Test</h4>
-
-        <div className="container">
-          <div className="row align-items-start">
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-          </div>
-          <div className="row align-items-center">
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-          </div>
-          <div className="row align-items-end">
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-            <div className="col">One of three columns</div>
-          </div>
+      <div className="container">
+        <div className="row rbg">
+          <div className="col-12 col-md-8 cbg">.col-12 .col-md-8</div>
+          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
         </div>
-        
+
+        <div className="row">
+          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
+          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
+          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
+        </div>
+
+        <div className="row rbg">
+          <div className="col-6 cbg">.col-6</div>
+          <div className="col-6 cbg">.col-6</div>
+        </div>
       </div>
     </>
   );

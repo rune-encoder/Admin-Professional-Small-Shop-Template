@@ -3,6 +3,19 @@
 // Source: https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_grid.scss
 // It creates the Bootstrap's grid system.
 
+// **
+// * Note: Source Code is Modified
+// * Added creation col-1 - col-12 to include flex and max-width as it was not generated before.
+// * See line 12 - 17
+// */
+
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+      flex: 0 0 math.div($i, $grid-columns) * 100%;
+      max-width: math.div($i, $grid-columns) * 100%;
+  }
+}
+
 // Grid system
 // --------------------------------------------------
 
