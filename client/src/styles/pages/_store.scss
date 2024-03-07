@@ -99,8 +99,31 @@ td {
 }
 
 // ! Revisit Create Own Class
-td button {
+.table__action-cell {
+  @include apply-flex(row, space-evenly, center);
+}
+
+.table__action-cell button {
   @extend %toggle-menu__button--style;
+
+// <===== BUTTON TOOLTIP SECTION =====>
+  &::after {
+    @include apply-position(absolute, $bottom: 100%, $left: 50%);
+
+    content: attr(data-action);
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+
+    @extend %tooltip--layout;
+    @extend %tooltip--style;
+  }
+
+  // TOOL TIP VISIBILITY
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 tbody tr {

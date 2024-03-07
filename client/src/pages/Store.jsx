@@ -80,11 +80,11 @@ export default function Home(props) {
                       <td>01/01/10</td>
                       <td>{product.quantity}</td>
                       <td>{product.category.name}</td>
-                      <td>
-                        <button>
+                      <td className="table__action-cell">
+                        <button data-action="Update">
                           <FiEdit />
                         </button>
-                        <button>
+                        <button data-action="Delete">
                           <BsTrash />
                         </button>
                       </td>

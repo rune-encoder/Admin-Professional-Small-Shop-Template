@@ -42,10 +42,12 @@
   @while $theme == "light" and $i >= $end or $theme == "dark" and $i <= $end {
     $color-name: #{$prefix}-#{$name-value};
     $value: hsl(0deg 0% $i * 1%);
+    $opacity-value: hsla(0, 0%, $i * 1%, $color-opacity);
     $shades: map.merge(
       $shades,
       (
         $color-name: $value,
+        "opacity-#{$color-name}": $opacity-value,
       )
     );
     $name-value: $name-value + 1;

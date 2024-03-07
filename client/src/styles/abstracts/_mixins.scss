@@ -120,3 +120,9 @@
 @mixin apply-text-shadow($color, $x: 1px, $y: 1px, $blur: 1px) {
   text-shadow: #{rem($x)} #{rem($y)} #{rem($blur)} var(--#{$color});
 }
+
+// APPLY GLASS EFFECT
+@mixin apply-glass-effect($color) {
+  background: var(--#{$color});
+  backdrop-filter: blur(5px);
+}
