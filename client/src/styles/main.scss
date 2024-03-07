@@ -9,6 +9,7 @@
 @import "./abstracts/mixins";
 @import "./abstracts/placeholders";
 @import "./vendor/google-fonts";
+@import "./vendor/_bootstrap/index.scss";
 @import "./base/reset";
 @import "./base/root";
 @import "./base/base";
@@ -21,7 +22,6 @@
 @import "./components/scrollbar";
 @import "./shame";
 
-@import "./vendor/_bootstrap/index.scss";
 
 // !Revisit
 // DARK THEME COLORS

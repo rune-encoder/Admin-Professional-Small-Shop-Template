@@ -1,8 +1,14 @@
 // This file contains grid variables that are part of Bootstrap v4 grid system.
-// Bootstrap File: Breadcrumbsbootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+// Bootstrap File: bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
 // Source: https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
 
-$grid-gutter-width: 12px !default; // Original value: 30px
+// **
+// * Note: Source Code is Modified
+// * Changed $grid-gutter-width value. Original value: 30px.
+// * Removed un-used, redundant or deprecated variables.
+// */
+
+$grid-gutter-width: 12px !default;
 $grid-columns: 12 !default;
 
 // <===== MAX WIDTH OF CONTAINER =====>

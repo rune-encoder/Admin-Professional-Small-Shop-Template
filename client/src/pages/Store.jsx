@@ -7,7 +7,7 @@ import { QUERY_PRODUCTS } from "../utils/queries";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-import { IoIosArrowDown, IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosArrowDown, IoIosAddCircleOutline, IoIosSearch } from "react-icons/io";
 import { PiArrowsDownUpLight } from "react-icons/pi";
 
 // !Revisit: INCOMPLETE ====================================
@@ -32,23 +32,23 @@ export default function Home(props) {
   return (
     <>
       <div className="window container">
-        <h6>Placeholder</h6>
+        <h6 className="t">Placeholder</h6>
         <div className="sub-window">
-          <div className="window-tools">
-            <div className="row">
-              <button className="col-3">
-                <PiArrowsDownUpLight /> Sort
-              </button>
-              <button className="col-3">
-                <IoIosAddCircleOutline /> New
-              </button>
-              <button className="col-3">
-                <IoIosArrowDown /> View
-              </button>
-            </div>
-
-            <div className="col-6">
+          <div className="window-tools row-no-gutters">
+            <button className="w-buttons col-2 cbg">
+              <PiArrowsDownUpLight /> Sort
+            </button>
+            <button className="w-buttons col-2 cbg">
+              <IoIosAddCircleOutline /> New
+            </button>
+            <button className="w-buttons col-2 cbg">
+              <IoIosArrowDown /> View
+            </button>
+            <div className="col-6 s cbg">
+              {/* <div className="s p "> */}
+              <IoIosSearch />
               <input type="text" placeholder="Search" />
+              {/* </div> */}
             </div>
           </div>
 
@@ -69,24 +69,6 @@ export default function Home(props) {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="container">
-        <div className="row rbg">
-          <div className="col-12 col-md-8 cbg">.col-12 .col-md-8</div>
-          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
-        </div>
-
-        <div className="row">
-          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
-          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
-          <div className="col-6 col-md-4 cbg">.col-6 .col-md-4</div>
-        </div>
-
-        <div className="row rbg">
-          <div className="col-6 cbg">.col-6</div>
-          <div className="col-6 cbg">.col-6</div>
         </div>
       </div>
     </>

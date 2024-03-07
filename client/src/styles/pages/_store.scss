@@ -6,12 +6,12 @@ $window-width: 50rem;
     @include apply-gradient ("shade-2", "shade-4", to bottom right);
     @include apply-border("light", $border-radius-window);
 
-    @include apply-font-family("roboto");
+    // @include apply-font-family("roboto");
     
     // ! Remove the following
     margin-top: 3rem;
-    // max-width: $window-width;
-    // height: auto;
+    max-width: $window-width;
+    height: auto;
 }
 
 .sub-window {
@@ -19,17 +19,39 @@ $window-width: 50rem;
     @include apply-border("light", $border-radius);
     
     overflow: auto;
-    // height: $window-height;
+    height: $window-height;
 }
 
 // ! Revisit - change to grid
 .window-tools {
-    // @include apply-flex(row, null, center);
+    // @include apply-flex(row, space-evenly, center);
+    @include apply-space("padding", -10, "y");
 
     border-bottom: solid 1px white;
+    // border: solid 1px white;
 }
 
 .window-work {
     @include apply-flex(row, space-between, start);
 }
 
+.w-buttons {
+    @extend %toggle-menu__button--layout;
+    @extend %toggle-menu__button--style;
+}
+
+.s {
+    @include apply-flex(row, end, center);
+    @include apply-space("padding", -5, "x", $important: true);
+    @include apply-space("gap", -10);
+
+    font-size: modular-scale(1);
+}
+
+.t {
+
+    // background-color: rgb(151, 80, 80);
+    @include apply-space("padding-bottom", -5);
+    @include apply-space("padding", -5, "x");
+
+}

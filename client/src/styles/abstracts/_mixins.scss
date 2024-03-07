@@ -21,18 +21,23 @@
 // APPLY MODULAR SCALE: FOR SPACING
 // USAGE: "MARGIN", "PADDING", AND "GAP" (SEE VARIABLES.SCSS FOR SCALE)
 // Example: @include apply-space("margin", 1, "x"); or @include apply-space("padding-left", 1);
-@mixin apply-space($property, $step, $axis: null) {
+@mixin apply-space($property, $step, $axis: null, $important: false) {
   $increment: 0.5; // Increment for half-steps for modular scale
   $value: $base-unit * pow($modular-scale, $step * $increment);
+
+  @if $important {
+    $value: #{$value} !important;
+  }
 
   @if not $axis {
     // Margin and Padding and Gap
     #{$property}: $value;
 
-    // Margin and Padding Axis Only
+    // Margin and Padding Only
   } @else if $axis == "x" {
     #{$property}-left: $value;
     #{$property}-right: $value;
+
   } @else if $axis == "y" {
     #{$property}-top: $value;
     #{$property}-bottom: $value;

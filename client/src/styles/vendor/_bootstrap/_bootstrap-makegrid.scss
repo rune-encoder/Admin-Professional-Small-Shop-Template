@@ -5,8 +5,8 @@
 
 // **
 // * Note: Source Code is Modified
-// * Added creation col-1 - col-12 to include flex and max-width as it was not generated before.
-// * See line 12 - 17
+// * Added creation of col-1 - col-12 classes. Includes flex: and max-width: to use classes. See line 12 - 17
+// * Added display: flex; and flex-wrap: wrap; to row-no-gutters class. See line 55 - 56.
 // */
 
 @for $i from 1 through $grid-columns {
@@ -51,6 +51,8 @@
 }
 
 .row-no-gutters {
+  display: flex;
+  flex-wrap: wrap;
   margin-right: 0;
   margin-left: 0;
 

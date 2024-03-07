@@ -9,9 +9,9 @@
 
 // **
 // * Note: Source Code is Modified
-// * Added col-#{$i}, to line 17 and 19 as it was not generating regular (col-1 through col-12)
-// * Added width to line 24
-// * Added flex to line 44 and changed width to max-width on line 45
+// * Added col-#{$i} to make-grid-columns mixin. It was not generating the regular (col-1 through col-12). See line 18 and 20.
+// * Added width: 100% to make-grid-columns mixin. See line 24.
+// * Added flex to calc-grid-column mixin. See line 45.
 // */
 
 // [converter] This is defined recursively in LESS, but Sass supports real loops
