@@ -7,7 +7,11 @@ import { QUERY_PRODUCTS } from "../utils/queries";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-import { IoIosArrowDown, IoIosAddCircleOutline, IoIosSearch } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoIosAddCircleOutline,
+  IoIosSearch,
+} from "react-icons/io";
 import { PiArrowsDownUpLight } from "react-icons/pi";
 
 // !Revisit: INCOMPLETE ====================================
@@ -32,23 +36,21 @@ export default function Home(props) {
   return (
     <>
       <div className="window container">
-        <h6 className="t">Placeholder</h6>
-        <div className="sub-window">
-          <div className="window-tools row-no-gutters">
-            <button className="w-buttons col-2 cbg">
+        <h6 className="window__bar">Placeholder</h6>
+        <div className="window__content">
+          <div className="window__toolbar row-no-gutters">
+            <button className="toolbar__button col-2 cbg">
               <PiArrowsDownUpLight /> Sort
             </button>
-            <button className="w-buttons col-2 cbg">
+            <button className="toolbar__button col-2 cbg">
               <IoIosAddCircleOutline /> New
             </button>
-            <button className="w-buttons col-2 cbg">
+            <button className="toolbar__button col-2 cbg">
               <IoIosArrowDown /> View
             </button>
-            <div className="col-6 s cbg">
-              {/* <div className="s p "> */}
+            <div className="toolbar__searchbar col-6 cbg">
               <IoIosSearch />
               <input type="text" placeholder="Search" />
-              {/* </div> */}
             </div>
           </div>
 
@@ -73,26 +75,4 @@ export default function Home(props) {
       </div>
     </>
   );
-}
-
-{
-  /* <div className="window">
-  <h5>Categories</h5>
-  <div className="sub-window">
-    <div>
-      <input type="text" />
-      <button>Search</button>
-    </div>
-    <div>
-      <h6>List</h6>
-      {categories.map((category) => (
-        <div key={category._id}>
-          <span>{category.name}</span>
-          <FiEdit />
-          <BsTrash />
-        </div>
-      ))}
-    </div>
-  </div>
-</div> */
 }

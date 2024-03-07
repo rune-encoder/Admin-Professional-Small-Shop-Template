@@ -2,56 +2,55 @@ $window-height: rem(600px);
 $window-width: 50rem;
 
 .window {
-    @include apply-space("padding", -5, "y");
-    @include apply-gradient ("shade-2", "shade-4", to bottom right);
-    @include apply-border("light", $border-radius-window);
+  @include apply-space("padding", -5, "y");
+  @include apply-gradient("shade-2", "shade-4");
+  @include apply-border("shade-10", $border-radius-window);
+  @include apply-box-shadow("always-dark", 25);
 
-    // @include apply-font-family("roboto");
-    
-    // ! Remove the following
-    margin-top: 3rem;
-    max-width: $window-width;
-    height: auto;
+  // ! Remove the following
+  margin-top: 3rem;
+  max-width: $window-width;
+  height: auto;
 }
 
-.sub-window {
-    @include apply-gradient ("shade-1", "shade-2", to bottom right);
-    @include apply-border("light", $border-radius);
-    
-    overflow: auto;
-    height: $window-height;
+.window__bar {
+  @include apply-space("padding", -10, "x");
 }
 
-// ! Revisit - change to grid
-.window-tools {
-    // @include apply-flex(row, space-evenly, center);
-    @include apply-space("padding", -10, "y");
+.window__content {
+  @include apply-space("margin-top", -5);
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-border("shade-10", $border-radius);
 
-    border-bottom: solid 1px white;
-    // border: solid 1px white;
+  overflow: auto;
+
+  // ! Remove the following
+  height: $window-height;
+}
+
+.window__toolbar {
+  @include apply-space("padding", -10, "y");
+  @include apply-gradient("light", "shade-1");
+  @include apply-box-shadow("always-dark", 1, $y: -1px);
+
+  position: sticky;
+  top: 0;
+  border-bottom: solid rem(1px) var(--shade-7);
+}
+
+.toolbar__button {
+  @extend %toggle-menu__button--layout;
+  @extend %toggle-menu__button--style;
+}
+
+.toolbar__searchbar {
+  @include apply-flex(row, end, center);
+  @include apply-space("padding", -5, "x", $important: true);
+  @include apply-space("gap", -10);
+
+  font-size: modular-scale(1);
 }
 
 .window-work {
-    @include apply-flex(row, space-between, start);
-}
-
-.w-buttons {
-    @extend %toggle-menu__button--layout;
-    @extend %toggle-menu__button--style;
-}
-
-.s {
-    @include apply-flex(row, end, center);
-    @include apply-space("padding", -5, "x", $important: true);
-    @include apply-space("gap", -10);
-
-    font-size: modular-scale(1);
-}
-
-.t {
-
-    // background-color: rgb(151, 80, 80);
-    @include apply-space("padding-bottom", -5);
-    @include apply-space("padding", -5, "x");
-
+  @include apply-flex(row, space-between, start);
 }

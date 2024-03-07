@@ -101,7 +101,7 @@
 }
 
 // APPLY LINEAR GRADIENT BASED ON AVAILABLE COLOR THEMES
-@mixin apply-gradient($color, $alteration, $direction: to right bottom) {
+@mixin apply-gradient($color, $alteration, $direction: to bottom right) {
   background: var(--#{$color});
   background: linear-gradient(
     $direction,
