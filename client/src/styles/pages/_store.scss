@@ -1,0 +1,56 @@
+$window-height: rem(600px);
+$window-width: 50rem;
+
+.window {
+  @include apply-space("padding", -5, "y");
+  @include apply-gradient("shade-2", "shade-4");
+  @include apply-border("shade-10", $border-radius-window);
+  @include apply-box-shadow("always-dark", 25);
+
+  // ! Remove the following
+  margin-top: 3rem;
+  max-width: $window-width;
+  height: auto;
+}
+
+.window__bar {
+  @include apply-space("padding", -10, "x");
+}
+
+.window__content {
+  @include apply-space("margin-top", -5);
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-border("shade-10", $border-radius);
+
+  overflow: auto;
+
+  // ! Remove the following
+  height: $window-height;
+}
+
+.window__toolbar {
+  @include apply-space("padding", -10, "y");
+  @include apply-gradient("light", "shade-1");
+  @include apply-box-shadow("always-dark", 1, $y: -1px);
+
+  position: sticky;
+  top: 0;
+  border-bottom: solid rem(1px) var(--shade-7);
+}
+
+.toolbar__button {
+  @extend %toggle-menu__button--layout;
+  @extend %toggle-menu__button--style;
+}
+
+.toolbar__searchbar {
+  @include apply-flex(row, end, center);
+  @include apply-space("padding", -5, "x", $important: true);
+  @include apply-space("gap", -10);
+
+  font-size: modular-scale(1);
+}
+
+.window-work {
+  @include apply-flex(row, space-between, start);
+}

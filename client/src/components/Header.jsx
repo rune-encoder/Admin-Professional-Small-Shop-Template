@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import MiniNavbar from "./header-components/MiniNavbar";
 import MiniNavDropdown from "./header-components/MiniNavDropdown";
 
-export default function Header({ children }) {
-  /* <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> */
+export default function Header({ children, adminData }) {
+  // <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -15,14 +15,14 @@ export default function Header({ children }) {
   return (
     <>
       <header className="roboto-condensed-250">
-        <Link to="/" className="logo">
-          <h1>ᚱuᚢe Eᚢcᛟdeᚱ</h1>
+        <Link to="/" className="header__logo">
+          <h5>ᚱuᚢe-Eᚢcᛟdeᚱ</h5>
         </Link>
 
-        <span>Admin Portal</span>
+        <span className="header__title">Admin Portal</span>
 
         {/* <======= MINI NAVIGATION BAR: RIGHT SIDE =======> */}
-        <MiniNavbar>
+        <MiniNavbar adminData={adminData}>
           <MiniNavDropdown
             isDropdownOpen={isDropdownOpen}
             toggleDropdown={toggleDropdown}

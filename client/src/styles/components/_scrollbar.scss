@@ -1,0 +1,46 @@
+// ! Revisit
+
+// For WebKit browsers (e.g., Chrome, Safari)
+
+// Scrollbar
+#root ::-webkit-scrollbar {
+  width: rem(15px);
+}
+
+// Scrollbar button
+#root ::-webkit-scrollbar-button {
+  // background: var(--shade-5);
+  // display: none;
+}
+
+// Scrollbar track
+#root ::-webkit-scrollbar-track {
+  @include apply-border("shade-5", $border-radius);
+
+  box-shadow: inset 0 0 rem(3px) var(--always-dark);
+  background: var(--always-light);
+}
+
+// Scrollbar thumb
+#root ::-webkit-scrollbar-thumb {
+  @include apply-gradient("shade-4", "shade-5", 90deg);
+  @include apply-border("shade-10", $border-radius);
+}
+
+#root ::-webkit-scrollbar-thumb:hover {
+  @include apply-gradient("shade-13", "shade-15", 90deg);
+}
+
+// For Firefox
+// Track
+// html {
+//     scrollbar-color: dark dark;
+//     scrollbar-width: thin;
+// }
+
+// For Edge and Internet Explorer
+// Track
+// body {
+//     scrollbar-face-color: #fff; // Color of the scrollbar face
+//     scrollbar-base-color: #fff; // Color of the scrollbar base
+// }

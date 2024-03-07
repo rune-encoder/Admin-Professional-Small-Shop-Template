@@ -1,0 +1,111 @@
+// <===== LOGIN PAGE: VARIABLES SECTION =====>
+$login__section-width: 30rem;
+$login__section-height: 30rem;
+$login__form-width: calc($login__section-width - 5rem);
+$login__button-width: math.div($login__form-width, 2);
+
+.login__section--wrapper {
+  @include apply-font-family("roboto");
+  @include apply-flex(row, center, center);
+
+  width: 100%;
+}
+
+// <===== LOGIN PAGE: STYLE SECTION =====>
+.login__section {
+  @include apply-flex(column, space-evenly, center);
+  @include apply-gradient("light", "shade-1");
+  @include apply-border("shade-10", $border-radius-card);
+  @include apply-box-shadow("shade-8", 25);
+
+  min-width: $login__section-width;
+  min-height: $login__section-height;
+}
+
+.login__welcome-text {
+  @include apply-flex(row, center);
+  @include apply-space("padding", -5, "y");
+
+  font-size: $base-font-size;
+  color: var(--shade-5);
+}
+
+.login__form-group {
+  @include apply-space("padding", 6, "y");
+  @include apply-space("padding", 4, "x");
+  @include apply-gradient("shade-15", "shade-17", to right top);
+  @include apply-border("shade-15", $border-radius-card);
+  @include apply-box-shadow("shade-15", 25);
+
+  width: $login__form-width;
+  height: auto;
+  overflow: hidden;
+}
+
+.login__form-group form {
+  @include apply-flex(column);
+}
+
+.login__form-section {
+  @include apply-flex(column);
+}
+
+.login__form-section label {
+  @include apply-text-shadow("shade-18");
+
+  color: var(--light);
+  font-weight: 600;
+}
+
+.login__form-section input {
+  @include apply-space("margin", -3, "y");
+  @include apply-space("padding", -10);
+  @include apply-gradient("light", "shade-1", 45deg);
+  @include apply-text-shadow("shade-14");
+
+  border: none;
+  border-radius: $border-radius;
+  background-color: var(--light);
+  color: var(--dark);
+
+  &::placeholder {
+    @include apply-text-shadow("shade-5");
+
+    color: var(--shade-18);
+  }
+}
+
+.login__button {
+  @include apply-space("margin", -3, "y");
+  @include apply-space("padding", -10);
+  @include apply-text-shadow("shade-10");
+  @include apply-box-shadow("light", 5);
+
+  // !REVISIT BUTTON STYLE (MAKE MODULAR)
+  border: solid rem(1px) hsl(0deg 0% 10% / 0%);
+  outline: solid rem(1px) var(--shade-10);
+  border-radius: $border-radius;
+  background-color: var(--always-light);
+  color: var(--always-dark);
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    @include apply-gradient("hover-primary", "hover-secondary", 180deg);
+
+    border: solid rem(0.1px) var(--shade-10);
+    outline-style: initial;
+    outline-offset: rem(2px);
+    outline-width: rem(3px);
+    outline-color: var(--hover-primary);
+  }
+
+  &:active {
+    @include apply-gradient("shade-5", "shade-8", 180deg);
+
+    color: var(--always-light);
+  }
+}
+
+.login__footer {
+  font-style: italic;
+}

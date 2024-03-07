@@ -21,32 +21,65 @@
 // APPLY MODULAR SCALE: FOR SPACING
 // USAGE: "MARGIN", "PADDING", AND "GAP" (SEE VARIABLES.SCSS FOR SCALE)
 // Example: @include apply-space("margin", 1, "x"); or @include apply-space("padding-left", 1);
-@mixin apply-space($property, $step, $axis: null) {
-  $increment: 0.5;
+@mixin apply-space($property, $step, $axis: null, $important: false) {
+  $increment: 0.5; // Increment for half-steps for modular scale
   $value: $base-unit * pow($modular-scale, $step * $increment);
+
+  @if $important {
+    $value: #{$value} !important;
+  }
 
   @if not $axis {
     // Margin and Padding and Gap
     #{$property}: $value;
 
-    // Margin and Padding Axis Only
+    // Margin and Padding Only
   } @else if $axis == "x" {
     #{$property}-left: $value;
     #{$property}-right: $value;
+
   } @else if $axis == "y" {
     #{$property}-top: $value;
     #{$property}-bottom: $value;
   }
 }
 
+// APPLY POSITION PROPERTY
+@mixin apply-position(
+  $position: "static",
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  position: $position;
+
+  @if $position == "absolute" or $position == "fixed" or $position == "sticky" {
+    $properties: (
+      "top": $top,
+      "right": $right,
+      "bottom": $bottom,
+      "left": $left,
+    );
+
+    @each $property, $value in $properties {
+      @if $value {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
 // APPLY MEDIA QUERY BREAKPOINTS
 @mixin respond-to($breakpoint) {
-  $raw-query: map.get($breakpoints, $breakpoint);
+  $raw-query: map.get($media-breakpoints, $breakpoint);
 
   @if $raw-query {
-    $query: if(meta.type-of($raw-query) == "string",
-    string.unquote($raw-query),
-    meta.inspect($raw-query));
+    $query: if(
+      meta.type-of($raw-query) == "string",
+      string.unquote($raw-query),
+      meta.inspect($raw-query)
+    );
 
     @media #{$query} {
       @content;
@@ -56,3 +89,34 @@
   }
 }
 
+// ! REVISIT: CHANGE STRENGTH AND EXPLAIN MAGIC NUMBERS
+// APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y)
+@mixin apply-box-shadow($color, $strength: 1, $x: 0, $y: 0) {
+  $base-blur: 0.5rem;
+  $base-spread: -0.3rem;
+  $adjusted-blur: $base-blur + calc(0.05rem * $strength);
+  $adjusted-spread: $base-spread - calc(0.02rem * $strength);
+
+  box-shadow: #{$x} #{$y} #{$adjusted-blur} #{$adjusted-spread} var(--#{$color});
+}
+
+// APPLY LINEAR GRADIENT BASED ON AVAILABLE COLOR THEMES
+@mixin apply-gradient($color, $alteration, $direction: to bottom right) {
+  background: var(--#{$color});
+  background: linear-gradient(
+    $direction,
+    var(--#{$color}),
+    var(--#{$alteration})
+  );
+}
+
+// APPLY BORDER RADIUS AND BORDER BASED ON AVAILABLE COLOR THEMES
+@mixin apply-border($color, $radius: 0, $width: 1px) {
+  border: solid rem($width) var(--#{$color});
+  border-radius: $radius;
+}
+
+// APPLY DEFAULT TEXT SHADOW BASED ON AVAILABLE COLOR THEMES
+@mixin apply-text-shadow($color, $x: 1px, $y: 1px, $blur: 1px) {
+  text-shadow: #{rem($x)} #{rem($y)} #{rem($blur)} var(--#{$color});
+}

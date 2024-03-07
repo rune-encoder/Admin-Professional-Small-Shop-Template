@@ -1,118 +1,80 @@
-/* ~~~~~~~~~~~~~~~~~~~ HEADER CSS~~~~~~~~~~~~~~~~~~~ */
-
-/* HEADER CONTAINER AND CONTENT WITHIN */
+// <===== HEADER SECTION =====>
 header {
   @include apply-flex(row, space-between, center);
+  @include apply-gradient("light", "shade-1");
+  @include apply-box-shadow("shade-10", 50, $y: 0.1rem);
+
   position: relative;
   width: 100%;
-  background-color: var(--opacity-medium);
+}
 
-  // ! Revisit
-  h1 {
-    @include respond-to("xlarge") {
-      color: gray;
-    }
-    @include respond-to("large") {
-      color: green;
-    }
-    @include respond-to("medium") {
-      color: blue;
-    }
-    @include respond-to("small") {
-      color: red;
-    }
-    @include respond-to("xsmall") {
-      color: yellow;
-    }
+// HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
+.header__text--subtle {
+  font-size: modular-scale(-2);
+  color: var(--shade-15);
+}
+
+// <===== LOGO SECTION =====>
+.header__logo {
+  @include apply-space("margin", -5, "x");
+  @include apply-space("padding", -5, "x");
+}
+
+// <===== TITLE SECTION =====>
+.header__title {
+  @include apply-font-family("ysabeau-sc");
+
+  font-weight: 700;
+}
+
+// <===== MINI-NAVIGATION-BAR SECTION =====>
+.mini-navbar {
+  @include apply-flex(row, center, center);
+  @include apply-space("margin", -5, "x");
+  @include apply-space("padding", -5, "x");
+  @include apply-space("gap", -10);
+
+  font-weight: 450;
+}
+
+// MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
+.mini-navbar__section {
+  @include apply-flex(column, center);
+  @include apply-space("padding", -5, "y");
+}
+
+// MINI-NAVBAR: USER ICON
+.mini-navbar__user-icon {
+  font-size: modular-scale(4);
+}
+
+// MINI-NAVBAR: OPEN  & CLOSE DROPDOWN BUTTON
+.mini-navbar__button {
+  @include apply-space("padding-top", -5);
+
+  color: var(--shade-19);
+  font-size: modular-scale(3);
+  
+  &:hover {
+    color: var(--selection);
   }
 }
 
-/* HEADER UTILITY: DE-EMPHASIZE TEXT STYLE */
-.header-subtle-text {
-  font-size: modular-scale(-2);
-  color: var(--medium);
-}
-
-/* ~~~~~~~~~~~~~~~~~~~ MINI-NAVIGATION-BAR ~~~~~~~~~~~~~~~~~~~ */
-/* MINI-NAV-BAR CONTAINER AND CONTENT WITHIN */
-.mini-nav-bar {
-  @include apply-flex(row, null, center);
-  @include apply-space("margin", -5, "x");
+// <===== DROPDOWN MENU SECTION =====>
+.dropdown-menu__section {
+  @include apply-position(
+    absolute,
+    calc(100% + modular-scale(-5)),
+    modular-scale(-5)
+  );
+  @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
-  @include apply-space("gap", -5);
-
-  border: solid red 1px;
+  @extend %toggle-menu--layout;
+  @extend %toggle-menu--style;
 }
 
-/* MINI-NAV-BAR TEXT GROUP: (USERNAME & ADMIN LEVEL)*/
-.mini-nav-text-group {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem 0rem;
-}
-
-/* USER ICON: MINI-NAV-BAR */
-.mini-nav-user-icon {
-  font-size: 2.5rem;
-}
-
-/* TOGGLE ICON & CLOSE ICON: MINI-NAV-BAR */
-.mini-nav-toggle-icon {
-  font-size: 1.6rem;
-  margin-top: 0.5rem;
-  cursor: pointer;
-}
-
-/* ~~~~~~~~~~~~~~~~~~~ DROPDOWN MENU ~~~~~~~~~~~~~~~~~~~ */
-/* DROPDOWN MENU AND CONTENT WITHIN */
-.dropdown-menu {
-  position: absolute;
-  top: 105%; /* Always display right under header */
-  right: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding: 0.5rem 0.75rem;
-  gap: 0.1rem;
-  z-index: 1;
-  background-color: var(--dark);
-
-  border: 1px solid var(--medium);
-  border-radius: 0.25rem;
-  /* border: solid red 1px; */
-}
-
-/* ORGANIZE ICONS AND TEXT FOR DROP DOWN MENU */
-.dropdown-menu-items {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-
-  /* !Revisit */
-  /* width: 100%; */
-  /* border: solid red 1px; */
-}
-
-/* !======================================= */
-
-/* LEFT ON HEADER: LOGO SECTION*/
-.logo h1 {
-  /* padding: 12px; */
-  /* font-weight: normal; */
-  /* font-size: 2em; */
-  /* color: var(--theme); */
-}
-
-/* =================== Media Queries =================== */
-
-/* Large smartphones */
-@media screen and (max-width: 768px) {
-}
-
-/* ! Small smartphones */
-@media screen and (max-width: 576px) {
-  /* MAKE LOGO SMALLER */
-  /* .logo h1 {
-    font-size: 1.5em;
-  } */
+// DROPDOWN MENU: BUTTONS
+.dropdown-menu__button {
+  @extend %toggle-menu__button--layout;
+  @extend %toggle-menu__button--style;
 }

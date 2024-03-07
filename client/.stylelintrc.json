@@ -1,3 +1,49 @@
 {
-  "extends": "stylelint-config-standard-scss"
+  "extends": "stylelint-config-standard-scss",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "selector-class-pattern": [
+      "^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+      {
+        "message": "Expected BEM naming convention for class."
+      }
+    ],
+    "scss/at-extend-no-missing-placeholder": true,
+    "scss/dollar-variable-pattern": "^[_]?[a-z]+[a-z0-9-]*",
+    "scss/percent-placeholder-pattern": "^[_]?[a-z]+[a-z0-9-]*",
+    "scss/at-mixin-pattern": "^[_]?[a-z]+[a-z0-9-]*",
+    "scss/at-function-pattern": "^[_]?[a-z]+[a-z0-9-]*",
+    
+    "scss/load-no-partial-leading-underscore": true,
+    "scss/at-import-partial-extension-blacklist": [
+      "scss"
+    ],
+    "scss/dollar-variable-no-missing-interpolation": true,
+    "scss/double-slash-comment-whitespace-inside": "always",
+    "scss/operator-no-unspaced": true,
+    "scss/declaration-nested-properties": "never",
+    "scss/declaration-nested-properties-no-divided-groups": true,
+    "scss/dimension-no-non-numeric-values": true,
+    "scss/function-color-relative": true,
+    "scss/function-quote-no-quoted-strings-inside": true,
+    "scss/function-unquote-no-unquoted-strings-inside": true,
+    "scss/media-feature-value-dollar-variable": "always",
+    "scss/operator-no-newline-before": true,
+    "scss/operator-no-newline-after": true,
+    "scss/partial-no-import": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/no-duplicate-dollar-variables": true,
+    "scss/no-duplicate-mixins": true,
+    "scss/no-global-function-names": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.scss"
+      ],
+      "extends": "stylelint-config-sass-guidelines"
+    }
+  ]
 }

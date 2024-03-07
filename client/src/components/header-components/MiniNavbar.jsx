@@ -1,18 +1,15 @@
 import { PiUserCircleLight } from "react-icons/pi";
 
-export default function MiniNavbar({ children }) {
+export default function MiniNavbar({ children, adminData }) {
   return (
-    /* <======= DROPDOWN MENU CONTAINER =======> */
-    <div className="mini-nav-bar">
-      {/* <======= USER NAME AND ADMIN LEVEL =======> */}
-      <div className="mini-nav-text-group">
-        <span className="mini-nav-username">Username</span>
-        <span className="header-subtle-text">Permission</span>
-      </div>
-      {/* <======= USER ICON =======> */}
-      <PiUserCircleLight className="mini-nav-user-icon" />
-      {/* <======= RENDER MININAVDROPDOWN COMPONENT =======> */}
+    <nav className="mini-navbar">
+      <section className="mini-navbar__section">
+        <span className="header__username">{adminData.username}</span>
+        <span className="header__text--subtle">{adminData.permission}</span>
+      </section>
+      <PiUserCircleLight className="mini-navbar__user-icon" />
+      {/* <======= DROPDOWN MENU CONTAINER =======> */}
       {children}
-    </div>
+    </nav>
   );
 }

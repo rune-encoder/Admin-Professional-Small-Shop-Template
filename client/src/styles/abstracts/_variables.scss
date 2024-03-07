@@ -1,8 +1,3 @@
-// !REVISIT
-// Base Colors (PRIMARY COLORS IN DESIGN) 
-// Semantic Colors (STATES, SUCCESS, ERROR, WARNING, INFOREQUIREMENTS, DISABLED)
-// Utility Colors (INTERACTIONS, FEEDBACK, HOVER, FOCUS)
-
 // BASE VARIABLES
 $base-unit: 1rem;
 $base-font-size: 1rem;
@@ -10,19 +5,24 @@ $base-line-height: 1.5;
 $base-font-weight: 400;
 
 // MODULAR SCALE (MAJOR THIRD)
-$modular-scale: 1.25; 
+$modular-scale: 1.25;
+
+// BORDER RADIUS
+$border-radius: rem(5px);
+$border-radius-window: rem(10px);
+$border-radius-card: rem(15px);
 
 // FONT FAMILIES
 $font-families: (
-"inter": ("Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif),
-"exo": ("Exo", sans-serif),
-"exo-2": ("Exo 2", sans-serif),
-"roboto": ("Roboto", sans-serif),
-"ysabeau": ("Ysabeau", sans-serif),
-"ysabeau-infant": ("Ysabeau Infant", sans-serif),
-"ysabeau-office": ("Ysabeau Office", sans-serif),
-"ysabeau-sc": ("Ysabeau SC", sans-serif),
-"roboto-condensed": ("Roboto Condensed", "Arial Narrow", sans-serif),
+  "inter": ("Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif),
+  "exo": ("Exo", sans-serif),
+  "exo-2": ("Exo 2", sans-serif),
+  "roboto": ("Roboto", sans-serif),
+  "roboto-condensed": ("Roboto Condensed", "Arial Narrow", sans-serif),
+  "ysabeau": ("Ysabeau", sans-serif),
+  "ysabeau-infant": ("Ysabeau Infant", sans-serif),
+  "ysabeau-office": ("Ysabeau Office", sans-serif),
+  "ysabeau-sc": ("Ysabeau SC", sans-serif),
 );
 
 // HEADER STEPS FOR MODULAR SCALE (SEE TYPOGRAPHY.SCSS FOR USAGE)
@@ -35,70 +35,78 @@ $header-steps: (
   "h6": 1,
 );
 
+// MEDIA QUERY BREAKPOINT VALUES
+// ! IMPORTANT: INDEPENDENT FROM BOOTSTRAP GRID BREAKPOINTS
+$xs-min: 0;
+$sm-min: 576px;
+$md-min: 768px;
+$lg-min: 992px;
+$xl-min: 1200px;
+$xxl-min: 1400px;
+
 // MEDIA QUERY BREAKPOINTS
-$breakpoints: (
-  "xsmall": (max-width: rem(480px)),
-  "small": (max-width: rem(770px)),
-  "medium": (max-width: rem(1025px)),
-  "large": (max-width: rem(1280px)),
-  "xlarge": (max-width: rem(1440px))
+$media-breakpoints: (
+  "xs": '(min-width: #{0}) and (max-width: #{$sm-min - 1})',
+  "sm": '(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})',
+  "md": '(min-width: #{$md-min}) and (max-width: #{$lg-min - 1})',
+  "lg": '(min-width: #{$lg-min}) and (max-width: #{$xl-min - 1})',
+  "xl": '(min-width: #{$xl-min}) and (max-width: #{$xxl-min - 1})',
+  "xxl": '(min-width: #{$xxl-min})',
 );
 
-// |========== LIGHT/DARK COLOR THEMES ==========| 
+// <===== THEME COLOR SECTION =====>
 // SHARED COLORS ACROSS THEMES
 $shared-colors: (
   // BASE COLORS
-  "always-light": #ffffff,
-  "always-dark": #000000b9,
+  "always-light": hsl(0deg 0% 100%),
+  "always-dark": hsl(0deg 0% 7%),
 
-  // SEMANTIC COLORS
-  "success": #28a745,
-  "warning": #f54323,
+  // !REVISIT THEME COLOR
+  "theme": #618adf,
+
+  // UTILITY COLORS
+  "hover-primary": hsl(180, 80%, 75%),
+  "hover-secondary": hsl(180, 60%, 60%),
 );
 
+// !REVISIT AND REFACTOR
+// <===== LIGHT THEME COLOR SECTION =====>
 // LIGHT THEME COLORS
-$light-theme-colors: map.merge(
-  (
-    /* BASE COLORS */ 
-    "light": #000,
-    "medium": #404040,
-    "opacity-medium": #bfbfbf86,
-    "medium-dark": rgb(218, 218, 218),
-    "dark": #ffffff,
+$light-theme: (
+  /* BASE COLORS */ "light": hsl(0deg 0% 100%),
+  "dark": hsl(0deg 0% 0%),
 
-    // !Revisit 
-    "unique":
-      rgb(27, 211, 211),
-    "theme": #618adf,
-
-    "text": #a61e4d,
-    "accent": #025dd4,
-    "link": #007acc,
-    "selection": #add8e6
-  ),
-  $shared-colors
+  // UTILITY COLORS
+  "selection": hsl(352, 23%, 26%),
 );
 
-// DARK THEME COLORS
-$dark-theme-colors: map.merge(
-  (
-    // BASE COLORS
-    "light": #fff,
-    "medium": #bfbfbf,
-    "opacity-medium": #40404077,
-    "medium-dark": rgb(37, 37, 37),
-    "dark": #131313,
+// LIGHT THEME SHADES OF GRAY
+$light-shades: generate-shades("light");
 
-    // !Revisit 
-    "unique":
-      #d608ff,
-    "theme": #8321a1,
+// MERGE LIGHT THEME COLORS AND SHADES
+$light-theme: map.merge($light-theme, $light-shades);
 
-    "text": #61afef,
-    "accent": #56b6c2,
-    "link": #c678dd,
-    "selection": #4b5263
-  ),
-  $shared-colors
+// MERGE LIGHT/DARK THEME SHARED COLORS INTO LIGHT THEME
+$light-theme: map.merge($light-theme, $shared-colors);
+
+// <===== DARK THEME COLOR SECTION =====>
+$dark-theme: (
+  // BASE COLORS
+  "light": hsl(0deg 0% 0%),
+  "dark": hsl(0deg 0% 100%),
+
+  // UTILITY COLORS
+  "selection": hsl(180, 80%, 75%),
+  
+  "primary": hsl(258, 54%, 18%),
+  "secondary": 	hsl(320, 74%, 21%),
 );
 
+// DARK THEME SHADES OF GRAY
+$dark-shades: generate-shades("dark");
+
+// MERGE DARK THEME COLORS AND SHADES
+$dark-theme: map.merge($dark-theme, $dark-shades);
+
+// MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
+$dark-theme: map.merge($dark-theme, $shared-colors);

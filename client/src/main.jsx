@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // |========== IMPORT MAIN COMPONENTS: PAGES ==========|
 import App from "./App.jsx";
-import Home from "./pages/Home.jsx";
+import Store from "./pages/Store.jsx";
 
 // |========== IMPORT CSS STYLES ==========|
 import "./styles/main.scss";
@@ -17,11 +17,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Store />,
       },
       {
-        path: "/Home",
-        element: <Home />,
+        path: "/Store",
+        element: <Store />,
       },
     ],
   },

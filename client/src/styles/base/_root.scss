@@ -1,11 +1,10 @@
-// ~~~~~~~~~~~~~~~~~~~ ROOT CSS ~~~~~~~~~~~~~~~~~~~ 
 :root {
     text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     
-    @include apply-theme-colors($light-theme-colors); // Light Mode Theme Colors
+    @include apply-theme-colors($light-theme); // Light Mode Theme Colors
     @include apply-font-family("inter");
 
     // ! Revisit (Not sure if this is necessary)
@@ -15,11 +14,12 @@
   }
   
   #root {
+    @include apply-gradient("shade-3", "shade-5");
+
     display: flex;
     flex-grow: 1; // Expand to fill available space
     overflow-x: hidden; // Prevent horizontal scrollbar
     max-width: 100%; 
     min-height: 100vh; 
-    color: var(--light);
-    background-color: var(--medium-dark);
+    color: var(--dark);
   }
