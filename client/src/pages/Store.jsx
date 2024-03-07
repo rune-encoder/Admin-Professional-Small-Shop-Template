@@ -37,38 +37,61 @@ export default function Home(props) {
     <>
       <div className="window container">
         <h6 className="window__bar">Placeholder</h6>
-        <div className="window__content">
+        <div className="window__body">
           <div className="window__toolbar row-no-gutters">
-            <button className="toolbar__button col-2 cbg">
+            <button className="toolbar__button col-2">
               <PiArrowsDownUpLight /> Sort
             </button>
-            <button className="toolbar__button col-2 cbg">
+            <button className="toolbar__button col-2">
               <IoIosAddCircleOutline /> New
             </button>
-            <button className="toolbar__button col-2 cbg">
+            <button className="toolbar__button col-2">
               <IoIosArrowDown /> View
             </button>
-            <div className="toolbar__searchbar col-6 cbg">
+            <div className="toolbar__searchbar col-6">
               <IoIosSearch />
               <input type="text" placeholder="Search" />
             </div>
           </div>
 
-          <div className="window-work">
-            <div className="left">
+          <div className="window__content row-no-gutters">
+            <div className="col-4 cbg">
               <h6>Content</h6>
               <div>Some content....</div>
             </div>
 
-            <div className="right">
-              <h6>List</h6>
-              {products.map((product) => (
-                <div key={product._id}>
-                  <span>{product.name}</span>
-                  <FiEdit />
-                  <BsTrash />
-                </div>
-              ))}
+            <div className="col-sm-8 col-xs-12 cbg table--wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product._id}>
+                      <td>{product.name}</td>
+                      <td>{product.price}</td>
+                      <td>01/01/10</td>
+                      <td>{product.quantity}</td>
+                      <td>{product.category.name}</td>
+                      <td>
+                        <button>
+                          <FiEdit />
+                        </button>
+                        <button>
+                          <BsTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

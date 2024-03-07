@@ -71,6 +71,8 @@ header {
   @include apply-space("padding", -5, "x");
   @extend %toggle-menu--layout;
   @extend %toggle-menu--style;
+
+  z-index: 2;
 }
 
 // DROPDOWN MENU: BUTTONS

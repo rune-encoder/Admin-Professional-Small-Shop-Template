@@ -19,3 +19,17 @@ label, span {
   font-size: modular-scale(-1);
   line-height: calc(1.2 * modular-scale(-1));
 }
+
+// TABLE HEADERS AND CELLS
+thead, th {
+  font-size: modular-scale(0);
+  line-height: calc(1.2 * modular-scale(0));
+  font-weight: 400;
+}
+
+// TABLE BODY AND CELLS
+tbody, td {
+  font-size: modular-scale(-1);
+  line-height: calc(1.5 * modular-scale(-1));
+  font-weight: 500;
+}

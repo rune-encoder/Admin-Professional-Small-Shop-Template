@@ -9,7 +9,8 @@ $window-width: 50rem;
 
   // ! Remove the following
   margin-top: 3rem;
-  max-width: $window-width;
+
+  // max-width: $window-width;
   height: auto;
 }
 
@@ -17,7 +18,7 @@ $window-width: 50rem;
   @include apply-space("padding", -10, "x");
 }
 
-.window__content {
+.window__body {
   @include apply-space("margin-top", -5);
   @include apply-gradient("shade-2", "shade-3", to bottom left);
   @include apply-border("shade-10", $border-radius);
@@ -36,6 +37,7 @@ $window-width: 50rem;
   position: sticky;
   top: 0;
   border-bottom: solid rem(1px) var(--shade-7);
+  z-index: 1;
 }
 
 .toolbar__button {
@@ -51,6 +53,62 @@ $window-width: 50rem;
   font-size: modular-scale(1);
 }
 
-.window-work {
-  @include apply-flex(row, space-between, start);
+// ! WORKING =============================================
+.window__content {
+  // ! Revisit : Empty
+}
+
+.table--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+  @include apply-space("padding", -5, "y", $important: true);
+}
+
+table {
+  @include apply-font-family("roboto");
+  @include apply-border("shade-8");
+  @include apply-box-shadow("always-dark", 1);
+
+  width: 100%;
+  user-select: none;
+}
+
+thead {
+  background-color: var(--shade-1);
+  border-bottom: solid rem(1px) var(--shade-10);
+}
+
+th {
+  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -10, "y");
+
+  &:nth-child(1) {
+    text-align: left;
+  }
+}
+
+tbody {
+  background-color: var(--shade-3);
+}
+
+td {
+  @include apply-space("padding", -10, "x");
+
+  &:nth-child(n + 2) {
+    text-align: center;
+  }
+}
+
+// ! Revisit Create Own Class
+td button {
+  @extend %toggle-menu__button--style;
+}
+
+tbody tr {
+  &:nth-child(odd) {
+    background-color: var(--shade-4);
+  }
+
+  &:hover {
+    background-color: var(--shade-8);
+  }
 }
