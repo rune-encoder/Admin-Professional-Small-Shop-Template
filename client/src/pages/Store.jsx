@@ -16,6 +16,9 @@ import { PiArrowsDownUpLight } from "react-icons/pi";
 
 // !Revisit: INCOMPLETE ====================================
 export default function Home(props) {
+  const [selectedProduct, setSelectedProduct] = useState(false);
+  console.log("selectedProduct", selectedProduct);
+
   // <======= QUERY SECTION=======>
   const { loading, data, error } = useQuery(QUERY_PRODUCTS);
 
@@ -24,7 +27,7 @@ export default function Home(props) {
   }
 
   if (error) {
-    console.log(error);
+    console.error(error);
     return <div>Error</div>;
   }
 
@@ -55,12 +58,25 @@ export default function Home(props) {
           </div>
 
           <div className="window__content row-no-gutters">
-            <div className="col-4 cbg">
-              <h6>Content</h6>
-              <div>Some content....</div>
+            <div className="window__content--wrapper col-md-5 col-sm-4 col-xs-12 cbg">
+              <section className="window__details-panel sticky">
+                {selectedProduct && (
+                  <>
+                    <div className="top cbg">
+                      <img className="est" src={selectedProduct.image.url}></img>
+                    </div>
+                    <div className="bottom cbg">
+                      <p>Name: {selectedProduct.name}</p>
+                      <p>Price: {selectedProduct.price}</p>
+                      <p>Quantity: {selectedProduct.quantity}</p>
+                      <p>Category: {selectedProduct.category.name}</p>
+                    </div>
+                  </>
+                )}
+              </section>
             </div>
 
-            <div className="col-sm-8 col-xs-12 cbg table--wrapper">
+            <div className="window__content--wrapper col-md-7 col-sm-8 col-xs-12">
               <table>
                 <thead>
                   <tr>
@@ -81,7 +97,10 @@ export default function Home(props) {
                       <td>{product.quantity}</td>
                       <td>{product.category.name}</td>
                       <td className="table__action-cell">
-                        <button data-action="Update">
+                        <button
+                          onClick={() => setSelectedProduct(product)}
+                          data-action="Update"
+                        >
                           <FiEdit />
                         </button>
                         <button data-action="Delete">

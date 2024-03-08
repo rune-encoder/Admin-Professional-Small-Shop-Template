@@ -11,6 +11,15 @@
   @return $base * pow($modular-scale, $step);
 }
 
+// USED IN CONJUNCTION WITH MIXIN: APPLY-SPACE IF YOU NEED TO SUBTRACT OR ADD SPACE
+// BASED ON THE MODULAR SCALE
+@function calculate-space($step) {
+  $increment: 0.5; 
+  $value: $base-unit * pow($modular-scale, $step * $increment);
+
+  @return $value;
+}
+
 // FUNCTION TO GENERATE SHADES OF GRAY FOR LIGHT/DARK THEMES
 @function generate-shades($theme) {
   @if not index("light" "dark", $theme) {
@@ -42,7 +51,7 @@
   @while $theme == "light" and $i >= $end or $theme == "dark" and $i <= $end {
     $color-name: #{$prefix}-#{$name-value};
     $value: hsl(0deg 0% $i * 1%);
-    $opacity-value: hsla(0, 0%, $i * 1%, $color-opacity);
+    $opacity-value: hsla(0deg, 0%, $i * 1%, $color-opacity);
     $shades: map.merge(
       $shades,
       (

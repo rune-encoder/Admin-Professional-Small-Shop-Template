@@ -78,7 +78,7 @@ const seedProductData = (categories) => {
         quantity: Math.floor(Math.random() * 10), // Between 0 and 10
         image: {
           cloudinaryId: "seed",
-          url: "https://res.cloudinary.com/dzcmadjl1/image/upload/v1616458918/seed.png",
+          url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819607/samples/logo.png",
         },
         isFeatured: Math.random() > 0.9, // 10% chance of being featured
       };

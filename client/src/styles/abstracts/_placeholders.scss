@@ -36,7 +36,7 @@
 
 %tooltip--style {
   @include apply-glass-effect("opacity-light");
-  @include apply-border("opacity-shade-5", $border-radius);
+  @include apply-border("opacity-shade-8", $border-radius);
   
   color: var(--dark);
   transition: opacity 0.3s ease, visibility 0.3s ease;
