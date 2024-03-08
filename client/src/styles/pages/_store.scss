@@ -1,3 +1,4 @@
+// ⚠️ Needs Refactoring
 // 🔴 In Progress
 
 $window--height: rem(600px);
@@ -175,6 +176,3 @@ tbody tr {
   position: sticky;
   top: $toolbar--height + halved-modular-scale(-5);
 }
-
-// @debug generate-shades("light");
-@debug generate-shades("dark");

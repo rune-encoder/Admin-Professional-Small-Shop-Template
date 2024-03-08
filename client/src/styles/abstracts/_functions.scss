@@ -89,6 +89,9 @@
   // This value will be used to generate the lightness value in HSL for each shade.
   $i: $start;
 
+  // Defines the opacity value for the generated shades to the global base opacity value.
+  $opacity-value: $base-opacity;
+
   // Generate shades using a while loop.
   @while ($theme == "light" and $i >= $end) or ($theme == "dark" and $i <= $end)
   {
@@ -96,17 +99,17 @@
     $shade-name: #{$prefix}-#{$shade-name-counter};
 
     // Calculate HSL color value for the current shade.
-    $value: hsl(0deg 0% $i * 1%);
+    $hsl-value: hsl(0deg 0% $i * 1%);
 
     // Calculate HSLA color value with opacity for the current shade.
-    $opacity-value: hsla(0deg, 0%, $i * 1%, $color-opacity);
+    $hsla-value: hsla(0deg, 0%, $i * 1%, $opacity-value);
 
     // Add generated shade and its opacity variant to the shades map.
     $shades: map.merge(
       $shades,
       (
-        $shade-name: $value,
-        "opacity-#{$shade-name}": $opacity-value,
+        $shade-name: $hsl-value,
+        "opacity-#{$shade-name}": $hsla-value,
       )
     );
 

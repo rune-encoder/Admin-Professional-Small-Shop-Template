@@ -16,7 +16,7 @@ $border-radius-window: rem(10px);
 $border-radius-card: rem(15px);
 
 // OPACITY FOR COLORS
-$color-opacity: 0.50;
+$base-opacity: 0.50;
 
 // FONT FAMILIES
 $font-families: (
@@ -81,9 +81,9 @@ $shared-colors: (
 $light-theme: (
   /* BASE COLORS */ 
   "light": hsl(0deg 0% 100%),
-  "opacity-light": hsla(0, 0%, 100%, $color-opacity),
+  "opacity-light": hsla(0, 0%, 100%, $base-opacity),
   "dark": hsl(0deg 0% 0%),
-  "opacity-dark": hsla(0, 0%, 0%, $color-opacity),
+  "opacity-dark": hsla(0, 0%, 0%, $base-opacity),
 
   // UTILITY COLORS
   "selection": hsl(352, 23%, 26%),
@@ -102,9 +102,9 @@ $light-theme: map.merge($light-theme, $shared-colors);
 $dark-theme: (
   // BASE COLORS
   "light": hsl(0deg 0% 0%),
-  "opacity-light": hsla(0, 0%, 0%, $color-opacity),
+  "opacity-light": hsla(0, 0%, 0%, $base-opacity),
   "dark": hsl(0deg 0% 100%),
-  "opacity-dark": hsla(0, 0%, 100%, $color-opacity),
+  "opacity-dark": hsla(0, 0%, 100%, $base-opacity),
 
   // UTILITY COLORS
   "selection": hsl(180, 80%, 75%),

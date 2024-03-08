@@ -1,16 +1,23 @@
-// APPLY DARK/LIGHT THEME COLORS (SEE VARIABLES.SCSS FOR COLORS)
+// ⚠️ Needs Refactoring
+// 🔴 In Progress
+
+// MIXIN USED TO OBTAIN COLOR NAME AND VALUES FROM COLOR-THEME MAPS
+// USED TO APPLY COLOR THEMES TO ACCROSS A GLOBAL ELEMENT, COMPONENT, OR CLASS.
+// DARK/LIGHT THEME MAPS ARE DEFINED IN _VARIABLES.SCSS ($LIGHT-THEME, $DARK-THEME)
 @mixin apply-theme-colors($theme-colors) {
   @each $key, $value in $theme-colors {
     --#{$key}: #{$value};
   }
 }
 
-// APPLY A FONT FAMILY (SEE VARIABLES.SCSS FOR FONTS)
+// MIXIN USED TO APPLY A FONT FAMILY AND ITS VARIANTS TO AN ELEMENT, COMPONENT, OR CLASS.
+// FONT FAMILIES AND VARIANTS ARE DEFINED IN _VARIABLES.SCSS ($FONT-FAMILIES)
+// EXAMPLE USAGE: @include apply-font-family("inter");
 @mixin apply-font-family($font) {
   font-family: map.get($font-families, $font);
 }
 
-// APPLY A FLEXBOX LAYOUT
+// MIXIN USED TO APPLY FLEXBOX PROPERTIES TO AN ELEMENT, COMPONENT, OR CLASS.
 @mixin apply-flex($direction, $justify: null, $align: null) {
   display: flex;
   flex-direction: $direction;
@@ -18,9 +25,19 @@
   align-items: $align;
 }
 
-// APPLY MODULAR SCALE: FOR SPACING
-// USAGE: "MARGIN", "PADDING", AND "GAP" (SEE VARIABLES.SCSS FOR SCALE)
-// Example: @include apply-space("margin", 1, "x"); or @include apply-space("padding-left", 1);
+/**
+ * Mixin used to apply spacing based on the modular scale. Used for margin, padding, and gap.
+ *
+ * @param {String} $property - The CSS property to apply spacing to (e.g., "margin", "padding").
+ * @param {Number} $step - The step on the modular scale to determine spacing.
+ * @param {String} [$axis=null] - (Optional) The axis to apply spacing to ("x" for horizontal, "y" for vertical).
+ * @param {Boolean} [$important=false] - (Optional) Whether to apply !important to the generated CSS.
+ *
+ * Example usage:
+ *   @include apply-space("margin", 1, "x");
+ *   @include apply-space("padding-left", 1);
+ */
+
 @mixin apply-space($property, $step, $axis: null, $important: false) {
   $value: halved-modular-scale($step);
 
