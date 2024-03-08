@@ -1,3 +1,5 @@
+// 🔴 In Progress
+
 $window--height: rem(600px);
 $window--width: 50rem;
 $window__bar--height: rem(24px);
@@ -150,7 +152,7 @@ tbody tr {
   @include apply-box-shadow("always-dark", 1);
 
   width: 100%;
-  height: $window--height - $window__bar--height - $toolbar--height + calculate-space(-13);
+  height: $window--height - $window__bar--height - $toolbar--height + halved-modular-scale(-13);
 }
 
 .est {
@@ -171,5 +173,8 @@ tbody tr {
 
 .sticky {
   position: sticky;
-  top: $toolbar--height + calculate-space(-5);
+  top: $toolbar--height + halved-modular-scale(-5);
 }
+
+// @debug generate-shades("light");
+@debug generate-shades("dark");
