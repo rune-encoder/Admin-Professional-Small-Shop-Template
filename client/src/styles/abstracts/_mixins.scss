@@ -1,16 +1,95 @@
-// APPLY DARK/LIGHT THEME COLORS (SEE VARIABLES.SCSS FOR COLORS)
+// ✨ Refactored
+// 🔴 In Progress
+
+/// Mixin used to apply all colors in a theme pack to an element, component, or class.
+/// Used on the application globaly to apply the theme colors to the `:root` pseudo-element.
+/// Note: This should not be used to apply individual colors. It is used to apply all colors in a theme pack.
+/// The themes in use are $light-theme and $dark-theme defined in _variables.scss.
+///
+/// @access private
+/// @group Theming
+/// @name apply-theme-colors
+///
+/// @param {Map} $theme-colors - The color theme map to apply.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-theme-colors($light-theme);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     --light: hsl(0deg 0% 100%);
+///     --opacity-light: hsla(0, 0%, 100%, 0.9);
+///     --dark: hsl(0deg 0% 0%);
+///     --opacity-dark: hsla(0, 0%, 0%, 0.9);
+///     --selection: hsl(352, 23%, 26%);
+///     --shade-1: hsl(0deg 0% 96%);
+///     (etc...)
+///   }
+///
+
 @mixin apply-theme-colors($theme-colors) {
   @each $key, $value in $theme-colors {
+    // Apply the color variable to the `:root` pseudo-element and `.dark` class.
     --#{$key}: #{$value};
   }
 }
 
-// APPLY A FONT FAMILY (SEE VARIABLES.SCSS FOR FONTS)
+/// Mixin used to apply font families and fallbacks to an element, component, or class.
+/// Note: The font family name must be a key in the $font-families map defined in _variables.scss.
+///
+/// @access public
+/// @group Theming
+/// @name apply-font-family
+///
+/// @param {String} $font - The font family name to apply.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-font-family("inter");
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     font-family: "Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif;
+///   }
+///
+
 @mixin apply-font-family($font) {
-  font-family: map.get($font-families, $font);
+  // Check if the provided `$font` parameter is a valid font family name defined in the `$font-families` map.
+  @if map.has-key($font-families, $font) {
+    // Apply the font family and fallbacks to the element.
+    font-family: map.get($font-families, $font);
+  } @else {
+    @error "Invalid font family: `#{$font}`. Expected a valid font family name from the `$font-families` map. Valid values: `#{map.keys($font-families)}`.";
+  }
 }
 
-// APPLY A FLEXBOX LAYOUT
+/// Mixin used to apply flexbox properties to an element, component, or class.
+///
+/// @access public
+/// @group Layout
+/// @name apply-flex
+///
+/// @param {String} $direction - The flex-direction property value.
+/// @param {String} $justify [null] - (Optional) The justify-content property value.
+/// @param {String} $align [null] - (Optional) The align-items property value.
+///
+/// @example scss - SCSS Usage
+///    .foo {
+///     @include apply-flex(row, space-between, center);
+///    }
+///
+/// @example css - CSS output
+///    .foo {
+///     display: flex;
+///     flex-direction: row;
+///     justify-content: space-between;
+///     align-items: center;
+///    }
+///
+
 @mixin apply-flex($direction, $justify: null, $align: null) {
   display: flex;
   flex-direction: $direction;
@@ -18,33 +97,116 @@
   align-items: $align;
 }
 
-// APPLY MODULAR SCALE: FOR SPACING
-// USAGE: "MARGIN", "PADDING", AND "GAP" (SEE VARIABLES.SCSS FOR SCALE)
-// Example: @include apply-space("margin", 1, "x"); or @include apply-space("padding-left", 1);
-@mixin apply-space($property, $step, $axis: null, $important: false) {
-  $increment: 0.5; // Increment for half-steps for modular scale
-  $value: $base-unit * pow($modular-scale, $step * $increment);
+/// Mixin used to apply spacing based on the modular scale in use.
+/// Used for margin, padding, and gap.
+///
+/// @access public
+/// @group Layout
+/// @name apply-space
+///
+/// @param {String} $property - The CSS property to apply spacing to (e.g., "margin", "padding", padding-left, gap).
+/// @param {Number} $step - The step on the modular scale to determine spacing.
+/// @param {String} $axis [null] - (Optional) The axis to apply spacing to ("x" for horizontal, "y" for vertical).
+/// @param {Boolean} $important [false] - (Optional) Whether to apply !important to the generated CSS.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-space("margin", -5, "x");
+///     @include apply-space("padding-left", -5);
+///     @include apply-space("gap", -10, $important: true);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     margin-left: 0.5724334022rem;
+///     margin-right: 0.5724334022rem;
+///     padding-left: 0.5724334022rem;
+///     gap: 0.32768rem !important;
+///   }
+///
 
+@mixin apply-space($property, $step, $axis: null, $important: false) {
+  // Check if the provided `$property` is valid.
+  $validProperties: (
+    "margin",
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+    "padding",
+    "padding-top",
+    "padding-right",
+    "padding-bottom",
+    "padding-left",
+    "gap"
+  );
+
+  @if not index($validProperties, $property) {
+    @error "Invalid property: `#{$property}`. Expected any of the following property values: `#{$validProperties}`.";
+  }
+
+  // Check if the `$step` parameter is a unitless number.
+  @if not unitless($step) {
+    @error "The `$step` parameter must be a unitless number. Remove unit `#{unit($step)}` from `#{$step}`.";
+  }
+
+  // Check if the `$axis` parameter is valid.
+  @if $axis and not index("x" "y", $axis) {
+    @error "Invalid axis: `#{$axis}`. Expected `x` or `y`.";
+  }
+
+  // Check if the `$axis` parameter is only used in conjuction with `margin` and `padding` properties.
+  @if $axis and not index("margin" "padding", $property) {
+    @error "The axis parementer is only available for the `margin` and `padding` properties. It is not available for selected property: `#{$property}`.";
+  }
+
+  // Calculate the spacing value based on the modular scale.
+  $value: halved-modular-scale($step);
+
+  // Apply !important if the `$important` parameter is set to `true`.
   @if $important {
     $value: #{$value} !important;
   }
 
+  // Apply the spacing value to the specified property.
   @if not $axis {
-    // Margin and Padding and Gap
     #{$property}: $value;
 
-    // Margin and Padding Only
+    // Apply the spacing value to the specified axis (if provided).
   } @else if $axis == "x" {
     #{$property}-left: $value;
     #{$property}-right: $value;
-
   } @else if $axis == "y" {
     #{$property}-top: $value;
     #{$property}-bottom: $value;
   }
 }
 
-// APPLY POSITION PROPERTY
+/// Mixin used to apply position properties to an element, component, or class.
+///
+/// @access public
+/// @group Layout
+/// @name apply-position
+///
+/// @param {String} $position ["static"] - The position property value.
+/// @param {String} $top [null] - (Optional) The top property value.
+/// @param {String} $right [null] - (Optional) The right property value.
+/// @param {String} $bottom [null] - (Optional) The bottom property value.
+/// @param {String} $left [null] - (Optional) The left property value.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-position(absolute, $bottom: 100%, $left: 50%);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     position: absolute;
+///     bottom: 100%;
+///     left: 50%;
+///   }
+///
+
 @mixin apply-position(
   $position: "static",
   $top: null,
@@ -52,71 +214,275 @@
   $bottom: null,
   $left: null
 ) {
-  position: $position;
+  // Check if the provided `$position` parameter is valid.
+  $validProperties: ("static", "relative", "absolute", "fixed", "sticky");
 
-  @if $position == "absolute" or $position == "fixed" or $position == "sticky" {
-    $properties: (
-      "top": $top,
-      "right": $right,
-      "bottom": $bottom,
-      "left": $left,
-    );
+  @if index($validProperties, $position) {
+    // Apply the position property to the element.
+    position: $position;
 
-    @each $property, $value in $properties {
-      @if $value {
-        #{$property}: $value;
+    // Checks if the provided position property is not `static`.
+    @if $position != "static" {
+      // Initialize a map of position properties.
+      $properties: (
+        "top": $top,
+        "right": $right,
+        "bottom": $bottom,
+        "left": $left,
+      );
+
+      // Iterate through the values of the position properties map.
+      // If a value is provided for the position property is not null, apply the value to the element.
+      @each $property, $value in $properties {
+        @if $value {
+          #{$property}: $value;
+        }
       }
     }
+  } @else {
+    @error "Invalid position value: `#{$position}`. Expected a valid position value of `#{$validProperties}`.";
   }
 }
 
-// APPLY MEDIA QUERY BREAKPOINTS
+/// Mixin used to apply media queries to an element, component, or class.
+/// The media query breakpoints are defined in the `$media-breakpoints` map in the `_variables.scss` file.
+///
+/// @access public
+/// @group Responsive
+/// @name respond-to
+///
+/// @param {String} $breakpoint - The breakpoint to apply to the media query.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include respond-to("md") {
+///     width: 100%;
+///    }
+/// }
+///
+/// @example css - CSS output
+///   @ media (min-width: 768px) and (max-width: 1023px) {
+///     .foo {
+///       width: 100%;
+///     }
+///   }
+///
+
 @mixin respond-to($breakpoint) {
-  $raw-query: map.get($media-breakpoints, $breakpoint);
+  // Check if the provided `$breakpoint` parameter is a valid breakpoint value from the `$media-breakpoints` map.
+  @if map.has-key($media-breakpoints, $breakpoint) {
+    $value: map.get($media-breakpoints, $breakpoint);
 
-  @if $raw-query {
-    $query: if(
-      meta.type-of($raw-query) == "string",
-      string.unquote($raw-query),
-      meta.inspect($raw-query)
-    );
-
-    @media #{$query} {
+    // Apply the media query to the element, component, or class.
+    @media #{$value} {
       @content;
     }
   } @else {
-    @error "No breakpoint found for `#{$breakpoint}`.";
+    @error "No breakpoint found for `#{$breakpoint}`. Expected a valid breakpoint values: `#{map.keys($media-breakpoints)}`. See `$media-breakpoints` map for values.";
   }
 }
 
-// ! REVISIT: CHANGE STRENGTH AND EXPLAIN MAGIC NUMBERS
-// APPLY BOX SHADOW: (CONTAINS DEFAULT VALUES FOR X, Y)
-@mixin apply-box-shadow($color, $strength: 1, $x: 0, $y: 0) {
-  $base-blur: 0.5rem;
-  $base-spread: -0.3rem;
-  $adjusted-blur: $base-blur + calc(0.05rem * $strength);
-  $adjusted-spread: $base-spread - calc(0.02rem * $strength);
+/// Mixin used to apply linear gradients to an element based on available color variables.
+/// The color variables are defined in the `$light-theme` and `$dark-theme` maps in the `_variables.scss` file.
+///
+/// @access public
+/// @group Theming
+/// @name apply-gradient
+///
+/// @param {String} $colorVariable - The color variable to apply as the starting color of the gradient.
+/// @param {String} $alteration - The color variable to apply as the ending color of the gradient.
+/// @param {String} $direction ["to bottom right"] - (Optional) The direction of the gradient. (e.g., 180deg, to top left, etc.)
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-gradient("light", "shade-1", 180deg);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     background: var(--light);
+///     background: linear-gradient(180deg, var(--light), var(--shade-1));
+///   }
+///
 
-  box-shadow: #{$x} #{$y} #{$adjusted-blur} #{$adjusted-spread} var(--#{$color});
+@mixin apply-gradient(
+  $colorVariable,
+  $alteration,
+  $direction: to bottom right
+) {
+  // Check if the provided `$colorVariable` and `$alteration` parameters are valid color variable values from the available color themes.
+  @if map.has-key($mergedColorThemesMap, $colorVariable) and
+    map.has-key($mergedColorThemesMap, $alteration)
+  {
+    // Apply the linear gradient to the element.
+    background: var(--#{$colorVariable});
+    background: linear-gradient(
+      $direction,
+      var(--#{$colorVariable}),
+      var(--#{$alteration})
+    );
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}` or `#{$alteration}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+  }
 }
 
-// APPLY LINEAR GRADIENT BASED ON AVAILABLE COLOR THEMES
-@mixin apply-gradient($color, $alteration, $direction: to bottom right) {
-  background: var(--#{$color});
-  background: linear-gradient(
-    $direction,
-    var(--#{$color}),
-    var(--#{$alteration})
-  );
+/// Mixin used to apply a glass effect to an element based on available color variables.
+///
+/// @access public
+/// @group Theming
+/// @name apply-glass-effect
+///
+/// @param {String} $colorVariable - The color variable to apply as the background color. Recommend opac color variables.
+/// @param {Number} $blur [5px] - (Optional) The blur radius of the backdrop filter.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-glass-effect("opacity-shade-1", 10px);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     background: var(--opacity-shade-1);
+///     backdrop-filter: blur(10px);
+///   }
+///
+
+@mixin apply-glass-effect($colorVariable, $blur: 5px) {
+  // Check if the provided `$blur` parameter has a unit.
+  @if unitless($blur) {
+    @error "The `$blur` parameter must have a unit. Define the unit for the value. Example: `5px`, `5rem`, `5em`, etc.";
+  }
+
+  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
+  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+    // Apply the glass effect to the element.
+    background: var(--#{$colorVariable});
+    backdrop-filter: blur($blur);
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+  }
 }
 
-// APPLY BORDER RADIUS AND BORDER BASED ON AVAILABLE COLOR THEMES
-@mixin apply-border($color, $radius: 0, $width: 1px) {
-  border: solid rem($width) var(--#{$color});
-  border-radius: $radius;
+/// Mixin used to apply border radius and border to an element based on available color variables.
+///
+/// @access public
+/// @group Theming
+/// @name apply-border
+///
+/// @param {String} $colorVariable - The color variable to apply as the border color.
+/// @param {Number} $radius [0] - (Optional) The border radius value. Recommend to use px.
+/// @param {Number} $width [1px] - (Optional) The border width value. Recommend to use px.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-border("shade-10", 10px, 1px);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     border: solid 1px var(--shade-10);
+///     border-radius: 10px;
+///   }
+///
+
+@mixin apply-border($colorVariable, $radius: 0, $width: 1px) {
+  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
+  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+    // Apply the border and border radius to the element.
+    border: solid $width var(--#{$colorVariable});
+    border-radius: $radius;
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+  }
 }
 
-// APPLY DEFAULT TEXT SHADOW BASED ON AVAILABLE COLOR THEMES
-@mixin apply-text-shadow($color, $x: 1px, $y: 1px, $blur: 1px) {
-  text-shadow: #{rem($x)} #{rem($y)} #{rem($blur)} var(--#{$color});
+/// Mixin used to apply text shadow to an element based on available color variables.
+///
+/// @access public
+/// @group Theming
+/// @name apply-text-shadow
+///
+/// @param {String} $colorVariable - The color variable to apply as the text shadow color.
+/// @param {Number} $x [1px] - (Optional) The horizontal offset of the shadow.
+/// @param {Number} $y [1px] - (Optional) The vertical offset of the shadow.
+/// @param {Number} $blur [1px] - (Optional) The blur radius of the shadow.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-text-shadow("shade-10", $blur: 3px);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     text-shadow: 1px 1px 3px var(--shade-10);
+///   }
+///
+
+@mixin apply-text-shadow($colorVariable, $x: 1px, $y: 1px, $blur: 1px) {
+  // Check if the provided `$x`, `$y`, and `$blur` parameters have a unit.
+  @if unitless($x) or unitless($y) or unitless($blur) {
+    @error "The `$x`, `$y`, and `$blur` parameters must have a unit. Define the unit for each value. Example: `1px`, `1rem`, `1em`, etc.";
+  }
+
+  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
+  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+    // Apply the text shadow to the element.
+    text-shadow: #{$x} #{$y} #{$blur} var(--#{$colorVariable});
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+  }
+}
+
+/// Mixin used to apply box shadow to an element based on available color variables.
+///
+/// @access private
+/// @group Theming
+/// @name apply-box-shadow
+///
+/// @param {String} $color - The color variable to apply as the box shadow color.
+/// @param {Number} $strength [1] - (Optional) The strength of the shadow. Used to calculate the blur and spread values.
+/// @param {Number} $x [0] - (Optional) The horizontal offset of the shadow.
+/// @param {Number} $y [0] - (Optional) The vertical offset of the shadow.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-box-shadow("shade-10", 1, 2x, 3px);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     box-shadow: 2px 3px 9.6px -5.4px var(--shade-10);
+///   }
+///
+
+@mixin apply-box-shadow($colorVariable, $strength: 1, $x: 0, $y: 0) {
+  // Check if the provided `$strength` parameter is a unitless number.
+  @if not unitless($strength) {
+    @error "The `$strength` parameter must be a unitless number. Remove unit `#{unit($strength)}` from `#{$strength}`.";
+  }
+
+  // Check if the provided `$x` and `$y` parameters have a unit (with the exception of `0`).
+  @if (unitless($x) and $x != 0) or (unitless($y) and $y != 0) {
+    @error "The `$x` and `$y` parameters must have a unit (with the exeption of `0`). Define the unit for each value. Example: `1px`, `1rem`, `1em`, etc.";
+  }
+
+  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
+  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+    // ! Revisit ===== Fine tune blur and spread calculation =====vvvvv
+    $base-blur: 8px;
+    $base-spread: -4.8px;
+    $adjusted-blur: $base-blur + calc(0.8px * $strength);
+    $adjusted-spread: $base-spread - calc(0.3px * $strength);
+
+    // ! Revisit ===== Fine tune blur and spread calculation =====^^^^^^
+
+    // Apply the box shadow to the element.
+    box-shadow: #{$x}
+      #{$y}
+      #{$adjusted-blur}
+      #{$adjusted-spread}
+      var(--#{$colorVariable});
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+  }
 }

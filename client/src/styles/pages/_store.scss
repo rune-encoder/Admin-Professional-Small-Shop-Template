@@ -1,5 +1,10 @@
-$window-height: rem(600px);
-$window-width: 50rem;
+// ⚠️ Needs Refactoring
+// 🔴 In Progress
+
+$window--height: rem(600px);
+$window--width: 50rem;
+$window__bar--height: rem(24px);
+$toolbar--height: rem(37px);
 
 .window {
   @include apply-space("padding", -5, "y");
@@ -9,15 +14,18 @@ $window-width: 50rem;
 
   // ! Remove the following
   margin-top: 3rem;
-  max-width: $window-width;
+
+  // max-width: $window-width;
   height: auto;
 }
 
 .window__bar {
   @include apply-space("padding", -10, "x");
+
+  height: $window__bar--height;
 }
 
-.window__content {
+.window__body {
   @include apply-space("margin-top", -5);
   @include apply-gradient("shade-2", "shade-3", to bottom left);
   @include apply-border("shade-10", $border-radius);
@@ -25,17 +33,19 @@ $window-width: 50rem;
   overflow: auto;
 
   // ! Remove the following
-  height: $window-height;
+  height: $window--height;
 }
 
 .window__toolbar {
-  @include apply-space("padding", -10, "y");
+  // @include apply-space("padding", -10, "y");
   @include apply-gradient("light", "shade-1");
   @include apply-box-shadow("always-dark", 1, $y: -1px);
 
   position: sticky;
   top: 0;
+  height: $toolbar--height;
   border-bottom: solid rem(1px) var(--shade-7);
+  z-index: 1;
 }
 
 .toolbar__button {
@@ -51,6 +61,118 @@ $window-width: 50rem;
   font-size: modular-scale(1);
 }
 
-.window-work {
-  @include apply-flex(row, space-between, start);
+// ! WORKING =============================================
+.window__content {
+  // ! Revisit : Empty
+  position: relative;
+}
+
+.window__content--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+  @include apply-space("padding", -5, "y", $important: true);
+
+
+}
+
+table {
+  @include apply-font-family("roboto");
+  @include apply-border("shade-8");
+  @include apply-box-shadow("always-dark", 1);
+
+  width: 100%;
+  user-select: none;
+}
+
+thead {
+  background-color: var(--shade-1);
+  border-bottom: solid rem(1px) var(--shade-10);
+}
+
+th {
+  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -10, "y");
+
+  &:nth-child(1) {
+    text-align: left;
+  }
+}
+
+tbody {
+  background-color: var(--shade-3);
+}
+
+td {
+  @include apply-space("padding", -10, "x");
+
+  &:nth-child(n + 2) {
+    text-align: center;
+  }
+}
+
+// ! Revisit Create Own Class
+.table__action-cell {
+  @include apply-flex(row, space-evenly, center);
+}
+
+.table__action-cell button {
+  @extend %toggle-menu__button--style;
+
+// <===== BUTTON TOOLTIP SECTION =====>
+  &::after {
+    @include apply-position(absolute, $bottom: 100%, $left: 50%);
+
+    content: attr(data-action);
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+
+    @extend %tooltip--layout;
+    @extend %tooltip--style;
+  }
+
+  // TOOL TIP VISIBILITY
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+tbody tr {
+  &:nth-child(odd) {
+    background-color: var(--shade-4);
+  }
+
+  &:hover {
+    background-color: var(--shade-8);
+  }
+}
+
+// ! WORKING =============================================
+.window__details-panel {
+  @include apply-border("shade-8");
+  @include apply-box-shadow("always-dark", 1);
+
+  width: 100%;
+  height: $window--height - $window__bar--height - $toolbar--height + halved-modular-scale(-13);
+}
+
+.est {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+
+}
+
+.top {
+  height: 40% !important;
+}
+
+.bottom {
+  height: 60% !important;
+}
+
+.sticky {
+  position: sticky;
+  top: $toolbar--height + halved-modular-scale(-5);
 }

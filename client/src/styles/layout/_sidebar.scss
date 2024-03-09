@@ -1,16 +1,18 @@
+$sidebar--min-width: rem(68px);
+
 // <===== SIDEBAR SECTION =====>
 .sidebar__aside {
   @include apply-flex(column, null, center);
   @include apply-space("padding-top", 19);
-  @include apply-space("min-width", 13);
   @include apply-gradient("light", "shade-1", 60deg);
   @include apply-font-family("roboto-condensed");
   @include apply-box-shadow("shade-10", 15);
 
+  min-width: $sidebar--min-width;
   font-weight: 500;
   border-right: solid rem(1px) var(--shade-11);
   color: var(--shade-22);
-  z-index: 1;
+  z-index: 2;
 }
 
 // SIDEBAR LINK/BUTTON: GROUP
@@ -73,5 +75,5 @@
   min-width: modular-scale(-4);
   min-height: 100%;
   opacity: 0;
-  z-index: 1;
+  z-index: 2;
 }

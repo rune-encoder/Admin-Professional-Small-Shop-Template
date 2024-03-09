@@ -1,3 +1,6 @@
+// ⚠️ Needs Refactoring
+// 🟢 Not Modified
+
 // BASE VARIABLES
 $base-unit: 1rem;
 $base-font-size: 1rem;
@@ -11,6 +14,9 @@ $modular-scale: 1.25;
 $border-radius: rem(5px);
 $border-radius-window: rem(10px);
 $border-radius-card: rem(15px);
+
+// OPACITY FOR COLORS
+$base-opacity: 0.50;
 
 // FONT FAMILIES
 $font-families: (
@@ -73,8 +79,11 @@ $shared-colors: (
 // <===== LIGHT THEME COLOR SECTION =====>
 // LIGHT THEME COLORS
 $light-theme: (
-  /* BASE COLORS */ "light": hsl(0deg 0% 100%),
+  /* BASE COLORS */ 
+  "light": hsl(0deg 0% 100%),
+  "opacity-light": hsla(0, 0%, 100%, $base-opacity),
   "dark": hsl(0deg 0% 0%),
+  "opacity-dark": hsla(0, 0%, 0%, $base-opacity),
 
   // UTILITY COLORS
   "selection": hsl(352, 23%, 26%),
@@ -93,7 +102,9 @@ $light-theme: map.merge($light-theme, $shared-colors);
 $dark-theme: (
   // BASE COLORS
   "light": hsl(0deg 0% 0%),
+  "opacity-light": hsla(0, 0%, 0%, $base-opacity),
   "dark": hsl(0deg 0% 100%),
+  "opacity-dark": hsla(0, 0%, 100%, $base-opacity),
 
   // UTILITY COLORS
   "selection": hsl(180, 80%, 75%),
@@ -110,3 +121,10 @@ $dark-theme: map.merge($dark-theme, $dark-shades);
 
 // MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
 $dark-theme: map.merge($dark-theme, $shared-colors);
+
+// Note: All available color themes should have the same color variable names.
+// There are times during testing which a color variable may not be available in all themes. (As they have not been added yet)
+// This is why we merge the maps of the available themes to create a `$validMaps` map.
+// Current available color themes: `$light-theme`, `$dark-theme`
+// This is used for mixin checks
+$mergedColorThemesMap: map.merge($light-theme, $dark-theme);

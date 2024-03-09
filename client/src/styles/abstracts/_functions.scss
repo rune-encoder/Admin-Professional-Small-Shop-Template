@@ -1,59 +1,129 @@
-// CONVERT PIXELS TO REM
+// ✨ Refactored
+// 🟢 Not Modified
+
+// USED TO CONVERT THE UNIT `PX` TO `REM`
 @function rem($pixels) {
+  // Check if the value is a number with unit of `px`.
+  @if unit($pixels) != "px" {
+    @error "Expected a number with unit of `px`.";
+  }
+
   @return math.div($pixels, 16px) * 1rem;
 }
 
-// CALCULATE MODULAR SCALE: FOR TYPOGRAPHY (SEE VARIABLES.SCSS FOR MODULAR SCALE)
+// USED FOR TYPOGRAPHY: INCREASE/DECREASE FONT SIZE BASED ON MODULAR SCALE
 @function modular-scale($step) {
+  // Check if the value of step is a number without a unit.
+  @if not unitless($step) {
+    @error "Expected a unitless number for modular scale. Remove unit `#{unit($step)}` from #{$step}.";
+  }
+
   $base: $base-font-size; // Base font size
   $scale: $modular-scale; // Modular scale
+  $value: $base * pow($modular-scale, $step);
 
-  @return $base * pow($modular-scale, $step);
+  @return $value;
 }
 
-// FUNCTION TO GENERATE SHADES OF GRAY FOR LIGHT/DARK THEMES
+// USED FOR SPACING: INCREASE/DECREASE SPACING BASED ON MODULAR SCALE
+// THE STEP FOR MODULAR SCALE IS HALVED TO HELP WITH FINE-TUNING SPACING
+@function halved-modular-scale($step) {
+  // Check if the value of step is a number without a unit.
+  @if not unitless($step) {
+    @error "Expected a unitless number for halved modular scale. Remove unit `#{unit($step)}` from #{$step}.";
+  }
+
+  $scale-reduction-factor: 0.5;
+  $value: $base-unit * math.pow($modular-scale, $step * $scale-reduction-factor);
+
+  @return $value;
+}
+
+// USED TO GENERATE SHADES OF GRAY AND OPAC VARIANTS FOR LIGHT/DARK THEMES
+// ONLY ACCEPTS 'light' OR 'dark' AS ARGUMENT
 @function generate-shades($theme) {
+  // Check if the theme is valid ('light' or 'dark').
   @if not index("light" "dark", $theme) {
     @error "Invalid theme: `#{$theme}`. Expected 'light' or 'dark'.";
   }
 
-  // !REVISIT
-  // IMPORTANT: DETERMINE THE AMOUNT OF SHADES BASED ON THE INCREMENT VALUE
-  $increment: 4;
-  $name-value: 1;
+  // Define the increment/decrement value for generating shades.
+  $step: 4; // Recommended values: 1, 2, 4, 5, 10, 20. Other values will work too.
+
+  // Initialize name counter for shades.
+  // (Example: '1' in 'shade-1' used in var(--shade-1))
+  $shade-name-counter: 1;
+
+  // Define the prefix for the shade name.
+  // (Example: 'shade' in 'shade-1' used in var(--shade-1))
   $prefix: "shade";
-  
+
+  // Define the range of shades for light and dark themes.
   $shade-range: (
     "light": (
-      (100 - $increment),
-      (0 + $increment),
+      // Range starts at (100 - $step)
+      // (Example: 100 - $step: 4 | Starts at 96% in a color value of hsl(0deg 0% 96%)).
+      (100 - $step),
+      // Range ends at (0 + $step)
+      // (Example: 0 + $step: 4 | Ends at 4% in a color value of hsl(0deg 0% 4%)).
+      (0 + $step),
     ),
     "dark": (
-      (0 + $increment),
-      (100 - $increment),
+      // Range starts at (0 + $step)
+      // (Example: 0 + $step: 4 | Starts at 4% in a color value of hsl(0deg 0% 4%)).
+      (0 + $step),
+      // Range ends at (100 - $step)
+      // (Example: 100 - $step: 4 | Ends at 96% in a color value of hsl(0deg 0% 96%)).
+      (100 - $step),
     ),
   );
-  
+
+  // Extract the start and end values based on the theme.
   $start: list.nth(map.get($shade-range, $theme), 1);
   $end: list.nth(map.get($shade-range, $theme), 2);
+
+  // Initialize a list to hold generated shades.
   $shades: ();
+
+  // Initialize the iterator $i with the start value.
+  // This value will be used to generate the lightness value in HSL for each shade.
   $i: $start;
 
-  @while $theme == "light" and $i >= $end or $theme == "dark" and $i <= $end {
-    $color-name: #{$prefix}-#{$name-value};
-    $value: hsl(0deg 0% $i * 1%);
+  // Defines the opacity value for the generated shades to the global base opacity value.
+  $opacity-value: $base-opacity;
+
+  // Generate shades using a while loop.
+  @while ($theme == "light" and $i >= $end) or ($theme == "dark" and $i <= $end)
+  {
+    // Generate name for the current shade.
+    $shade-name: #{$prefix}-#{$shade-name-counter};
+
+    // Calculate HSL color value for the current shade.
+    $hsl-value: hsl(0deg 0% $i * 1%);
+
+    // Calculate HSLA color value with opacity for the current shade.
+    $hsla-value: hsla(0deg, 0%, $i * 1%, $opacity-value);
+
+    // Add generated shade and its opacity variant to the shades map.
     $shades: map.merge(
       $shades,
       (
-        $color-name: $value,
+        $shade-name: $hsl-value,
+        "opacity-#{$shade-name}": $hsla-value,
       )
     );
-    $name-value: $name-value + 1;
-    
+
+    // Increment the shade name counter.
+    $shade-name-counter: $shade-name-counter + 1;
+
+    // Depending on the theme, increment or decrement the iterator $i.
+    // If the theme is "light", we're going from a high lightness value to a low one, so we decrement $i.
     @if $theme == "light" {
-      $i: $i - $increment;
+      $i: $i - $step;
+
+    // If the theme is "dark", we're going from a low lightness value to a high one, so we increment $i.
     } @else if $theme == "dark" {
-      $i: $i + $increment;
+      $i: $i + $step;
     }
   }
 

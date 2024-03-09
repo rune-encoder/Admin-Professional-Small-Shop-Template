@@ -27,6 +27,13 @@ header h5 {
 
 .rbg {
     background-color: rgb(151, 80, 80);
+    
+    // @include apply-gradient("shade-1", "shade-30");
+    // @include apply-border("shade-100", 4px, 2px);
+    // @include apply-text-shadow("always-dark", 1rem, 1em);
+    // @include apply-glass-effect("opacity-shade-1", 5px)
+    // @include apply-box-shadow("always-dark", 1, 5px, 5);
+    // @include apply-box-shadow("always-dark", 2, 2px, 3px);
 }
 
 // .cbg {

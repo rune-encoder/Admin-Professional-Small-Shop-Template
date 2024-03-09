@@ -19,3 +19,24 @@ label, span {
   font-size: modular-scale(-1);
   line-height: calc(1.2 * modular-scale(-1));
 }
+
+// TABLE HEADERS AND CELLS
+thead, th {
+  font-size: modular-scale(0);
+  line-height: calc(1.2 * modular-scale(0));
+  font-weight: 400;
+}
+
+// TABLE BODY AND CELLS
+tbody, td {
+  font-size: modular-scale(-1);
+  line-height: calc(1.5 * modular-scale(-1));
+  font-weight: 500;
+}
+
+// TOOLTIP TYPOGRAPHY (SEE _PLACEHOLDERS.SCSS)
+%tooltip--typography {
+  font-size: modular-scale(-2);
+  line-height: calc(1.2 * modular-scale(-2));
+  font-weight: 500;
+}

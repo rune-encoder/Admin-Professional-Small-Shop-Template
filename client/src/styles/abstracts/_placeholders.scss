@@ -28,3 +28,18 @@
     color: var(--selection);
   }
 }
+
+%tooltip--layout {
+  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -15, "y");
+}
+
+%tooltip--style {
+  @include apply-glass-effect("opacity-light");
+  @include apply-border("opacity-shade-8", $border-radius);
+  
+  color: var(--dark);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  @extend %tooltip--typography; // (SEE _TYPOGRAPHY.SCSS)
+}
