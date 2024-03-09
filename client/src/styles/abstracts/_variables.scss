@@ -121,3 +121,10 @@ $dark-theme: map.merge($dark-theme, $dark-shades);
 
 // MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
 $dark-theme: map.merge($dark-theme, $shared-colors);
+
+// Note: All available color themes should have the same color variable names.
+// There are times during testing which a color variable may not be available in all themes. (As they have not been added yet)
+// This is why we merge the maps of the available themes to create a `$validMaps` map.
+// Current available color themes: `$light-theme`, `$dark-theme`
+// This is used for mixin checks
+$mergedColorThemesMap: map.merge($light-theme, $dark-theme);
