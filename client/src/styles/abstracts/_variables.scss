@@ -1,13 +1,18 @@
 // ⚠️ Needs Refactoring
 // 🟢 Not Modified
 
-// BASE VARIABLES
+/// BASE VARIABLES
+// ! Revisit REmove Base Unit
 $base-unit: 1rem;
+
+/// base font
 $base-font-size: 1rem;
 $base-line-height: 1.5;
 $base-font-weight: 400;
 
-// MODULAR SCALE (MAJOR THIRD)
+/// MODULAR SCALE (MAJOR THIRD)
+/// The value of the modular scale is based on the major third.
+/// 
 $modular-scale: 1.25;
 
 // BORDER RADIUS
@@ -15,7 +20,7 @@ $border-radius: rem(5px);
 $border-radius-window: rem(10px);
 $border-radius-card: rem(15px);
 
-// OPACITY FOR COLORS
+/// OPACITY FOR COLORS
 $base-opacity: 0.50;
 
 // FONT FAMILIES

@@ -1,13 +1,10 @@
-// ✨ Refactored
-// 🔴 In Progress
-
 /// Mixin used to apply all colors in a theme pack to an element, component, or class.
 /// Used on the application globaly to apply the theme colors to the `:root` pseudo-element.
 /// Note: This should not be used to apply individual colors. It is used to apply all colors in a theme pack.
 /// The themes in use are $light-theme and $dark-theme defined in _variables.scss.
 ///
 /// @access private
-/// @group Theming
+/// @group Theme
 /// @name apply-theme-colors
 ///
 /// @param {Map} $theme-colors - The color theme map to apply.
@@ -40,7 +37,7 @@
 /// Note: The font family name must be a key in the $font-families map defined in _variables.scss.
 ///
 /// @access public
-/// @group Theming
+/// @group Typography
 /// @name apply-font-family
 ///
 /// @param {String} $font - The font family name to apply.
@@ -286,7 +283,7 @@
 /// The color variables are defined in the `$light-theme` and `$dark-theme` maps in the `_variables.scss` file.
 ///
 /// @access public
-/// @group Theming
+/// @group Theme
 /// @name apply-gradient
 ///
 /// @param {String} $colorVariable - The color variable to apply as the starting color of the gradient.
@@ -329,7 +326,7 @@
 /// Mixin used to apply a glass effect to an element based on available color variables.
 ///
 /// @access public
-/// @group Theming
+/// @group Theme
 /// @name apply-glass-effect
 ///
 /// @param {String} $colorVariable - The color variable to apply as the background color. Recommend opac color variables.
@@ -366,7 +363,7 @@
 /// Mixin used to apply border radius and border to an element based on available color variables.
 ///
 /// @access public
-/// @group Theming
+/// @group Theme
 /// @name apply-border
 ///
 /// @param {String} $colorVariable - The color variable to apply as the border color.
@@ -399,7 +396,7 @@
 /// Mixin used to apply text shadow to an element based on available color variables.
 ///
 /// @access public
-/// @group Theming
+/// @group Theme
 /// @name apply-text-shadow
 ///
 /// @param {String} $colorVariable - The color variable to apply as the text shadow color.
@@ -433,10 +430,11 @@
   }
 }
 
+// ! Revisit (See Todo's)
 /// Mixin used to apply box shadow to an element based on available color variables.
 ///
 /// @access private
-/// @group Theming
+/// @group Theme
 /// @name apply-box-shadow
 ///
 /// @param {String} $color - The color variable to apply as the box shadow color.
@@ -454,6 +452,8 @@
 ///     box-shadow: 2px 3px 9.6px -5.4px var(--shade-10);
 ///   }
 ///
+/// @todo !Revisit Fine tune base-blur and base-spread values for the box shadow.
+/// @todo !Revisit Fine tune adjusted-blur and adjusted-spread calculations for the box shadow.
 
 @mixin apply-box-shadow($colorVariable, $strength: 1, $x: 0, $y: 0) {
   // Check if the provided `$strength` parameter is a unitless number.
@@ -468,13 +468,10 @@
 
   // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
   @if map.has-key($mergedColorThemesMap, $colorVariable) {
-    // ! Revisit ===== Fine tune blur and spread calculation =====vvvvv
     $base-blur: 8px;
     $base-spread: -4.8px;
     $adjusted-blur: $base-blur + calc(0.8px * $strength);
     $adjusted-spread: $base-spread - calc(0.3px * $strength);
-
-    // ! Revisit ===== Fine tune blur and spread calculation =====^^^^^^
 
     // Apply the box shadow to the element.
     box-shadow: #{$x}

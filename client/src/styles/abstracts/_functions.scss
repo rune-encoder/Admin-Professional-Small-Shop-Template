@@ -1,17 +1,57 @@
-// ✨ Refactored
-// 🟢 Not Modified
+/// Function used to convert pixel values to rem.
+/// 
+/// @access public
+/// @group Utilities
+/// @name rem
+///
+/// @param {Number} $pixels - The value in pixels to be converted to rem.
+/// @return {Number} - The converted value in rem.
+/// 
+/// @example scss - Usage
+/// .element {
+///  font-size: rem(24px);
+/// }
+/// 
+/// @example css - Output
+/// .element {
+///  font-size: 1.5rem;
+/// }
+///
 
-// USED TO CONVERT THE UNIT `PX` TO `REM`
 @function rem($pixels) {
   // Check if the value is a number with unit of `px`.
   @if unit($pixels) != "px" {
-    @error "Expected a number with unit of `px`.";
+    @error "Invalid unit. Expected a number with unit of `px`.";
   }
 
   @return math.div($pixels, 16px) * 1rem;
 }
 
-// USED FOR TYPOGRAPHY: INCREASE/DECREASE FONT SIZE BASED ON MODULAR SCALE
+/// Function used to calculate the font size based on the modular scale and base font size.
+/// Used for calculating typography settings of font-size and line-height.
+/// 
+/// @access public
+/// @name modular-scale
+/// @group Typography
+/// 
+/// @require _variables.scss
+/// @require $modular-scale - The value of the modular scale. 
+/// @require $base-font-size - The base font size of the application.
+/// 
+/// @param {Number} $step - The step value to be used for the modular scale.
+/// @return {Number} - The calculated font size based on the modular scale and base font size.
+/// 
+/// @example scss - Usage
+/// .element {
+///  font-size: modular-scale(1);
+/// }
+/// 
+/// @example css - Output
+/// .element {
+///  font-size: 1.25rem;
+/// }
+///
+
 @function modular-scale($step) {
   // Check if the value of step is a number without a unit.
   @if not unitless($step) {
@@ -25,8 +65,34 @@
   @return $value;
 }
 
-// USED FOR SPACING: INCREASE/DECREASE SPACING BASED ON MODULAR SCALE
-// THE STEP FOR MODULAR SCALE IS HALVED TO HELP WITH FINE-TUNING SPACING
+/// Function used to calculate the spacing based on the modular scale and base font size.
+/// Used for calculating spacing: margin, padding, gap. 
+/// It reduces the step value by half to help with fine-tuning spacing.
+/// The step value can be changed by adjusting the `$scale-reduction-factor` variable.
+/// However, it is recommended to keep the value at `0.5` for best results.
+/// 
+/// @access public
+/// @name halved-modular-scale
+/// @group Layout
+/// 
+/// @require _variables.scss
+/// @require $modular-scale - The value of the modular scale.
+/// @require $base-font-size - The base font size of the application.
+/// 
+/// @param {Number} $step - The step value to be used for the modular scale.
+/// @return {Number} - The calculated spacing based on the modular scale and base font size.
+/// 
+/// @example scss - Usage
+/// .element {
+///  margin-top: halved-modular-scale(1);
+/// }
+/// 
+/// @example css - Output
+/// .element {
+///  margin-top: 1.25rem;
+/// }
+///
+
 @function halved-modular-scale($step) {
   // Check if the value of step is a number without a unit.
   @if not unitless($step) {
@@ -34,17 +100,45 @@
   }
 
   $scale-reduction-factor: 0.5;
-  $value: $base-unit * math.pow($modular-scale, $step * $scale-reduction-factor);
+  $value: $base-font-size * math.pow($modular-scale, $step * $scale-reduction-factor);
 
   @return $value;
 }
 
-// USED TO GENERATE SHADES OF GRAY AND OPAC VARIANTS FOR LIGHT/DARK THEMES
-// ONLY ACCEPTS 'light' OR 'dark' AS ARGUMENT
+/// Function used to generate shades of gray and their opacity variants for the *light* and *dark* theme **ONLY**.
+/// The generated shades are based on the HSL color model and the opacity shades are based on the HSLA color model.
+/// The colors are then assigned a color variable for use in the application. Example: `var(--shade-1)`.
+/// The `$step` variable is the *dial* that is used to define the increment/decrement value for generating shades.
+/// If the `$step` value is set to `1`, the shades will be generated in increments of `1%`.
+/// If the `$step` value is set to `5`, the shades will be generated in increments of `5%`.
+/// 
+/// @access private
+/// @name generate-shades
+/// @group Theme
+/// 
+/// @require _variables.scss
+/// @require $base-opacity - The base opacity value for the application. Used for generating opacity variants.
+/// 
+/// @param {String} $theme - The theme to generate shades for. Accepts *'light'* or *'dark'*.
+/// @return {Map} - A map containing the generated shades and their opacity variants.
+/// 
+/// @example scss - Usage
+/// $light-shades: generate-shades("light");
+/// 
+/// @example css - Output
+/// $light-shades: (
+///  "shade-1": hsl(0deg 0% 96%),
+///  "opacity-shade-1": hsla(0, 0%, 96%, 0.8),
+///  "shade-2": hsl(0deg 0% 92%),
+///  "opacity-shade-2": hsla(0, 0%, 92%, 0.8),
+///  (etc...)
+/// );
+///
+
 @function generate-shades($theme) {
   // Check if the theme is valid ('light' or 'dark').
   @if not index("light" "dark", $theme) {
-    @error "Invalid theme: `#{$theme}`. Expected 'light' or 'dark'.";
+    @error "Invalid theme: `#{$theme}`. Expected `light` or `dark`.";
   }
 
   // Define the increment/decrement value for generating shades.
