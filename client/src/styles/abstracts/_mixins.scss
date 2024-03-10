@@ -1,42 +1,6 @@
-/// Mixin used to apply all colors in a theme pack to an element, component, or class.
-/// Used on the application globaly to apply the theme colors to the `:root` pseudo-element.
-/// Note: This should not be used to apply individual colors. It is used to apply all colors in a theme pack.
-/// The themes in use are $light-theme and $dark-theme defined in _variables.scss.
-///
-/// @access private
-/// @name apply-theme-colors
-/// @group Theme
-///
-/// @require _variables.scss
-/// @require $light-theme - The light theme color map to apply.
-/// @require $dark-theme - The dark theme color map to apply.
-///
-/// @param {Map} $theme-colors - The color theme map to apply.
-///
-/// @example scss - SCSS Usage
-///   .foo {
-///     @include apply-theme-colors($light-theme);
-///   }
-///
-/// @example css - CSS output
-///   .foo {
-///     --light: hsl(0deg 0% 100%);
-///     --opacity-light: hsla(0, 0%, 100%, 0.9);
-///     --dark: hsl(0deg 0% 0%);
-///     --opacity-dark: hsla(0, 0%, 0%, 0.9);
-///     --selection: hsl(352, 23%, 26%);
-///     --shade-1: hsl(0deg 0% 96%);
-///     (etc...)
-///   }
-///
-
-@mixin apply-theme-colors($theme-colors) {
-  @each $key, $value in $theme-colors {
-    // Apply the color variable to the `:root` pseudo-element and `.dark` class.
-    --#{$key}: #{$value};
-  }
-}
-
+// ==============================
+// TYPOGRAPHY MIXINS
+// ==============================
 /// Mixin used to apply font families and fallbacks to an element, component, or class.
 /// Note: The font family name must be a key in the $font-families map defined in _variables.scss.
 ///
@@ -69,6 +33,9 @@
   }
 }
 
+// ==============================
+// LAYOUT MIXINS
+// ==============================
 /// Mixin used to apply flexbox properties to an element, component, or class.
 ///
 /// @name apply-flex
@@ -247,6 +214,9 @@
   }
 }
 
+// ==============================
+// RESPONSIVE MIXINS
+// ==============================
 /// Mixin used to apply media queries to an element, component, or class.
 /// The media query breakpoints are defined in the `$media-breakpoints` map in the `_variables.scss` file.
 ///
@@ -284,6 +254,48 @@
     }
   } @else {
     @error "No breakpoint found for `#{$breakpoint}`. Expected a valid breakpoint values: `#{map.keys($media-breakpoints)}`. See `$media-breakpoints` map for values.";
+  }
+}
+
+// ==============================
+// THEME MIXINS
+// ==============================
+/// Mixin used to apply all colors in a theme pack to an element, component, or class.
+/// Used on the application globaly to apply the theme colors to the `:root` pseudo-element.
+/// Note: This should not be used to apply individual colors. It is used to apply all colors in a theme pack.
+/// The themes in use are $light-theme and $dark-theme defined in _variables.scss.
+///
+/// @access private
+/// @name apply-theme-colors
+/// @group Theme
+///
+/// @require _variables.scss
+/// @require $light-theme - The light theme color map to apply.
+/// @require $dark-theme - The dark theme color map to apply.
+///
+/// @param {Map} $theme-colors - The color theme map to apply.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-theme-colors($light-theme);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     --light: hsl(0deg 0% 100%);
+///     --opacity-light: hsla(0, 0%, 100%, 0.9);
+///     --dark: hsl(0deg 0% 0%);
+///     --opacity-dark: hsla(0, 0%, 0%, 0.9);
+///     --selection: hsl(352, 23%, 26%);
+///     --shade-1: hsl(0deg 0% 96%);
+///     (etc...)
+///   }
+///
+
+@mixin apply-theme-colors($theme-colors) {
+  @each $key, $value in $theme-colors {
+    // Apply the color variable to the `:root` pseudo-element and `.dark` class.
+    --#{$key}: #{$value};
   }
 }
 
