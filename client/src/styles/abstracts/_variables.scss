@@ -1,13 +1,23 @@
-/// BASE VARIABLES
-
-$base-line-height: 1.5;
-$base-font-weight: 400;
-
-/// The base font size of the application.
+// ==============================
+// TYPOGRAPHY VARIABLES
+// ==============================
+/// The base font size of the application. Also used in the modular scale calculation.
 /// @type Number
 /// @group Typography
 ///
 $base-font-size: 1rem;
+
+/// The base line height of the application. 
+/// @type Number
+/// @group Typography
+/// 
+$base-line-height: 1.5;
+
+/// The base font weight of the application.
+/// @type Number
+/// @group Typography
+/// 
+$base-font-weight: 400;
 
 /// Modular scale in use: (Major Third: 1.25)
 /// Modular scale is used to create a harmonious typography system throughout the application.
@@ -16,6 +26,9 @@ $base-font-size: 1rem;
 ///
 $modular-scale: 1.25;
 
+// ==============================
+// THEME VARIABLES
+// ==============================
 /// Base opacity value for colors.
 /// This is used to generate the opacity level of the 'light' and 'dark' theme colors.
 /// @type Number
@@ -43,6 +56,48 @@ $border-radius-md: calc($border-radius-sm * 2);
 /// 
 $border-radius-lg: calc($border-radius-sm * 3);
 
+// ==============================
+// RESPONSIVE VARIABLES
+// ==============================
+/// Minimum screen width for extra small devices.
+/// @type Number
+/// @group Responsive
+/// 
+$xs-min: 0;
+
+/// Minimum screen width for small devices.
+/// @type Number
+/// @group Responsive
+/// 
+$sm-min: 576px;
+
+/// Minimum screen width for medium devices.
+/// @type Number
+/// @group Responsive
+/// 
+$md-min: 768px;
+
+/// Minimum screen width for large devices.
+/// @type Number
+/// @group Responsive
+/// 
+$lg-min: 992px;
+
+/// Minimum screen width for extra large devices.
+/// @type Number
+/// @group Responsive
+/// 
+$xl-min: 1200px;
+
+/// Minimum screen width for extra extra large devices.
+/// @type Number
+/// @group Responsive
+/// 
+$xxl-min: 1400px;
+
+// ==============================
+// TYPOGRAPHY MAPS
+// ==============================
 /// A map of font families to be used throughout the application.
 /// @prop {Map} $font-families - A map of font families to be used throughout the application.
 /// @group Typography
@@ -59,7 +114,10 @@ $font-families: (
   "ysabeau-sc": ("Ysabeau SC", sans-serif),
 );
 
-/// HEADER STEPS FOR MODULAR SCALE (SEE TYPOGRAPHY.SCSS FOR USAGE)
+/// Predefined steps for use with the modular scale for headers (h1 - h6).
+/// @prop {Map} $header-steps - Predefined steps values for headers (h1 - h6) to be used with the modular scale.
+/// @group Typography
+/// 
 $header-steps: (
   "h1": 6,
   "h2": 5,
@@ -69,16 +127,20 @@ $header-steps: (
   "h6": 1,
 );
 
-/// MEDIA QUERY BREAKPOINT VALUES
-// ! IMPORTANT: INDEPENDENT FROM BOOTSTRAP GRID BREAKPOINTS
-$xs-min: 0;
-$sm-min: 576px;
-$md-min: 768px;
-$lg-min: 992px;
-$xl-min: 1200px;
-$xxl-min: 1400px;
-
-/// MEDIA QUERY BREAKPOINTS
+// ==============================
+// RESPONSIVE MAPS
+// ==============================
+/// A map of media query breakpoints used for responsive design.
+/// @prop {Map} $media-breakpoints - A map of media query breakpoints. Used with the `respond-to` mixin.
+/// @group Responsive
+/// 
+/// @see $xs-min
+/// @see $sm-min
+/// @see $md-min
+/// @see $lg-min
+/// @see $xl-min
+/// @see $xxl-min
+/// 
 $media-breakpoints: (
   "xs": '(min-width: #{0}) and (max-width: #{$sm-min - 1})',
   "sm": '(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})',
@@ -88,6 +150,7 @@ $media-breakpoints: (
   "xxl": '(min-width: #{$xxl-min})',
 );
 
+// !Revisit ======================================================
 // <===== THEME COLOR SECTION =====>
 /// SHARED COLORS ACROSS THEMES
 $shared-colors: (

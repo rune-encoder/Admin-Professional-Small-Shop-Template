@@ -1,3 +1,6 @@
+// ==============================
+// UTILITIES FUNCTIONS
+// ==============================
 /// Function used to convert pixel values to rem.
 /// 
 /// @group Utilities
@@ -26,6 +29,9 @@
   @return math.div($pixels, 16px) * 1rem;
 }
 
+// ==============================
+// TYPOGRAPHY FUNCTIONS
+// ==============================
 /// Function used to calculate the font size based on the modular scale and base font size.
 /// Used for calculating typography settings of font-size and line-height.
 /// 
@@ -63,6 +69,9 @@
   @return $value;
 }
 
+// ==============================
+// LAYOUT FUNCTIONS
+// ==============================
 /// Function used to calculate the spacing based on the modular scale and base font size.
 /// Used for calculating spacing: margin, padding, gap. 
 /// It reduces the step value by half to help with fine-tuning spacing.
@@ -102,6 +111,9 @@
   @return $value;
 }
 
+// ==============================
+// THEME FUNCTIONS
+// ==============================
 /// Function used to generate shades of gray and their opacity variants for the *light* and *dark* theme **ONLY**.
 /// The generated shades are based on the HSL color model and the opacity shades are based on the HSLA color model.
 /// The colors are then assigned a color variable for use in the application. Example: `var(--shade-1)`.
