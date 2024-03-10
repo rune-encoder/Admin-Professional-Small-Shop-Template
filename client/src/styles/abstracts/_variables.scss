@@ -7,16 +7,16 @@
 ///
 $base-font-size: 1rem;
 
-/// The base line height of the application. 
+/// The base line height of the application.
 /// @type Number
 /// @group Typography
-/// 
+///
 $base-line-height: 1.5;
 
 /// The base font weight of the application.
 /// @type Number
 /// @group Typography
-/// 
+///
 $base-font-weight: 400;
 
 /// Modular scale in use: (Major Third: 1.25)
@@ -27,97 +27,130 @@ $base-font-weight: 400;
 $modular-scale: 1.25;
 
 // ==============================
+// RESPONSIVE VARIABLES
+// ==============================
+/// Minimum screen width for extra small devices.
+/// @type Number
+/// @group Responsive
+///
+$xs-min: 0;
+
+/// Minimum screen width for small devices.
+/// @type Number
+/// @group Responsive
+///
+$sm-min: 576px;
+
+/// Minimum screen width for medium devices.
+/// @type Number
+/// @group Responsive
+///
+$md-min: 768px;
+
+/// Minimum screen width for large devices.
+/// @type Number
+/// @group Responsive
+///
+$lg-min: 992px;
+
+/// Minimum screen width for extra large devices.
+/// @type Number
+/// @group Responsive
+///
+$xl-min: 1200px;
+
+/// Minimum screen width for extra extra large devices.
+/// @type Number
+/// @group Responsive
+///
+$xxl-min: 1400px;
+
+// ==============================
 // THEME VARIABLES
 // ==============================
 /// Base opacity value for colors.
 /// This is used to generate the opacity level of the 'light' and 'dark' theme colors.
 /// @type Number
 /// @group Theme
-/// 
-$base-opacity: 0.50;
+///
+$base-opacity: 0.5;
 
 /// Small border radius. Default border radius for elements.
 /// @type Number
 /// @group Theme
-/// 
+///
 $border-radius-sm: 5px;
 
 /// Medium border radius for elements. (Example Usage: Buttons, Inputs, Windows)
 /// @type Number
 /// @group Theme
-/// @see $border-radius-sm
-/// 
+/// @require $border-radius-sm
+///
 $border-radius-md: calc($border-radius-sm * 2);
 
 /// Large border radius for elements. (Example Usage: Modals, Cards)
 /// @type Number
 /// @group Theme
-/// @see $border-radius-sm
-/// 
+/// @require $border-radius-sm
+///
 $border-radius-lg: calc($border-radius-sm * 3);
-
-// ==============================
-// RESPONSIVE VARIABLES
-// ==============================
-/// Minimum screen width for extra small devices.
-/// @type Number
-/// @group Responsive
-/// 
-$xs-min: 0;
-
-/// Minimum screen width for small devices.
-/// @type Number
-/// @group Responsive
-/// 
-$sm-min: 576px;
-
-/// Minimum screen width for medium devices.
-/// @type Number
-/// @group Responsive
-/// 
-$md-min: 768px;
-
-/// Minimum screen width for large devices.
-/// @type Number
-/// @group Responsive
-/// 
-$lg-min: 992px;
-
-/// Minimum screen width for extra large devices.
-/// @type Number
-/// @group Responsive
-/// 
-$xl-min: 1200px;
-
-/// Minimum screen width for extra extra large devices.
-/// @type Number
-/// @group Responsive
-/// 
-$xxl-min: 1400px;
 
 // ==============================
 // TYPOGRAPHY MAPS
 // ==============================
 /// A map of font families to be used throughout the application.
+/// The keys contain a list of the primary font and fonts to be used as a fallback.
 /// @prop {Map} $font-families - A map of font families to be used throughout the application.
 /// @group Typography
-/// 
+///
 $font-families: (
-  "inter": ("Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif),
-  "exo": ("Exo", sans-serif),
-  "exo-2": ("Exo 2", sans-serif),
-  "roboto": ("Roboto", sans-serif),
-  "roboto-condensed": ("Roboto Condensed", "Arial Narrow", sans-serif),
-  "ysabeau": ("Ysabeau", sans-serif),
-  "ysabeau-infant": ("Ysabeau Infant", sans-serif),
-  "ysabeau-office": ("Ysabeau Office", sans-serif),
-  "ysabeau-sc": ("Ysabeau SC", sans-serif),
+  "inter": (
+    "Inter",
+    system-ui,
+    "Avenir",
+    "Helvetica",
+    "Arial",
+    sans-serif,
+  ),
+  "exo": (
+    "Exo",
+    sans-serif,
+  ),
+  "exo-2": (
+    "Exo 2",
+    sans-serif,
+  ),
+  "roboto": (
+    "Roboto",
+    sans-serif,
+  ),
+  "roboto-condensed": (
+    "Roboto Condensed",
+    "Arial Narrow",
+    sans-serif,
+  ),
+  "ysabeau": (
+    "Ysabeau",
+    sans-serif,
+  ),
+  "ysabeau-infant": (
+    "Ysabeau Infant",
+    sans-serif,
+  ),
+  "ysabeau-office": (
+    "Ysabeau Office",
+    sans-serif,
+  ),
+  "ysabeau-sc": (
+    "Ysabeau SC",
+    sans-serif,
+  ),
 );
 
 /// Predefined steps for use with the modular scale for headers (h1 - h6).
 /// @prop {Map} $header-steps - Predefined steps values for headers (h1 - h6) to be used with the modular scale.
 /// @group Typography
-/// 
+///
 $header-steps: (
   "h1": 6,
   "h2": 5,
@@ -133,89 +166,149 @@ $header-steps: (
 /// A map of media query breakpoints used for responsive design.
 /// @prop {Map} $media-breakpoints - A map of media query breakpoints. Used with the `respond-to` mixin.
 /// @group Responsive
-/// 
-/// @see $xs-min
-/// @see $sm-min
-/// @see $md-min
-/// @see $lg-min
-/// @see $xl-min
-/// @see $xxl-min
-/// 
+///
+/// @require $xs-min
+/// @require $sm-min
+/// @require $md-min
+/// @require $lg-min
+/// @require $xl-min
+/// @require $xxl-min
+///
 $media-breakpoints: (
-  "xs": '(min-width: #{0}) and (max-width: #{$sm-min - 1})',
-  "sm": '(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})',
-  "md": '(min-width: #{$md-min}) and (max-width: #{$lg-min - 1})',
-  "lg": '(min-width: #{$lg-min}) and (max-width: #{$xl-min - 1})',
-  "xl": '(min-width: #{$xl-min}) and (max-width: #{$xxl-min - 1})',
-  "xxl": '(min-width: #{$xxl-min})',
+  "xs": "(min-width: #{0}) and (max-width: #{$sm-min - 1})",
+  "sm": "(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})",
+  "md": "(min-width: #{$md-min}) and (max-width: #{$lg-min - 1})",
+  "lg": "(min-width: #{$lg-min}) and (max-width: #{$xl-min - 1})",
+  "xl": "(min-width: #{$xl-min}) and (max-width: #{$xxl-min - 1})",
+  "xxl": "(min-width: #{$xxl-min})",
 );
 
-// !Revisit ======================================================
-// <===== THEME COLOR SECTION =====>
-/// SHARED COLORS ACROSS THEMES
+// ==============================
+// THEME MAPS
+// ==============================
+/// A map of colors shared across themes. Used in both the *light* and *dark* themes.
+/// It contains ***color variables*** that are colors that ***stay the same across themes***.
+/// @prop {Map} $shared-colors - A map of colors shared across themes.
+/// @group Theme
+///
+
 $shared-colors: (
-  // BASE COLORS
+  // Base Colors
   "always-light": hsl(0deg 0% 100%),
   "always-dark": hsl(0deg 0% 7%),
 
-  // !REVISIT THEME COLOR
+  // ! Revisit
   "theme": #618adf,
 
-  // UTILITY COLORS
+  // ! Revisit
+  // Utility Colors
   "hover-primary": hsl(180, 80%, 75%),
-  "hover-secondary": hsl(180, 60%, 60%),
+  "hover-secondary": hsl(180, 60%, 60%)
 );
 
-// !REVISIT AND REFACTOR
-// <===== LIGHT THEME COLOR SECTION =====>
-// LIGHT THEME COLORS
-$light-theme: (
-  /* BASE COLORS */ 
+/// A map of colors used for the light theme.
+/// It contains ***color variables*** that are ***ONLY*** used in the ***light theme***.
+/// It is recommended to use opposite colors for the dark theme.
+/// Note: There should *NOT* be any color variables names (keys) that are *different* from the *`$dark-theme`*.
+/// Only the value of the color should be different to allow for transitioning between themes.
+/// Likewise there should *NOT* be any color variable names (keys) that are the *same* as the *`$shared-colors` theme*.
+/// As those are being used throught the application regardless of the theme.
+
+/// @prop {Map} $light-theme - A map of colors used for the light theme only.
+/// @group Theme
+/// 
+/// @require $base-opacity
+///
+
+$base-light-theme: (
+  // Base Colors
   "light": hsl(0deg 0% 100%),
   "opacity-light": hsla(0, 0%, 100%, $base-opacity),
   "dark": hsl(0deg 0% 0%),
   "opacity-dark": hsla(0, 0%, 0%, $base-opacity),
 
-  // UTILITY COLORS
-  "selection": hsl(352, 23%, 26%),
+  // Utility Colors
+  "selection": hsl(352, 23%, 26%)
 );
 
-// LIGHT THEME SHADES OF GRAY
-$light-shades: generate-shades("light");
+/// A map of colors used for the dark theme.
+/// It contains ***color variables*** that are ***ONLY*** used in the ***dark theme***.
+/// It is recommended to use opposite colors for the light theme.
+/// Note: There should *NOT* be any color variables names (keys) that are *different* from the *light theme*.
+/// Only the value of the color should be different to allow for transitioning between themes.
+/// Likewise there should *NOT* be any color variables that are the *same* as the *`$shared-colors` theme*.
+///
+/// @prop {Map} $dark-theme - A map of colors used for the dark theme only.
+/// @group Theme
+/// 
+/// @require $base-opacity
+/// 
+///
 
-// MERGE LIGHT THEME COLORS AND SHADES
-$light-theme: map.merge($light-theme, $light-shades);
-
-/// MERGE LIGHT/DARK THEME SHARED COLORS INTO LIGHT THEME
-$light-theme: map.merge($light-theme, $shared-colors);
-
-// <===== DARK THEME COLOR SECTION =====>
-$dark-theme: (
-  // BASE COLORS
+$base-dark-theme: (
+  // Base Colors
   "light": hsl(0deg 0% 0%),
   "opacity-light": hsla(0, 0%, 0%, $base-opacity),
   "dark": hsl(0deg 0% 100%),
   "opacity-dark": hsla(0, 0%, 100%, $base-opacity),
 
-  // UTILITY COLORS
-  "selection": hsl(180, 80%, 75%),
-  
+  // ! Revisit
   "primary": hsl(258, 54%, 18%),
-  "secondary": 	hsl(320, 74%, 21%),
+  "secondary": hsl(320, 74%, 21%),
+
+  // Utility Colors
+  "selection": hsl(180, 80%, 75%)
 );
 
-// DARK THEME SHADES OF GRAY
-$dark-shades: generate-shades("dark");
+/// This map is used to set all the *light theme* colors, shades, etc. that are used in the application.
+/// It uses the color variables and values defined in the *`$base-light-theme`* and *`$shared-colors`* maps.
+/// It also uses the *`generate-shades`* function that returns a map of generated shades based on the theme.
+/// The map contains all the color variables and values that are used in the *light theme*.
+/// 
+/// @prop {Map} $light-theme - A map of colors used for the light theme only.
+/// @group Theme
+/// 
+/// @require _functions.scss
+/// @require {function} generate-shades
+/// @require $base-light-theme
+/// @require $shared-colors
+///
+$light-theme: map.merge(
+  $base-light-theme,
+  map.merge(generate-shades("light"), $shared-colors)
+);
 
-// MERGE DARK THEME COLORS AND SHADES
-$dark-theme: map.merge($dark-theme, $dark-shades);
+/// This map is used to set all the *dark theme* colors, shades, etc. that are used in the application.
+/// It uses the color variables and values defined in the *`$base-dark-theme`* and *`$shared-colors`* maps.
+/// It also uses the *`generate-shades`* function that returns a map of generated shades based on the theme.
+/// The map ontains all the color variables and values that are used in the *dark theme*.
+/// 
+/// @prop {Map} $dark-theme - A map of colors used for the dark theme only.
+/// @group Theme
+/// 
+/// @require _functions.scss
+/// @require {function} generate-shades
+/// @require $base-dark-theme
+/// @require $shared-colors
+///
 
-/// MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
-$dark-theme: map.merge($dark-theme, $shared-colors);
+$dark-theme: map.merge(
+  $base-dark-theme,
+  map.merge(generate-shades("dark"), $shared-colors)
+);
 
-/// Note: All available color themes should have the same color variable names.
+/// A map used for error handling checks in certain mixins.
+/// Checks are used to see if a key (color variable) is available in all available color themes.
+/// Important Note: All available color themes should have the same color variable names.
 /// There are times during testing which a color variable may not be available in all themes. (As they have not been added yet)
-/// This is why we merge the maps of the available themes to create a `$validMaps` map.
+/// This is why we merge the maps of the available themes to create a new map.
 /// Current available color themes: `$light-theme`, `$dark-theme`
-/// This is used for mixin checks
-$mergedColorThemesMap: map.merge($light-theme, $dark-theme);
+/// 
+/// @prop {Map} $themeColorCheckMap - A map of all available color themes. Used to check if key is available in a theme.
+/// @group Debug
+/// 
+/// @require $light-theme
+/// @require $dark-theme
+///
+
+$themeColorCheckMap: map.merge($light-theme, $dark-theme);

@@ -306,7 +306,7 @@
 /// @group Theme
 /// 
 /// @require _variables.scss
-/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the starting color of the gradient.
 /// @param {String} $alteration - The color variable to apply as the ending color of the gradient.
@@ -330,8 +330,8 @@
   $direction: to bottom right
 ) {
   // Check if the provided `$colorVariable` and `$alteration` parameters are valid color variable values from the available color themes.
-  @if map.has-key($mergedColorThemesMap, $colorVariable) and
-    map.has-key($mergedColorThemesMap, $alteration)
+  @if map.has-key($themeColorCheckMap, $colorVariable) and
+    map.has-key($themeColorCheckMap, $alteration)
   {
     // Apply the linear gradient to the element.
     background: var(--#{$colorVariable});
@@ -341,7 +341,7 @@
       var(--#{$alteration})
     );
   } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}` or `#{$alteration}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+    @error "Invalid color variable value detected: `#{$colorVariable}` or `#{$alteration}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
   }
 }
 
@@ -351,7 +351,7 @@
 /// @group Theme
 ///
 /// @require _variables.scss
-/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 /// 
 /// @param {String} $colorVariable - The color variable to apply as the background color. Recommend opac color variables.
 /// @param {Number} $blur [5px] - (Optional) The blur radius of the backdrop filter.
@@ -375,12 +375,12 @@
   }
 
   // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
-  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+  @if map.has-key($themeColorCheckMap, $colorVariable) {
     // Apply the glass effect to the element.
     background: var(--#{$colorVariable});
     backdrop-filter: blur($blur);
   } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
   }
 }
 
@@ -390,7 +390,7 @@
 /// @group Theme
 /// 
 /// @require _variables.scss
-/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the border color.
 /// @param {Number} $radius [0] - (Optional) The border radius value. Recommend to use px.
@@ -410,12 +410,12 @@
 
 @mixin apply-border($colorVariable, $radius: 0, $width: 1px) {
   // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
-  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+  @if map.has-key($themeColorCheckMap, $colorVariable) {
     // Apply the border and border radius to the element.
     border: solid $width var(--#{$colorVariable});
     border-radius: $radius;
   } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
   }
 }
 
@@ -425,7 +425,7 @@
 /// @group Theme
 /// 
 /// @require _variables.scss
-/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the text shadow color.
 /// @param {Number} $x [1px] - (Optional) The horizontal offset of the shadow.
@@ -450,11 +450,11 @@
   }
 
   // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
-  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+  @if map.has-key($themeColorCheckMap, $colorVariable) {
     // Apply the text shadow to the element.
     text-shadow: #{$x} #{$y} #{$blur} var(--#{$colorVariable});
   } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
   }
 }
 
@@ -466,7 +466,7 @@
 /// @group Theme
 /// 
 /// @require _variables.scss
-/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $color - The color variable to apply as the box shadow color.
 /// @param {Number} $strength [1] - (Optional) The strength of the shadow. Used to calculate the blur and spread values.
@@ -498,7 +498,7 @@
   }
 
   // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
-  @if map.has-key($mergedColorThemesMap, $colorVariable) {
+  @if map.has-key($themeColorCheckMap, $colorVariable) {
     $base-blur: 8px;
     $base-spread: -4.8px;
     $adjusted-blur: $base-blur + calc(0.8px * $strength);
@@ -511,6 +511,6 @@
       #{$adjusted-spread}
       var(--#{$colorVariable});
   } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$mergedColorThemesMap` map. Acceptable values: `#{map.keys($mergedColorThemesMap)}`.";
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
   }
 }
