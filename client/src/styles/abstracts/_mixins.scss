@@ -4,8 +4,12 @@
 /// The themes in use are $light-theme and $dark-theme defined in _variables.scss.
 ///
 /// @access private
-/// @group Theme
 /// @name apply-theme-colors
+/// @group Theme
+///
+/// @require _variables.scss
+/// @require $light-theme - The light theme color map to apply.
+/// @require $dark-theme - The dark theme color map to apply.
 ///
 /// @param {Map} $theme-colors - The color theme map to apply.
 ///
@@ -36,9 +40,11 @@
 /// Mixin used to apply font families and fallbacks to an element, component, or class.
 /// Note: The font family name must be a key in the $font-families map defined in _variables.scss.
 ///
-/// @access public
-/// @group Typography
 /// @name apply-font-family
+/// @group Typography
+/// 
+/// @require _variables.scss
+/// @require $font-families - The map of font families and their fallbacks.
 ///
 /// @param {String} $font - The font family name to apply.
 ///
@@ -65,9 +71,8 @@
 
 /// Mixin used to apply flexbox properties to an element, component, or class.
 ///
-/// @access public
-/// @group Layout
 /// @name apply-flex
+/// @group Layout
 ///
 /// @param {String} $direction - The flex-direction property value.
 /// @param {String} $justify [null] - (Optional) The justify-content property value.
@@ -97,9 +102,11 @@
 /// Mixin used to apply spacing based on the modular scale in use.
 /// Used for margin, padding, and gap.
 ///
-/// @access public
-/// @group Layout
 /// @name apply-space
+/// @group Layout
+/// 
+/// @require _functions.scss
+/// @require halved-modular-scale - The function used to calculate the spacing based on the modular scale.
 ///
 /// @param {String} $property - The CSS property to apply spacing to (e.g., "margin", "padding", padding-left, gap).
 /// @param {Number} $step - The step on the modular scale to determine spacing.
@@ -181,9 +188,8 @@
 
 /// Mixin used to apply position properties to an element, component, or class.
 ///
-/// @access public
-/// @group Layout
 /// @name apply-position
+/// @group Layout
 ///
 /// @param {String} $position ["static"] - The position property value.
 /// @param {String} $top [null] - (Optional) The top property value.
@@ -244,9 +250,11 @@
 /// Mixin used to apply media queries to an element, component, or class.
 /// The media query breakpoints are defined in the `$media-breakpoints` map in the `_variables.scss` file.
 ///
-/// @access public
-/// @group Responsive
 /// @name respond-to
+/// @group Responsive
+/// 
+/// @require _variables.scss
+/// @require $media-breakpoints - The map of media query breakpoints.
 ///
 /// @param {String} $breakpoint - The breakpoint to apply to the media query.
 ///
@@ -282,9 +290,11 @@
 /// Mixin used to apply linear gradients to an element based on available color variables.
 /// The color variables are defined in the `$light-theme` and `$dark-theme` maps in the `_variables.scss` file.
 ///
-/// @access public
-/// @group Theme
 /// @name apply-gradient
+/// @group Theme
+/// 
+/// @require _variables.scss
+/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the starting color of the gradient.
 /// @param {String} $alteration - The color variable to apply as the ending color of the gradient.
@@ -325,10 +335,12 @@
 
 /// Mixin used to apply a glass effect to an element based on available color variables.
 ///
-/// @access public
-/// @group Theme
 /// @name apply-glass-effect
+/// @group Theme
 ///
+/// @require _variables.scss
+/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
+/// 
 /// @param {String} $colorVariable - The color variable to apply as the background color. Recommend opac color variables.
 /// @param {Number} $blur [5px] - (Optional) The blur radius of the backdrop filter.
 ///
@@ -362,9 +374,11 @@
 
 /// Mixin used to apply border radius and border to an element based on available color variables.
 ///
-/// @access public
-/// @group Theme
 /// @name apply-border
+/// @group Theme
+/// 
+/// @require _variables.scss
+/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the border color.
 /// @param {Number} $radius [0] - (Optional) The border radius value. Recommend to use px.
@@ -395,9 +409,11 @@
 
 /// Mixin used to apply text shadow to an element based on available color variables.
 ///
-/// @access public
-/// @group Theme
 /// @name apply-text-shadow
+/// @group Theme
+/// 
+/// @require _variables.scss
+/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $colorVariable - The color variable to apply as the text shadow color.
 /// @param {Number} $x [1px] - (Optional) The horizontal offset of the shadow.
@@ -434,8 +450,11 @@
 /// Mixin used to apply box shadow to an element based on available color variables.
 ///
 /// @access private
-/// @group Theme
 /// @name apply-box-shadow
+/// @group Theme
+/// 
+/// @require _variables.scss
+/// @require $mergedColorThemesMap - Used to check if the provided color variable is valid.
 ///
 /// @param {String} $color - The color variable to apply as the box shadow color.
 /// @param {Number} $strength [1] - (Optional) The strength of the shadow. Used to calculate the blur and spread values.

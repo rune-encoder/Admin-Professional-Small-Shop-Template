@@ -1,29 +1,52 @@
-// ⚠️ Needs Refactoring
-// 🟢 Not Modified
-
 /// BASE VARIABLES
-// ! Revisit REmove Base Unit
-$base-unit: 1rem;
 
-/// base font
-$base-font-size: 1rem;
 $base-line-height: 1.5;
 $base-font-weight: 400;
 
-/// MODULAR SCALE (MAJOR THIRD)
-/// The value of the modular scale is based on the major third.
-/// 
+/// The base font size of the application.
+/// @type Number
+/// @group Typography
+///
+$base-font-size: 1rem;
+
+/// Modular scale in use: (Major Third: 1.25)
+/// Modular scale is used to create a harmonious typography system throughout the application.
+/// @type Number
+/// @group Typography
+///
 $modular-scale: 1.25;
 
-// BORDER RADIUS
-$border-radius: rem(5px);
-$border-radius-window: rem(10px);
-$border-radius-card: rem(15px);
-
-/// OPACITY FOR COLORS
+/// Base opacity value for colors.
+/// This is used to generate the opacity level of the 'light' and 'dark' theme colors.
+/// @type Number
+/// @group Theme
+/// 
 $base-opacity: 0.50;
 
-// FONT FAMILIES
+/// Small border radius. Default border radius for elements.
+/// @type Number
+/// @group Theme
+/// 
+$border-radius-sm: 5px;
+
+/// Medium border radius for elements. (Example Usage: Buttons, Inputs, Windows)
+/// @type Number
+/// @group Theme
+/// @see $border-radius-sm
+/// 
+$border-radius-md: calc($border-radius-sm * 2);
+
+/// Large border radius for elements. (Example Usage: Modals, Cards)
+/// @type Number
+/// @group Theme
+/// @see $border-radius-sm
+/// 
+$border-radius-lg: calc($border-radius-sm * 3);
+
+/// A map of font families to be used throughout the application.
+/// @prop {Map} $font-families - A map of font families to be used throughout the application.
+/// @group Typography
+/// 
 $font-families: (
   "inter": ("Inter", system-ui, "Avenir", "Helvetica", "Arial", sans-serif),
   "exo": ("Exo", sans-serif),
@@ -36,7 +59,7 @@ $font-families: (
   "ysabeau-sc": ("Ysabeau SC", sans-serif),
 );
 
-// HEADER STEPS FOR MODULAR SCALE (SEE TYPOGRAPHY.SCSS FOR USAGE)
+/// HEADER STEPS FOR MODULAR SCALE (SEE TYPOGRAPHY.SCSS FOR USAGE)
 $header-steps: (
   "h1": 6,
   "h2": 5,
@@ -46,7 +69,7 @@ $header-steps: (
   "h6": 1,
 );
 
-// MEDIA QUERY BREAKPOINT VALUES
+/// MEDIA QUERY BREAKPOINT VALUES
 // ! IMPORTANT: INDEPENDENT FROM BOOTSTRAP GRID BREAKPOINTS
 $xs-min: 0;
 $sm-min: 576px;
@@ -55,7 +78,7 @@ $lg-min: 992px;
 $xl-min: 1200px;
 $xxl-min: 1400px;
 
-// MEDIA QUERY BREAKPOINTS
+/// MEDIA QUERY BREAKPOINTS
 $media-breakpoints: (
   "xs": '(min-width: #{0}) and (max-width: #{$sm-min - 1})',
   "sm": '(min-width: #{$sm-min}) and (max-width: #{$md-min - 1})',
@@ -66,7 +89,7 @@ $media-breakpoints: (
 );
 
 // <===== THEME COLOR SECTION =====>
-// SHARED COLORS ACROSS THEMES
+/// SHARED COLORS ACROSS THEMES
 $shared-colors: (
   // BASE COLORS
   "always-light": hsl(0deg 0% 100%),
@@ -100,7 +123,7 @@ $light-shades: generate-shades("light");
 // MERGE LIGHT THEME COLORS AND SHADES
 $light-theme: map.merge($light-theme, $light-shades);
 
-// MERGE LIGHT/DARK THEME SHARED COLORS INTO LIGHT THEME
+/// MERGE LIGHT/DARK THEME SHARED COLORS INTO LIGHT THEME
 $light-theme: map.merge($light-theme, $shared-colors);
 
 // <===== DARK THEME COLOR SECTION =====>
@@ -124,12 +147,12 @@ $dark-shades: generate-shades("dark");
 // MERGE DARK THEME COLORS AND SHADES
 $dark-theme: map.merge($dark-theme, $dark-shades);
 
-// MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
+/// MERGE LIGHT/DARK THEME SHARED COLORS INTO DARK THEME
 $dark-theme: map.merge($dark-theme, $shared-colors);
 
-// Note: All available color themes should have the same color variable names.
-// There are times during testing which a color variable may not be available in all themes. (As they have not been added yet)
-// This is why we merge the maps of the available themes to create a `$validMaps` map.
-// Current available color themes: `$light-theme`, `$dark-theme`
-// This is used for mixin checks
+/// Note: All available color themes should have the same color variable names.
+/// There are times during testing which a color variable may not be available in all themes. (As they have not been added yet)
+/// This is why we merge the maps of the available themes to create a `$validMaps` map.
+/// Current available color themes: `$light-theme`, `$dark-theme`
+/// This is used for mixin checks
 $mergedColorThemesMap: map.merge($light-theme, $dark-theme);

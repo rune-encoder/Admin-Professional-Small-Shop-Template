@@ -9,7 +9,7 @@ $toolbar--height: rem(37px);
 .window {
   @include apply-space("padding", -5, "y");
   @include apply-gradient("shade-2", "shade-4");
-  @include apply-border("shade-10", $border-radius-window);
+  @include apply-border("shade-10", $border-radius-md);
   @include apply-box-shadow("always-dark", 25);
 
   // ! Remove the following
@@ -28,7 +28,7 @@ $toolbar--height: rem(37px);
 .window__body {
   @include apply-space("margin-top", -5);
   @include apply-gradient("shade-2", "shade-3", to bottom left);
-  @include apply-border("shade-10", $border-radius);
+  @include apply-border("shade-10", $border-radius-sm);
 
   overflow: auto;
 

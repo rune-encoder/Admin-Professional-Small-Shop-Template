@@ -8,7 +8,7 @@
 %toggle-menu--style {
   @include apply-font-family("inter");
   @include apply-gradient("light", "shade-1", to right top);
-  @include apply-border("shade-10", $border-radius);
+  @include apply-border("shade-10", $border-radius-sm);
   @include apply-box-shadow("shade-10", 10);
 
   font-weight: 300;
@@ -36,7 +36,7 @@
 
 %tooltip--style {
   @include apply-glass-effect("opacity-light");
-  @include apply-border("opacity-shade-8", $border-radius);
+  @include apply-border("opacity-shade-8", $border-radius-sm);
   
   color: var(--dark);
   transition: opacity 0.3s ease, visibility 0.3s ease;

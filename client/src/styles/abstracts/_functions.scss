@@ -1,6 +1,5 @@
 /// Function used to convert pixel values to rem.
 /// 
-/// @access public
 /// @group Utilities
 /// @name rem
 ///
@@ -30,7 +29,6 @@
 /// Function used to calculate the font size based on the modular scale and base font size.
 /// Used for calculating typography settings of font-size and line-height.
 /// 
-/// @access public
 /// @name modular-scale
 /// @group Typography
 /// 
@@ -71,7 +69,6 @@
 /// The step value can be changed by adjusting the `$scale-reduction-factor` variable.
 /// However, it is recommended to keep the value at `0.5` for best results.
 /// 
-/// @access public
 /// @name halved-modular-scale
 /// @group Layout
 /// 
