@@ -33,9 +33,9 @@
   }
 }
 
-/// Mixin used to apply typography settings to an element, component, or class.
+/// Mixin used to apply complete typography to an element.
 /// Used for setting font-size, line-height, and font-weight.
-/// Font size and line height are calculated based on the modular scale in use.
+/// Font size and line height are calculated based on the modular scale to maintain a harmonious typography system.
 /// Note: The font weight must be a key in the $font-weights map defined in _variables.scss.
 /// Recommend using set line-height factor of `$base-line-height` and `$compact-line-height`.
 ///
@@ -46,11 +46,10 @@
 /// @require modular-scale - The function used to calculate the font size based on the modular scale.
 /// @require _variables.scss
 /// @require $font-weights - The map of font weights.
-/// @require $base-line-height - The base line height of the application.
 ///
-/// @param {Number} $step [0]- The step on the modular scale to determine the font size.
-/// @param {Number} $line-height [$base-line-height] - (Optional) The factor to multiply with the modular scale.
-/// @param {String} $weight ["normal"] - (Optional) The font weight value.
+/// @param {Number} $step [null]- (Optional) The step on the modular scale to determine the font size.
+/// @param {Number} $line-height [null] - (Optional) The factor to determine the line height based on the font size and the modular scale.
+/// @param {String} $weight ["normal"] - The font weight value.
 ///
 /// @example scss - SCSS Usage
 ///   .foo {
@@ -65,20 +64,27 @@
 ///   }
 ///
 
-@mixin set-typography(
-  $step: 0,
-  $line-height: $base-line-height,
-  $weight: "normal"
-) {
-  @if not unitless($step) or not unitless($line-height) {
-    @error "The `$step` and `$line-height` parameters must be unitless numbers. Remove the unit `#{unit($step)}#{unit($line-height)}` from the mixin.";
-  }
-
-  font-size: modular-scale($step);
-  line-height: calc($line-height * modular-scale($step));
-
+@mixin set-typography($step: null, $line-height: null, $weight: "normal") {
+  // Check if the provided `$weight` parameter is a valid font weight value from the `$font-weights` map.
   @if map.has-key($font-weights, $weight) {
+    // Apply the font weight. If the font weight is not provided, the default value is `normal`.
     font-weight: map.get($font-weights, $weight);
+
+    // If a step value is provided, calculate the font size based on the modular scale.
+    @if $step {
+      font-size: modular-scale($step);
+
+      // If a line-height value is provided with a step value, calculate the line height based on the modular scale.
+      @if $line-height {
+        line-height: calc(#{$line-height} * modular-scale($step));
+      }
+
+      // If a line-height value is provided without a step value, throw a warning.
+    } @else if $line-height {
+      @warn "The `$line-height` parameter is being used without a `$step` parameter. It is recommended to use the `$step` parameter to calculate the line height to maintain a harmonious typography system. The line height will be set to `#{$line-height}`.";
+      
+      line-height: $line-height;
+    }
   } @else {
     @error "Invalid font weight: `#{$weight}`. Expected a valid font weight value from the `$font-weights` map. Valid values: `#{map.keys($font-weights)}`.";
   }
