@@ -52,9 +52,9 @@ $login__button-width: math.div($login__form-width, 2);
 
 .login__form-section label {
   @include apply-text-shadow("shade-18");
+  @include set-typography("semi-bold");
 
   color: var(--light);
-  font-weight: 600;
 }
 
 .login__form-section input {

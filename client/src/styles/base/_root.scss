@@ -1,7 +1,7 @@
 :root {
   @include apply-theme-colors($light-theme); // Light Mode Theme Colors
   @include apply-font-family("inter");
-  @include set-typography(0, $base-line-height, "normal");
+  @include set-typography("normal", 0, $base-line-height);
 
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;

@@ -7,9 +7,9 @@ $sidebar--min-width: rem(68px);
   @include apply-gradient("light", "shade-1", 60deg);
   @include apply-font-family("roboto-condensed");
   @include apply-box-shadow("shade-10", 15);
+  @include set-typography("medium");
 
   min-width: $sidebar--min-width;
-  font-weight: 500;
   border-right: solid rem(1px) var(--shade-11);
   color: var(--shade-22);
   z-index: 2;

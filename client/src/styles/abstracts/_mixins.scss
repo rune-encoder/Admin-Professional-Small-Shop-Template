@@ -47,9 +47,9 @@
 /// @require _variables.scss
 /// @require $font-weights - The map of font weights.
 ///
+/// @param {String} $weight ["normal"] - The font weight value.
 /// @param {Number} $step [null]- (Optional) The step on the modular scale to determine the font size.
 /// @param {Number} $line-height [null] - (Optional) The factor to determine the line height based on the font size and the modular scale.
-/// @param {String} $weight ["normal"] - The font weight value.
 ///
 /// @example scss - SCSS Usage
 ///   .foo {
@@ -64,7 +64,7 @@
 ///   }
 ///
 
-@mixin set-typography($step: null, $line-height: null, $weight: "normal") {
+@mixin set-typography($weight: "normal", $step: null, $line-height: null) {
   // Check if the provided `$weight` parameter is a valid font weight value from the `$font-weights` map.
   @if map.has-key($font-weights, $weight) {
     // Apply the font weight. If the font weight is not provided, the default value is `normal`.

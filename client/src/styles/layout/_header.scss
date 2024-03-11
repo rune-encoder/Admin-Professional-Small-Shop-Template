@@ -23,8 +23,7 @@ header {
 // <===== TITLE SECTION =====>
 .header__title {
   @include apply-font-family("ysabeau-sc");
-
-  font-weight: 700;
+  @include set-typography("bold");
 }
 
 // <===== MINI-NAVIGATION-BAR SECTION =====>
@@ -33,8 +32,6 @@ header {
   @include apply-space("margin", -5, "x");
   @include apply-space("padding", -5, "x");
   @include apply-space("gap", -10);
-
-  font-weight: 450;
 }
 
 // MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
