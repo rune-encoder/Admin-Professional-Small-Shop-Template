@@ -6,7 +6,7 @@
 ///
 /// @name apply-font-family
 /// @group Typography
-/// 
+///
 /// @require _variables.scss
 /// @require $font-families - The map of font families and their fallbacks.
 ///
@@ -30,6 +30,57 @@
     font-family: map.get($font-families, $font);
   } @else {
     @error "Invalid font family: `#{$font}`. Expected a valid font family name from the `$font-families` map. Valid values: `#{map.keys($font-families)}`.";
+  }
+}
+
+/// Mixin used to apply typography settings to an element, component, or class.
+/// Used for setting font-size, line-height, and font-weight.
+/// Font size and line height are calculated based on the modular scale in use.
+/// Note: The font weight must be a key in the $font-weights map defined in _variables.scss.
+/// Recommend using set line-height factor of `$base-line-height` and `$compact-line-height`.
+///
+/// @name set-typography
+/// @group Typography
+///
+/// @require _functions.scss
+/// @require modular-scale - The function used to calculate the font size based on the modular scale.
+/// @require _variables.scss
+/// @require $font-weights - The map of font weights.
+/// @require $base-line-height - The base line height of the application.
+///
+/// @param {Number} $step [0]- The step on the modular scale to determine the font size.
+/// @param {Number} $line-height [$base-line-height] - (Optional) The factor to multiply with the modular scale.
+/// @param {String} $weight ["normal"] - (Optional) The font weight value.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include set-typography(0, 1.5, "bold");
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     font-size: 1rem;
+///     line-height: 1.875rem;
+///     font-weight: 700;
+///   }
+///
+
+@mixin set-typography(
+  $step: 0,
+  $line-height: $base-line-height,
+  $weight: "normal"
+) {
+  @if not unitless($step) or not unitless($line-height) {
+    @error "The `$step` and `$line-height` parameters must be unitless numbers. Remove the unit `#{unit($step)}#{unit($line-height)}` from the mixin.";
+  }
+
+  font-size: modular-scale($step);
+  line-height: calc($line-height * modular-scale($step));
+
+  @if map.has-key($font-weights, $weight) {
+    font-weight: map.get($font-weights, $weight);
+  } @else {
+    @error "Invalid font weight: `#{$weight}`. Expected a valid font weight value from the `$font-weights` map. Valid values: `#{map.keys($font-weights)}`.";
   }
 }
 
@@ -71,14 +122,14 @@
 ///
 /// @name apply-space
 /// @group Layout
-/// 
+///
 /// @require _functions.scss
 /// @require halved-modular-scale - The function used to calculate the spacing based on the modular scale.
 ///
 /// @param {String} $property - The CSS property to apply spacing to (e.g., "margin", "padding", padding-left, gap).
 /// @param {Number} $step - The step on the modular scale to determine spacing.
 /// @param {String} $axis [null] - (Optional) The axis to apply spacing to ("x" for horizontal, "y" for vertical).
-/// @param {Boolean} $important [false] - (Optional) Whether to apply !important to the generated CSS.
+/// @param {Boolean} $important [null] - (Optional) Whether to apply !important to the generated CSS.
 ///
 /// @example scss - SCSS Usage
 ///   .foo {
@@ -96,7 +147,7 @@
 ///   }
 ///
 
-@mixin apply-space($property, $step, $axis: null, $important: false) {
+@mixin apply-space($property, $step, $axis: null, $important: null) {
   // Check if the provided `$property` is valid.
   $validProperties: (
     "margin",
@@ -222,7 +273,7 @@
 ///
 /// @name respond-to
 /// @group Responsive
-/// 
+///
 /// @require _variables.scss
 /// @require $media-breakpoints - The map of media query breakpoints.
 ///
@@ -299,12 +350,50 @@
   }
 }
 
+/// Mixin used to apply border radius and border to an element based on available color variables.
+///
+/// @name apply-border
+/// @group Theme
+///
+/// @require _variables.scss
+/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
+///
+/// @param {String} $colorVariable - The color variable to apply as the border color.
+/// @param {Number} $radius [0] - (Optional) The border radius value. Recommend to use px.
+/// @param {Number} $width [1px] - (Optional) The border width value. Recommend to use px.
+///
+/// @example scss - SCSS Usage
+///   .foo {
+///     @include apply-border("shade-10", 10px, 1px);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     border: solid 1px var(--shade-10);
+///     border-radius: 10px;
+///   }
+///
+
+@mixin apply-border($colorVariable, $radius: 0, $width: 1px) {
+  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
+  @if map.has-key($themeColorCheckMap, $colorVariable) {
+    // Apply the border and border radius to the element.
+    border: solid $width var(--#{$colorVariable});
+    border-radius: $radius;
+  } @else {
+    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
+  }
+}
+
+// ==============================
+// STYLE MIXINS
+// ==============================
 /// Mixin used to apply linear gradients to an element based on available color variables.
 /// The color variables are defined in the `$light-theme` and `$dark-theme` maps in the `_variables.scss` file.
 ///
 /// @name apply-gradient
-/// @group Theme
-/// 
+/// @group Style
+///
 /// @require _variables.scss
 /// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
@@ -348,11 +437,11 @@
 /// Mixin used to apply a glass effect to an element based on available color variables.
 ///
 /// @name apply-glass-effect
-/// @group Theme
+/// @group Style
 ///
 /// @require _variables.scss
 /// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
-/// 
+///
 /// @param {String} $colorVariable - The color variable to apply as the background color. Recommend opac color variables.
 /// @param {Number} $blur [5px] - (Optional) The blur radius of the backdrop filter.
 ///
@@ -384,46 +473,11 @@
   }
 }
 
-/// Mixin used to apply border radius and border to an element based on available color variables.
-///
-/// @name apply-border
-/// @group Theme
-/// 
-/// @require _variables.scss
-/// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
-///
-/// @param {String} $colorVariable - The color variable to apply as the border color.
-/// @param {Number} $radius [0] - (Optional) The border radius value. Recommend to use px.
-/// @param {Number} $width [1px] - (Optional) The border width value. Recommend to use px.
-///
-/// @example scss - SCSS Usage
-///   .foo {
-///     @include apply-border("shade-10", 10px, 1px);
-///   }
-///
-/// @example css - CSS output
-///   .foo {
-///     border: solid 1px var(--shade-10);
-///     border-radius: 10px;
-///   }
-///
-
-@mixin apply-border($colorVariable, $radius: 0, $width: 1px) {
-  // Check if the provided `$colorVariable` parameter is a valid color variable value from the available color themes.
-  @if map.has-key($themeColorCheckMap, $colorVariable) {
-    // Apply the border and border radius to the element.
-    border: solid $width var(--#{$colorVariable});
-    border-radius: $radius;
-  } @else {
-    @error "Invalid color variable value detected: `#{$colorVariable}`. Expected a valid color value from the available color variables defined in `$themeColorCheckMap` map. Acceptable values: `#{map.keys($themeColorCheckMap)}`.";
-  }
-}
-
 /// Mixin used to apply text shadow to an element based on available color variables.
 ///
 /// @name apply-text-shadow
-/// @group Theme
-/// 
+/// @group Style
+///
 /// @require _variables.scss
 /// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///
@@ -461,10 +515,9 @@
 // ! Revisit (See Todo's)
 /// Mixin used to apply box shadow to an element based on available color variables.
 ///
-/// @access private
 /// @name apply-box-shadow
-/// @group Theme
-/// 
+/// @group Style
+///
 /// @require _variables.scss
 /// @require $themeColorCheckMap - Used to check if the provided color variable is valid.
 ///

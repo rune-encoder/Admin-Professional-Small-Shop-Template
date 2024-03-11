@@ -1,42 +1,34 @@
-// <===== TYPOGRAPHY SECTION =====>
-// HEADERS (H1 - H6)
+// Create header typography style for h1 - h6.
 @each $header, $step in $header-steps {
   #{$header} {
-    font-size: modular-scale($step);
-    line-height: calc(1.2 * modular-scale($step));
-    font-weight: if($step > 3, 550, 500);
+    @include set-typography($step, $compact-line-height, "medium");
   }
 }
 
-// PARAGRAPHS
+// Paragraph typography
 p {
-  font-size: $base-font-size;
-  line-height: calc(1.5 * modular-scale(0));
+  @include set-typography(0, $base-line-height, normal);
 }
 
-// LABELS
-label, span {
-  font-size: modular-scale(-1);
-  line-height: calc(1.2 * modular-scale(-1));
+// Anchor typography
+label,
+span {
+  @include set-typography(-1, $compact-line-height, normal);
 }
 
-// TABLE HEADERS AND CELLS
-thead, th {
-  font-size: modular-scale(0);
-  line-height: calc(1.2 * modular-scale(0));
-  font-weight: 400;
+// Table header typography (and table header cells).
+thead,
+th {
+  @include set-typography(0, $compact-line-height, normal);
 }
 
-// TABLE BODY AND CELLS
-tbody, td {
-  font-size: modular-scale(-1);
-  line-height: calc(1.5 * modular-scale(-1));
-  font-weight: 500;
+// Table body typography (and table body cells).
+tbody,
+td {
+  @include set-typography(-1, $base-line-height, medium);
 }
 
-// TOOLTIP TYPOGRAPHY (SEE _PLACEHOLDERS.SCSS)
+// Tooltip typography (see placeholders.scss).
 %tooltip--typography {
-  font-size: modular-scale(-2);
-  line-height: calc(1.2 * modular-scale(-2));
-  font-weight: 500;
+  @include set-typography(-2, $compact-line-height, medium);
 }

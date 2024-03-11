@@ -7,17 +7,18 @@
 ///
 $base-font-size: 1rem;
 
-/// The base line height of the application.
+/// The base line height of the application. (default line height).
 /// @type Number
 /// @group Typography
 ///
 $base-line-height: 1.5;
 
-/// The base font weight of the application.
+/// The compact line height of the application (smaller line height).
 /// @type Number
 /// @group Typography
+/// @require $base-line-height
 ///
-$base-font-weight: 400;
+$compact-line-height: $base-line-height - 0.2;
 
 /// Modular scale in use: (Major Third: 1.25)
 /// Modular scale is used to create a harmonious typography system throughout the application.
@@ -160,6 +161,22 @@ $header-steps: (
   "h6": 1,
 );
 
+/// A map of font weights to be used throughout the application.
+/// @prop {Map} $font-weights - A map of font weights to be used throughout the application.
+/// @group Typography
+///
+$font-weights: (
+  "thin": 100,
+  "extra-light": 200,
+  "light": 300,
+  "normal": 400,
+  "medium": 500,
+  "semi-bold": 600,
+  "bold": 700,
+  "extra-bold": 800,
+  "black": 900,
+);
+
 // ==============================
 // RESPONSIVE MAPS
 // ==============================
@@ -213,7 +230,7 @@ $shared-colors: (
 /// Only the value of the color should be different to allow for transitioning between themes.
 /// Likewise there should *NOT* be any color variable names (keys) that are the *same* as the *`$shared-colors` theme*.
 /// As those are being used throught the application regardless of the theme.
-
+///
 /// @prop {Map} $light-theme - A map of colors used for the light theme only.
 /// @group Theme
 /// 
