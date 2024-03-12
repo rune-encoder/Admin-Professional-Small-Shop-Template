@@ -14,7 +14,7 @@ import Auth from "./utils/auth";
 
 import Login from "./pages/Login.jsx";
 
-import Header from "./components/Header";
+import Header from "./components/header/Header.jsx";
 import Footer from "./components/Footer";
 import ThemeBtn from "./components/UI/ThemeBtn";
 import Sidebar from "./components/Sidebar";

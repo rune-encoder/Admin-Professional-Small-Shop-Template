@@ -14,12 +14,17 @@
 @import "./base/root";
 @import "./base/base";
 @import "./base/typography";
+@import "./components/scrollbar";
+@import "./components/window/window";
+@import "./components/window/toolbar";
+@import "./components/window/content";
+@import "./components/window/item-view";
+@import "./components/window/item-list";
 @import "./layout/sidebar";
 @import "./layout/header";
 @import "./layout/footer";
 @import "./pages/login";
 @import "./pages/store";
-@import "./components/scrollbar";
 @import "./shame";
 
 

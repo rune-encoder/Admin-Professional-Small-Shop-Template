@@ -15,7 +15,7 @@ $login__button-width: math.div($login__form-width, 2);
 .login__section {
   @include apply-flex(column, space-evenly, center);
   @include apply-gradient("light", "shade-1");
-  @include apply-border("shade-10", $border-radius-card);
+  @include apply-border("shade-10", $border-radius-lg);
   @include apply-box-shadow("shade-8", 25);
 
   min-width: $login__section-width;
@@ -34,7 +34,7 @@ $login__button-width: math.div($login__form-width, 2);
   @include apply-space("padding", 6, "y");
   @include apply-space("padding", 4, "x");
   @include apply-gradient("shade-15", "shade-17", to right top);
-  @include apply-border("shade-15", $border-radius-card);
+  @include apply-border("shade-15", $border-radius-lg);
   @include apply-box-shadow("shade-15", 25);
 
   width: $login__form-width;
@@ -52,9 +52,9 @@ $login__button-width: math.div($login__form-width, 2);
 
 .login__form-section label {
   @include apply-text-shadow("shade-18");
+  @include set-typography("semi-bold");
 
   color: var(--light);
-  font-weight: 600;
 }
 
 .login__form-section input {
@@ -64,7 +64,7 @@ $login__button-width: math.div($login__form-width, 2);
   @include apply-text-shadow("shade-14");
 
   border: none;
-  border-radius: $border-radius;
+  border-radius: $border-radius-sm;
   background-color: var(--light);
   color: var(--dark);
 
@@ -84,7 +84,7 @@ $login__button-width: math.div($login__form-width, 2);
   // !REVISIT BUTTON STYLE (MAKE MODULAR)
   border: solid rem(1px) hsl(0deg 0% 10% / 0%);
   outline: solid rem(1px) var(--shade-10);
-  border-radius: $border-radius;
+  border-radius: $border-radius-sm;
   background-color: var(--always-light);
   color: var(--always-dark);
   transition: all 0.2s ease-in;

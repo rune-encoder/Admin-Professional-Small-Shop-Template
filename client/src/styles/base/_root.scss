@@ -1,25 +1,21 @@
 :root {
-    text-rendering: optimizelegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-size-adjust: 100%;
-    
-    @include apply-theme-colors($light-theme); // Light Mode Theme Colors
-    @include apply-font-family("inter");
+  @include apply-theme-colors($light-theme); // Light Mode Theme Colors
+  @include apply-font-family("inter");
+  @include set-typography("normal", 0, $base-line-height);
 
-    // ! Revisit (Not sure if this is necessary)
-    font-size: $base-font-size;
-    line-height: $base-line-height;
-    font-weight: $base-font-weight;
-  }
-  
-  #root {
-    @include apply-gradient("shade-3", "shade-5");
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
 
-    display: flex;
-    flex-grow: 1; // Expand to fill available space
-    overflow-x: hidden; // Prevent horizontal scrollbar
-    max-width: 100%; 
-    min-height: 100vh; 
-    color: var(--dark);
-  }
+#root {
+  @include apply-gradient("shade-3", "shade-5");
+
+  display: flex;
+  flex-grow: 1; // Expand to fill available space
+  overflow-x: hidden; // Prevent horizontal scrollbar
+  max-width: 100%;
+  min-height: 100vh;
+  color: var(--dark);
+}

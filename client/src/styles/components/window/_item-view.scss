@@ -1,0 +1,116 @@
+// <===== WINDOW DETAILS SECTION =====>
+
+// ! WORKING =============================================
+.selected-item-view {
+  @include apply-border("shade-8");
+  @include apply-box-shadow("always-dark", 1);
+  @include apply-gradient("shade-6", "shade-8", to bottom right);
+
+  width: 100%;
+  height: $window--height - $window__bar--height - $toolbar--height +
+    halved-modular-scale(-13);
+  position: sticky;
+  top: $toolbar--height + halved-modular-scale(-5);
+
+  //   @include apply-font-family("roboto");
+}
+
+// ! WORKING =============================================
+.item-view__top-section {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+
+  height: 40% !important;
+}
+
+.item__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+// ! WORKING =============================================
+.item-view__bottom-section {
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-space("margin", -10, "x");
+  @include apply-space("margin", -5, "y");
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+
+  height: calc(60% - (#{halved-modular-scale(-5)} * 2));
+  overflow-y: auto;
+}
+
+// ! WORKING =============================================
+.item-view__header--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+}
+
+.item-view__name {
+  @include apply-flex(row, flex-start, center);
+  @include set-typography("bold", 0, $base-line-height);
+  @include apply-space("gap", -10);
+}
+
+.item-view__category {
+  @include apply-space("gap", -15);
+  @include apply-flex(row, flex-end, center);
+  @extend %text--subtle;
+}
+
+// ! WORKING REFACTOR =================================
+.details__info-group--wrapper {
+  @include apply-flex(row, center, center);
+
+  width: 100%;
+}
+
+.details__item--wrapper {
+  @include apply-space("margin", -10, "x");
+  @include apply-space("margin", -5, "y");
+  @include apply-gradient("shade-6", "shade-7", 180deg);
+}
+
+.details__item {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -20, "y");
+}
+
+.item-label,
+.item-value {
+  @include set-typography("medium", 0, $base-line-height);
+}
+
+.item-value svg {
+  @include apply-flex(row, center, center);
+  @include set-typography("bold", 1, $base-line-height);
+
+  filter: drop-shadow(0 0 5px var(--shade-1));
+}
+
+.item-value svg[data-boolean="true"] {
+  color: var(--success);
+}
+
+.item-value svg[data-boolean="false"] {
+  color: var(--danger);
+}
+
+// ! WORKING =============================================
+.item__description {
+  @include apply-space("padding", -10, "x");
+}
+
+.item__description span {
+  @include set-typography("bold", 0, $base-line-height);
+}
+
+.item__description p {
+  @include apply-font-family("roboto");
+  @include apply-space("padding", -10, "x");
+}
+
+// ! WORKING =============================================

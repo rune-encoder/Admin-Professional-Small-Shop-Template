@@ -4,12 +4,12 @@ $sidebar--min-width: rem(68px);
 .sidebar__aside {
   @include apply-flex(column, null, center);
   @include apply-space("padding-top", 19);
-  @include apply-gradient("light", "shade-1", 60deg);
   @include apply-font-family("roboto-condensed");
+  @include set-typography("medium");
+  @include apply-gradient("light", "shade-1", 60deg);
   @include apply-box-shadow("shade-10", 15);
 
   min-width: $sidebar--min-width;
-  font-weight: 500;
   border-right: solid rem(1px) var(--shade-11);
   color: var(--shade-22);
   z-index: 2;
@@ -26,6 +26,7 @@ $sidebar--min-width: rem(68px);
   text-align: center;
   cursor:pointer;
   user-select: none;
+
 
   &:hover {
     @include apply-gradient("shade-18", "shade-22", 140deg);
