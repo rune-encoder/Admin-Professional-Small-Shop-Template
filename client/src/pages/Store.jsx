@@ -61,7 +61,7 @@ export default function Home(props) {
           </div>
 
           <div className="window__content row-no-gutters">
-            <div className="window__content--wrapper col-md-5 col-sm-4 col-xs-12">
+            <div className="window__content--wrapper col-sm-12 col-md-5">
               {selectedProduct && (
                 <>
                   <div className="window__details">
@@ -73,16 +73,16 @@ export default function Home(props) {
                     </section>
                     <section className="details__bottom-section">
                       <div className="details__title-group--wrapper row-no-gutters">
-                        <span className="details__title col-xs-6 col-sm-12 col-md-6">
+                        <span className="details__title col-6">
                           <MdOutlineShoppingCart /> {selectedProduct.name}
                         </span>
-                        <span className="details__subtitle col-xs-6 col-sm-12 col-md-6">
+                        <span className="details__subtitle col-6">
                           <MdOutlineCategory /> {selectedProduct.category.name}
                         </span>
                       </div>
 
                       <div className="details__item-group--wrapper row-no-gutters">
-                        <div className="col-xs-6 col-sm-12 col-md-6">
+                        <div className="col-6">
                           <div className="details__item--wrapper">
                             <span className="details__item">
                               <span className="item-label">In Stock:</span>
@@ -107,7 +107,7 @@ export default function Home(props) {
                           </div>
                         </div>
 
-                        <div className="col-xs-6 col-sm-12 col-md-6">
+                        <div className="col-6">
                           <div className="details__item--wrapper">
                             <span className="details__item">
                               <span className="item-label">Price:</span>
@@ -125,22 +125,22 @@ export default function Home(props) {
                         </div>
                       </div>
 
-                      <details className="d">
-                        <summary>Description</summary>
+                      <div className="item__description">
+                        <span className="">Description</span>
                         <p>{selectedProduct.shortDescription}</p>
-                      </details>
+                      </div>
 
-                      <details className="d">
-                        <summary>Details</summary>
+                      <div className="item__description">
+                        <span>Details</span>
                         <p>{selectedProduct.details}</p>
-                      </details>
+                      </div>
                     </section>
                   </div>
                 </>
               )}
             </div>
 
-            <div className="window__content--wrapper col-md-7 col-sm-8 col-xs-12">
+            <div className="window__content--wrapper col-sm-12 col-md-7">
               <table>
                 <thead>
                   <tr>

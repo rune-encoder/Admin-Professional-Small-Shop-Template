@@ -9,9 +9,10 @@
   width: 100%;
   height: $window--height - $window__bar--height - $toolbar--height +
     halved-modular-scale(-13);
-
   position: sticky;
   top: $toolbar--height + halved-modular-scale(-5);
+
+  //   @include apply-font-family("roboto");
 }
 
 // ! WORKING =============================================
@@ -38,7 +39,7 @@
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
 
-  height: calc(60% - (#{halved-modular-scale(-5)} * 2)) !important;
+  height: calc(60% - (#{halved-modular-scale(-5)} * 2));
   overflow-y: auto;
 }
 
@@ -57,10 +58,6 @@
   @include apply-space("gap", -15);
   @include apply-flex(row, flex-end, center);
   @extend %text--subtle;
-
-  @include respond-to("md") {
-    @include apply-flex(row, flex-start, center);
-  }
 }
 
 // ! WORKING REFACTOR =================================
@@ -103,4 +100,15 @@
 }
 
 // ! WORKING =============================================
+.item__description {
+  @include apply-space("padding", -10, "x");
+}
 
+.item__description span {
+  @include set-typography("bold", 0, $base-line-height);
+}
+
+.item__description p {
+  @include apply-font-family("roboto");
+  @include apply-space("padding", -10, "x");
+}
