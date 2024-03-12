@@ -11,6 +11,8 @@ import {
   IoIosArrowDown,
   IoIosAddCircleOutline,
   IoIosSearch,
+  IoMdCheckmarkCircleOutline,
+  IoMdCloseCircleOutline 
 } from "react-icons/io";
 import { PiArrowsDownUpLight } from "react-icons/pi";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -42,14 +44,14 @@ export default function Home(props) {
       <div className="window container">
         <h6 className="window__bar">Placeholder</h6>
         <div className="window__body">
-          <div className="window__toolbar row-no-gutters">
-            <button className="toolbar__button col-2">
-              <PiArrowsDownUpLight /> Sort
-            </button>
-            <button className="toolbar__button col-2">
+          <div className="toolbar row-no-gutters">
+            <button className="toolbar__btn col-2">
               <IoIosAddCircleOutline /> New
             </button>
-            <button className="toolbar__button col-2">
+            <button className="toolbar__btn col-2">
+              <PiArrowsDownUpLight /> Sort
+            </button>
+            <button className="toolbar__btn col-2">
               <IoIosArrowDown /> View
             </button>
             <div className="toolbar__searchbar col-6">
@@ -62,8 +64,7 @@ export default function Home(props) {
             <div className="window__content--wrapper col-md-5 col-sm-4 col-xs-12">
               {selectedProduct && (
                 <>
-                  <div className="window__details sticky">
-                    {/* ! Revisit */}
+                  <div className="window__details">
                     <section className="details__top-section">
                       <img
                         className="details__image"
@@ -71,7 +72,7 @@ export default function Home(props) {
                       ></img>
                     </section>
                     <section className="details__bottom-section">
-                      <div className="details__title-group--wrapper row-no-gutters cbg">
+                      <div className="details__title-group--wrapper row-no-gutters">
                         <span className="details__title col-xs-6 col-sm-12 col-md-6">
                           <MdOutlineShoppingCart /> {selectedProduct.name}
                         </span>
@@ -81,24 +82,32 @@ export default function Home(props) {
                       </div>
 
                       <div className="details__item-group--wrapper row-no-gutters">
-                        <div className="details__item-group col-xs-6 col-sm-12 col-md-6">
+                        <div className="col-xs-6 col-sm-12 col-md-6">
                           <div className="details__item--wrapper">
                             <span className="details__item">
                               <span className="item-label">In Stock:</span>
                               <span className="item-value">
-                                {selectedProduct.inStock}1
+                                {selectedProduct.inStock ? (
+                                  <IoMdCheckmarkCircleOutline data-boolean='true' />
+                                ) : (
+                                  <IoMdCloseCircleOutline data-boolean='false' />
+                                )}
                               </span>
                             </span>
                             <span className="details__item">
                               <span className="item-label">Featured:</span>
                               <span className="item-value">
-                                {selectedProduct.isFeatured}2
+                                {selectedProduct.isFeatured ? (
+                                  <IoMdCheckmarkCircleOutline data-boolean='true' />
+                                ) : (
+                                  <IoMdCloseCircleOutline data-boolean='false' />
+                                )}
                               </span>
                             </span>
                           </div>
                         </div>
 
-                        <div className="details__item-group col-xs-6 col-sm-12 col-md-6 cbg">
+                        <div className="col-xs-6 col-sm-12 col-md-6">
                           <div className="details__item--wrapper">
                             <span className="details__item">
                               <span className="item-label">Price:</span>

@@ -1,0 +1,106 @@
+// <===== WINDOW DETAILS SECTION =====>
+
+// ! WORKING =============================================
+.window__details {
+  @include apply-border("shade-8");
+  @include apply-box-shadow("always-dark", 1);
+  @include apply-gradient("shade-6", "shade-8", to bottom right);
+
+  width: 100%;
+  height: $window--height - $window__bar--height - $toolbar--height +
+    halved-modular-scale(-13);
+
+  position: sticky;
+  top: $toolbar--height + halved-modular-scale(-5);
+}
+
+// ! WORKING =============================================
+.details__top-section {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+
+  height: 40% !important;
+}
+
+.details__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+// ! WORKING =============================================
+.details__bottom-section {
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-space("margin", -10, "x");
+  @include apply-space("margin", -5, "y");
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+
+  height: calc(60% - (#{halved-modular-scale(-5)} * 2)) !important;
+  overflow-y: auto;
+}
+
+// ! WORKING =============================================
+.details__title-group--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+}
+
+.details__title {
+  @include apply-flex(row, flex-start, center);
+  @include set-typography("bold", 0, $base-line-height);
+  @include apply-space("gap", -10);
+}
+
+.details__subtitle {
+  @include apply-space("gap", -15);
+  @include apply-flex(row, flex-end, center);
+  @extend %text--subtle;
+
+  @include respond-to("md") {
+    @include apply-flex(row, flex-start, center);
+  }
+}
+
+// ! WORKING REFACTOR =================================
+.details__item-group--wrapper {
+  @include apply-flex(row, center, center);
+
+  width: 100%;
+}
+
+.details__item--wrapper {
+  @include apply-space("margin", -10, "x");
+  @include apply-space("margin", -5, "y");
+  @include apply-gradient("shade-6", "shade-7", 180deg);
+}
+
+.details__item {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -20, "y");
+}
+
+.item-label,
+.item-value {
+  @include set-typography("medium", 0, $base-line-height);
+}
+
+.item-value svg {
+  @include apply-flex(row, center, center);
+  @include set-typography("bold", 1, $base-line-height);
+
+  filter: drop-shadow(0 0 5px var(--shade-1));
+}
+
+.item-value svg[data-boolean="true"] {
+  color: var(--success);
+}
+
+.item-value svg[data-boolean="false"] {
+  color: var(--danger);
+}
+
+// ! WORKING =============================================
+

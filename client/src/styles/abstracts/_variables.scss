@@ -214,6 +214,10 @@ $shared-colors: (
   "always-light": hsl(0deg 0% 100%),
   "always-dark": hsl(0deg 0% 7%),
 
+  // Semantic Colors
+  "success": hsl(120, 75%, 50%),
+  "danger": hsl(0, 75%, 50%),
+
   // ! Revisit
   "theme": #618adf,
 

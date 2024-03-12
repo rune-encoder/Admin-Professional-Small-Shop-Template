@@ -1,0 +1,34 @@
+$window--height: rem(600px);
+$window--width: 50rem;
+$window__bar--height: rem(24px);
+$toolbar--height: rem(37px);
+
+// <===== WINDOW SECTION =====>
+.window {
+  @include apply-space("padding", -5, "y");
+  @include apply-gradient("shade-2", "shade-4");
+  @include apply-border("shade-10", $border-radius-md);
+  @include apply-box-shadow("always-dark", 10);
+
+  // ! Revisit Remove the following === Window specs (may change later)
+  margin-top: 3rem;
+  // max-width: $window--width;
+  height: auto;
+}
+
+// WINDOW BAR/TAB.
+.window__bar {
+  @include apply-space("padding", -10, "x");
+
+  height: $window__bar--height;
+}
+
+// WINDOW BODY.
+.window__body {
+  @include apply-space("margin-top", -5);
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-border("shade-10", $border-radius-sm);
+
+  overflow: auto;
+  height: $window--height; // Height of window
+}
