@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import MiniNavbar from "./header-components/MiniNavbar";
-import MiniNavDropdown from "./header-components/MiniNavDropdown";
+import MiniNavbar from "./MiniNavbar";
+import MiniNavDropdown from "./MiniNavDropdown";
 
 export default function Header({ children, adminData }) {
   // <======= MANAGE STATE DROPDOWN MENU: (OPEN/CLOSE) =======> 

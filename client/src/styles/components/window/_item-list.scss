@@ -68,5 +68,6 @@ tbody tr {
 
   &:hover {
     background-color: var(--shade-8);
+    @include apply-gradient("shade-7", "shade-8", to bottom right);
   }
 }

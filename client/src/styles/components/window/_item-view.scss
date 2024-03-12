@@ -1,7 +1,7 @@
 // <===== WINDOW DETAILS SECTION =====>
 
 // ! WORKING =============================================
-.window__details {
+.selected-item-view {
   @include apply-border("shade-8");
   @include apply-box-shadow("always-dark", 1);
   @include apply-gradient("shade-6", "shade-8", to bottom right);
@@ -16,7 +16,7 @@
 }
 
 // ! WORKING =============================================
-.details__top-section {
+.item-view__top-section {
   @include apply-flex(row, center, center);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
@@ -24,7 +24,7 @@
   height: 40% !important;
 }
 
-.details__image {
+.item__image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -32,7 +32,7 @@
 }
 
 // ! WORKING =============================================
-.details__bottom-section {
+.item-view__bottom-section {
   @include apply-gradient("shade-2", "shade-3", to bottom left);
   @include apply-space("margin", -10, "x");
   @include apply-space("margin", -5, "y");
@@ -44,24 +44,24 @@
 }
 
 // ! WORKING =============================================
-.details__title-group--wrapper {
+.item-view__header--wrapper {
   @include apply-space("padding", -10, "x", $important: true);
 }
 
-.details__title {
+.item-view__name {
   @include apply-flex(row, flex-start, center);
   @include set-typography("bold", 0, $base-line-height);
   @include apply-space("gap", -10);
 }
 
-.details__subtitle {
+.item-view__category {
   @include apply-space("gap", -15);
   @include apply-flex(row, flex-end, center);
   @extend %text--subtle;
 }
 
 // ! WORKING REFACTOR =================================
-.details__item-group--wrapper {
+.details__info-group--wrapper {
   @include apply-flex(row, center, center);
 
   width: 100%;
@@ -112,3 +112,5 @@
   @include apply-font-family("roboto");
   @include apply-space("padding", -10, "x");
 }
+
+// ! WORKING =============================================
