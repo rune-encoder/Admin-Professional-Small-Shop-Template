@@ -10,8 +10,7 @@ header {
 
 // HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
 .header__text--subtle {
-  font-size: modular-scale(-2);
-  color: var(--shade-15);
+  @extend %text--subtle;
 }
 
 // <===== LOGO SECTION =====>

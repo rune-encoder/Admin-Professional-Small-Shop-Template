@@ -15,7 +15,7 @@ $toolbar--height: rem(37px);
   // ! Remove the following
   margin-top: 3rem;
 
-  // max-width: $window-width;
+  // max-width: $window--width;
   height: auto;
 }
 
@@ -55,7 +55,7 @@ $toolbar--height: rem(37px);
 
 .toolbar__searchbar {
   @include apply-flex(row, end, center);
-  @include apply-space("padding", -5, "x", $important: true);
+  @include apply-space("padding", -10, "x", $important: true);
   @include apply-space("gap", -10);
 
   font-size: modular-scale(1);
@@ -70,8 +70,6 @@ $toolbar--height: rem(37px);
 .window__content--wrapper {
   @include apply-space("padding", -10, "x", $important: true);
   @include apply-space("padding", -5, "y", $important: true);
-
-
 }
 
 table {
@@ -89,7 +87,7 @@ thead {
 }
 
 th {
-  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -10, "x");
   @include apply-space("padding", -10, "y");
 
   &:nth-child(1) {
@@ -117,7 +115,7 @@ td {
 .table__action-cell button {
   @extend %toggle-menu__button--style;
 
-// <===== BUTTON TOOLTIP SECTION =====>
+  // <===== BUTTON TOOLTIP SECTION =====>
   &::after {
     @include apply-position(absolute, $bottom: 100%, $left: 50%);
 
@@ -148,31 +146,135 @@ tbody tr {
 }
 
 // ! WORKING =============================================
-.window__details-panel {
+.window__details {
   @include apply-border("shade-8");
   @include apply-box-shadow("always-dark", 1);
+  @include apply-gradient("shade-6", "shade-8", to bottom right);
 
   width: 100%;
-  height: $window--height - $window__bar--height - $toolbar--height + halved-modular-scale(-13);
+  height: $window--height - $window__bar--height - $toolbar--height +
+    halved-modular-scale(-13);
 }
 
-.est {
-  width: 100%;
-  height: 100%;
+.details__top-section {
+  @include apply-flex(row, center, center);
+
+  height: 40% !important;
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+}
+
+.details__image {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
-
 }
 
-.top {
-  height: 40% !important;
-}
+.details__bottom-section {
+  @include apply-gradient("shade-2", "shade-3", to bottom left);
+  @include apply-space("margin", -10, "x");
+  @include apply-space("margin", -5, "y");
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
 
-.bottom {
-  height: 60% !important;
+  height: calc(60% - (#{halved-modular-scale(-5)} * 2)) !important;
+  overflow-y: auto;
 }
 
 .sticky {
   position: sticky;
   top: $toolbar--height + halved-modular-scale(-5);
+}
+
+// ! WORKING =============================================
+
+.details__title-group--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+  // @include apply-space("padding-bottom", -5, $important: true);
+}
+
+.details__title {
+  @include apply-flex(row, flex-start, center);
+  @include set-typography("bold", 0, $base-line-height);
+}
+
+.details__subtitle {
+  @include apply-flex(row, flex-end, center);
+  @extend %text--subtle;
+
+  @include respond-to("md") {
+    @include apply-flex(row, flex-start, center);
+  }
+}
+
+// ! WORKING =============================================
+
+.details__item-group--wrapper {
+  @include apply-flex(row, center, center);
+
+  width: 100%;
+
+  // border: solid 1px var(--shade-15);
+}
+
+.details__item-group {
+  // @include apply-space("margin", -10, "x");
+  // @include apply-space("margin", -5, "y");
+  // @include apply-space("padding", -10, "x");
+  // @include apply-space("padding", -5, "y");
+
+  // @include apply-flex(column, center, flex-start);
+
+  // width: 50%;
+
+  // border: solid 1px var(--shade-15);
+}
+
+.details__item--wrapper {
+  @include apply-space("margin", -10, "x");
+
+  @include apply-space("margin", -5, "y");
+  // @include apply-space("padding", -10, "x");
+  // @include apply-space("padding", -5, "y");
+
+  @include apply-gradient("shade-6", "shade-7", 180deg);
+
+  // border: solid 1px var(--shade-15);
+}
+
+.details__item {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -20, "y");
+
+  // background-color: var(--shade-7)
+}
+
+.item-label,
+.item-value {
+  @include set-typography("medium", 0, $base-line-height);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::before {
+  content: "+";
+  padding-right: 0.5em;
+}
+details[open] summary::before {
+  content: "-";
+}
+
+/* Custom styles for the summary text */
+summary {
+  cursor: pointer;
+  color: #333; /* Change text color */
+  font-weight: bold;
+}
+
+/* Custom styles for the content within the details element */
+details > p {
+  margin-left: 1em; /* Adjust indentation */
 }

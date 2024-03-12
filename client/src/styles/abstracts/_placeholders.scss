@@ -1,3 +1,4 @@
+// ! Revisit: Document with SassDoc
 %toggle-menu--layout {
   @include apply-flex(column, center, start);
   @include apply-space("gap", -10);
@@ -41,4 +42,9 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
   @extend %tooltip--typography; // (SEE _TYPOGRAPHY.SCSS)
+}
+
+%text--subtle {
+  font-size: modular-scale(-2);
+  color: var(--shade-15);
 }

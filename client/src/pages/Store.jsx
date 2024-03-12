@@ -13,6 +13,7 @@ import {
   IoIosSearch,
 } from "react-icons/io";
 import { PiArrowsDownUpLight } from "react-icons/pi";
+import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 // !Revisit: INCOMPLETE ====================================
 export default function Home(props) {
@@ -58,22 +59,76 @@ export default function Home(props) {
           </div>
 
           <div className="window__content row-no-gutters">
-            <div className="window__content--wrapper col-md-5 col-sm-4 col-xs-12 cbg">
-              <section className="window__details-panel sticky">
-                {selectedProduct && (
-                  <>
-                    <div className="top cbg">
-                      <img className="est" src={selectedProduct.image.url}></img>
-                    </div>
-                    <div className="bottom cbg">
-                      <p>Name: {selectedProduct.name}</p>
-                      <p>Price: {selectedProduct.price}</p>
-                      <p>Quantity: {selectedProduct.quantity}</p>
-                      <p>Category: {selectedProduct.category.name}</p>
-                    </div>
-                  </>
-                )}
-              </section>
+            <div className="window__content--wrapper col-md-5 col-sm-4 col-xs-12">
+              {selectedProduct && (
+                <>
+                  <div className="window__details sticky">
+                    {/* ! Revisit */}
+                    <section className="details__top-section">
+                      <img
+                        className="details__image"
+                        src={selectedProduct.image.url}
+                      ></img>
+                    </section>
+                    <section className="details__bottom-section">
+                      <div className="details__title-group--wrapper row-no-gutters cbg">
+                        <span className="details__title col-xs-6 col-sm-12 col-md-6">
+                          <MdOutlineShoppingCart /> {selectedProduct.name}
+                        </span>
+                        <span className="details__subtitle col-xs-6 col-sm-12 col-md-6">
+                          <MdOutlineCategory /> {selectedProduct.category.name}
+                        </span>
+                      </div>
+
+                      <div className="details__item-group--wrapper row-no-gutters">
+                        <div className="details__item-group col-xs-6 col-sm-12 col-md-6">
+                          <div className="details__item--wrapper">
+                            <span className="details__item">
+                              <span className="item-label">In Stock:</span>
+                              <span className="item-value">
+                                {selectedProduct.inStock}1
+                              </span>
+                            </span>
+                            <span className="details__item">
+                              <span className="item-label">Featured:</span>
+                              <span className="item-value">
+                                {selectedProduct.isFeatured}2
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="details__item-group col-xs-6 col-sm-12 col-md-6 cbg">
+                          <div className="details__item--wrapper">
+                            <span className="details__item">
+                              <span className="item-label">Price:</span>
+                              <span className="item-value">
+                                ${selectedProduct.price}
+                              </span>
+                            </span>
+                            <span className="details__item">
+                              <span className="item-label">Quantity:</span>
+                              <span className="item-value">
+                                {selectedProduct.quantity}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <details className="d">
+                        <summary>Description</summary>
+                        <p>{selectedProduct.shortDescription}</p>
+                      </details>
+
+                      <details className="d">
+                        <summary>Details</summary>
+                        <p>{selectedProduct.details}</p>
+                      </details>
+                    </section>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="window__content--wrapper col-md-7 col-sm-8 col-xs-12">
