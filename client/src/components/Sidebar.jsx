@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
@@ -10,45 +10,8 @@ import {
   MdOutlineShoppingCart,
 } from "react-icons/md";
 
-// const sidebarContent = [
-//   {
-//     id: 1,
-//     path: "/Shop",
-//     icon: FaShop,
-//     text: "Store",
-//   },
-//   {
-//     id: 2,
-//     path: "/Orders",
-//     icon: MdLocalShipping,
-//     text: "Orders",
-//   },
-//   {
-//     id: 3,
-//     path: "/Reports",
-//     icon: MdQueryStats,
-//     text: "Reports",
-//   },
-//   {
-//     id: 4,
-//     path: "/Admins",
-//     icon: FaUsers,
-//     text: "Admins",
-//   },
-// ];
-
-{
-  /* <aside className="sidebar__aside">
-{sidebarContent.map((item) => (
-  <Link to={item.path} key={item.id} className="sidebar__links">
-    <item.icon className="sidebar__icon" />
-    <span className="sidebar__text">{item.text}</span>
-  </Link>
-))}
-</aside> */
-}
-
 export default function Sidebar() {
+  // <======= STATE SIDEBAR: (MOUSE HOVER) =======>
   const [isHovered, setIsHovered] = useState(false);
 
   return (

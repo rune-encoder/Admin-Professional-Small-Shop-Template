@@ -3,6 +3,7 @@ import themeReducer, { toggleTheme } from "../features/themeSlice/";
 
 const listenerMiddleware = createListenerMiddleware();
 
+// ! Revisit, seperate middleware from store
 // Add a listener for the "theme/toggleTheme" action
 listenerMiddleware.startListening({
   actionCreator: toggleTheme,
@@ -26,19 +27,20 @@ listenerMiddleware.startListening({
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
+    admin: adminReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
 
-// ! Refactor
+// ! Revisit | Refactor
 function updateTheme() {
-    const darkMode = store.getState().theme.darkMode;
-  
-    darkMode
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-  }
-  
-  // Call updateTheme immediately after the store is created
-  updateTheme();
+  const darkMode = store.getState().theme.darkMode;
+
+  darkMode
+    ? document.documentElement.classList.add("dark")
+    : document.documentElement.classList.remove("dark");
+}
+
+// Call updateTheme immediately after the store is created
+updateTheme();
