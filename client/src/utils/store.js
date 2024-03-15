@@ -1,6 +1,8 @@
 import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
-import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import adminReducer from "../features/adminSlice/";
+import themeReducer, { toggleTheme } from "../features/themeSlice/";
+import menuReducer from "../features/menuSlice";
+
 import productsReducer from "../features/productsSlice";
 
 const listenerMiddleware = createListenerMiddleware();
@@ -30,6 +32,7 @@ export const store = configureStore({
   reducer: {
     theme: themeReducer,
     admin: adminReducer,
+    menu: menuReducer,
     products: productsReducer,
   },
   middleware: (getDefaultMiddleware) =>

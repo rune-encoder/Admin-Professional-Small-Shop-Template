@@ -1,4 +1,4 @@
-// Import Outlet from react-router-dom to render nested routes
+// Import Outlet from react-router-dom 
 import { Outlet } from "react-router-dom";
 
 // Import components

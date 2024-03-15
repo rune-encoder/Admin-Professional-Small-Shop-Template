@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
-import Store from "./pages/Store.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 import "./styles/main.scss";
 
@@ -15,11 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Store />,
-      },
-      {
-        path: "/Store",
-        element: <Store />,
+        element: <AdminDashboard />,
       },
     ],
   },

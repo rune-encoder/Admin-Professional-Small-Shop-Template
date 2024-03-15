@@ -6,8 +6,6 @@ import { LOGIN_ADMIN } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 export default function Login() {
-  // const dispatch = useDispatch();
-
   const [formState, setFormState] = useState({
     username: "",
     password: "",

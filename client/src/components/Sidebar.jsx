@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
+import { openMenuItem, selectMenu } from "../features/menuSlice";
+
 import { FaUsers } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import {
@@ -11,8 +15,43 @@ import {
 } from "react-icons/md";
 
 export default function Sidebar() {
+  // <======= REDUX STATE: MENU ITEM (OPEN/CLOSE) =======>
+  const isActive = useSelector(selectMenu);
+  const dispatch = useDispatch();
+
   // <======= STATE SIDEBAR: (MOUSE HOVER) =======>
   const [isHovered, setIsHovered] = useState(false);
+
+  // SIDEBAR STORE BUTTON: MENU ITEMS
+  const storeMenu = [
+    { name: "store", icon: <MdOutlineStore />, isOpen: isActive.store },
+    {
+      name: "categories",
+      icon: <MdOutlineCategory />,
+      isOpen: isActive.categories,
+    },
+    {
+      name: "products",
+      icon: <MdOutlineShoppingCart />,
+      isOpen: isActive.products,
+    },
+  ];
+
+  // CREATE MENU BUTTONS FOR EACH STORE MENU ITEM
+  const storeMenuMap = storeMenu.map((item) => {
+    return (
+      <button
+        key={item.name}
+        className={`sidebar-menu__button ${
+          isActive[item.name] ? "disabled" : ""
+        }`}
+        disabled={isActive[item.name]}
+        onClick={() => dispatch(openMenuItem({ [item.name]: true }))}
+      >
+        {item.icon} {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+      </button>
+    );
+  });
 
   return (
     <aside className="sidebar__aside">
@@ -25,18 +64,10 @@ export default function Sidebar() {
         <span className="sidebar__text">Store</span>
 
         {isHovered && (
-          <section className="sidebar-menu__section">
+          <menu className="sidebar-menu__section">
             <div className="sidebar-menu__hover-filler"></div>
-            <button className="sidebar-menu__button">
-              <MdOutlineStore /> Store
-            </button>
-            <button className="sidebar-menu__button">
-              <MdOutlineCategory /> Categories
-            </button>
-            <button className="sidebar-menu__button">
-              <MdOutlineShoppingCart /> Products
-            </button>
-          </section>
+            {storeMenuMap}
+          </menu>
         )}
       </div>
 

@@ -43,7 +43,7 @@ export default function MiniNavDropdown() {
       )}
       {/* <======= DROPDOWN MENU CONTENT =======> */}
       {isDropdownOpen && (
-        <section className="dropdown-menu__section">
+        <menu className="dropdown-menu__section">
           <button
             className="dropdown-menu__button"
             onClick={() => dispatch(toggleTheme(isDarkMode))}
@@ -60,7 +60,7 @@ export default function MiniNavDropdown() {
           <span className="header__text--subtle">
             Build Version v1.0.0 beta
           </span>
-        </section>
+        </menu>
       )}
     </div>
   );

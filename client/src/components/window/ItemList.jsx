@@ -10,13 +10,9 @@ import {
   selectProductsStatus,
   selectProductsError,
   selectProduct,
-  selectSelectedProduct,
 } from "../../features/productsSlice";
 
 export default function ItemList({ setEditMode }) {
-  const selectedProduct = useSelector(selectSelectedProduct);
-  console.log("selectedProduct", selectedProduct);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
