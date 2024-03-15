@@ -5,15 +5,16 @@ import { useState, useEffect } from "react";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 
 import Toolbar from "./Toolbar";
-import ItemView from "./ItemView";
+import ItemDetails from "./ItemDetails";
 import ItemList from "./ItemList";
 
 export default function Window() {
   const [selectedProduct, setSelectedProduct] = useState(false);
-  console.log("selectedProduct", selectedProduct);
+  // console.log("selectedProduct", selectedProduct);
 
-  //   const [test, setTest] = useState(false);
-  //   console.log("test", test);
+  const [editMode, setEditMode] = useState(false);
+  // console.log("editMode", editMode);
+
 
   // <======= QUERY SECTION=======>
   const { loading, data, error } = useQuery(QUERY_PRODUCTS);
@@ -37,10 +38,14 @@ export default function Window() {
       <div className="window__body">
         <Toolbar />
         <div className="window__content row-no-gutters">
-          <ItemView selectedProduct={selectedProduct} />
+          <ItemDetails
+            selectedProduct={selectedProduct}
+            editMode={editMode}
+          />
           <ItemList
             products={products}
             setSelectedProduct={setSelectedProduct}
+            setEditMode={setEditMode}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-export default function ItemList({ products, setSelectedProduct }) {
+export default function ItemList({ products, setSelectedProduct, setEditMode }) {
   return (
     <div className="window__content--wrapper col-sm-12 col-md-7">
       <table>
@@ -26,10 +26,10 @@ export default function ItemList({ products, setSelectedProduct }) {
               <td className="table__action-cell">
                 <button
                   data-action="Update"
-                  //   onClick={(event) => {
-                  //     event.stopPropagation();
-                  //     setTest(product);
-                  //   }}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setEditMode(true);
+                    }}
                 >
                   <FiEdit />
                 </button>

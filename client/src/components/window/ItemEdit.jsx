@@ -1,18 +1,20 @@
 import {
-    IoMdCheckmarkCircleOutline,
-    IoMdCloseCircleOutline,
-  } from "react-icons/io";
-  import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+  IoMdCheckmarkCircleOutline,
+  IoMdCloseCircleOutline,
+} from "react-icons/io";
+import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 export default function ItemView({ selectedProduct }) {
   return (
     <>
       <div className="item-view__header--wrapper row-no-gutters">
         <span className="item-view__name col-6">
-          <MdOutlineShoppingCart /> {selectedProduct.name}
+          <label><MdOutlineShoppingCart />Name: </label>
+          <input placeholder="Name" value={selectedProduct.name} />
         </span>
         <span className="item-view__category col-6">
-          <MdOutlineCategory /> {selectedProduct.category.name}
+            <label><MdOutlineCategory /> Category</label>
+           {selectedProduct.category.name}
         </span>
       </div>
 
@@ -45,9 +47,15 @@ export default function ItemView({ selectedProduct }) {
         <div className="col-6">
           <div className="top-group__item--wrapper">
             <span className="top-group__item">
-              <span className="item-label">Price:</span>
-              <span className="item-value">${selectedProduct.price}</span>
+              <span className="item-label">
+                <label>Price: </label>
+              </span>
+              <span className="item-value">
+                <input placeholder="Price" />
+              </span>
             </span>
+
+            {/*  */}
             <span className="top-group__item">
               <span className="item-label">Quantity:</span>
               <span className="item-value">{selectedProduct.quantity}</span>
@@ -56,11 +64,13 @@ export default function ItemView({ selectedProduct }) {
         </div>
       </div>
 
+{/* Description */}
       <div className="item-view__description">
         <span className="">Description</span>
         <p>{selectedProduct.shortDescription}</p>
       </div>
 
+{/* Details */}
       <div className="item-view__description">
         <span>Details</span>
         <p>{selectedProduct.details}</p>
