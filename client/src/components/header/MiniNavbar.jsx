@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
+import { selectAdmin } from "../../features/adminSlice";
+
 import { PiUserCircleLight } from "react-icons/pi";
 
-export default function MiniNavbar({ children, adminData }) {
+export default function MiniNavbar({ children }) {
+  const adminData = useSelector(selectAdmin);
+
   return (
     <nav className="mini-navbar">
       <section className="mini-navbar__section">

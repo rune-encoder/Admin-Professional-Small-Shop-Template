@@ -1,7 +1,7 @@
 // <===== WINDOW DETAILS SECTION =====>
 
 // ! WORKING =============================================
-.selected-item-view {
+.selected-item-details {
   @include apply-border("shade-8");
   @include apply-box-shadow("always-dark", 1);
   @include apply-gradient("shade-6", "shade-8", to bottom right);
@@ -16,7 +16,7 @@
 }
 
 // ! WORKING =============================================
-.item-view__top-section {
+.item-details__top-section {
   @include apply-flex(row, center, center);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
@@ -32,7 +32,7 @@
 }
 
 // ! WORKING =============================================
-.item-view__bottom-section {
+.item-details__bottom-section {
   @include apply-gradient("shade-2", "shade-3", to bottom left);
   @include apply-space("margin", -10, "x");
   @include apply-space("margin", -5, "y");
@@ -61,19 +61,19 @@
 }
 
 // ! WORKING REFACTOR =================================
-.details__info-group--wrapper {
+.item-view__top-group--wrapper {
   @include apply-flex(row, center, center);
 
   width: 100%;
 }
 
-.details__item--wrapper {
+.top-group__item--wrapper {
   @include apply-space("margin", -10, "x");
   @include apply-space("margin", -5, "y");
   @include apply-gradient("shade-6", "shade-7", 180deg);
 }
 
-.details__item {
+.top-group__item {
   @include apply-flex(row, space-between, center);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -20, "y");
@@ -100,15 +100,15 @@
 }
 
 // ! WORKING =============================================
-.item__description {
+.item-view__description {
   @include apply-space("padding", -10, "x");
 }
 
-.item__description span {
+.item-view__description span {
   @include set-typography("bold", 0, $base-line-height);
 }
 
-.item__description p {
+.item-view__description p {
   @include apply-font-family("roboto");
   @include apply-space("padding", -10, "x");
 }

@@ -2,11 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// |========== IMPORT MAIN COMPONENTS: PAGES ==========|
 import App from "./App.jsx";
-import Store from "./pages/Store.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
-// |========== IMPORT CSS STYLES ==========|
 import "./styles/main.scss";
 
 const router = createBrowserRouter([
@@ -17,11 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Store />,
-      },
-      {
-        path: "/Store",
-        element: <Store />,
+        element: <AdminDashboard />,
       },
     ],
   },

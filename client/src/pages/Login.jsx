@@ -1,7 +1,9 @@
+import Auth from "../utils/auth";
+
 import { useState, useEffect } from "react";
+
 import { LOGIN_ADMIN } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
 
 export default function Login() {
   const [formState, setFormState] = useState({
@@ -30,20 +32,22 @@ export default function Login() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    // Remove the old token from localStorage
+    localStorage.removeItem("id_token");
+
     try {
-      // !REVISIT: Returns ID, email, username, and permission (change)
-      // !REVISIT: bug if you log out by timer, token still stored, cannot login
-      const mutationResponse = await loginUser({
+      const { data } = await loginUser({
         variables: {
           username: formState.username,
           password: formState.password,
         },
       });
 
-      const token = mutationResponse.data.adminLogin.token;
-      localStorage.removeItem("id_token");
-      Auth.login(token);
+      const token = data.adminLogin.token;
+      console.log(token);
 
+      Auth.login(token);
     } catch (error) {
       console.error(error);
     }
