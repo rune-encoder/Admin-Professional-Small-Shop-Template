@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectSelectedProduct } from "../../features/productsSlice";
 
 import ItemView from "./ItemView";
 import ItemEdit from "./ItemEdit";
 
-export default function ItemDetails({ selectedProduct, editMode }) {
+export default function ItemDetails({ editMode }) {
+  const selectedProduct = useSelector(selectSelectedProduct);
+
   return (
     <div className="window__content--wrapper col-sm-12 col-md-5">
       {selectedProduct && (
@@ -15,11 +18,11 @@ export default function ItemDetails({ selectedProduct, editMode }) {
           <section className="item-details__bottom-section">
             {editMode ? (
               <>
-                <ItemEdit selectedProduct={selectedProduct} />
+                <ItemEdit />
               </>
             ) : (
               <>
-                <ItemView selectedProduct={selectedProduct} />
+                <ItemView />
               </>
             )}
           </section>

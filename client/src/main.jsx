@@ -2,11 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// |========== IMPORT MAIN COMPONENTS: PAGES ==========|
 import App from "./App.jsx";
 import Store from "./pages/Store.jsx";
 
-// |========== IMPORT CSS STYLES ==========|
 import "./styles/main.scss";
 
 const router = createBrowserRouter([

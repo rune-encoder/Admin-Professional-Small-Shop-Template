@@ -34,6 +34,10 @@ export default function Login() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    // Remove the old token from localStorage
+    localStorage.removeItem("id_token");
+
     try {
       const { data } = await loginUser({
         variables: {
@@ -43,6 +47,7 @@ export default function Login() {
       });
 
       const token = data.adminLogin.token;
+      console.log(token);
 
       Auth.login(token);
     } catch (error) {

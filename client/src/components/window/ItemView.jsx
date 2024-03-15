@@ -1,10 +1,15 @@
-import {
-    IoMdCheckmarkCircleOutline,
-    IoMdCloseCircleOutline,
-  } from "react-icons/io";
-  import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { selectSelectedProduct } from "../../features/productsSlice";
 
-export default function ItemView({ selectedProduct }) {
+import {
+  IoMdCheckmarkCircleOutline,
+  IoMdCloseCircleOutline,
+} from "react-icons/io";
+import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+
+export default function ItemView() {
+  const selectedProduct = useSelector(selectSelectedProduct);
+
   return (
     <>
       <div className="item-view__header--wrapper row-no-gutters">

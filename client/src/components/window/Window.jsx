@@ -1,8 +1,8 @@
-import { useQuery, useMutation } from "@apollo/client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 
 // import { QUERY_CATEGORIES } from "../../utils/queries";
-import { QUERY_PRODUCTS } from "../../utils/queries";
 
 import Toolbar from "./Toolbar";
 import ItemDetails from "./ItemDetails";
@@ -15,23 +15,6 @@ export default function Window() {
   const [editMode, setEditMode] = useState(false);
   // console.log("editMode", editMode);
 
-
-  // <======= QUERY SECTION=======>
-  const { loading, data, error } = useQuery(QUERY_PRODUCTS);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    console.error(error);
-    return <div>Error</div>;
-  }
-
-  const products = data?.getProducts || [];
-
-  // console.log(products);
-
   return (
     <div className="window container">
       <h6 className="window__bar">Placeholder</h6>
@@ -43,7 +26,6 @@ export default function Window() {
             editMode={editMode}
           />
           <ItemList
-            products={products}
             setSelectedProduct={setSelectedProduct}
             setEditMode={setEditMode}
           />

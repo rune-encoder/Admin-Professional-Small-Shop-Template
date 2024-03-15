@@ -1,10 +1,15 @@
+import { useSelector } from "react-redux";
+import { selectSelectedProduct } from "../../features/productsSlice";
+
 import {
   IoMdCheckmarkCircleOutline,
   IoMdCloseCircleOutline,
 } from "react-icons/io";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
-export default function ItemView({ selectedProduct }) {
+export default function ItemView() {
+  const selectedProduct = useSelector(selectSelectedProduct);
+  
   return (
     <>
       <div className="item-view__header--wrapper row-no-gutters">

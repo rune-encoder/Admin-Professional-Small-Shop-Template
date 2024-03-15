@@ -1,9 +1,11 @@
 import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
+import adminReducer from "../features/adminSlice/";
+import productsReducer from "../features/productsSlice";
 
 const listenerMiddleware = createListenerMiddleware();
 
-// ! Revisit, seperate middleware from store
+// ! Revisit | seperate middleware from store
 // Add a listener for the "theme/toggleTheme" action
 listenerMiddleware.startListening({
   actionCreator: toggleTheme,
@@ -28,6 +30,7 @@ export const store = configureStore({
   reducer: {
     theme: themeReducer,
     admin: adminReducer,
+    products: productsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),

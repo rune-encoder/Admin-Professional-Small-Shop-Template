@@ -5,7 +5,6 @@ import { PiUserCircleLight } from "react-icons/pi";
 
 export default function MiniNavbar({ children }) {
   const adminData = useSelector(selectAdmin);
-  console.log(adminData);
 
   return (
     <nav className="mini-navbar">
