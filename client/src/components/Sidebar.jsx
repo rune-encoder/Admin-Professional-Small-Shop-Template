@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { openMenuItem, selectMenu } from "../features/menuSlice";
+import { toggleMenuItem, selectMenu } from "../features/menuSlice";
 
 import { FaUsers } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
@@ -46,7 +46,7 @@ export default function Sidebar() {
           isActive[item.name] ? "disabled" : ""
         }`}
         disabled={isActive[item.name]}
-        onClick={() => dispatch(openMenuItem({ [item.name]: true }))}
+        onClick={() => dispatch(toggleMenuItem({ [item.name]: true }))}
       >
         {item.icon} {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
       </button>

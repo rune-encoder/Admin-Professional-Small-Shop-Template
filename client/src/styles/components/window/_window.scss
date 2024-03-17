@@ -18,9 +18,21 @@ $toolbar--height: rem(37px);
 
 // WINDOW BAR/TAB.
 .window__bar {
+  @include apply-flex(row, space-between, center);
   @include apply-space("padding", -10, "x");
 
   height: $window__bar--height;
+
+  // ! Revisit - Improve Style for Button
+  button {
+    @include apply-flex(row, center, center);
+    @include apply-space("padding", -10,);
+    @include apply-border("shade-10", $border-radius-sm);
+
+    &:hover {
+      @include apply-gradient("shade-5", "shade-8", to bottom left);
+    }
+  }
 }
 
 // WINDOW BODY.
