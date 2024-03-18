@@ -1,6 +1,3 @@
-import { FiEdit } from "react-icons/fi";
-import { BsTrash } from "react-icons/bs";
-
 import { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -10,9 +7,13 @@ import {
   selectProductsStatus,
   selectProductsError,
   selectProduct,
+  toggleSelectedProductEdit,
 } from "../../features/productsSlice";
 
-export default function ItemList({ setEditMode }) {
+import { FiEdit } from "react-icons/fi";
+import { BsTrash } from "react-icons/bs";
+
+export default function ItemList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function ItemList({ setEditMode }) {
                   data-action="Update"
                   onClick={(event) => {
                     event.stopPropagation();
-                    setEditMode(true);
+                    dispatch(toggleSelectedProductEdit());
                   }}
                 >
                   <FiEdit />

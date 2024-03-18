@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-import { selectSelectedProduct } from "../../features/productsSlice";
+import { selectSelectedProduct, selectSelectedProductEdit } from "../../features/productsSlice";
 
 import ItemView from "./ItemView";
 import ItemEdit from "./ItemEdit";
 
-export default function ItemDetails({ editMode }) {
+export default function ItemDetails() {
   const selectedProduct = useSelector(selectSelectedProduct);
+  const editMode = useSelector(selectSelectedProductEdit);
 
   return (
     <div className="window__content--wrapper col-sm-12 col-md-5">
@@ -16,15 +17,7 @@ export default function ItemDetails({ editMode }) {
           </section>
 
           <section className="item-details__bottom-section">
-            {editMode ? (
-              <>
-                <ItemEdit />
-              </>
-            ) : (
-              <>
-                <ItemView />
-              </>
-            )}
+            {editMode ? <ItemEdit /> : <ItemView />}
           </section>
         </div>
       )}

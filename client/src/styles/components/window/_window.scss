@@ -31,6 +31,7 @@ $toolbar--height: rem(37px);
 
     &:hover {
       @include apply-gradient("shade-5", "shade-8", to bottom left);
+      color: var(--selection)
     }
   }
 }

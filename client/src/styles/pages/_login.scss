@@ -60,19 +60,7 @@ $login__button-width: math.div($login__form-width, 2);
 .login__form-section input {
   @include apply-space("margin", -3, "y");
   @include apply-space("padding", -10);
-  @include apply-gradient("light", "shade-1", 45deg);
-  @include apply-text-shadow("shade-14");
-
-  border: none;
-  border-radius: $border-radius-sm;
-  background-color: var(--light);
-  color: var(--dark);
-
-  &::placeholder {
-    @include apply-text-shadow("shade-5");
-
-    color: var(--shade-18);
-  }
+  @extend %form-input--style;
 }
 
 .login__button {
