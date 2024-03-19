@@ -1,8 +1,10 @@
-import { useState } from "react";
-
+// Import Redux Hooks
 import { useSelector } from "react-redux";
+
+// Import Redux Selectors
 import { selectMenu } from "../features/menuSlice";
 
+// Import Components
 import Window from "../components/window/Window";
 
 import Toolbar from "../components/window/Toolbar";

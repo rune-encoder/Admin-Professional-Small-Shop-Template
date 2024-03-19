@@ -1,14 +1,19 @@
+// Import React Hooks
 import { useState, useEffect } from "react";
 
+// Import Redux Hooks
 import { useSelector } from "react-redux";
-import { selectSelectedProduct } from "../../features/productsSlice";
 
+// Import Redux Selectors
+import { selectCurrentProduct } from "../../features/products/productSelectors";
+
+// Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
-  const selectedProduct = useSelector(selectSelectedProduct);
+  const selectedProduct = useSelector(selectCurrentProduct);
 
   const [formState, setFormState] = useState({ ...selectedProduct });
 

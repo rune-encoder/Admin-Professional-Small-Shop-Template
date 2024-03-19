@@ -1,15 +1,19 @@
+// Import Redux Hooks
 import { useSelector } from "react-redux";
-import {
-  selectSelectedProduct,
-  selectSelectedProductEdit,
-} from "../../features/productsSlice";
 
+// Import Redux Selectors
+import {
+  selectCurrentProduct,
+  selectProductEditMode,
+} from "../../features/products/productSelectors";
+
+// Import Components
 import ItemView from "./ItemView";
 import ItemEdit from "./ItemEdit";
 
 export default function ItemDetails() {
-  const selectedProduct = useSelector(selectSelectedProduct);
-  const editMode = useSelector(selectSelectedProductEdit);
+  const selectedProduct = useSelector(selectCurrentProduct);
+  const productEditMode = useSelector(selectProductEditMode);
 
   return (
     <div className="window__content--wrapper col-sm-12 col-md-5">
@@ -20,7 +24,7 @@ export default function ItemDetails() {
           </section>
 
           <section className="item-details__bottom-section">
-            {editMode ? <ItemEdit /> : <ItemView />}
+            {productEditMode ? <ItemEdit /> : <ItemView />}
           </section>
         </div>
       )}

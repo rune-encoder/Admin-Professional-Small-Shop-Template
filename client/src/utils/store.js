@@ -3,7 +3,7 @@ import adminReducer from "../features/adminSlice/";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import menuReducer from "../features/menuSlice";
 
-import productsReducer from "../features/productsSlice";
+import productsReducer from "../features/products/productSlice";
 
 const listenerMiddleware = createListenerMiddleware();
 

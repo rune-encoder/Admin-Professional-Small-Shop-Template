@@ -1,6 +1,10 @@
+// Import Redux Hooks
 import { useSelector } from "react-redux";
-import { selectSelectedProduct } from "../../features/productsSlice";
 
+// Import Redux Selectors
+import { selectCurrentProduct } from "../../features/products/productSelectors";
+
+// Import React Icons
 import {
   IoMdCheckmarkCircleOutline,
   IoMdCloseCircleOutline,
@@ -8,7 +12,7 @@ import {
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 export default function ItemView() {
-  const selectedProduct = useSelector(selectSelectedProduct);
+  const selectedProduct = useSelector(selectCurrentProduct);
 
   return (
     <>

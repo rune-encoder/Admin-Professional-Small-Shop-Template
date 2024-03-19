@@ -1,15 +1,24 @@
+// Import React Hooks
 import { useEffect } from "react";
 
+// Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProducts,
-  selectAllProducts,
-  selectProductsStatus,
-  selectProductsError,
-  selectProduct,
-  toggleSelectedProductEdit,
-} from "../../features/productsSlice";
 
+// Import Redux Actions
+import {
+  currentProduct,
+  toggleProductEditMode,
+} from "../../features/products/productSlice";
+import { getProducts } from "../../features/products/productThunks";
+
+// Import Redux Selectors
+import {
+  selectGetProducts,
+  selectGetProductsStatus,
+  selectGetProductsError,
+} from "../../features/products/productSelectors";
+
+// Import React Icons
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
@@ -20,9 +29,9 @@ export default function ItemList() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const products = useSelector(selectAllProducts);
-  const status = useSelector(selectProductsStatus);
-  const error = useSelector(selectProductsError);
+  const products = useSelector(selectGetProducts);
+  const status = useSelector(selectGetProductsStatus);
+  const error = useSelector(selectGetProductsError);
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -51,8 +60,8 @@ export default function ItemList() {
             <tr
               key={product._id}
               onClick={() => {
-                dispatch(toggleSelectedProductEdit(false));
-                dispatch(selectProduct(product));
+                dispatch(toggleProductEditMode(false));
+                dispatch(currentProduct(product));
               }}
             >
               <td>{product.name}</td>
@@ -65,8 +74,8 @@ export default function ItemList() {
                   data-action="Update"
                   onClick={(event) => {
                     event.stopPropagation();
-                    dispatch(toggleSelectedProductEdit(true));
-                    dispatch(selectProduct(product));
+                    dispatch(toggleProductEditMode(true));
+                    dispatch(currentProduct(product));
                   }}
                 >
                   <FiEdit />
