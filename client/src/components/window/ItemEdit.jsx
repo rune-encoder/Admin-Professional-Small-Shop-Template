@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import { selectSelectedProduct } from "../../features/productsSlice";
 
@@ -8,6 +10,24 @@ import { BsSave, BsTrash } from "react-icons/bs";
 export default function ItemView() {
   const selectedProduct = useSelector(selectSelectedProduct);
 
+  const [formState, setFormState] = useState({
+    name: selectedProduct.name,
+    price: selectedProduct.price,
+    quantity: selectedProduct.quantity,
+    isFeatured: selectedProduct.isFeatured,
+    shortDescription: selectedProduct.shortDescription,
+    details: selectedProduct.details,
+  });
+
+  const handleInputChange = async (event) => {
+    const { name, type, checked } = event.target;
+    const value = type === "checkbox" ? checked : event.target.value;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   return (
     <form className="product-edit__form">
       <div className="product-edit__label-group">
@@ -15,7 +35,13 @@ export default function ItemView() {
           <MdOutlineShoppingCart />
           Product Name:
         </label>
-        <input type="text" placeholder="Name" value={selectedProduct.name} />
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formState.name}
+          onChange={handleInputChange}
+        />
       </div>
 
       <div className="product-edit__label-group">
@@ -33,32 +59,47 @@ export default function ItemView() {
           <div className="custom-column--wrapper">
             <div className="product-edit__label-group">
               <label className="item-label">Price:</label>
-              <input type="number" value={selectedProduct.price} />
+              <input
+                type="number"
+                name="price"
+                value={formState.price}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="product-edit__label-group">
               <label className="item-label">Quantity:</label>
-              <input type="number" value={selectedProduct.quantity} />
+              <input
+                type="number"
+                name="quantity"
+                value={formState.quantity}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="product-edit__label-group">
               <label className="item-label">Featured:</label>
-              <input type="checkbox" checked={selectedProduct.isFeatured} />
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={formState.isFeatured}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
         </div>
 
         <div className="col-md-3 col-sm-5">
           <div className="custom-column--wrapper">
-            <button className="product-edit__btn">
+            <button className="product-edit__btn" type="button">
               <BsSave />
               Save
             </button>
-            <button className="product-edit__btn">
+            <button className="product-edit__btn" type="button">
               <IoArrowBackCircleOutline />
               Cancel
             </button>
-            <button className="product-edit__btn">
+            <button className="product-edit__btn" type="button">
               <BsTrash />
               Delete
             </button>
@@ -68,27 +109,21 @@ export default function ItemView() {
 
       <div className="product-edit__description">
         <label className="">Description: </label>
-        <textarea value={selectedProduct.shortDescription} />
+        <textarea
+          name="shortDescription"
+          value={formState.shortDescription}
+          onChange={handleInputChange}
+        />
       </div>
 
       <div className="product-edit__description">
         <label>Details:</label>
-        <textarea value={selectedProduct.details} />
+        <textarea
+          name="details"
+          value={formState.details}
+          onChange={handleInputChange}
+        />
       </div>
     </form>
-
-    //   <div className="col-3">
-    //   <div className="custom-column--wrapper image-upload__section cbg">
-    //     {/* <label>Image</label> */}
-    //     <input
-    //       placeholder="Image URL"
-    //       id="image"
-    //       type="file"
-    //       name="image"
-    //       required
-    //     />
-    //     <canvas id="myCanvas"></canvas>
-    //   </div>
-    // </div>
   );
 }
