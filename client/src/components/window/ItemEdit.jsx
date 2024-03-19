@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { selectSelectedProduct } from "../../features/productsSlice";
@@ -10,14 +10,11 @@ import { BsSave, BsTrash } from "react-icons/bs";
 export default function ItemView() {
   const selectedProduct = useSelector(selectSelectedProduct);
 
-  const [formState, setFormState] = useState({
-    name: selectedProduct.name,
-    price: selectedProduct.price,
-    quantity: selectedProduct.quantity,
-    isFeatured: selectedProduct.isFeatured,
-    shortDescription: selectedProduct.shortDescription,
-    details: selectedProduct.details,
-  });
+  const [formState, setFormState] = useState({ ...selectedProduct });
+
+  useEffect(() => {
+    setFormState({ ...selectedProduct });
+  }, [selectedProduct]);
 
   const handleInputChange = async (event) => {
     const { name, type, checked } = event.target;

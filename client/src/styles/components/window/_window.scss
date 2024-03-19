@@ -1,5 +1,5 @@
 $window--height: rem(600px);
-$window--width: 50rem;
+$window--width: 90rem;
 $window__bar--height: rem(24px);
 $toolbar--height: rem(37px);
 
@@ -12,7 +12,7 @@ $toolbar--height: rem(37px);
 
   // ! Revisit Remove the following === Window specs (may change later)
   margin-top: 3rem;
-  // max-width: $window--width;
+  max-width: $window--width;
   height: auto;
 }
 

@@ -17,7 +17,7 @@ export default function AdminDashboard() {
       {menuState.store && <Window title="Store" />}
       {menuState.categories && <Window title="Categories" />}
       {menuState.products && (
-        <Window title="Products" >
+        <Window title="Products">
           <Toolbar />
           <div className="window__content row-no-gutters">
             <ItemDetails />

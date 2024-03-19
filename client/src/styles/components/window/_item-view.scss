@@ -26,6 +26,8 @@
 // GROUP FOR EACH LABEL AND VALUE TOGETHER
 .mid-group__item {
   @include apply-flex(row, space-between, center);
+  
+  width: 100%;
 }
 
 // INDIVIDUAL STYLES FOR EACH LABEL AND VALUE

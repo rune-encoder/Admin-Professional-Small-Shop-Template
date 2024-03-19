@@ -35,11 +35,11 @@
 .item-details__bottom-section {
   @include apply-gradient("shade-2", "shade-3", to bottom left);
   @include apply-space("margin", -10, "x");
-  @include apply-space("margin", -5, "y");
+  @include apply-space("margin-bottom", -5);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
 
-  height: calc(60% - (#{halved-modular-scale(-5)} * 2));
+  height: calc(60% - halved-modular-scale(-5));
   overflow-y: auto;
 }
 

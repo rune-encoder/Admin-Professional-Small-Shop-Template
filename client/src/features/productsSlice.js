@@ -23,11 +23,11 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     selectProduct: (state, action) => {
-        state.selectedProduct = action.payload;
+      state.selectedProduct = action.payload;
     },
-    toggleSelectedProductEdit: (state) => {
-      state.selectedProductEdit = !state.selectedProductEdit;
-    }
+    toggleSelectedProductEdit: (state, action) => {
+      state.selectedProductEdit = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -46,18 +46,19 @@ const productsSlice = createSlice({
 });
 
 // Actions
-export const { selectProduct, toggleSelectedProductEdit } = productsSlice.actions;
+export const { selectProduct, toggleSelectedProductEdit } =
+  productsSlice.actions;
 
 // Selectors
 export const selectAllProducts = (state) => state.products.products;
 export const selectProductsStatus = (state) => state.products.status;
 export const selectProductsError = (state) => state.products.error;
 export const selectSelectedProduct = (state) => state.products.selectedProduct;
-export const selectSelectedProductEdit = (state) => state.products.selectedProductEdit;
+export const selectSelectedProductEdit = (state) =>
+  state.products.selectedProductEdit;
 
 // Reducer
 export default productsSlice.reducer;
 
 // Thunks
 export { getProducts };
-

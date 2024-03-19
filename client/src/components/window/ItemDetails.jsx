@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectSelectedProduct, selectSelectedProductEdit } from "../../features/productsSlice";
+import {
+  selectSelectedProduct,
+  selectSelectedProductEdit,
+} from "../../features/productsSlice";
 
 import ItemView from "./ItemView";
 import ItemEdit from "./ItemEdit";

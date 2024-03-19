@@ -48,7 +48,13 @@ export default function ItemList() {
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product._id} onClick={() => dispatch(selectProduct(product))}>
+            <tr
+              key={product._id}
+              onClick={() => {
+                dispatch(toggleSelectedProductEdit(false));
+                dispatch(selectProduct(product));
+              }}
+            >
               <td>{product.name}</td>
               <td>{product.price}</td>
               <td>01/01/10</td>
@@ -59,7 +65,8 @@ export default function ItemList() {
                   data-action="Update"
                   onClick={(event) => {
                     event.stopPropagation();
-                    dispatch(toggleSelectedProductEdit());
+                    dispatch(toggleSelectedProductEdit(true));
+                    dispatch(selectProduct(product));
                   }}
                 >
                   <FiEdit />
