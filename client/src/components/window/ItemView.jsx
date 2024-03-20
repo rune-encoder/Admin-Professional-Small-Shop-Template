@@ -1,6 +1,10 @@
+// Import Redux Hooks
 import { useSelector } from "react-redux";
-import { selectSelectedProduct } from "../../features/productsSlice";
 
+// Import Redux Selectors
+import { selectCurrentProduct } from "../../features/products/productSelectors";
+
+// Import React Icons
 import {
   IoMdCheckmarkCircleOutline,
   IoMdCloseCircleOutline,
@@ -8,7 +12,7 @@ import {
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 export default function ItemView() {
-  const selectedProduct = useSelector(selectSelectedProduct);
+  const selectedProduct = useSelector(selectCurrentProduct);
 
   return (
     <>
@@ -21,10 +25,10 @@ export default function ItemView() {
         </span>
       </div>
 
-      <div className="item-view__top-group--wrapper row-no-gutters">
+      <div className="custom-row--wrapper row-no-gutters">
         <div className="col-6">
-          <div className="top-group__item--wrapper">
-            <span className="top-group__item">
+          <div className="custom-column--wrapper">
+            <span className="mid-group__item">
               <span className="item-label">In Stock:</span>
               <span className="item-value">
                 {selectedProduct.inStock ? (
@@ -34,7 +38,7 @@ export default function ItemView() {
                 )}
               </span>
             </span>
-            <span className="top-group__item">
+            <span className="mid-group__item">
               <span className="item-label">Featured:</span>
               <span className="item-value">
                 {selectedProduct.isFeatured ? (
@@ -48,12 +52,12 @@ export default function ItemView() {
         </div>
 
         <div className="col-6">
-          <div className="top-group__item--wrapper">
-            <span className="top-group__item">
+          <div className="custom-column--wrapper">
+            <span className="mid-group__item">
               <span className="item-label">Price:</span>
               <span className="item-value">${selectedProduct.price}</span>
             </span>
-            <span className="top-group__item">
+            <span className="mid-group__item">
               <span className="item-label">Quantity:</span>
               <span className="item-value">{selectedProduct.quantity}</span>
             </span>

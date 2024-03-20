@@ -48,3 +48,17 @@
   font-size: modular-scale(-2);
   color: var(--shade-15);
 }
+
+%form-input--style {
+  @include apply-gradient("shade-1", "shade-2", 45deg);
+  @include apply-border("shade-8", $border-radius-sm);
+  @include apply-text-shadow("shade-10");
+
+  color: var(--dark);
+
+  &::placeholder {
+    @include apply-text-shadow("shade-5");
+
+    color: var(--shade-18);
+  }
+}

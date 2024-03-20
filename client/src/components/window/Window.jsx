@@ -1,6 +1,10 @@
+// Import Redux Hooks
 import { useDispatch } from "react-redux";
+
+// Import Redux Actions
 import { toggleMenuItem } from "../../features/menuSlice";
 
+// Import React Icons
 import { GrClose } from "react-icons/gr";
 
 export default function Window({ title, children }) {

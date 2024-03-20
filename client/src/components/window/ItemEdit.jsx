@@ -1,85 +1,131 @@
-import { useSelector } from "react-redux";
-import { selectSelectedProduct } from "../../features/productsSlice";
+// Import React Hooks
+import { useState, useEffect } from "react";
 
-import {
-  IoMdCheckmarkCircleOutline,
-  IoMdCloseCircleOutline,
-} from "react-icons/io";
+// Import Redux Hooks
+import { useSelector } from "react-redux";
+
+// Import Redux Selectors
+import { selectCurrentProduct } from "../../features/products/productSelectors";
+
+// Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
-  const selectedProduct = useSelector(selectSelectedProduct);
-  
+  const selectedProduct = useSelector(selectCurrentProduct);
+
+  const [formState, setFormState] = useState({ ...selectedProduct });
+
+  useEffect(() => {
+    setFormState({ ...selectedProduct });
+  }, [selectedProduct]);
+
+  const handleInputChange = async (event) => {
+    const { name, type, checked } = event.target;
+    const value = type === "checkbox" ? checked : event.target.value;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   return (
-    <>
-      <div className="item-view__header--wrapper row-no-gutters">
-        <span className="item-view__name col-6">
-          <label><MdOutlineShoppingCart />Name: </label>
-          <input placeholder="Name" value={selectedProduct.name} />
-        </span>
-        <span className="item-view__category col-6">
-            <label><MdOutlineCategory /> Category</label>
-           {selectedProduct.category.name}
-        </span>
+    <form className="product-edit__form">
+      <div className="product-edit__label-group">
+        <label className="product-edit__label-icon">
+          <MdOutlineShoppingCart />
+          Product Name:
+        </label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formState.name}
+          onChange={handleInputChange}
+        />
       </div>
 
-      <div className="item-view__top-group--wrapper row-no-gutters">
-        <div className="col-6">
-          <div className="top-group__item--wrapper">
-            <span className="top-group__item">
-              <span className="item-label">In Stock:</span>
-              <span className="item-value">
-                {selectedProduct.inStock ? (
-                  <IoMdCheckmarkCircleOutline data-boolean="true" />
-                ) : (
-                  <IoMdCloseCircleOutline data-boolean="false" />
-                )}
-              </span>
-            </span>
-            <span className="top-group__item">
-              <span className="item-label">Featured:</span>
-              <span className="item-value">
-                {selectedProduct.isFeatured ? (
-                  <IoMdCheckmarkCircleOutline data-boolean="true" />
-                ) : (
-                  <IoMdCloseCircleOutline data-boolean="false" />
-                )}
-              </span>
-            </span>
+      <div className="product-edit__label-group">
+        <label className="product-edit__label-icon">
+          <MdOutlineCategory />
+          Category:
+        </label>
+        <select>
+          <option>Test</option>
+        </select>
+      </div>
+
+      <div className="custom-row--wrapper row-no-gutters">
+        <div className="col-md-9 col-sm-5">
+          <div className="custom-column--wrapper">
+            <div className="product-edit__label-group">
+              <label className="item-label">Price:</label>
+              <input
+                type="number"
+                name="price"
+                value={formState.price}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="product-edit__label-group">
+              <label className="item-label">Quantity:</label>
+              <input
+                type="number"
+                name="quantity"
+                value={formState.quantity}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="product-edit__label-group">
+              <label className="item-label">Featured:</label>
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={formState.isFeatured}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="col-6">
-          <div className="top-group__item--wrapper">
-            <span className="top-group__item">
-              <span className="item-label">
-                <label>Price: </label>
-              </span>
-              <span className="item-value">
-                <input placeholder="Price" />
-              </span>
-            </span>
-
-            {/*  */}
-            <span className="top-group__item">
-              <span className="item-label">Quantity:</span>
-              <span className="item-value">{selectedProduct.quantity}</span>
-            </span>
+        <div className="col-md-3 col-sm-5">
+          <div className="custom-column--wrapper">
+            <button className="product-edit__btn" type="button">
+              <BsSave />
+              Save
+            </button>
+            <button className="product-edit__btn" type="button">
+              <IoArrowBackCircleOutline />
+              Cancel
+            </button>
+            <button className="product-edit__btn" type="button">
+              <BsTrash />
+              Delete
+            </button>
           </div>
         </div>
       </div>
 
-{/* Description */}
-      <div className="item-view__description">
-        <span className="">Description</span>
-        <p>{selectedProduct.shortDescription}</p>
+      <div className="product-edit__description">
+        <label className="">Description: </label>
+        <textarea
+          name="shortDescription"
+          value={formState.shortDescription}
+          onChange={handleInputChange}
+        />
       </div>
 
-{/* Details */}
-      <div className="item-view__description">
-        <span>Details</span>
-        <p>{selectedProduct.details}</p>
+      <div className="product-edit__description">
+        <label>Details:</label>
+        <textarea
+          name="details"
+          value={formState.details}
+          onChange={handleInputChange}
+        />
       </div>
-    </>
+    </form>
   );
 }

@@ -1,0 +1,67 @@
+// <===== VIEW SELECTED ITEM SECTION =====>
+
+// This section contains the styles for when a product is selected from a list.
+// The product is then displayed in the display area of the window.
+// This contains the styles for the section under the image of the product.
+
+// SELECTED ITEM VIEW HEADER SECTION: (NAME, CATEGORY)
+.item-view__header--wrapper {
+  @include apply-space("padding", -10, "x", $important: true);
+}
+
+.item-view__name {
+  @include apply-flex(row, flex-start, center);
+  @include set-typography("bold", 0, $base-line-height);
+  @include apply-space("gap", -10);
+}
+
+.item-view__category {
+  @include apply-space("gap", -15);
+  @include apply-flex(row, flex-end, center);
+  @extend %text--subtle;
+}
+
+// SELECTED ITEM VIEW MID SECTION: (BOOLEANS AND NUMBERS)
+
+// GROUP FOR EACH LABEL AND VALUE TOGETHER
+.mid-group__item {
+  @include apply-flex(row, space-between, center);
+  
+  width: 100%;
+}
+
+// INDIVIDUAL STYLES FOR EACH LABEL AND VALUE
+.item-label,
+.item-value {
+  @include set-typography("medium", 0, $base-line-height);
+}
+
+// ICON STYLE FOR BOOLEAN VALUES
+.item-value svg {
+  @include apply-flex(row, center, center);
+  @include set-typography("bold", 1, $base-line-height);
+
+  filter: drop-shadow(0 0 5px var(--shade-1));
+}
+
+.item-value svg[data-boolean="true"] {
+  color: var(--success);
+}
+
+.item-value svg[data-boolean="false"] {
+  color: var(--danger);
+}
+
+// SELECTED ITEM VIEW BOTTOM SECTION: (DESCRIPTION AND DETAILS)
+.item-view__description {
+  @include apply-space("padding", -10, "x");
+}
+
+.item-view__description span {
+  @include set-typography("bold", 0, $base-line-height);
+}
+
+.item-view__description p {
+  @include apply-font-family("roboto");
+  @include apply-space("padding", -10, "x");
+}

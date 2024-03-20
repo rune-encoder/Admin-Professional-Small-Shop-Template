@@ -1,27 +1,37 @@
+// Import React Hooks
+import { useEffect } from "react";
+
+// Import Redux Hooks
+import { useSelector, useDispatch } from "react-redux";
+
+// Import Redux Actions
+import {
+  currentProduct,
+  toggleProductEditMode,
+} from "../../features/products/productSlice";
+import { getProducts } from "../../features/products/productThunks";
+
+// Import Redux Selectors
+import {
+  selectGetProducts,
+  selectGetProductsStatus,
+  selectGetProductsError,
+} from "../../features/products/productSelectors";
+
+// Import React Icons
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-import { useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import {
-  getProducts,
-  selectAllProducts,
-  selectProductsStatus,
-  selectProductsError,
-  selectProduct,
-} from "../../features/productsSlice";
-
-export default function ItemList({ setEditMode }) {
+export default function ItemList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const products = useSelector(selectAllProducts);
-  const status = useSelector(selectProductsStatus);
-  const error = useSelector(selectProductsError);
+  const products = useSelector(selectGetProducts);
+  const status = useSelector(selectGetProductsStatus);
+  const error = useSelector(selectGetProductsError);
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -47,7 +57,13 @@ export default function ItemList({ setEditMode }) {
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product._id} onClick={() => dispatch(selectProduct(product))}>
+            <tr
+              key={product._id}
+              onClick={() => {
+                dispatch(toggleProductEditMode(false));
+                dispatch(currentProduct(product));
+              }}
+            >
               <td>{product.name}</td>
               <td>{product.price}</td>
               <td>01/01/10</td>
@@ -58,7 +74,8 @@ export default function ItemList({ setEditMode }) {
                   data-action="Update"
                   onClick={(event) => {
                     event.stopPropagation();
-                    setEditMode(true);
+                    dispatch(toggleProductEditMode(true));
+                    dispatch(currentProduct(product));
                   }}
                 >
                   <FiEdit />
