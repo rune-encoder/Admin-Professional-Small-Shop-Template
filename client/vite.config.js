@@ -12,6 +12,8 @@ export default defineConfig({
         target: "http://localhost:3001",
         // !Revisit: Secure - Set to true for production
         secure: false,
+        // This is required for the server to accept the request
+        // If false, the server will reject the request
         changeOrigin: true,
       },
     },

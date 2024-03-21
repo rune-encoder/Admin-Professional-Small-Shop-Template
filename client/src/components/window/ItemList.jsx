@@ -9,7 +9,6 @@ import {
   currentProduct,
   toggleProductEditMode,
 } from "../../features/products/productSlice";
-import { getProducts } from "../../features/products/productThunks";
 
 // Import Redux Selectors
 import {
@@ -17,6 +16,9 @@ import {
   selectGetProductsStatus,
   selectGetProductsError,
 } from "../../features/products/productSelectors";
+
+// Import Redux Thunks
+import { getProducts } from "../../features/products/productThunks";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";

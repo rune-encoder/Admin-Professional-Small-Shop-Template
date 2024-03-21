@@ -2,10 +2,18 @@
 import { useState, useEffect } from "react";
 
 // Import Redux Hooks
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Import Redux Selectors
-import { selectCurrentProduct } from "../../features/products/productSelectors";
+import {
+  selectCurrentProduct,
+  selectGetCategories,
+  selectGetCategoriesStatus,
+  selectGetCategoriesError,
+} from "../../features/products/productSelectors";
+
+// Import Redux Thunks
+import { getCategories } from "../../features/products/productThunks";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -13,14 +21,36 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
-  const selectedProduct = useSelector(selectCurrentProduct);
+  // useState Hooks
+  // Initialize formState with an empty object
+  const [formState, setFormState] = useState({
+    name: "",
+    price: 0,
+    quantity: 0,
+    isFeatured: false,
+    shortDescription: "",
+    details: "",
+  });
 
-  const [formState, setFormState] = useState({ ...selectedProduct });
+  // useSelector Hooks
+  const selectedProduct = useSelector(selectCurrentProduct);
+  const categories = useSelector(selectGetCategories);
+  const categoriesStatus = useSelector(selectGetCategoriesStatus);
+  const categoriesError = useSelector(selectGetCategoriesError);
+
+  // useDispatch Hooks
+  const dispatch = useDispatch();
+
+  // useEffect Hooks
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   useEffect(() => {
     setFormState({ ...selectedProduct });
   }, [selectedProduct]);
 
+  // Event Handlers
   const handleInputChange = async (event) => {
     const { name, type, checked } = event.target;
     const value = type === "checkbox" ? checked : event.target.value;
@@ -29,6 +59,15 @@ export default function ItemView() {
       [name]: value,
     });
   };
+
+  if (categoriesStatus === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (categoriesStatus === "failed") {
+    console.error(categoriesError);
+    return <div>Error</div>;
+  }
 
   return (
     <form className="product-edit__form">
@@ -52,12 +91,17 @@ export default function ItemView() {
           Category:
         </label>
         <select>
-          <option>Test</option>
+          {categories &&
+            categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
         </select>
       </div>
 
       <div className="custom-row--wrapper row-no-gutters">
-        <div className="col-md-9 col-sm-5">
+        <div className="col-lg-9 col-md-12 col-sm-5">
           <div className="custom-column--wrapper">
             <div className="product-edit__label-group">
               <label className="item-label">Price:</label>
@@ -91,7 +135,7 @@ export default function ItemView() {
           </div>
         </div>
 
-        <div className="col-md-3 col-sm-5">
+        <div className="col-lg-3 col-md-12 col-sm-5">
           <div className="custom-column--wrapper">
             <button className="product-edit__btn" type="button">
               <BsSave />
