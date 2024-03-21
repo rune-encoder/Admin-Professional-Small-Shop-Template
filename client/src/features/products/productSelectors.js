@@ -7,12 +7,12 @@ export const selectCurrentProduct = (state) => state.products.currentProduct;
 export const selectProductEditMode = (state) =>
   state.products.productEditMode;
 
-// Selectors for: QUERY_CATEGORIES
-export const selectGetCategories = (state) => state.products.categories;
-export const selectGetCategoriesStatus = (state) => state.products.status;
-export const selectGetCategoriesError = (state) => state.products.error;
-
 // Selectors for: QUERY_PRODUCTS
 export const selectGetProducts = (state) => state.products.products;
 export const selectGetProductsStatus = (state) => state.products.status;
 export const selectGetProductsError = (state) => state.products.error;
+
+// Selectors for: UPDATE_PRODUCT
+export const selectUpdateProduct = (state) => state.products.currentProduct;
+export const selectUpdateProductStatus = (state) => state.products.status;
+export const selectUpdateProductError = (state) => state.products.error;

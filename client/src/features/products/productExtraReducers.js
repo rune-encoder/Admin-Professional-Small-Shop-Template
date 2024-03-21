@@ -1,22 +1,11 @@
 // Summary: This file contains the extra reducers for the product slice.
 
 // Import Thunks
-import { getCategories, getProducts } from "./productThunks";
+import { getProducts, updateProduct } from "./productThunks";
 
 // Define the extra reducers for the product slice
 export const productExtraReducers = (builder) => {
   builder
-    .addCase(getCategories.pending, (state) => {
-      state.status = "loading";
-    })
-    .addCase(getCategories.fulfilled, (state, action) => {
-      state.status = "succeeded";
-      state.categories = action.payload;
-    })
-    .addCase(getCategories.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    })
     .addCase(getProducts.pending, (state) => {
       state.status = "loading";
     })
@@ -27,5 +16,16 @@ export const productExtraReducers = (builder) => {
     .addCase(getProducts.rejected, (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
-    });
+    })
+    .addCase(updateProduct.pending, (state) => {
+      state.status = "loading";
+    })
+    .addCase(updateProduct.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.currentProduct = action.payload;
+    })
+    .addCase(updateProduct.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    })
 };

@@ -1,19 +1,26 @@
 // Import React Hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
 
 // Import Redux Selectors
 import {
-  selectCurrentProduct,
   selectGetCategories,
   selectGetCategoriesStatus,
   selectGetCategoriesError,
+} from "../../features/categories/categorySelectors";
+
+import {
+  selectCurrentProduct,
+  selectUpdateProduct,
+  selectUpdateProductStatus,
+  selectUpdateProductError,
 } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
-import { getCategories } from "../../features/products/productThunks";
+import { getCategories } from "../../features/categories/categoryThunks";
+import { updateProduct } from "../../features/products/productThunks";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -21,6 +28,14 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
+  // !Delete: Used to check re-renders
+  const renderCount = useRef(0);
+
+  useEffect(() => {
+    renderCount.current = renderCount.current + 1;
+    console.log(`ItemView has rendered ${renderCount.current} times`);
+  });
+
   // useState Hooks
   // Initialize formState with an empty object
   const [formState, setFormState] = useState({
@@ -35,8 +50,9 @@ export default function ItemView() {
   // useSelector Hooks
   const selectedProduct = useSelector(selectCurrentProduct);
   const categories = useSelector(selectGetCategories);
-  const categoriesStatus = useSelector(selectGetCategoriesStatus);
-  const categoriesError = useSelector(selectGetCategoriesError);
+  const status = useSelector(selectGetCategoriesStatus);
+  const error = useSelector(selectGetCategoriesError);
+  // const product = useSelector(selectUpdateProduct);
 
   // useDispatch Hooks
   const dispatch = useDispatch();
@@ -60,17 +76,23 @@ export default function ItemView() {
     });
   };
 
-  if (categoriesStatus === "loading") {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formState);
+  };
+
+  // ! Revisit, Handle Loading and Error States
+  if (status === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (categoriesStatus === "failed") {
-    console.error(categoriesError);
+  if (status === "failed") {
+    console.error(error);
     return <div>Error</div>;
   }
 
   return (
-    <form className="product-edit__form">
+    <form className="product-edit__form" onSubmit={handleSubmit}>
       <div className="product-edit__label-group">
         <label className="product-edit__label-icon">
           <MdOutlineShoppingCart />

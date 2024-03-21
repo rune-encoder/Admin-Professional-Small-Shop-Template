@@ -3,6 +3,7 @@ import adminReducer from "../features/adminSlice/";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import menuReducer from "../features/menuSlice";
 
+import categoriesReducer from "../features/categories/categorySlice";
 import productsReducer from "../features/products/productSlice";
 
 const listenerMiddleware = createListenerMiddleware();
@@ -34,6 +35,7 @@ export const store = configureStore({
     admin: adminReducer,
     menu: menuReducer,
     products: productsReducer,
+    categories: categoriesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),
