@@ -40,17 +40,18 @@ export default function ItemList() {
   }, [dispatch]);
 
   const products = useSelector(selectGetProducts);
-  const status = useSelector(selectGetProductsStatus);
-  const error = useSelector(selectGetProductsError);
+  const getProductsStatus = useSelector(selectGetProductsStatus);
+  const getProductsError = useSelector(selectGetProductsError);
 
-  if (status === "loading") {
+  // !Revisit: How to show error (unauthorized etc.)
+  if (getProductsStatus === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (status === "failed") {
-    console.error(error);
-    return <div>Error</div>;
+  if (getProductsStatus === "failed") {
+    console.error(getProductsError);
   }
+  // ! Revisit: ===================================^^^^
 
   return (
     <div className="window__content--wrapper col-sm-12 col-md-7">

@@ -13,13 +13,13 @@ import {
 
 import {
   selectCurrentProduct,
-  selectUpdateProduct,
   selectUpdateProductStatus,
   selectUpdateProductError,
 } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
+import { getProducts } from "../../features/products/productThunks";
 import { updateProduct } from "../../features/products/productThunks";
 
 // Import React Icons
@@ -51,14 +51,10 @@ export default function ItemView() {
   // useSelector Hooks
   const selectedProduct = useSelector(selectCurrentProduct);
   const categories = useSelector(selectGetCategories);
-  const status = useSelector(selectGetCategoriesStatus);
-  const error = useSelector(selectGetCategoriesError);
-  // const product = useSelector(selectUpdateProduct);
-
-  // !Delete
-  // console.log("selectedProduct", selectedProduct);
-  // console.log("categories", categories);
-  // console.log("formState", formState);
+  const getCategoriesStatus = useSelector(selectGetCategoriesStatus);
+  const getCategoriesError = useSelector(selectGetCategoriesError);
+  const updateProductStatus = useSelector(selectUpdateProductStatus);
+  const updateProductError = useSelector(selectUpdateProductError);
 
   // useDispatch Hooks
   const dispatch = useDispatch();
@@ -81,29 +77,57 @@ export default function ItemView() {
   }, [selectedProduct]);
 
   // Event Handlers
-  const handleInputChange = async (event) => {
-    const { name, type, checked } = event.target;
-    const value = type === "checkbox" ? checked : event.target.value;
+  const handleInputChange = (event) => {
+    const { name, type, checked, value } = event.target;
+    let newValue;
+
+    if (type === "checkbox") {
+      newValue = checked;
+    } else if (name === "price") {
+      newValue = parseFloat(parseFloat(value).toFixed(2));
+    } else if (name === "quantity") {
+      newValue = parseInt(value, 10);
+    } else {
+      newValue = value;
+    }
+
     setFormState({
       ...formState,
-      [name]: value,
+      [name]: newValue,
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ input: formState });
+
+    // Wait for the product to be updated before fetching the products again.
+    await dispatch(
+      updateProduct({ id: selectedProduct._id, input: formState })
+    );
+
+    if (updateProductStatus === "succeeded") {
+      
+      // Refresh the products list global state by fetching the products again.
+      dispatch(getProducts());
+    } else if (updateProductStatus === "failed") {
+      console.error(updateProductError);
+    }
   };
 
   // ! Revisit, Handle Loading and Error States
-  if (status === "loading") {
+  if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (status === "failed") {
-    console.error(error);
-    return <div>Error</div>;
+  if (getCategoriesStatus === "failed") {
+    console.error(getCategoriesError);
   }
+
+  if (updateProductStatus === "failed") {
+    console.error(updateProductError);
+    window.alert(updateProductError);
+  }
+  // ! Revisit: ===================================^^^^
 
   return (
     <form className="product-edit__form" onSubmit={handleSubmit}>

@@ -26,10 +26,10 @@ export const getProducts = createAsyncThunk(
 // Update a product on the server
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async (product) => {
+  async ({ id, input }) => {
     const { data } = await client.mutate({
       mutation: UPDATE_PRODUCT,
-      variables: product,
+      variables: { id, input },
     });
 
     // Return the updated product from the server

@@ -5,11 +5,13 @@ import { productExtraReducers } from ".//productExtraReducers";
 
 // Initial state for the products slice
 const initialState = {
-  products: [],
-  status: "idle",
-  error: null,
   currentProduct: null,
   productEditMode: false,
+  products: [],
+  getProductsStatus: "idle",
+  getProductsError: null,
+  updateProductStatus: "idle",
+  updateProductError: null,
 };
 
 // Create the products slice

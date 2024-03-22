@@ -9,10 +9,10 @@ export const selectProductEditMode = (state) =>
 
 // Selectors for: QUERY_PRODUCTS
 export const selectGetProducts = (state) => state.products.products;
-export const selectGetProductsStatus = (state) => state.products.status;
-export const selectGetProductsError = (state) => state.products.error;
+export const selectGetProductsStatus = (state) => state.products.getProductsStatus;
+export const selectGetProductsError = (state) => state.products.getProductsError;
 
 // Selectors for: UPDATE_PRODUCT
 export const selectUpdateProduct = (state) => state.products.currentProduct;
-export const selectUpdateProductStatus = (state) => state.products.status;
-export const selectUpdateProductError = (state) => state.products.error;
+export const selectUpdateProductStatus = (state) => state.products.updateProductStatus;
+export const selectUpdateProductError = (state) => state.products.updateProductError;
