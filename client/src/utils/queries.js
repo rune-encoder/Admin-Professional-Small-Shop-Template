@@ -19,16 +19,16 @@ export const QUERY_PRODUCTS = gql`
         _id
         name
       }
-      shortDescription
-      details
+      isFeatured
+      inStock
       price
       quantity
+      shortDescription
+      details
       image {
         cloudinaryId
         url
       }
-      isFeatured
-      inStock
     }
   }
 `;

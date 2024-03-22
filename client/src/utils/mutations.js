@@ -18,21 +18,21 @@ export const UPDATE_PRODUCT = gql`
   mutation updateProduct($id: ID!, $input: ProductInput!) {
     updateProduct(_id: $id, input: $input) {
       _id
+      name
+      createdAt
       category {
         _id
       }
-      createdAt
+      inStock
+      isFeatured
+      price
+      quantity
+      shortDescription
       details
       image {
         cloudinaryId
         url
       }
-      inStock
-      isFeatured
-      name
-      price
-      quantity
-      shortDescription
     }
   }
 `;

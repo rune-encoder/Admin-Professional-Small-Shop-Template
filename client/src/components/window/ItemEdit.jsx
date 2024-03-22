@@ -33,13 +33,14 @@ export default function ItemView() {
 
   useEffect(() => {
     renderCount.current = renderCount.current + 1;
-    console.log(`ItemView has rendered ${renderCount.current} times`);
+    console.log(`ItemEdit has rendered ${renderCount.current} times`);
   });
 
   // useState Hooks
   // Initialize formState with an empty object
   const [formState, setFormState] = useState({
     name: "",
+    category: "",
     price: 0,
     quantity: 0,
     isFeatured: false,
@@ -54,6 +55,11 @@ export default function ItemView() {
   const error = useSelector(selectGetCategoriesError);
   // const product = useSelector(selectUpdateProduct);
 
+  // !Delete
+  // console.log("selectedProduct", selectedProduct);
+  // console.log("categories", categories);
+  // console.log("formState", formState);
+
   // useDispatch Hooks
   const dispatch = useDispatch();
 
@@ -63,7 +69,15 @@ export default function ItemView() {
   }, [dispatch]);
 
   useEffect(() => {
-    setFormState({ ...selectedProduct });
+    setFormState({
+      name: selectedProduct.name,
+      category: selectedProduct.category._id,
+      price: selectedProduct.price,
+      quantity: selectedProduct.quantity,
+      isFeatured: selectedProduct.isFeatured,
+      shortDescription: selectedProduct.shortDescription,
+      details: selectedProduct.details,
+    });
   }, [selectedProduct]);
 
   // Event Handlers
@@ -78,7 +92,7 @@ export default function ItemView() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formState);
+    console.log({ input: formState });
   };
 
   // ! Revisit, Handle Loading and Error States
@@ -112,7 +126,11 @@ export default function ItemView() {
           <MdOutlineCategory />
           Category:
         </label>
-        <select>
+        <select
+          name="category"
+          value={formState.category}
+          onChange={handleInputChange}
+        >
           {categories &&
             categories.map((category) => (
               <option key={category._id} value={category._id}>
@@ -159,7 +177,7 @@ export default function ItemView() {
 
         <div className="col-lg-3 col-md-12 col-sm-5">
           <div className="custom-column--wrapper">
-            <button className="product-edit__btn" type="button">
+            <button className="product-edit__btn" type="submit">
               <BsSave />
               Save
             </button>
