@@ -8,13 +8,31 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 
 // Import Mutations
+import { UPDATE_PRODUCT } from "../../utils/mutations";
 
 // Fetch all products from the server
-export const getProducts = createAsyncThunk("products/getProducts", async () => {
-  const { data } = await client.query({
-    query: QUERY_PRODUCTS,
-  });
+export const getProducts = createAsyncThunk(
+  "products/getProducts",
+  async () => {
+    const { data } = await client.query({
+      query: QUERY_PRODUCTS,
+    });
 
-  // Return the products from the server or an empty array
-  return data?.getProducts || [];
-});
+    // Return the products from the server or an empty array
+    return data?.getProducts || [];
+  }
+);
+
+// Update a product on the server
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async (product) => {
+    const { data } = await client.mutate({
+      mutation: UPDATE_PRODUCT,
+      variables: product,
+    });
+
+    // Return the updated product from the server
+    return data?.updateProduct;
+  }
+);

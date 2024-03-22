@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +9,6 @@ import {
   currentProduct,
   toggleProductEditMode,
 } from "../../features/products/productSlice";
-import { getProducts } from "../../features/products/productThunks";
 
 // Import Redux Selectors
 import {
@@ -18,11 +17,22 @@ import {
   selectGetProductsError,
 } from "../../features/products/productSelectors";
 
+// Import Redux Thunks
+import { getProducts } from "../../features/products/productThunks";
+
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
 export default function ItemList() {
+  // !Delete: Used to check re-renders
+  const renderCount = useRef(0);
+
+  useEffect(() => {
+    renderCount.current = renderCount.current + 1;
+    console.log(`ItemList has rendered ${renderCount.current} times`);
+  });
+
   const dispatch = useDispatch();
 
   useEffect(() => {

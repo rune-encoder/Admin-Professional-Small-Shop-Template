@@ -11,3 +11,8 @@ export const selectProductEditMode = (state) =>
 export const selectGetProducts = (state) => state.products.products;
 export const selectGetProductsStatus = (state) => state.products.status;
 export const selectGetProductsError = (state) => state.products.error;
+
+// Selectors for: UPDATE_PRODUCT
+export const selectUpdateProduct = (state) => state.products.currentProduct;
+export const selectUpdateProductStatus = (state) => state.products.status;
+export const selectUpdateProductError = (state) => state.products.error;
