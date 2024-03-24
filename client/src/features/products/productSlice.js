@@ -12,6 +12,8 @@ const initialState = {
   getProductsError: null,
   updateProductStatus: "idle",
   updateProductError: null,
+  deleteProductStatus: "idle",
+  deleteProductError: null,
 };
 
 // Create the products slice

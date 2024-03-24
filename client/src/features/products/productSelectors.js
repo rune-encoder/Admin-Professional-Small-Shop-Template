@@ -13,6 +13,9 @@ export const selectGetProductsStatus = (state) => state.products.getProductsStat
 export const selectGetProductsError = (state) => state.products.getProductsError;
 
 // Selectors for: UPDATE_PRODUCT
-export const selectUpdateProduct = (state) => state.products.currentProduct;
 export const selectUpdateProductStatus = (state) => state.products.updateProductStatus;
 export const selectUpdateProductError = (state) => state.products.updateProductError;
+
+// Selectors for: DELETE_PRODUCT
+export const selectDeleteProductStatus = (state) => state.products.deleteProductStatus;
+export const selectDeleteProductError = (state) => state.products.deleteProductError;

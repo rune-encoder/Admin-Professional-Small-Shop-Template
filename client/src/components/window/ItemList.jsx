@@ -15,10 +15,15 @@ import {
   selectGetProducts,
   selectGetProductsStatus,
   selectGetProductsError,
+  selectDeleteProductStatus,
+  selectDeleteProductError,
 } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
-import { getProducts } from "../../features/products/productThunks";
+import {
+  getProducts,
+  deleteProduct,
+} from "../../features/products/productThunks";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
@@ -32,16 +37,37 @@ export default function ItemList() {
     renderCount.current = renderCount.current + 1;
     console.log(`ItemList has rendered ${renderCount.current} times`);
   });
+  // ! ==========>
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-
+  // ==============================
+  // useSelector Hooks Section
+  // ==============================
   const products = useSelector(selectGetProducts);
   const getProductsStatus = useSelector(selectGetProductsStatus);
   const getProductsError = useSelector(selectGetProductsError);
+  const deleteProductStatus = useSelector(selectDeleteProductStatus);
+  const deleteProductError = useSelector(selectDeleteProductError);
+
+  // ==============================
+  // useDispatch Hooks Section
+  // ==============================
+  const dispatch = useDispatch();
+
+  // ==============================
+  // useEffect Hooks Section
+  // ==============================
+  useEffect(() => {
+    // Fetch products from the server for the list when the component mounts
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  const handleDeleteProduct = async (productId) => {
+    // Wait for the product to be deleted
+    await dispatch(deleteProduct(productId));
+
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
+    dispatch(getProducts());
+  };
 
   // !Revisit: How to show error (unauthorized etc.)
   if (getProductsStatus === "loading") {
@@ -93,10 +119,10 @@ export default function ItemList() {
                 </button>
                 <button
                   data-action="Delete"
-                  //   onClick={(event) => {
-                  //     event.stopPropagation();
-                  //     setTest(product);
-                  //   }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleDeleteProduct(product._id);
+                  }}
                 >
                   <BsTrash />
                 </button>

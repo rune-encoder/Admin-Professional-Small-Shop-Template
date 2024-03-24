@@ -19,8 +19,10 @@ import {
 
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
-import { getProducts } from "../../features/products/productThunks";
-import { updateProduct } from "../../features/products/productThunks";
+import {
+  getProducts,
+  updateProduct,
+} from "../../features/products/productThunks";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -28,16 +30,19 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
-  // !Delete: Used to check re-renders
+  // !Delete: Used to check re-renders of the component
   const renderCount = useRef(0);
 
   useEffect(() => {
     renderCount.current = renderCount.current + 1;
     console.log(`ItemEdit has rendered ${renderCount.current} times`);
   });
+  // ! ==========>
 
-  // useState Hooks
-  // Initialize formState with an empty object
+  // ==============================
+  // useState Hooks Section
+  // ==============================
+  // Initialize formState with empty values
   const [formState, setFormState] = useState({
     name: "",
     category: "",
@@ -48,24 +53,37 @@ export default function ItemView() {
     details: "",
   });
 
-  // useSelector Hooks
+  // ==============================
+  // useSelector Hooks Section
+  // ==============================
+  // Selector for the current product
   const selectedProduct = useSelector(selectCurrentProduct);
+
+  // Selector for the categories
   const categories = useSelector(selectGetCategories);
+
+  // Selectors for the status and error of the async actions.
   const getCategoriesStatus = useSelector(selectGetCategoriesStatus);
   const getCategoriesError = useSelector(selectGetCategoriesError);
   const updateProductStatus = useSelector(selectUpdateProductStatus);
   const updateProductError = useSelector(selectUpdateProductError);
 
-  // useDispatch Hooks
+  // ==============================
+  // useDispatch Hooks Section
+  // ==============================
   const dispatch = useDispatch();
 
-  // useEffect Hooks
+  // ==============================
+  // useEffect Hooks Section
+  // ==============================
   useEffect(() => {
+    // Fetch the categories for the select dropdown when the component mounts
     dispatch(getCategories());
   }, [dispatch]);
 
   useEffect(() => {
     setFormState({
+      // Populate the form with the selected product's data
       name: selectedProduct.name,
       category: selectedProduct.category._id,
       price: selectedProduct.price,
@@ -76,16 +94,21 @@ export default function ItemView() {
     });
   }, [selectedProduct]);
 
-  // Event Handlers
+  // ==============================
+  // Event Handlers Section
+  // ==============================
   const handleInputChange = (event) => {
     const { name, type, checked, value } = event.target;
     let newValue;
 
     if (type === "checkbox") {
+      // Checkbox values are boolean
       newValue = checked;
     } else if (name === "price") {
+      // Round the price to 2 decimal places
       newValue = parseFloat(parseFloat(value).toFixed(2));
     } else if (name === "quantity") {
+      // Whole numbers only
       newValue = parseInt(value, 10);
     } else {
       newValue = value;
@@ -98,6 +121,7 @@ export default function ItemView() {
   };
 
   const handleSubmit = async (event) => {
+    // Prevent the form from refreshing the page
     event.preventDefault();
 
     // Wait for the product to be updated before fetching the products again.
@@ -105,16 +129,15 @@ export default function ItemView() {
       updateProduct({ id: selectedProduct._id, input: formState })
     );
 
-    if (updateProductStatus === "succeeded") {
-      
-      // Refresh the products list global state by fetching the products again.
-      dispatch(getProducts());
-    } else if (updateProductStatus === "failed") {
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
+    dispatch(getProducts());
+
+    if (updateProductStatus === "failed") {
       console.error(updateProductError);
     }
   };
 
-  // ! Revisit, Handle Loading and Error States
+  // ! Revisit: Improve Loading and Error handling
   if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
   }
@@ -122,12 +145,7 @@ export default function ItemView() {
   if (getCategoriesStatus === "failed") {
     console.error(getCategoriesError);
   }
-
-  if (updateProductStatus === "failed") {
-    console.error(updateProductError);
-    window.alert(updateProductError);
-  }
-  // ! Revisit: ===================================^^^^
+  // ! ==========>
 
   return (
     <form className="product-edit__form" onSubmit={handleSubmit}>
