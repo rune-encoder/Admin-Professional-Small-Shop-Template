@@ -31,7 +31,7 @@ export const productExtraReducers = (builder) => {
     .addCase(deleteProduct.pending, (state) => {
       state.deleteProductStatus = "loading";
     })
-    .addCase(deleteProduct.fulfilled, (state, action) => {
+    .addCase(deleteProduct.fulfilled, (state) => {
       state.deleteProductStatus = "succeeded";
       state.currentProduct = null;
       state.editMode = false;

@@ -14,9 +14,6 @@ import {
 import {
   selectGetProducts,
   selectGetProductsStatus,
-  selectGetProductsError,
-  selectDeleteProductStatus,
-  selectDeleteProductError,
 } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
@@ -31,12 +28,12 @@ import { BsTrash } from "react-icons/bs";
 
 export default function ItemList() {
   // !Delete: Used to check re-renders
-  const renderCount = useRef(0);
+  // const renderCount = useRef(0);
 
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    console.log(`ItemList has rendered ${renderCount.current} times`);
-  });
+  // useEffect(() => {
+  //   renderCount.current = renderCount.current + 1;
+  //   console.log(`ItemList has rendered ${renderCount.current} times`);
+  // });
   // ! ==========>
 
   // ==============================
@@ -44,9 +41,6 @@ export default function ItemList() {
   // ==============================
   const products = useSelector(selectGetProducts);
   const getProductsStatus = useSelector(selectGetProductsStatus);
-  const getProductsError = useSelector(selectGetProductsError);
-  const deleteProductStatus = useSelector(selectDeleteProductStatus);
-  const deleteProductError = useSelector(selectDeleteProductError);
 
   // ==============================
   // useDispatch Hooks Section
@@ -72,10 +66,6 @@ export default function ItemList() {
   // !Revisit: How to show error (unauthorized etc.)
   if (getProductsStatus === "loading") {
     return <div>Loading...</div>;
-  }
-
-  if (getProductsStatus === "failed") {
-    console.error(getProductsError);
   }
   // ! Revisit: ===================================^^^^
 

@@ -8,14 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectGetCategories,
   selectGetCategoriesStatus,
-  selectGetCategoriesError,
 } from "../../features/categories/categorySelectors";
 
-import {
-  selectCurrentProduct,
-  selectUpdateProductStatus,
-  selectUpdateProductError,
-} from "../../features/products/productSelectors";
+import { selectCurrentProduct } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
@@ -31,12 +26,12 @@ import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
   // !Delete: Used to check re-renders of the component
-  const renderCount = useRef(0);
+  // const renderCount = useRef(0);
 
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    console.log(`ItemEdit has rendered ${renderCount.current} times`);
-  });
+  // useEffect(() => {
+  //   renderCount.current = renderCount.current + 1;
+  //   console.log(`ItemEdit has rendered ${renderCount.current} times`);
+  // });
   // ! ==========>
 
   // ==============================
@@ -61,12 +56,7 @@ export default function ItemView() {
 
   // Selector for the categories
   const categories = useSelector(selectGetCategories);
-
-  // Selectors for the status and error of the async actions.
   const getCategoriesStatus = useSelector(selectGetCategoriesStatus);
-  const getCategoriesError = useSelector(selectGetCategoriesError);
-  const updateProductStatus = useSelector(selectUpdateProductStatus);
-  const updateProductError = useSelector(selectUpdateProductError);
 
   // ==============================
   // useDispatch Hooks Section
@@ -131,19 +121,11 @@ export default function ItemView() {
 
     // Refresh the products list global state by fetching the products again. (Server or Cache)
     dispatch(getProducts());
-
-    if (updateProductStatus === "failed") {
-      console.error(updateProductError);
-    }
   };
 
   // ! Revisit: Improve Loading and Error handling
   if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
-  }
-
-  if (getCategoriesStatus === "failed") {
-    console.error(getCategoriesError);
   }
   // ! ==========>
 

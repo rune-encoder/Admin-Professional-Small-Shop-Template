@@ -249,7 +249,15 @@ $base-light-theme: (
   "opacity-dark": hsla(0, 0%, 0%, $base-opacity),
 
   // Utility Colors
-  "selection": hsl(352, 23%, 26%)
+  "selection": hsl(352, 23%, 26%),
+
+  // Error Window Color Gradients: 
+  "err-window-dark": hsl(0, 90%, 80%), 
+  "err-window-light": hsl(0, 65%, 68%), 
+  "err-btn-dark": hsl(0, 75%, 80%), 
+  "err-btn-light":  hsl(0, 75%, 68%), 
+  "err-content-dark": hsl(0, 75%, 92%), 
+  "err-content-light": hsl(0, 90%, 80%),
 );
 
 /// A map of colors used for the dark theme.
@@ -278,7 +286,15 @@ $base-dark-theme: (
   "secondary": hsl(320, 74%, 21%),
 
   // Utility Colors
-  "selection": hsl(180, 80%, 75%)
+  "selection": hsl(180, 80%, 75%),
+
+  // Error Window Color Gradients: 
+  "err-window-dark": hsl(0, 90%, 8%),
+  "err-window-light": hsl(0, 65%, 16%),
+  "err-btn-dark": hsl(0, 75%, 20%),
+  "err-btn-light": hsl(0, 75%, 32%),
+  "err-content-dark": hsl(0, 75%, 8%),
+  "err-content-light": hsl(0, 90%, 20%),
 );
 
 /// This map is used to set all the *light theme* colors, shades, etc. that are used in the application.

@@ -21,7 +21,6 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    // ! Rename due to confusion with selector
     currentProduct: (state, action) => {
       state.currentProduct = action.payload;
     },
