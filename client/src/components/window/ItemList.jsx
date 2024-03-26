@@ -14,11 +14,13 @@ import {
 import {
   selectGetProducts,
   selectGetProductsStatus,
-  selectGetProductsError,
 } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
-import { getProducts } from "../../features/products/productThunks";
+import {
+  getProducts,
+  deleteProduct,
+} from "../../features/products/productThunks";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
@@ -26,31 +28,49 @@ import { BsTrash } from "react-icons/bs";
 
 export default function ItemList() {
   // !Delete: Used to check re-renders
-  const renderCount = useRef(0);
+  // const renderCount = useRef(0);
 
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    console.log(`ItemList has rendered ${renderCount.current} times`);
-  });
+  // useEffect(() => {
+  //   renderCount.current = renderCount.current + 1;
+  //   console.log(`ItemList has rendered ${renderCount.current} times`);
+  // });
+  // ! ==========>
 
+  // ==============================
+  // useSelector Hooks Section
+  // ==============================
+  const products = useSelector(selectGetProducts);
+  const getProductsStatus = useSelector(selectGetProductsStatus);
+
+  // ==============================
+  // useDispatch Hooks Section
+  // ==============================
   const dispatch = useDispatch();
 
+  // ==============================
+  // useEffect Hooks Section
+  // ==============================
   useEffect(() => {
+    // Fetch products from the server for the list when the component mounts
     dispatch(getProducts());
   }, [dispatch]);
 
-  const products = useSelector(selectGetProducts);
-  const status = useSelector(selectGetProductsStatus);
-  const error = useSelector(selectGetProductsError);
+  // ==============================
+  // Event Handlers Section
+  // ==============================
+  const handleDeleteProduct = async (productId) => {
+    // Wait for the product to be deleted
+    await dispatch(deleteProduct(productId));
 
-  if (status === "loading") {
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
+    dispatch(getProducts());
+  };
+
+  // !Revisit: Handling Loading State
+  if (getProductsStatus === "loading") {
     return <div>Loading...</div>;
   }
-
-  if (status === "failed") {
-    console.error(error);
-    return <div>Error</div>;
-  }
+  // ! Revisit: ===================================^^^^
 
   return (
     <div className="window__content--wrapper col-sm-12 col-md-7">
@@ -92,10 +112,10 @@ export default function ItemList() {
                 </button>
                 <button
                   data-action="Delete"
-                  //   onClick={(event) => {
-                  //     event.stopPropagation();
-                  //     setTest(product);
-                  //   }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleDeleteProduct(product._id);
+                  }}
                 >
                   <BsTrash />
                 </button>

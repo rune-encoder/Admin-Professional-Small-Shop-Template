@@ -8,19 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectGetCategories,
   selectGetCategoriesStatus,
-  selectGetCategoriesError,
 } from "../../features/categories/categorySelectors";
 
-import {
-  selectCurrentProduct,
-  selectUpdateProduct,
-  selectUpdateProductStatus,
-  selectUpdateProductError,
-} from "../../features/products/productSelectors";
+import { selectCurrentProduct } from "../../features/products/productSelectors";
 
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
-import { updateProduct } from "../../features/products/productThunks";
+import {
+  getProducts,
+  updateProduct,
+} from "../../features/products/productThunks";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -28,16 +25,19 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemView() {
-  // !Delete: Used to check re-renders
-  const renderCount = useRef(0);
+  // !Delete: Used to check re-renders of the component
+  // const renderCount = useRef(0);
 
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    console.log(`ItemEdit has rendered ${renderCount.current} times`);
-  });
+  // useEffect(() => {
+  //   renderCount.current = renderCount.current + 1;
+  //   console.log(`ItemEdit has rendered ${renderCount.current} times`);
+  // });
+  // ! ==========>
 
-  // useState Hooks
-  // Initialize formState with an empty object
+  // ==============================
+  // useState Hooks Section
+  // ==============================
+  // Initialize formState with empty values
   const [formState, setFormState] = useState({
     name: "",
     category: "",
@@ -48,28 +48,32 @@ export default function ItemView() {
     details: "",
   });
 
-  // useSelector Hooks
+  // ==============================
+  // useSelector Hooks Section
+  // ==============================
+  // Selector for the current product
   const selectedProduct = useSelector(selectCurrentProduct);
+
+  // Selector for the categories
   const categories = useSelector(selectGetCategories);
-  const status = useSelector(selectGetCategoriesStatus);
-  const error = useSelector(selectGetCategoriesError);
-  // const product = useSelector(selectUpdateProduct);
+  const getCategoriesStatus = useSelector(selectGetCategoriesStatus);
 
-  // !Delete
-  // console.log("selectedProduct", selectedProduct);
-  // console.log("categories", categories);
-  // console.log("formState", formState);
-
-  // useDispatch Hooks
+  // ==============================
+  // useDispatch Hooks Section
+  // ==============================
   const dispatch = useDispatch();
 
-  // useEffect Hooks
+  // ==============================
+  // useEffect Hooks Section
+  // ==============================
   useEffect(() => {
+    // Fetch the categories for the select dropdown when the component mounts
     dispatch(getCategories());
   }, [dispatch]);
 
   useEffect(() => {
     setFormState({
+      // Populate the form with the selected product's data
       name: selectedProduct.name,
       category: selectedProduct.category._id,
       price: selectedProduct.price,
@@ -80,30 +84,50 @@ export default function ItemView() {
     });
   }, [selectedProduct]);
 
-  // Event Handlers
-  const handleInputChange = async (event) => {
-    const { name, type, checked } = event.target;
-    const value = type === "checkbox" ? checked : event.target.value;
+  // ==============================
+  // Event Handlers Section
+  // ==============================
+  const handleInputChange = (event) => {
+    const { name, type, checked, value } = event.target;
+    let newValue;
+
+    if (type === "checkbox") {
+      // Checkbox values are boolean
+      newValue = checked;
+    } else if (name === "price") {
+      // Round the price to 2 decimal places
+      newValue = parseFloat(parseFloat(value).toFixed(2));
+    } else if (name === "quantity") {
+      // Whole numbers only
+      newValue = parseInt(value, 10);
+    } else {
+      newValue = value;
+    }
+
     setFormState({
       ...formState,
-      [name]: value,
+      [name]: newValue,
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    // Prevent the form from refreshing the page
     event.preventDefault();
-    console.log({ input: formState });
+
+    // Wait for the product to be updated before fetching the products again.
+    await dispatch(
+      updateProduct({ id: selectedProduct._id, input: formState })
+    );
+
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
+    dispatch(getProducts());
   };
 
-  // ! Revisit, Handle Loading and Error States
-  if (status === "loading") {
+  // ! Revisit: Handling Loading State
+  if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
   }
-
-  if (status === "failed") {
-    console.error(error);
-    return <div>Error</div>;
-  }
+  // ! ==========>
 
   return (
     <form className="product-edit__form" onSubmit={handleSubmit}>

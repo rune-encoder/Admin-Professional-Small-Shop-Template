@@ -8,7 +8,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 
 // Import Mutations
-import { UPDATE_PRODUCT } from "../../utils/mutations";
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
 
 // Fetch all products from the server
 export const getProducts = createAsyncThunk(
@@ -26,13 +26,38 @@ export const getProducts = createAsyncThunk(
 // Update a product on the server
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async (product) => {
+  async ({ id, input }) => {
     const { data } = await client.mutate({
       mutation: UPDATE_PRODUCT,
-      variables: product,
+      variables: { id, input },
+
+        //Note: Apollo automatically updates the cache with the new product due to normalization.
     });
 
     // Return the updated product from the server
     return data?.updateProduct;
+  }
+);
+
+// Delete a product on the server
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (id) => {
+    const { data } = await client.mutate({
+      mutation: DELETE_PRODUCT,
+      variables: { id },
+
+      // Apollo update function: Manual changes to the Apollo cache
+      update: (cache, { data }) => {
+        // Get the Apollo cache id of the deleted product
+        const productCacheId = cache.identify(data.deleteProduct);
+
+        // Remove the deleted product from the Apollo cache
+        cache.evict({ id: productCacheId });
+      },
+    });
+
+    // Return the deleted product from the server
+    return data?.deleteProduct;
   }
 );

@@ -19,7 +19,7 @@ export default function Footer(props) {
           </a>
         ))}
       </div>
-      <h5 className="footer-text">{footerText}</h5>
+      <h5 className="footer-text">Footer Placeholder</h5>
     </footer>
   );
 }

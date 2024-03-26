@@ -36,3 +36,26 @@ export const UPDATE_PRODUCT = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: ID!) {
+    deleteProduct(_id: $id) {
+      _id
+      name
+      createdAt
+      category {
+        _id
+      }
+      inStock
+      isFeatured
+      price
+      quantity
+      shortDescription
+      details
+      image {
+        cloudinaryId
+        url
+      }
+    }
+  }
+`;

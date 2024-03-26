@@ -1,31 +1,43 @@
 // Summary: This file contains the extra reducers for the product slice.
 
 // Import Thunks
-import { getProducts, updateProduct } from "./productThunks";
+import { getProducts, updateProduct, deleteProduct } from "./productThunks";
 
 // Define the extra reducers for the product slice
 export const productExtraReducers = (builder) => {
   builder
     .addCase(getProducts.pending, (state) => {
-      state.status = "loading";
+      state.getProductsStatus = "loading";
     })
     .addCase(getProducts.fulfilled, (state, action) => {
-      state.status = "succeeded";
+      state.getProductsStatus = "succeeded";
       state.products = action.payload;
     })
     .addCase(getProducts.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
+      state.getProductsStatus = "failed";
+      state.getProductsError = action.error.message;
     })
     .addCase(updateProduct.pending, (state) => {
-      state.status = "loading";
+      state.updateProductStatus = "loading";
     })
     .addCase(updateProduct.fulfilled, (state, action) => {
-      state.status = "succeeded";
+      state.updateProductStatus = "succeeded";
       state.currentProduct = action.payload;
     })
     .addCase(updateProduct.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
+      state.updateProductStatus = "failed";
+      state.updateProductError = action.error.message;
     })
+    .addCase(deleteProduct.pending, (state) => {
+      state.deleteProductStatus = "loading";
+    })
+    .addCase(deleteProduct.fulfilled, (state) => {
+      state.deleteProductStatus = "succeeded";
+      state.currentProduct = null;
+      state.productEditMode = false;
+    })
+    .addCase(deleteProduct.rejected, (state, action) => {
+      state.deleteProductStatus = "failed";
+      state.deleteProductError = action.error.message;
+    });
 };

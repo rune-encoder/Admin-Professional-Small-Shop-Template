@@ -1,7 +1,8 @@
-import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
+import { configureStore, createListenerMiddleware, current } from "@reduxjs/toolkit";
 import adminReducer from "../features/adminSlice/";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import menuReducer from "../features/menuSlice";
+import errorReducer from "../features/errorSlice";
 
 import categoriesReducer from "../features/categories/categorySlice";
 import productsReducer from "../features/products/productSlice";
@@ -29,11 +30,28 @@ listenerMiddleware.startListening({
   },
 });
 
+// Add a listener to log the latest error message from async thunks.
+listenerMiddleware.startListening({
+  predicate: (action, currentState, previousState) => {
+    return (
+      currentState.error.latestErrorMessage !==
+      previousState.error.latestErrorMessage
+    );
+  },
+  effect: (action, listenerApi) => {
+    const state = listenerApi.getState();
+    const error = state.error.latestErrorMessage;
+
+    console.error(error);
+  },
+});
+
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     admin: adminReducer,
     menu: menuReducer,
+    error: errorReducer,
     products: productsReducer,
     categories: categoriesReducer,
   },

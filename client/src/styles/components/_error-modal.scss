@@ -1,0 +1,73 @@
+// !Revisit: Refactor later: Similar to Window Styles except for colors and dimensions.
+$error__window--height: rem(300px);
+$error__window--width: rem(720px);
+$error__window-bar--height: rem(24px);
+
+.error-modal__content {
+  @include apply-position(fixed, $top: 50%, $left: 50%);
+  @include apply-flex(row, center, center);
+
+  transform: translate(-50%, -75%);
+  z-index: 5;
+}
+
+.error__window {
+  @include apply-space("padding", -5, "y");
+  @include apply-gradient("err-window-dark", "err-window-light");
+  @include apply-border("danger", $border-radius-md);
+  @include apply-box-shadow("always-dark", 10);
+
+  // ! Revisit Remove the following === Window specs (may change later)
+  max-width: $error__window--width;
+  height: auto;
+}
+
+// WINDOW BAR/TAB.
+.error__window-bar {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "x");
+
+  height: $error__window-bar--height;
+}
+
+// ! Revisit - Improve Style for Button
+.error__window-bar button {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -10);
+  @include apply-border("danger", $border-radius-sm);
+
+  &:hover {
+    @include apply-gradient("err-btn-dark", "err-btn-light", to bottom left);
+
+    color: var(--selection);
+  }
+}
+
+// WINDOW BODY.
+.error__window-body {
+  @include apply-space("margin-top", -5);
+  @include apply-gradient("err-content-dark", "shade-3", to bottom left);
+  @include apply-border("err-content-light", $border-radius-sm);
+
+  // Error Message Content Layout
+  @include apply-flex(column, center, center);
+  @include apply-space("gap", -10);
+  @include apply-font-family("roboto-condensed");
+
+  // Error Message Icon
+  svg {
+    @include set-typography("normal", 5, $compact-line-height);
+  }
+
+  // Error Message Text
+  p {
+    @include set-typography("normal", 2, $compact-line-height);
+    @include apply-text-shadow("err-window-dark");
+
+    text-align: center;
+  }
+
+
+  overflow: auto;
+  height: $error__window--height;
+}

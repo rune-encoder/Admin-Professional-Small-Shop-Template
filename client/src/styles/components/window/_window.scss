@@ -22,17 +22,17 @@ $toolbar--height: rem(37px);
   @include apply-space("padding", -10, "x");
 
   height: $window__bar--height;
+}
 
-  // ! Revisit - Improve Style for Button
-  button {
-    @include apply-flex(row, center, center);
-    @include apply-space("padding", -10,);
-    @include apply-border("shade-10", $border-radius-sm);
+// ! Revisit - Improve Style for Button
+.window__bar button {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -10);
+  @include apply-border("shade-10", $border-radius-sm);
 
-    &:hover {
-      @include apply-gradient("shade-5", "shade-8", to bottom left);
-      color: var(--selection)
-    }
+  &:hover {
+    @include apply-gradient("shade-5", "shade-8", to bottom left);
+    color: var(--selection);
   }
 }
 
