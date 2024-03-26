@@ -55,6 +55,9 @@ export default function ItemList() {
     dispatch(getProducts());
   }, [dispatch]);
 
+  // ==============================
+  // Event Handlers Section
+  // ==============================
   const handleDeleteProduct = async (productId) => {
     // Wait for the product to be deleted
     await dispatch(deleteProduct(productId));
@@ -63,7 +66,7 @@ export default function ItemList() {
     dispatch(getProducts());
   };
 
-  // !Revisit: How to show error (unauthorized etc.)
+  // !Revisit: Handling Loading State
   if (getProductsStatus === "loading") {
     return <div>Loading...</div>;
   }

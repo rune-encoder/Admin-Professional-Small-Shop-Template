@@ -34,7 +34,7 @@ export const productExtraReducers = (builder) => {
     .addCase(deleteProduct.fulfilled, (state) => {
       state.deleteProductStatus = "succeeded";
       state.currentProduct = null;
-      state.editMode = false;
+      state.productEditMode = false;
     })
     .addCase(deleteProduct.rejected, (state, action) => {
       state.deleteProductStatus = "failed";

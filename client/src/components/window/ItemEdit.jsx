@@ -123,7 +123,7 @@ export default function ItemView() {
     dispatch(getProducts());
   };
 
-  // ! Revisit: Improve Loading and Error handling
+  // ! Revisit: Handling Loading State
   if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
   }

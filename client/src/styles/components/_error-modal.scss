@@ -62,7 +62,7 @@ $error__window-bar--height: rem(24px);
   // Error Message Text
   p {
     @include set-typography("normal", 2, $compact-line-height);
-    @include apply-text-shadow("shade-5");
+    @include apply-text-shadow("err-window-dark");
 
     text-align: center;
   }
