@@ -11,11 +11,15 @@ import Toolbar from "../components/window/Toolbar";
 import ItemDetails from "../components/window/ItemDetails";
 import ItemList from "../components/window/ItemList";
 
+import Test from "../components/Test";
+
 export default function AdminDashboard() {
   const menuState = useSelector(selectMenu);
 
   return (
-    <>
+      
+      <>
+      
       {menuState.store && <Window title="Store" />}
       {menuState.categories && <Window title="Categories" />}
       {menuState.products && (
@@ -27,6 +31,7 @@ export default function AdminDashboard() {
           </div>
         </Window>
       )}
-    </>
+      </>
+      
   );
 }

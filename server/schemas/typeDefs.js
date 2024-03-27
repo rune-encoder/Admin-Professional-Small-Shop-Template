@@ -131,7 +131,7 @@ input ProductInput {
     details: String
     price: Float
     quantity: Int
-    image: ImageInput
+    image: [ImageInput]
     isFeatured: Boolean
 }
 

@@ -34,10 +34,10 @@ const productSchema = new Schema({
   },
 
   // IMAGE FOR THE PRODUCT 
-  image: {
+  images: [{
     cloudinaryId: String,
     url: String,
-  },
+  }],
 
   // IS THE PRODUCT FEATURED (FOR CAROUSEL)
   isFeatured: {

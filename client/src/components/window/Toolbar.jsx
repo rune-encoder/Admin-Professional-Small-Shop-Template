@@ -6,10 +6,22 @@ import {
   IoIosSearch,
 } from "react-icons/io";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { selectProductMode } from "../../features/products/productSelectors";
+
+import { setProductMode } from "../../features/products/productSlice";
+
+
 export default function Toolbar() {
+  const productMode = useSelector(selectProductMode);
+  const dispatch = useDispatch();
+
   return (
     <div className="toolbar row-no-gutters">
-      <button className="toolbar__btn col-2">
+      <button className="toolbar__btn col-2"
+      onClick={() => dispatch(setProductMode({ mode: "new" }))}
+      >
         <IoIosAddCircleOutline /> New
       </button>
       <button className="toolbar__btn col-2">

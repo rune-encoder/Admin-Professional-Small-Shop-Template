@@ -46,6 +46,11 @@ const products = {
     "Bread Plate Set",
     "Dessert Plate Set",
     "Appetizer Plate Set",
+    "Dinner Plate Collection",
+    "Salad Plate Collection",
+    "Bread Plate Collection",
+    "Dessert Plate Collection",
+    "Appetizer Plate Collection",
   ],
   bowlsProductNames: [
     "Soup Bowl",
@@ -56,6 +61,11 @@ const products = {
     "Salad Bowl Set",
     "Cereal Bowl Set",
     "Fruit Bowl Set",
+    "Soup Bowl Collection",
+    "Salad Bowl Collection",
+    "Cereal Bowl Collection",
+    "Fruit Bowl Collection",
+    "Soup Bowl Collection",
   ],
   cupsProductNames: [
     "Coffee Cup",
@@ -64,6 +74,11 @@ const products = {
     "Coffee Cup Set",
     "Tea Cup Set",
     "Mug Set",
+    "Coffee Cup Collection",
+    "Tea Cup Collection",
+    "Mug Collection",
+    "Coffee Cup Collection",
+    "Tea Cup Collection",
   ],
   potsProductNames: [
     "Sauce Pot",
@@ -72,6 +87,11 @@ const products = {
     "Sauce Pot Set",
     "Soup Pot Set",
     "Stock Pot Set",
+    "Sauce Pot Collection",
+    "Soup Pot Collection",
+    "Stock Pot Collection",
+    "Sauce Pot Collection",
+    "Soup Pot Collection",
   ],
 };
 

@@ -10,7 +10,10 @@ import {
   selectGetCategoriesStatus,
 } from "../../features/categories/categorySelectors";
 
-import { selectCurrentProduct } from "../../features/products/productSelectors";
+import {
+  selectCurrentProduct,
+  selectProductMode,
+} from "../../features/products/productSelectors";
 
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
@@ -24,7 +27,7 @@ import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
-export default function ItemView() {
+export default function ItemEdit() {
   // !Delete: Used to check re-renders of the component
   // const renderCount = useRef(0);
 
@@ -54,6 +57,9 @@ export default function ItemView() {
   // Selector for the current product
   const selectedProduct = useSelector(selectCurrentProduct);
 
+  // Selector for product mode: "view", "update", "new"
+  const productMode = useSelector(selectProductMode);
+
   // Selector for the categories
   const categories = useSelector(selectGetCategories);
   const getCategoriesStatus = useSelector(selectGetCategoriesStatus);
@@ -72,17 +78,20 @@ export default function ItemView() {
   }, [dispatch]);
 
   useEffect(() => {
-    setFormState({
-      // Populate the form with the selected product's data
-      name: selectedProduct.name,
-      category: selectedProduct.category._id,
-      price: selectedProduct.price,
-      quantity: selectedProduct.quantity,
-      isFeatured: selectedProduct.isFeatured,
-      shortDescription: selectedProduct.shortDescription,
-      details: selectedProduct.details,
-    });
-  }, [selectedProduct]);
+    // ! Revisit: Ideally find a way to merge this with other components
+    // Populate the form with the selected product's data if in update mode
+    if (selectedProduct && productMode === "update") {
+      setFormState({
+        name: selectedProduct.name,
+        category: selectedProduct.category._id,
+        price: selectedProduct.price,
+        quantity: selectedProduct.quantity,
+        isFeatured: selectedProduct.isFeatured,
+        shortDescription: selectedProduct.shortDescription,
+        details: selectedProduct.details,
+      });
+    } 
+  }, [selectedProduct, productMode]);
 
   // ==============================
   // Event Handlers Section
@@ -130,110 +139,121 @@ export default function ItemView() {
   // ! ==========>
 
   return (
-    <form className="product-edit__form" onSubmit={handleSubmit}>
-      <div className="product-edit__label-group">
-        <label className="product-edit__label-icon">
-          <MdOutlineShoppingCart />
-          Product Name:
-        </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formState.name}
-          onChange={handleInputChange}
-        />
-      </div>
+      <div className="selected-item-details">
+        <section className="item-details__top-section">
+          <img
+            className="item__image"
+            src="https://justclickhere.co.uk/wp-content/uploads/2021/06/photo-editing.png"
+          ></img>
+        </section>
 
-      <div className="product-edit__label-group">
-        <label className="product-edit__label-icon">
-          <MdOutlineCategory />
-          Category:
-        </label>
-        <select
-          name="category"
-          value={formState.category}
-          onChange={handleInputChange}
-        >
-          {categories &&
-            categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-        </select>
-      </div>
-
-      <div className="custom-row--wrapper row-no-gutters">
-        <div className="col-lg-9 col-md-12 col-sm-5">
-          <div className="custom-column--wrapper">
+        <section className="item-details__bottom-section">
+          <form className="product-edit__form" onSubmit={handleSubmit}>
             <div className="product-edit__label-group">
-              <label className="item-label">Price:</label>
+              <label className="product-edit__label-icon">
+                <MdOutlineShoppingCart />
+                Product Name:
+              </label>
               <input
-                type="number"
-                name="price"
-                value={formState.price}
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formState.name}
                 onChange={handleInputChange}
               />
             </div>
 
             <div className="product-edit__label-group">
-              <label className="item-label">Quantity:</label>
-              <input
-                type="number"
-                name="quantity"
-                value={formState.quantity}
+              <label className="product-edit__label-icon">
+                <MdOutlineCategory />
+                Category:
+              </label>
+              <select
+                name="category"
+                value={formState.category}
+                onChange={handleInputChange}
+              >
+                {categories &&
+                  categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div className="custom-row--wrapper row-no-gutters">
+              <div className="col-lg-9 col-md-12 col-sm-5">
+                <div className="custom-column--wrapper">
+                  <div className="product-edit__label-group">
+                    <label className="item-label">Price:</label>
+                    <input
+                      type="number"
+                      name="price"
+                      value={formState.price}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="product-edit__label-group">
+                    <label className="item-label">Quantity:</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      value={formState.quantity}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="product-edit__label-group">
+                    <label className="item-label">Featured:</label>
+                    <input
+                      type="checkbox"
+                      name="isFeatured"
+                      checked={formState.isFeatured}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-md-12 col-sm-5">
+                <div className="custom-column--wrapper">
+                  <button className="product-edit__btn" type="submit">
+                    <BsSave />
+                    Save
+                  </button>
+                  <button className="product-edit__btn" type="button">
+                    <IoArrowBackCircleOutline />
+                    Cancel
+                  </button>
+                  <button className="product-edit__btn" type="button">
+                    <BsTrash />
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="product-edit__description">
+              <label className="">Description: </label>
+              <textarea
+                name="shortDescription"
+                value={formState.shortDescription}
                 onChange={handleInputChange}
               />
             </div>
 
-            <div className="product-edit__label-group">
-              <label className="item-label">Featured:</label>
-              <input
-                type="checkbox"
-                name="isFeatured"
-                checked={formState.isFeatured}
+            <div className="product-edit__description">
+              <label>Details:</label>
+              <textarea
+                name="details"
+                value={formState.details}
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-        </div>
-
-        <div className="col-lg-3 col-md-12 col-sm-5">
-          <div className="custom-column--wrapper">
-            <button className="product-edit__btn" type="submit">
-              <BsSave />
-              Save
-            </button>
-            <button className="product-edit__btn" type="button">
-              <IoArrowBackCircleOutline />
-              Cancel
-            </button>
-            <button className="product-edit__btn" type="button">
-              <BsTrash />
-              Delete
-            </button>
-          </div>
-        </div>
+          </form>
+        </section>
       </div>
-
-      <div className="product-edit__description">
-        <label className="">Description: </label>
-        <textarea
-          name="shortDescription"
-          value={formState.shortDescription}
-          onChange={handleInputChange}
-        />
-      </div>
-
-      <div className="product-edit__description">
-        <label>Details:</label>
-        <textarea
-          name="details"
-          value={formState.details}
-          onChange={handleInputChange}
-        />
-      </div>
-    </form>
   );
 }

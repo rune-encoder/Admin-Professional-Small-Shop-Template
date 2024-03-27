@@ -1,14 +1,12 @@
+$toolbar--height: rem(37px);
+
 // WINDOW TOOLBAR
 // Location: (Within Window Body: Top)
 .toolbar {
-  // ! Revisit
-  // @include apply-space("padding", -10, "y", true);
-
+  @include apply-space("padding", -10, "y", true);
   @include apply-gradient("light", "shade-1");
   @include apply-box-shadow("always-dark", 1, $y: -1px);
 
-  position: sticky;
-  top: 0;
   height: $toolbar--height;
   border-bottom: solid rem(1px) var(--shade-7);
   z-index: 1;

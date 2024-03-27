@@ -10,7 +10,6 @@ import { selectShowErrorModal } from "./features/errorSlice.js";
 // Import Components
 import Login from "./pages/Login.jsx";
 import Header from "./components/header/Header.jsx";
-import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import ErrorMessage from "./components/error/ErrorMessage.jsx";
 
@@ -31,7 +30,6 @@ export default function Content() {
             <main className="content__main">
               <Outlet />
             </main>
-            <Footer />
           </div>
         </>
       )}

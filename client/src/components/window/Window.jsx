@@ -12,15 +12,19 @@ export default function Window({ title, children }) {
   const itemName = title.toLowerCase();
 
   return (
-    <div className="window container">
-      <div className="window__bar">
-        <h6>{title}</h6>
-        <button onClick={() => dispatch(toggleMenuItem({ [itemName]: false }))}>
-          <GrClose />
-        </button>
-      </div>
+    <div className="window--wrapper">
+      <div className="window">
+        <div className="window__bar">
+          <h6>{title}</h6>
+          <button
+            onClick={() => dispatch(toggleMenuItem({ [itemName]: false }))}
+          >
+            <GrClose />
+          </button>
+        </div>
 
-      <div className="window__body">{children}</div>
+        <div className="window__body">{children}</div>
+      </div>
     </div>
   );
 }

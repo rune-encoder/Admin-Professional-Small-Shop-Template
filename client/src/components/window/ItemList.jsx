@@ -5,10 +5,7 @@ import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Import Redux Actions
-import {
-  currentProduct,
-  toggleProductEditMode,
-} from "../../features/products/productSlice";
+import { setProductMode } from "../../features/products/productSlice";
 
 // Import Redux Selectors
 import {
@@ -90,8 +87,7 @@ export default function ItemList() {
             <tr
               key={product._id}
               onClick={() => {
-                dispatch(toggleProductEditMode(false));
-                dispatch(currentProduct(product));
+                dispatch(setProductMode({ mode: "view", product }));
               }}
             >
               <td>{product.name}</td>
@@ -104,8 +100,7 @@ export default function ItemList() {
                   data-action="Update"
                   onClick={(event) => {
                     event.stopPropagation();
-                    dispatch(toggleProductEditMode(true));
-                    dispatch(currentProduct(product));
+                    dispatch(setProductMode({ mode: "update", product }));
                   }}
                 >
                   <FiEdit />
