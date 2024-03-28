@@ -1,6 +1,7 @@
 // <===== WINDOW DETAILS SECTION =====>
 
 // ! WORKING =============================================
+// INSIDE CONTENT WRAPPER FOR WINDOW CONTENT
 .selected-item-details {
   @include apply-border("shade-8");
   @include apply-box-shadow("always-dark", 1);

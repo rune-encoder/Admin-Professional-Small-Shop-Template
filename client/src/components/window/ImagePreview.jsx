@@ -1,13 +1,24 @@
+// ! Revisit: Refactor and Comment
 // Import React Hooks
 import { useState, useEffect, useRef } from "react";
+
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
 export default function ImagePreview() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [topImage, setTopImage] = useState(null);
+  const imageGroupRef = useRef(null);
 
   useEffect(() => {
     console.log("selectedImages", selectedImages);
+    console.log("imageGroupRef", imageGroupRef);
   }, [selectedImages]);
+
+  const scroll = (scrollOffset) => {
+    if (imageGroupRef.current) {
+      imageGroupRef.current.scrollBy(scrollOffset, 0);
+    }
+  };
 
   const handleImageChange = (e) => {
     // console.log("handleImageChange");
@@ -47,21 +58,29 @@ export default function ImagePreview() {
 
       <section className="select-img__section--wrapper">
         <div className="select-img__section">
-          <button>+</button>
+          <button className="left-img-btn" onClick={() => scroll(-50)}>
+            <IoIosArrowDropleft />
+          </button>
 
-          <div className="select-img__group">
+          <div ref={imageGroupRef} className="select-img__group">
             {selectedImages.map((image, index) => (
               <div
                 key={index}
                 className="select-img"
                 onClick={() => handleImageClick(image)}
               >
-                <img className="item__image" src={image} alt={`Selected ${index}`} />
+                <img
+                  className="item__image"
+                  src={image}
+                  alt={`Selected ${index}`}
+                />
               </div>
             ))}
           </div>
 
-          <button>+</button>
+          <button className="right-img-btn" onClick={() => scroll(50)}>
+            <IoIosArrowDropright />
+          </button>
         </div>
       </section>
 

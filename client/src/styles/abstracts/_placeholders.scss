@@ -1,5 +1,8 @@
 // ! Revisit: Document with SassDoc
 
+// ==============================
+// SUBMENU LAYOUT AND STYLES
+// ==============================
 // Layout for submenus: Dropdowns, Context Menus, etc.
 %submenu--layout {
   @include apply-flex(column, center, start);
@@ -17,6 +20,9 @@
   @include set-typography("light");
 }
 
+// ==============================
+// BASE BUTTONS
+// ==============================
 // Layout for Buttons containing Icons and Text
 %icon-text__button--layout {
   @include apply-flex(row, center, center);
@@ -34,6 +40,9 @@
   }
 }
 
+// ==============================
+// TOOLTIPS
+// ==============================
 // Layout for Tooltips (Displayed on Hover)
 %tooltip--layout {
   @include apply-space("padding", -5, "x");
@@ -51,13 +60,18 @@
   @extend %tooltip--typography; // (SEE _TYPOGRAPHY.SCSS)
 }
 
+// ==============================
+// SUBTLE TEXT
+// ==============================
 // Make text subtle
 %text--subtle {
   font-size: modular-scale(-2);
   color: var(--shade-15);
 }
 
-// Style for form inputs
+// ==============================
+// FORMS
+// ==============================
 %form-input--style {
   @include apply-gradient("shade-1", "shade-2", 45deg);
   @include apply-border("shade-8", $border-radius-sm);
@@ -72,8 +86,10 @@
   }
 }
 
-//! Layout for Window
-
+// ==============================
+// WINDOW
+// ==============================
+// Window layout
 %window--layout {
   @include apply-flex(column);
   @include apply-space("padding", -10, "x");
@@ -83,11 +99,13 @@
   overflow-y: auto;
 }
 
+// Window layout for tabs
 %window-tab--layout {
   @include apply-flex(row, space-between, center);
   @include apply-space("padding", -10, "x");
 }
 
+// Window layout for tab buttons
 %window-tab__button--layout {
   @include apply-flex(row, center, center);
   @include apply-space("padding", -10);
