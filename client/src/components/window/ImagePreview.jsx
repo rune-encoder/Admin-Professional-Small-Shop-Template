@@ -9,10 +9,10 @@ export default function ImagePreview() {
   const [topImage, setTopImage] = useState(null);
   const imageGroupRef = useRef(null);
 
-  useEffect(() => {
-    console.log("selectedImages", selectedImages);
-    console.log("imageGroupRef", imageGroupRef);
-  }, [selectedImages]);
+  // useEffect(() => {
+  //   console.log("selectedImages", selectedImages);
+  //   console.log("imageGroupRef", imageGroupRef);
+  // }, [selectedImages]);
 
   const scroll = (scrollOffset) => {
     if (imageGroupRef.current) {
@@ -84,10 +84,10 @@ export default function ImagePreview() {
         </div>
       </section>
 
-      <section className="">
+      <section className="choose-file__container">
         <input
-          className=""
-          placeholder="Image URL"
+          className="choose-file__input"
+          placeholder="Upload Image"
           id="image"
           type="file"
           name="image"

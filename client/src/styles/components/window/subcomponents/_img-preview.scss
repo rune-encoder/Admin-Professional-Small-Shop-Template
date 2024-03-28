@@ -76,3 +76,14 @@
 }
 
 // Item details bottom section....
+
+.choose-file__container {
+  @include apply-flex(row, start, center);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding-bottom", -5);
+}
+
+.choose-file__input {
+  @include apply-font-family("roboto");
+  @include apply-text-shadow("shade-3");
+}
