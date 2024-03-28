@@ -14,20 +14,20 @@
 @import "./base/root";
 @import "./base/base";
 @import "./base/typography";
-@import "./components/error-modal";
 @import "./components/scrollbar";
-@import "./components/window/window";
-@import "./components/window/toolbar";
-@import "./components/window/content";
-@import "./components/window/item-details";
-@import "./components/window/item-view";
-@import "./components/window/item-form";
-@import "./components/window/item-list";
+@import "./components/error-window/error-window";
+@import "./components/window/base/window";
+@import "./components/window/base/toolbar";
+@import "./components/window/base/content";
+@import "./components/window/subcomponents/item-details";
+@import "./components/window/subcomponents/item-view";
+@import "./components/window/subcomponents/item-form";
+@import "./components/window/subcomponents/item-list";
+@import "./components/window/subcomponents/img-preview";
 @import "./layout/sidebar";
 @import "./layout/header";
 @import "./layout/footer";
 @import "./pages/login";
-@import "./pages/store";
 @import "./shame";
 
 

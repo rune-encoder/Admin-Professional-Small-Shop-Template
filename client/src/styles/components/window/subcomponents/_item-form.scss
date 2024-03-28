@@ -1,7 +1,9 @@
 $form__input--width: rem(125px);
 
-// <===== EDIT SELECTED ITEM SECTION =====>
-
+// ! Revisit: Refactor later
+// ==============================
+// EDIT FORM SECTION
+// ==============================
 // Edit form: general layout
 .product-edit__form {
   @include apply-flex(column, center, center);
@@ -85,6 +87,6 @@ $form__input--width: rem(125px);
 .product-edit__btn {
   @include apply-font-family("roboto");
   @include set-typography("medium", 0, $base-line-height);
-  @extend %toggle-menu__button--layout;
-  @extend %toggle-menu__button--style;
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
 }

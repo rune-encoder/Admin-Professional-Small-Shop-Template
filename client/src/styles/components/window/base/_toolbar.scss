@@ -1,7 +1,10 @@
+// VARIABLES: DIMENSIONS FOR THE TOOLBAR
 $toolbar--height: rem(37px);
 
-// WINDOW TOOLBAR
-// Location: (Within Window Body: Top)
+// ==============================
+// WINDOW TOOLBAR SECTION
+// ==============================
+// TOOLBAR: (Within the window body at the top)
 .toolbar {
   @include apply-space("padding", -10, "y", true);
   @include apply-gradient("light", "shade-1");
@@ -17,7 +20,7 @@ $toolbar--height: rem(37px);
     @include apply-flex(row, flex-start, center);
     @include apply-space("padding", -10, "x", $important: true);
     @include apply-space("gap", -10);
-    @extend %toggle-menu__button--style;
+    @extend %icon-text__button--style;
 }
 
 // TOOLBAR SEARCHBAR

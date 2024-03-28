@@ -1,4 +1,6 @@
-// <===== HEADER SECTION =====>
+// ==============================
+// HEADER SECTION
+// ==============================
 header {
   @include apply-flex(row, space-between, center);
   @include apply-gradient("light", "shade-1");
@@ -13,19 +15,25 @@ header {
   @extend %text--subtle;
 }
 
-// <===== LOGO SECTION =====>
+// ==============================
+// LOGO SECTION
+// ==============================
 .header__logo {
   @include apply-space("margin", -5, "x");
   @include apply-space("padding", -5, "x");
 }
 
-// <===== TITLE SECTION =====>
+// ==============================
+// TITLE SECTION
+// ==============================
 .header__title {
   @include apply-font-family("ysabeau-sc");
   @include set-typography("bold");
 }
 
-// <===== MINI-NAVIGATION-BAR SECTION =====>
+// ==============================
+// MINI-NAVBAR SECTION SECTION
+// ==============================
 .mini-navbar {
   @include apply-flex(row, center, center);
   @include apply-space("margin", -5, "x");
@@ -50,13 +58,15 @@ header {
 
   color: var(--shade-19);
   font-size: modular-scale(3);
-  
+
   &:hover {
     color: var(--selection);
   }
 }
 
-// <===== DROPDOWN MENU SECTION =====>
+// ==============================
+// DROPDOWN MENU SECTION (Hidden)
+// ==============================
 .dropdown-menu__section {
   @include apply-position(
     absolute,
@@ -65,14 +75,14 @@ header {
   );
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
-  @extend %toggle-menu--layout;
-  @extend %toggle-menu--style;
+  @extend %submenu--layout;
+  @extend %submenu--style;
 
   z-index: 2;
 }
 
 // DROPDOWN MENU: BUTTONS
 .dropdown-menu__button {
-  @extend %toggle-menu__button--layout;
-  @extend %toggle-menu__button--style;
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
 }

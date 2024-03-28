@@ -1,12 +1,15 @@
 // ! Revisit: Document with SassDoc
-%toggle-menu--layout {
+
+// Layout for submenus: Dropdowns, Context Menus, etc.
+%submenu--layout {
   @include apply-flex(column, center, start);
   @include apply-space("gap", -10);
 
   z-index: 1;
 }
 
-%toggle-menu--style {
+// Style for submenus: Dropdowns, Context Menus, etc.
+%submenu--style {
   @include apply-font-family("inter");
   @include apply-gradient("light", "shade-1", to right top);
   @include apply-border("shade-10", $border-radius-sm);
@@ -14,12 +17,14 @@
   @include set-typography("light");
 }
 
-%toggle-menu__button--layout {
+// Layout for Buttons containing Icons and Text
+%icon-text__button--layout {
   @include apply-flex(row, center, center);
   @include apply-space("gap", -10);
 }
 
-%toggle-menu__button--style {
+// Style for Buttons containing Icons and Text
+%icon-text__button--style {
   color: var(--dark);
   transition: transform 0.2s ease-out;
 
@@ -29,11 +34,13 @@
   }
 }
 
+// Layout for Tooltips (Displayed on Hover)
 %tooltip--layout {
   @include apply-space("padding", -5, "x");
   @include apply-space("padding", -15, "y");
 }
 
+// Style for Tooltips (Displayed on Hover)
 %tooltip--style {
   @include apply-glass-effect("opacity-light");
   @include apply-border("opacity-shade-8", $border-radius-sm);
@@ -44,11 +51,13 @@
   @extend %tooltip--typography; // (SEE _TYPOGRAPHY.SCSS)
 }
 
+// Make text subtle
 %text--subtle {
   font-size: modular-scale(-2);
   color: var(--shade-15);
 }
 
+// Style for form inputs
 %form-input--style {
   @include apply-gradient("shade-1", "shade-2", 45deg);
   @include apply-border("shade-8", $border-radius-sm);
@@ -62,3 +71,26 @@
     color: var(--shade-18);
   }
 }
+
+//! Layout for Window
+
+%window--layout {
+  @include apply-flex(column);
+  @include apply-space("padding", -10, "x");
+  @include apply-space("padding", -5, "y");
+
+  flex: 1;
+  overflow-y: auto;
+}
+
+%window-tab--layout {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "x");
+}
+
+%window-tab__button--layout {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -10);
+}
+
+

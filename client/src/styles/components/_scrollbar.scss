@@ -1,10 +1,10 @@
-// ! Revisit
+// ! Revisit: Improve scrollbar styles
 
 // For WebKit browsers (e.g., Chrome, Safari)
 
 // Scrollbar
 #root ::-webkit-scrollbar {
-  width: rem(15px);
+  width: rem(10px);
 }
 
 // Scrollbar button
@@ -15,7 +15,7 @@
 
 // Scrollbar track
 #root ::-webkit-scrollbar-track {
-  @include apply-border("shade-5", $border-radius-sm);
+  @include apply-border("shade-5");
 
   box-shadow: inset 0 0 rem(3px) var(--always-dark);
   background: var(--always-light);

@@ -41,42 +41,41 @@ export default function ImagePreview() {
 
   return (
     <>
-      <div className="test__top-section cbg">
-        <section className="">
-          {topImage && (
-            <div className="img-cont">
-              <img src={topImage} alt="Top" className="img-icon" />
-            </div>
-          )}
-        </section>
-      </div>
+      <section className="item-details__top-section">
+        {topImage && <img src={topImage} alt="Top" className="item__image" />}
+      </section>
 
-      <div className="test__middle-section cbg">
-          <section className="t-img-sec">
+      <section className="select-img__section--wrapper">
+        <div className="select-img__section">
+          <button>+</button>
+
+          <div className="select-img__group">
             {selectedImages.map((image, index) => (
-              <img
+              <div
                 key={index}
-                src={image}
-                alt={`Selected ${index}`}
-                width="50"
-                height="50"
+                className="select-img"
                 onClick={() => handleImageClick(image)}
-              />
+              >
+                <img className="item__image" src={image} alt={`Selected ${index}`} />
+              </div>
             ))}
-          </section>
+          </div>
 
-          <section className="t-input-sec">
-            <input
-              className=""
-              placeholder="Image URL"
-              id="image"
-              type="file"
-              name="image"
-              onChange={handleImageChange}
-              multiple
-            />
-          </section>
+          <button>+</button>
         </div>
+      </section>
+
+      <section className="">
+        <input
+          className=""
+          placeholder="Image URL"
+          id="image"
+          type="file"
+          name="image"
+          onChange={handleImageChange}
+          multiple
+        />
+      </section>
     </>
   );
 }

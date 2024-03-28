@@ -128,9 +128,9 @@ export default function ItemCreate() {
 
   return (
     <div className="selected-item-details">
-    <section className="item-details__top-section">
+
       <ImagePreview />
-    </section>
+
 
     <section className="item-details__bottom-section">
       <form className="product-edit__form" onSubmit={handleSubmit}>

@@ -1,9 +1,12 @@
-// !Revisit: Refactor later: Similar to Window Styles except for colors and dimensions.
+// VARIABLES: DIMENSIONS FOR THE ERROR WINDOW
 $error__window--height: rem(300px);
 $error__window--width: rem(720px);
-$error__window-bar--height: rem(24px);
 
-.error-modal__content {
+// ==============================
+// ERROR WINDOW SECTION
+// ==============================
+// SPACE AROUND THE ERROR WINDOW: (To position the error window as a modal)
+.error__window--wrapper {
   @include apply-position(fixed, $top: 50%, $left: 50%);
   @include apply-flex(row, center, center);
 
@@ -11,29 +14,28 @@ $error__window-bar--height: rem(24px);
   z-index: 5;
 }
 
+// ERROR WINDOW
 .error__window {
-  @include apply-space("padding", -5, "y");
+  @extend %window--layout;
+  @include apply-box-shadow("always-dark", 10);
   @include apply-gradient("err-window-dark", "err-window-light");
   @include apply-border("danger", $border-radius-md);
-  @include apply-box-shadow("always-dark", 10);
 
-  // ! Revisit Remove the following === Window specs (may change later)
   max-width: $error__window--width;
-  height: auto;
+  height: $error__window--height;
 }
 
-// WINDOW BAR/TAB.
-.error__window-bar {
-  @include apply-flex(row, space-between, center);
-  @include apply-space("padding", -10, "x");
-
-  height: $error__window-bar--height;
+// ==============================
+// ERROR TAB SECTION
+// ==============================
+// TAB: (Window Title Bar)
+.error__window-tab {
+  @extend %window-tab--layout;
 }
 
-// ! Revisit - Improve Style for Button
-.error__window-bar button {
-  @include apply-flex(row, center, center);
-  @include apply-space("padding", -10);
+// TAB: CLOSE BUTTON
+.error__window-tab button {
+  @extend %window-tab__button--layout;
   @include apply-border("danger", $border-radius-sm);
 
   &:hover {
@@ -43,7 +45,10 @@ $error__window-bar--height: rem(24px);
   }
 }
 
-// WINDOW BODY.
+// ==============================
+// ERROR WINDOW BODY SECTION
+// ==============================
+// BODY: Main content area within the error window.
 .error__window-body {
   @include apply-space("margin-top", -5);
   @include apply-gradient("err-content-dark", "shade-3", to bottom left);
@@ -54,6 +59,10 @@ $error__window-bar--height: rem(24px);
   @include apply-space("gap", -10);
   @include apply-font-family("roboto-condensed");
 
+  flex-grow: 1; // Expand to fill the remaining space
+  overflow-y: auto;
+
+  // <===== ERROR WINDOW CONTENT SECTION =====>
   // Error Message Icon
   svg {
     @include set-typography("normal", 5, $compact-line-height);
@@ -66,8 +75,4 @@ $error__window-bar--height: rem(24px);
 
     text-align: center;
   }
-
-
-  overflow: auto;
-  height: $error__window--height;
 }

@@ -1,11 +1,15 @@
-// WINDOW CONTENT
-// location: (Within Window Body: Bottom) (All content under toolbar)
+// ==============================
+// WINDOW CONTENT SECTION
+// ==============================
+// CONTENT: Within the window body and under the toolbar.
+// Contains the content intended to be displayed in the window body.
 .window__content {
   // Fit content under toolbar using all available space.
   height: calc(100% - $toolbar--height);
 }
 
-// Wrapper for content sections. (Sections: item-details.scss and item-list.scss)
+// CONTENT WRAPPER: Contains sections with different content within the window content area.
+// Used within the window__content area to wrap different sections of content and control the overflow.
 .window__content--wrapper {
   @include apply-space("padding", -10, "x", $important: true);
   @include apply-space("padding", -5, "y", $important: true);

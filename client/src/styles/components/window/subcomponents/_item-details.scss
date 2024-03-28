@@ -13,7 +13,7 @@
 
 // ! WORKING =============================================
 .item-details__top-section {
-  @include apply-flex(row, center, center);
+  @include apply-flex(column, center, center);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
 
@@ -38,3 +38,4 @@
   flex-grow: 1;
   overflow-y: auto;
 }
+

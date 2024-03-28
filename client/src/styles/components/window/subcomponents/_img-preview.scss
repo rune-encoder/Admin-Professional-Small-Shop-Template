@@ -1,0 +1,55 @@
+// ! WORKING =============================================
+
+.select-img__section--wrapper {
+    // @include apply-flex(row, center, center);
+      @include apply-space("padding", -10, "x");
+    @include apply-space("padding-bottom", -5);
+  
+    width: 100%;
+    height: 10%;
+  
+    // border: solid red 1px;
+  }
+  
+  .select-img__section {
+    @include apply-gradient("shade-2", "shade-3", to bottom left);
+    @include apply-flex(row, space-between, center);
+  
+    width: 100%;
+    height: 100%;
+  
+    // border: solid red 1px;
+  }
+  
+  
+  
+  .select-img__group {
+    @include apply-flex(row, start, center);
+  
+    width: 100%;
+    height: 100%;
+
+    // overflow: hidden;
+  
+    // border: solid red 1px;
+    // overflow-x: auto;
+  
+  }
+  
+  .select-img {
+    @include apply-flex(row, center, center);
+    @include apply-space("padding", -10, "x");
+    @include apply-space("padding", -10, "y");
+  
+    width: 50px;
+    height: 100%;
+    
+    cursor: pointer;
+    // border: solid red 1px;
+
+    &:hover {
+        @include apply-border("shade-8", $border-radius-sm);
+        box-sizing: border-box;
+    }
+  }
+  

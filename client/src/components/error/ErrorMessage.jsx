@@ -15,10 +15,11 @@ export default function ErrorMessage() {
 
   const latestErrorMessage = useSelector(selectLatestErrorMessage);
 
+  // ! Revisit: Keep or remove "container" class on "error__window" div
   return (
-    <div className="error-modal__content">
+    <div className="error__window--wrapper">
       <div className="error__window container">
-        <div className="error__window-bar">
+        <div className="error__window-tab">
           <h6>Error</h6>
           <button onClick={() => dispatch(toggleErrorModal(false))}>
             <GrClose />

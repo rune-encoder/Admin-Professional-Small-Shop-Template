@@ -1,5 +1,7 @@
-// <===== WINDOW SECTION =====>
-
+// ==============================
+// WINDOW SECTION
+// ==============================
+// SPACE AROUND THE WINDOW: (To position the window based on the screen size)
 .window--wrapper {
   @include apply-flex(column);
   @include apply-space("padding", 0, "x");
@@ -9,37 +11,38 @@
   height: 100%;
 }
 
+// WINDOW
 .window {
-  @include apply-flex(column);
-  @include apply-space("padding", -10, "x");
-  @include apply-space("padding", -5, "y");
+  @extend %window--layout;
+  @include apply-box-shadow("always-dark", 10);
   @include apply-gradient("shade-2", "shade-4");
   @include apply-border("shade-10", $border-radius-md);
-  @include apply-box-shadow("always-dark", 10);
-
-  flex: 1; // Expand to fill the remaining space
-  overflow-y: auto;
 }
 
-// WINDOW BAR/TAB.
-.window__bar {
-  @include apply-flex(row, space-between, center);
-  @include apply-space("padding", -10, "x");
+// ==============================
+// TAB SECTION
+// ==============================
+// TAB: (Window Title Bar)
+.window__tab {
+  @extend %window-tab--layout;
 }
 
-// ! Revisit - Improve Style for Button
-.window__bar button {
-  @include apply-flex(row, center, center);
-  @include apply-space("padding", -10);
+// TAB: CLOSE BUTTON
+.window__tab button {
+  @extend %window-tab__button--layout;
   @include apply-border("shade-10", $border-radius-sm);
 
   &:hover {
     @include apply-gradient("shade-5", "shade-8", to bottom left);
+
     color: var(--selection);
   }
 }
 
-// WINDOW BODY.
+// ==============================
+// WINDOW BODY SECTION
+// ==============================
+// BODY: Main content area within the window.
 .window__body {
   @include apply-space("margin-top", -5);
   @include apply-gradient("shade-2", "shade-3", to bottom left);
