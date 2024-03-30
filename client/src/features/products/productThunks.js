@@ -8,7 +8,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 
 // Import Mutations
-import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
+import {
+  CREATE_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT,
+} from "../../utils/mutations";
 
 // Fetch all products from the server
 export const getProducts = createAsyncThunk(
@@ -23,6 +27,25 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// !WORKING: ===================================
+// Create a new product and add it to the server
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async (input) => {
+    console.log(input);
+    const { data } = await client.mutate({
+      mutation: CREATE_PRODUCT,
+      variables: input,
+    });
+
+    console.log(data);
+
+    // Return the new product from the server
+    return data?.createProduct;
+  }
+);
+// !WORKING: ===================================
+
 // Update a product on the server
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
@@ -31,7 +54,7 @@ export const updateProduct = createAsyncThunk(
       mutation: UPDATE_PRODUCT,
       variables: { id, input },
 
-        //Note: Apollo automatically updates the cache with the new product due to normalization.
+      //Note: Apollo automatically updates the cache with the new product due to normalization.
     });
 
     // Return the updated product from the server

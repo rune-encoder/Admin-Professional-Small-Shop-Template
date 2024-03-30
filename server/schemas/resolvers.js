@@ -6,12 +6,14 @@ const { checkPermission, adminLevel } = require("../utils/adminPermissions");
 const {
   AuthenticationError,
   ForbiddenError,
+  ApolloError,
 } = require("apollo-server-express");
 
-// const { uploadImage, cloudConfig } = require("../utils/imageUploader");
-// require("dotenv").config();
+const { uploadImages, cloudConfig } = require("../utils/imageUploader");
+require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
+
 // const fs = require("fs");
-// const cloudinary = require("cloudinary").v2;
 // ! const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
 // CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION: 
@@ -183,9 +185,24 @@ const resolvers = {
       return await Category.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
 
+    // !WORKING: ===================================
     createProduct: withAuth(async (parent, { input }, context) => {
-      return await Product.create(input);
+      // return await Product.create(input);
+      console.log("Resolvers: createProduct");
+      try {
+        // console.log(input);
+
+        await cloudinary.config(cloudConfig);
+
+        const results = await uploadImages(input.image);
+        console.log(results);
+
+      } catch (error) {
+        throw new ApolloError("Error creating product", error);
+      }
+
     }, adminLevel.EDITOR),
+    // !WORKING: ===================================
 
     updateProduct: withAuth(async (parent, { _id, input }, context) => {
       return await Product.findByIdAndUpdate(

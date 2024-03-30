@@ -15,6 +15,7 @@ import { selectCurrentProduct } from "../../features/products/productSelectors";
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
 import {
+  createProduct,
   getProducts,
   updateProduct,
 } from "../../features/products/productThunks";
@@ -28,18 +29,6 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
 
 export default function ItemCreate() {
-  // useEffect(() => {
-  //     console.log(selectedImages);
-  // }, [selectedImages]);
-  // !Delete: Used to check re-renders of the component
-  // const renderCount = useRef(0);
-
-  // useEffect(() => {
-  //   renderCount.current = renderCount.current + 1;
-  //   console.log(`ItemEdit has rendered ${renderCount.current} times`);
-  // });
-  // ! ==========>
-
   // ==============================
   // useState Hooks Section
   // ==============================
@@ -54,11 +43,18 @@ export default function ItemCreate() {
     details: "",
   });
 
+  // !WORKING: ===================================
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [displayImage, setDisplayImage] = useState(null);
+
+  // !WORKING: ===================================
+
   // ==============================
   // useSelector Hooks Section
   // ==============================
   // Selector for the current product
-  const selectedProduct = useSelector(selectCurrentProduct);
+  // !Disabled
+  // const selectedProduct = useSelector(selectCurrentProduct);
 
   // Selector for the categories
   const categories = useSelector(selectGetCategories);
@@ -80,6 +76,51 @@ export default function ItemCreate() {
   // ==============================
   // Event Handlers Section
   // ==============================
+
+  // !WORKING: ===================================
+  const handleImageChange = async (e) => {
+    // Create a new array from the files (or file) selected.
+    const newFiles = Array.from(e.target.files);
+
+    // Create a new promise for the images (or image) to be read.
+    const newImages = newFiles.map((file) => {
+      return new Promise((resolve, reject) => {
+        // Create new instance of the file reader API
+        const reader = new FileReader();
+
+        // Event handler called when the read operation is completed.
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+
+        // Event handler is called when an error occurs while reading the files (or file)
+        // If there is an error, the promise is rejected.
+        reader.onerror = reject;
+
+        // Read the files (or file) and convert them to a data URL.
+        reader.readAsDataURL(file);
+      });
+    });
+
+    try {
+      // Wait for all the images (or image) to settle.
+      // If fulfilled, the array of data URLs is assigned to newDataUrls.
+      const newDataUrls = await Promise.all(newImages);
+
+      // Add the new data URLs to the state of selectedImages array.
+      setSelectedImages((prevImages) => [...prevImages, ...newDataUrls]);
+
+      // Set the displayed image to the first image file uploaded
+      // Note: Noticable when multiple files are uploaded at once.
+      setDisplayImage(newDataUrls[0]);
+    } catch (error) {
+      // If rejected, an error message is logged to the console.
+      console.error("Error reading image files:", error);
+    }
+  };
+
+  // !WORKING: ===================================
+
   const handleInputChange = (event) => {
     const { name, type, checked, value } = event.target;
     let newValue;
@@ -107,13 +148,25 @@ export default function ItemCreate() {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
+    // console.log(formState);
+    // console.log(selectedImages);
+
+    let input = { ...formState, image: selectedImages };
+    // console.log( selectedImages )
+    // console.log({ input })
+
+    // !Uncomment to check on the server
+    // await dispatch(createProduct({ input }));
+
+    // console.log({ id: selectedProduct._id, input: formState })
+
     // Wait for the product to be updated before fetching the products again.
-    await dispatch(
-      updateProduct({ id: selectedProduct._id, input: formState })
-    );
+    // await dispatch(
+    //   updateProduct({ id: selectedProduct._id, input: formState })
+    // );
 
     // Refresh the products list global state by fetching the products again. (Server or Cache)
-    dispatch(getProducts());
+    // dispatch(getProducts());
   };
 
   // ! Revisit: Handling Loading State
@@ -122,11 +175,14 @@ export default function ItemCreate() {
   }
   // ! ==========>
 
-  // ! ==========>
-
   return (
     <div className="selected-item-details">
-      <ImagePreview />
+      <ImagePreview
+        selectedImages={selectedImages}
+        displayImage={displayImage}
+        setDisplayImage={setDisplayImage}
+        handleImageChange={handleImageChange}
+      />
 
       <section className="item-details__bottom-section">
         <form className="product-edit__form" onSubmit={handleSubmit}>
@@ -202,7 +258,7 @@ export default function ItemCreate() {
               <div className="custom-column--wrapper">
                 <button className="product-edit__btn" type="submit">
                   <BsSave />
-                  Save
+                  Create
                 </button>
                 {/* <button className="product-edit__btn" type="button">
                   <IoArrowBackCircleOutline />

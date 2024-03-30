@@ -14,6 +14,29 @@ export const LOGIN_ADMIN = gql`
   }
 `;
 
+export const CREATE_PRODUCT = gql`
+mutation createProduct($input: ProductInput!) {
+  createProduct(input: $input) {
+    _id
+    category {
+      _id
+    }
+    createdAt
+    details
+    image {
+      cloudinaryId
+      url
+    }
+    isFeatured
+    name
+    price
+    quantity
+    shortDescription
+    inStock
+  }
+}
+`;
+
 export const UPDATE_PRODUCT = gql`
   mutation updateProduct($id: ID!, $input: ProductInput!) {
     updateProduct(_id: $id, input: $input) {
