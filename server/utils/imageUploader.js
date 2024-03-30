@@ -14,7 +14,7 @@ const uploadImages = async (imagePaths) => {
   // allow overwriting the asset with new versions
   const options = {
     use_filename: true,
-    unique_filename: false,
+    unique_filename: true,
     overwrite: true,
     upload_preset: "Shop-Template",
   };
@@ -23,6 +23,7 @@ const uploadImages = async (imagePaths) => {
     // Upload the images
     const uploadPromises = imagePaths.map(imagePath => cloudinary.uploader.upload(imagePath, options));
     const results = await Promise.all(uploadPromises);
+    return results;
   } catch (error) {
     console.error(error);
   }

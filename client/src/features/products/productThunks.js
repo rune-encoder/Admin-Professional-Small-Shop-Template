@@ -32,12 +32,12 @@ export const getProducts = createAsyncThunk(
 export const createProduct = createAsyncThunk(
   "products/createProduct",
   async (input) => {
-    console.log(input);
     const { data } = await client.mutate({
       mutation: CREATE_PRODUCT,
       variables: input,
     });
 
+    // !Delete Later
     console.log(data);
 
     // Return the new product from the server

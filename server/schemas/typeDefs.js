@@ -32,6 +32,7 @@ type Category {
 type Image {
     cloudinaryId: String
     url: String
+    _id: ID
 }
 
 type Product {
@@ -43,7 +44,7 @@ type Product {
     details: String
     price: Float!
     quantity: Int!
-    image: Image
+    image: [Image]
     isFeatured: Boolean
     inStock: Boolean
 }
@@ -83,11 +84,6 @@ type Auth {
 input CartInput {
     product: ID
     quantity: Int
-}
-
-input ImageInput {
-    cloudinaryId: String
-    url: String
 }
 
 # <=== FILTERS: INPUTS FOR QUERIES ===>

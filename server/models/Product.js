@@ -34,7 +34,7 @@ const productSchema = new Schema({
   },
 
   // IMAGE FOR THE PRODUCT 
-  images: [{
+  image: [{
     cloudinaryId: String,
     url: String,
   }],

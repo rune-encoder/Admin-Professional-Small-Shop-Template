@@ -16,7 +16,7 @@ const cloudinary = require("cloudinary").v2;
 // const fs = require("fs");
 // ! const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
-// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION: 
+// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION:
 // MUST BE LOGGED IN. DEFAULT: "VIEWER"
 const withAuth = (resolverFunction, requiredPermission) => {
   return async (parent, args, context, info) => {
@@ -140,8 +140,13 @@ const resolvers = {
       const adminData = await Admin.findById(args._id);
 
       // Prevents modification of the "OWNER" permission level to a lower level.
-      if (adminData.permission === adminLevel.OWNER && args.permission !== adminLevel.OWNER) {
-        throw new ForbiddenError("Permission level is the highest level and cannot be lowered.");
+      if (
+        adminData.permission === adminLevel.OWNER &&
+        args.permission !== adminLevel.OWNER
+      ) {
+        throw new ForbiddenError(
+          "Permission level is the highest level and cannot be lowered."
+        );
       }
 
       // If the field is specified in the args, update the field in the adminData object
@@ -187,35 +192,42 @@ const resolvers = {
 
     // !WORKING: ===================================
     createProduct: withAuth(async (parent, { input }, context) => {
-      // return await Product.create(input);
-      console.log("Resolvers: createProduct");
       try {
-        // console.log(input);
+        // Configure Cloudinary with the cloudConfig object
+        cloudinary.config(cloudConfig);
 
-        await cloudinary.config(cloudConfig);
-
+        // Upload the images to Cloudinary and get the results
         const results = await uploadImages(input.image);
-        console.log(results);
 
+        // Create an array of objects with the cloudinary ID and URL
+        const imageParams = results.map(result => ({
+          cloudinaryId: result.asset_id,
+          url: result.url, // Public (Choose private [secure_url] or public [url] URL)
+        }));
+
+        // Replace the image array of strings with the object with the returned cloudinary ID and URL
+        input.image = imageParams;
+
+        // Save the product to the database
+        const product = await Product.create(input);
+
+        return product;
       } catch (error) {
         throw new ApolloError("Error creating product", error);
       }
-
     }, adminLevel.EDITOR),
     // !WORKING: ===================================
 
     updateProduct: withAuth(async (parent, { _id, input }, context) => {
-      return await Product.findByIdAndUpdate(
-        _id,
-        input,
-        { new: true, runValidators: true }
-      );
+      return await Product.findByIdAndUpdate(_id, input, {
+        new: true,
+        runValidators: true,
+      });
     }, adminLevel.EDITOR),
 
     deleteProduct: withAuth(async (parent, { _id }, context) => {
       return await Product.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
-
   },
 };
 

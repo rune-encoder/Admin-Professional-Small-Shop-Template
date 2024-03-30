@@ -26,6 +26,7 @@ mutation createProduct($input: ProductInput!) {
     image {
       cloudinaryId
       url
+      _id
     }
     isFeatured
     name

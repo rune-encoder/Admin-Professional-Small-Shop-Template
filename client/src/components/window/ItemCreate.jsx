@@ -156,17 +156,8 @@ export default function ItemCreate() {
     // console.log({ input })
 
     // !Uncomment to check on the server
-    // await dispatch(createProduct({ input }));
+    await dispatch(createProduct({ input }));
 
-    // console.log({ id: selectedProduct._id, input: formState })
-
-    // Wait for the product to be updated before fetching the products again.
-    // await dispatch(
-    //   updateProduct({ id: selectedProduct._id, input: formState })
-    // );
-
-    // Refresh the products list global state by fetching the products again. (Server or Cache)
-    // dispatch(getProducts());
   };
 
   // ! Revisit: Handling Loading State
