@@ -14,13 +14,16 @@ import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 export default function ItemView() {
   const selectedProduct = useSelector(selectCurrentProduct);
 
+  console.log(selectedProduct)
+
   return (
     <>
         <div className="selected-item-details">
           <section className="item-details__top-section">
             <img
               className="item__image"
-              src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"
+              data-cloudinary-id={selectedProduct.image[0].cloudinaryId}
+              src={selectedProduct.image[0].url}
             ></img>
           </section>
 

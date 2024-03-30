@@ -28,6 +28,7 @@ export const QUERY_PRODUCTS = gql`
       image {
         cloudinaryId
         url
+        _id
       }
     }
   }

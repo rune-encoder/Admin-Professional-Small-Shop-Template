@@ -35,10 +35,21 @@ export const createProduct = createAsyncThunk(
     const { data } = await client.mutate({
       mutation: CREATE_PRODUCT,
       variables: input,
-    });
 
-    // !Delete Later
-    console.log(data);
+      update: (cache, { data: { createProduct } }) => {
+        // Read the data from our cache for this query.
+        const data = cache.readQuery({ query: QUERY_PRODUCTS });
+        console.log(data);
+        console.log(createProduct);
+        // Add the new product to the cache.
+        if (data) {
+          cache.writeQuery({
+            query: QUERY_PRODUCTS,
+            data: { getProducts: [...data.getProducts, createProduct] },
+          });
+        }
+      },
+    });
 
     // Return the new product from the server
     return data?.createProduct;

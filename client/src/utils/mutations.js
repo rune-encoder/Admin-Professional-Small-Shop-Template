@@ -15,27 +15,27 @@ export const LOGIN_ADMIN = gql`
 `;
 
 export const CREATE_PRODUCT = gql`
-mutation createProduct($input: ProductInput!) {
-  createProduct(input: $input) {
-    _id
-    category {
+  mutation createProduct($input: ProductInput!) {
+    createProduct(input: $input) {
       _id
+      name
+      createdAt
+      category {
+        _id
+      }
+      inStock
+      isFeatured
+      price
+      quantity
+      shortDescription
+      details
+      image {
+        cloudinaryId
+        url
+        _id
+      }
     }
-    createdAt
-    details
-    image {
-      cloudinaryId
-      url
-      _id
-    }
-    isFeatured
-    name
-    price
-    quantity
-    shortDescription
-    inStock
   }
-}
 `;
 
 export const UPDATE_PRODUCT = gql`
@@ -56,6 +56,7 @@ export const UPDATE_PRODUCT = gql`
       image {
         cloudinaryId
         url
+        _id
       }
     }
   }
@@ -79,6 +80,7 @@ export const DELETE_PRODUCT = gql`
       image {
         cloudinaryId
         url
+        _id
       }
     }
   }

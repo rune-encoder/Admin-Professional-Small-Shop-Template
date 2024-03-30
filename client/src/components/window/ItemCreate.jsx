@@ -158,6 +158,21 @@ export default function ItemCreate() {
     // !Uncomment to check on the server
     await dispatch(createProduct({ input }));
 
+    dispatch(getProducts());
+
+    setFormState({
+      name: "",
+      category: "",
+      price: 0,
+      quantity: 0,
+      isFeatured: false,
+      shortDescription: "",
+      details: "",
+    });
+
+    setSelectedImages([]);
+    setDisplayImage(null);
+
   };
 
   // ! Revisit: Handling Loading State
@@ -203,7 +218,7 @@ export default function ItemCreate() {
             >
               {categories &&
                 categories.map((category) => (
-                  <option key={category._id} value={category._id}>
+                  <option key={category._id} name={category.name} value={category._id}>
                     {category.name}
                   </option>
                 ))}
