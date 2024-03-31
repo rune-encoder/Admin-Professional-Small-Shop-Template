@@ -11,6 +11,7 @@ import {
 // Define the extra reducers for the product slice
 export const productExtraReducers = (builder) => {
   builder
+    // Set the status of fetching the products
     .addCase(getProducts.pending, (state) => {
       state.getProductsStatus = "loading";
     })
@@ -22,19 +23,18 @@ export const productExtraReducers = (builder) => {
       state.getProductsStatus = "failed";
       state.getProductsError = action.error.message;
     })
-    // !WORKING: ===================================
+    // Set the status of creating a product.
     .addCase(createProduct.pending, (state) => {
       state.createProductStatus = "loading";
     })
-    .addCase(createProduct.fulfilled, (state, action) => {
+    .addCase(createProduct.fulfilled, (state) => {
       state.createProductStatus = "succeeded";
-      // state.products.push(action.payload);
     })
     .addCase(createProduct.rejected, (state, action) => {
       state.createProductStatus = "failed";
       state.createProductError = action.error.message;
     })
-    // !WORKING: ===================================
+    // Set the status of updating a product.
     .addCase(updateProduct.pending, (state) => {
       state.updateProductStatus = "loading";
     })
@@ -46,6 +46,7 @@ export const productExtraReducers = (builder) => {
       state.updateProductStatus = "failed";
       state.updateProductError = action.error.message;
     })
+    // Set the status of deleting a product.
     .addCase(deleteProduct.pending, (state) => {
       state.deleteProductStatus = "loading";
     })

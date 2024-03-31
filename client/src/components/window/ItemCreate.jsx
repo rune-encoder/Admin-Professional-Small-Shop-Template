@@ -148,18 +148,16 @@ export default function ItemCreate() {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
-    // console.log(formState);
-    // console.log(selectedImages);
-
+    // Create a new object with the form state and the selected images.
     let input = { ...formState, image: selectedImages };
-    // console.log( selectedImages )
-    // console.log({ input })
 
-    // !Uncomment to check on the server
+    // Wait for the product to be created before fetching the products again.
     await dispatch(createProduct({ input }));
 
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
     dispatch(getProducts());
 
+    // Reset the form state after the form is submitted.
     setFormState({
       name: "",
       category: "",
@@ -218,7 +216,7 @@ export default function ItemCreate() {
             >
               {categories &&
                 categories.map((category) => (
-                  <option key={category._id} name={category.name} value={category._id}>
+                  <option key={category._id} value={category._id}>
                     {category.name}
                   </option>
                 ))}

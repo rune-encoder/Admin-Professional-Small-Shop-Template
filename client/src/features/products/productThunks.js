@@ -6,6 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Import Queries
 import { QUERY_PRODUCTS } from "../../utils/queries";
+import { QUERY_CATEGORIES } from "../../utils/queries";
 
 // Import Mutations
 import {
@@ -27,7 +28,6 @@ export const getProducts = createAsyncThunk(
   }
 );
 
-// !WORKING: ===================================
 // Create a new product and add it to the server
 export const createProduct = createAsyncThunk(
   "products/createProduct",
@@ -36,16 +36,36 @@ export const createProduct = createAsyncThunk(
       mutation: CREATE_PRODUCT,
       variables: input,
 
+      // Update the Apollo cache with the new product
       update: (cache, { data: { createProduct } }) => {
-        // Read the data from our cache for this query.
-        const data = cache.readQuery({ query: QUERY_PRODUCTS });
-        console.log(data);
-        console.log(createProduct);
+        // Read the category data from the cache.
+        const categoryData = cache.readQuery({ query: QUERY_CATEGORIES });
+        // Find the category object that matches the new product's category id.
+        const category = categoryData?.getCategories.find(
+          (category) => category._id === createProduct.category._id
+        );
+
+        // Read the products data from the cache.
+        const productData = cache.readQuery({ query: QUERY_PRODUCTS });
+
+        // Create a new product object that includes the category name.
+        // Note: This is needed to match the structure of the getProducts query and update the cache.
+        // Creating a new object avoids unintended side effects when updating the cache.
+        const newCreateProduct = {
+          ...createProduct,
+          category: {
+            ...createProduct.category,
+            name: category?.name,
+          },
+        };
+
         // Add the new product to the cache.
-        if (data) {
+        if (productData) {
           cache.writeQuery({
             query: QUERY_PRODUCTS,
-            data: { getProducts: [...data.getProducts, createProduct] },
+            data: {
+              getProducts: [...productData.getProducts, newCreateProduct],
+            },
           });
         }
       },
@@ -55,7 +75,6 @@ export const createProduct = createAsyncThunk(
     return data?.createProduct;
   }
 );
-// !WORKING: ===================================
 
 // Update a product on the server
 export const updateProduct = createAsyncThunk(

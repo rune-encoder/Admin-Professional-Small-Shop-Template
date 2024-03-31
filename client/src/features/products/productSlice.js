@@ -10,10 +10,8 @@ const initialState = {
   products: [],
   getProductsStatus: "idle",
   getProductsError: null,
-  // !WORKING: ===================================
   createProductStatus: "idle",
   createProductError: null,
-  // !WORKING: ===================================
   updateProductStatus: "idle",
   updateProductError: null,
   deleteProductStatus: "idle",
