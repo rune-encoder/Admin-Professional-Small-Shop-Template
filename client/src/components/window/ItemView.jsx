@@ -14,7 +14,7 @@ import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 export default function ItemView() {
   const selectedProduct = useSelector(selectCurrentProduct);
 
-  console.log(selectedProduct)
+  // console.log(selectedProduct)
 
   return (
     <>

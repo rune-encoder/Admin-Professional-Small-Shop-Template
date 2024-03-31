@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -10,14 +10,11 @@ import {
   selectGetCategoriesStatus,
 } from "../../features/categories/categorySelectors";
 
-import { selectCurrentProduct } from "../../features/products/productSelectors";
-
 // Import Redux Thunks
 import { getCategories } from "../../features/categories/categoryThunks";
 import {
   createProduct,
   getProducts,
-  updateProduct,
 } from "../../features/products/productThunks";
 
 // Import Components
@@ -25,8 +22,7 @@ import ImagePreview from "./ImagePreview";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { BsSave, BsTrash } from "react-icons/bs";
+import { BsSave } from "react-icons/bs";
 
 export default function ItemCreate() {
   // ==============================
@@ -43,11 +39,10 @@ export default function ItemCreate() {
     details: "",
   });
 
-  // !WORKING: ===================================
+  // Initialize selectedImages with an empty array. This will hold the data URLs of the images uploaded.
   const [selectedImages, setSelectedImages] = useState([]);
+  // Initialize displayImage with null. This will hold the data URL of the image displayed.
   const [displayImage, setDisplayImage] = useState(null);
-
-  // !WORKING: ===================================
 
   // ==============================
   // useSelector Hooks Section
@@ -77,7 +72,6 @@ export default function ItemCreate() {
   // Event Handlers Section
   // ==============================
 
-  // !WORKING: ===================================
   const handleImageChange = async (e) => {
     // Create a new array from the files (or file) selected.
     const newFiles = Array.from(e.target.files);
@@ -118,8 +112,6 @@ export default function ItemCreate() {
       console.error("Error reading image files:", error);
     }
   };
-
-  // !WORKING: ===================================
 
   const handleInputChange = (event) => {
     const { name, type, checked, value } = event.target;

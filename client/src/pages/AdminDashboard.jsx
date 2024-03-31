@@ -15,9 +15,7 @@ export default function AdminDashboard() {
   const menuState = useSelector(selectMenu);
 
   return (
-      
-      <>
-      
+    <>
       {menuState.store && <Window title="Store" />}
       {menuState.categories && <Window title="Categories" />}
       {menuState.products && (
@@ -29,7 +27,6 @@ export default function AdminDashboard() {
           </div>
         </Window>
       )}
-      </>
-      
+    </>
   );
 }
