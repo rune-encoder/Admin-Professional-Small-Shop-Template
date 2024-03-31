@@ -194,29 +194,28 @@ const resolvers = {
       try {
         // !DO NOT DELETE: WORKING CODE
         // Configure Cloudinary with the cloudConfig object
-        // cloudinary.config(cloudConfig);
+        cloudinary.config(cloudConfig);
 
         // Upload the images to Cloudinary and get the results
-        // const results = await uploadImages(input.image);
+        const results = await uploadImages(input.image);
 
         // Create an array of objects with the cloudinary ID and URL
-        // const imageParams = results.map(result => ({
-        //   cloudinaryId: result.asset_id,
-        //   url: result.url, 
-        // Public (Choose private [secure_url] or public [url] URL)
-        // }));
+        const imageParams = results.map((result) => ({
+          cloudinaryId: result.asset_id,
+          url: result.url, // Public (Choose private [secure_url] or public [url] URL)
+        }));
 
-        // !Delete and Uncomment top when done fixing category issue. 
-        const imageParams = [
-          {
-            cloudinaryId: "sampleId3",
-            url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819601/samples/shoe.jpg",
-          },
-          {
-            cloudinaryId: "sampleId4",
-            url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819606/samples/cup-on-a-table.jpg",
-          },
-        ];
+        // !Delete and Uncomment top when done fixing category issue.
+        // const imageParams = [
+        //   {
+        //     cloudinaryId: "sampleId3",
+        //     url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819601/samples/shoe.jpg",
+        //   },
+        //   {
+        //     cloudinaryId: "sampleId4",
+        //     url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819606/samples/cup-on-a-table.jpg",
+        //   },
+        // ];
         // !=========================================
 
         // Replace the image array of strings with the object with the returned cloudinary ID and URL

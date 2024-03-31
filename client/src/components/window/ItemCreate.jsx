@@ -170,7 +170,6 @@ export default function ItemCreate() {
 
     setSelectedImages([]);
     setDisplayImage(null);
-
   };
 
   // ! Revisit: Handling Loading State
