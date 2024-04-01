@@ -12,6 +12,7 @@ const {
 const {
   uploadImages,
   updateImage,
+  deleteImages,
   cloudConfig,
 } = require("../utils/imageUploader");
 require("dotenv").config();
@@ -252,7 +253,14 @@ const resolvers = {
       return updatedProduct;
     }, adminLevel.EDITOR),
 
-    deleteProduct: withAuth(async (parent, { _id }, context) => {
+    deleteProduct: withAuth(async (parent, { _id, images }, context) => {
+      // Configure Cloudinary with the cloudConfig object
+      cloudinary.config(cloudConfig);
+
+      // Delete the images (or image) from Cloudinary
+      await deleteImages(images);
+
+      // Delete the product from the database
       return await Product.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
   },

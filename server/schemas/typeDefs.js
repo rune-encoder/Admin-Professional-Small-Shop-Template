@@ -132,6 +132,12 @@ input ProductInput {
 }
 
 # TEST INPUT
+input TestTwo {
+    cloudinaryId: String
+    url: String
+    _id: ID
+}
+
 input ImageInput {
     cloudinaryId: String
     url: String
@@ -177,7 +183,7 @@ type Mutation {
 
     createProduct(input: ProductInput!): Product
     updateProduct(_id: ID!, input: TestInput!): Product
-    deleteProduct(_id: ID!): Product
+    deleteProduct(_id: ID!, images: [TestTwo]): Product
 }
 `;
 

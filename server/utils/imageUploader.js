@@ -36,7 +36,7 @@ const updateImage = async (imageData) => {
   const options = {
     public_id: imageData.cloudinaryId,
     overwrite: true, // Overwrite the image if it already exists
-    invalidate: true, // Invalidate the old image so the new one is displayed
+    invalidate: true, // Invalidate the old image so it is no longer accessible
   };
 
   try {
@@ -55,4 +55,23 @@ const updateImage = async (imageData) => {
   }
 };
 
-module.exports = { uploadImages, updateImage, cloudConfig };
+const deleteImages = async (imagesData) => {
+  // Create an array of public IDs from the imagesData array
+  const publicIds = imagesData.map((id) => id.cloudinaryId);
+
+  const options = {
+    invalidate: true, // Invalidate the image so it is no longer accessible
+  };
+
+  try {
+    // Delete the images from Cloudinary
+    const deletePromises = publicIds.map((publicId) =>
+      cloudinary.uploader.destroy(publicId, options)
+    );
+    await Promise.all(deletePromises);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports = { uploadImages, updateImage, deleteImages, cloudConfig };

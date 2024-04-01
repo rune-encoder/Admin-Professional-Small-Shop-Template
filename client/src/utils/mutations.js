@@ -63,8 +63,8 @@ export const UPDATE_PRODUCT = gql`
 `;
 
 export const DELETE_PRODUCT = gql`
-  mutation deleteProduct($id: ID!) {
-    deleteProduct(_id: $id) {
+  mutation deleteProduct($id: ID!, $images: [TestTwo]) {
+    deleteProduct(_id: $id, images: $images) {
       _id
       name
       createdAt
