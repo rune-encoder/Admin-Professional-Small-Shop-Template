@@ -4,13 +4,17 @@
 export const selectCurrentProduct = (state) => state.products.currentProduct;
 
 // Selectors for: Toggling the product edit mode (true/false)
-export const selectProductEditMode = (state) =>
-  state.products.productEditMode;
+export const selectProductMode = (state) =>
+  state.products.productMode;
 
 // Selectors for: QUERY_PRODUCTS
 export const selectGetProducts = (state) => state.products.products;
 export const selectGetProductsStatus = (state) => state.products.getProductsStatus;
 export const selectGetProductsError = (state) => state.products.getProductsError;
+
+// Selectors for: CREATE_PRODUCT
+export const selectCreateProductStatus = (state) => state.products.createProductStatus;
+export const selectCreateProductError = (state) => state.products.createProductError;
 
 // Selectors for: UPDATE_PRODUCT
 export const selectUpdateProductStatus = (state) => state.products.updateProductStatus;

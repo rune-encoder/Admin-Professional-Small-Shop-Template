@@ -6,10 +6,12 @@ import { productExtraReducers } from ".//productExtraReducers";
 // Initial state for the products slice
 const initialState = {
   currentProduct: null,
-  productEditMode: false,
+  productMode: null,
   products: [],
   getProductsStatus: "idle",
   getProductsError: null,
+  createProductStatus: "idle",
+  createProductError: null,
   updateProductStatus: "idle",
   updateProductError: null,
   deleteProductStatus: "idle",
@@ -21,11 +23,9 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    currentProduct: (state, action) => {
-      state.currentProduct = action.payload;
-    },
-    toggleProductEditMode: (state, action) => {
-      state.productEditMode = action.payload;
+    setProductMode: (state, action) => {
+      state.productMode = action.payload.mode;
+      state.currentProduct = action.payload.product || null;
     },
   },
   extraReducers: (builder) => {
@@ -34,9 +34,7 @@ const productsSlice = createSlice({
 });
 
 // Actions
-export const { currentProduct, toggleProductEditMode } =
-  productsSlice.actions;
+export const { setProductMode } = productsSlice.actions;
 
 // Reducer
 export default productsSlice.reducer;
-

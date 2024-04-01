@@ -6,15 +6,21 @@ const { checkPermission, adminLevel } = require("../utils/adminPermissions");
 const {
   AuthenticationError,
   ForbiddenError,
+  ApolloError,
 } = require("apollo-server-express");
 
-// const { uploadImage, cloudConfig } = require("../utils/imageUploader");
-// require("dotenv").config();
+const {
+  uploadImages,
+  updateImage,
+  cloudConfig,
+} = require("../utils/imageUploader");
+require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
+
 // const fs = require("fs");
-// const cloudinary = require("cloudinary").v2;
 // ! const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
-// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION: 
+// CHECK IF THE ADMIN IS LOGGED IN AND HAS THE REQUIRED PERMISSION:
 // MUST BE LOGGED IN. DEFAULT: "VIEWER"
 const withAuth = (resolverFunction, requiredPermission) => {
   return async (parent, args, context, info) => {
@@ -138,8 +144,13 @@ const resolvers = {
       const adminData = await Admin.findById(args._id);
 
       // Prevents modification of the "OWNER" permission level to a lower level.
-      if (adminData.permission === adminLevel.OWNER && args.permission !== adminLevel.OWNER) {
-        throw new ForbiddenError("Permission level is the highest level and cannot be lowered.");
+      if (
+        adminData.permission === adminLevel.OWNER &&
+        args.permission !== adminLevel.OWNER
+      ) {
+        throw new ForbiddenError(
+          "Permission level is the highest level and cannot be lowered."
+        );
       }
 
       // If the field is specified in the args, update the field in the adminData object
@@ -184,21 +195,66 @@ const resolvers = {
     }, adminLevel.EDITOR),
 
     createProduct: withAuth(async (parent, { input }, context) => {
-      return await Product.create(input);
+      try {
+        // Configure Cloudinary with the cloudConfig object
+        cloudinary.config(cloudConfig);
+
+        // Upload the images to Cloudinary and get the results
+        const results = await uploadImages(input.image);
+
+        // Create an array of objects with the cloudinary ID and URL
+        const imageParams = results.map((result) => ({
+          cloudinaryId: result.public_id,
+          url: result.url, // Public (Choose private [secure_url] or public [url] URL)
+        }));
+
+        // Replace the image array of strings with the object with the returned cloudinary ID and URL
+        input.image = imageParams;
+
+        // Save the product to the database
+        const product = await Product.create(input);
+
+        return product;
+      } catch (error) {
+        throw new ApolloError("Error creating product", error);
+      }
     }, adminLevel.EDITOR),
 
     updateProduct: withAuth(async (parent, { _id, input }, context) => {
-      return await Product.findByIdAndUpdate(
-        _id,
-        input,
-        { new: true, runValidators: true }
+      // Configure Cloudinary with the cloudConfig object
+      cloudinary.config(cloudConfig);
+
+      // Iterate over the input.image array which contains objects with data of the images.
+      const updatedImages = await Promise.all(
+        input.image.map(async (imageData) => {
+          // If the image object has a dataURL property
+          if (imageData.dataURL) {
+            // Use the Cloudinary API to update the image.
+            // Replace the url with the new image URL and remove the dataURL property.
+            return await updateImage(imageData);
+          }
+
+          // If the image object doesn't have a dataURL property, leave it as it is
+          return imageData;
+        })
       );
+
+      // Update the product with the new data.
+      const updatedProduct = await Product.findByIdAndUpdate(
+        _id,
+        { ...input, image: updatedImages },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      return updatedProduct;
     }, adminLevel.EDITOR),
 
     deleteProduct: withAuth(async (parent, { _id }, context) => {
       return await Product.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
-
   },
 };
 

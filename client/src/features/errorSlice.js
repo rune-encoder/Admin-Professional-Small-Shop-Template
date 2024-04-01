@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getCategories } from "./categories/categoryThunks";
 import {
   getProducts,
+  createProduct,
   updateProduct,
   deleteProduct,
 } from "./products/productThunks";
@@ -35,6 +36,7 @@ const errorSlice = createSlice({
     builder
       .addCase(getCategories.rejected, handleRejected)
       .addCase(getProducts.rejected, handleRejected)
+      .addCase(createProduct.rejected, handleRejected)
       .addCase(updateProduct.rejected, handleRejected)
       .addCase(deleteProduct.rejected, handleRejected);
   },

@@ -32,6 +32,7 @@ type Category {
 type Image {
     cloudinaryId: String
     url: String
+    _id: ID
 }
 
 type Product {
@@ -43,7 +44,7 @@ type Product {
     details: String
     price: Float!
     quantity: Int!
-    image: Image
+    image: [Image]
     isFeatured: Boolean
     inStock: Boolean
 }
@@ -83,11 +84,6 @@ type Auth {
 input CartInput {
     product: ID
     quantity: Int
-}
-
-input ImageInput {
-    cloudinaryId: String
-    url: String
 }
 
 # <=== FILTERS: INPUTS FOR QUERIES ===>
@@ -131,7 +127,26 @@ input ProductInput {
     details: String
     price: Float
     quantity: Int
-    image: ImageInput
+    image: [String]
+    isFeatured: Boolean
+}
+
+# TEST INPUT
+input ImageInput {
+    cloudinaryId: String
+    url: String
+    _id: ID
+    dataURL: String
+}
+
+input TestInput {
+    category: ID
+    name: String
+    shortDescription: String
+    details: String
+    price: Float
+    quantity: Int
+    image: [ImageInput]
     isFeatured: Boolean
 }
 
@@ -161,7 +176,7 @@ type Mutation {
     deleteCategory(_id: ID!): Category
 
     createProduct(input: ProductInput!): Product
-    updateProduct(_id: ID!, input: ProductInput!): Product
+    updateProduct(_id: ID!, input: TestInput!): Product
     deleteProduct(_id: ID!): Product
 }
 `;

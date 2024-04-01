@@ -1,28 +1,24 @@
 // <===== WINDOW DETAILS SECTION =====>
 
 // ! WORKING =============================================
+// INSIDE CONTENT WRAPPER FOR WINDOW CONTENT
 .selected-item-details {
   @include apply-border("shade-8");
   @include apply-box-shadow("always-dark", 1);
   @include apply-gradient("shade-6", "shade-8", to bottom right);
+  @include apply-flex(column);
 
   width: 100%;
-  height: $window--height - $window__bar--height - $toolbar--height +
-    halved-modular-scale(-12);
-  position: sticky;
-  top: $toolbar--height + halved-modular-scale(-5);
-
-  //   @include apply-font-family("roboto");
-  // border: solid rem(1px) var(--always-light);
+  height: 100%;
 }
 
 // ! WORKING =============================================
 .item-details__top-section {
-  @include apply-flex(row, center, center);
+  @include apply-flex(column, center, center);
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
 
-  height: 40% !important;
+  height: 40%;
 }
 
 .item__image {
@@ -40,6 +36,9 @@
   @include apply-space("padding", -10, "x");
   @include apply-space("padding", -5, "y");
 
-  height: calc(60% - halved-modular-scale(-5));
+  // display: flex;
+  // flex-direction: column;
+  flex-grow: 1; // Expand to fill the remaining space
   overflow-y: auto;
 }
+

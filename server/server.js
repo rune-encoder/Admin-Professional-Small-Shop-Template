@@ -27,7 +27,7 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   // !Revisit: May need to increase or decrease the limit.
-  app.use(express.json({ limit: "5mb" }));
+  app.use(express.json({ limit: "10mb" }));
 
   // Tell Apollo server to use the Express application as middleware.
   server.applyMiddleware({ app });

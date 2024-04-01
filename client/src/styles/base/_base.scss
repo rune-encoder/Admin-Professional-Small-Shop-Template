@@ -4,11 +4,13 @@
   @include apply-flex(column);
 
   flex-grow: 1; // Expand to fill available space
-  min-height: 100vh;
+  height: 100vh;
 
   // WRAPS APP'S MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
   &__main {
     flex-grow: 1; // Expand to fill available space
+    overflow-y: auto;
+    height: 100%;
   }
 }
 

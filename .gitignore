@@ -24,10 +24,7 @@ dist-ssr
 *.sw?
 
 package-lock.json
-
 .env
-
-imageUploader.js
 
 main.css
 index.css

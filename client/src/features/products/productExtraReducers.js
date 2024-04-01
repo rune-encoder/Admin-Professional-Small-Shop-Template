@@ -1,11 +1,19 @@
 // Summary: This file contains the extra reducers for the product slice.
 
 // Import Thunks
-import { getProducts, updateProduct, deleteProduct } from "./productThunks";
+import {
+  getProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from "./productThunks";
 
 // Define the extra reducers for the product slice
 export const productExtraReducers = (builder) => {
   builder
+    // ==============================
+    // SET STATUS: GET PRODUCTS
+    // ==============================
     .addCase(getProducts.pending, (state) => {
       state.getProductsStatus = "loading";
     })
@@ -17,6 +25,22 @@ export const productExtraReducers = (builder) => {
       state.getProductsStatus = "failed";
       state.getProductsError = action.error.message;
     })
+    // ==============================
+    // SET STATUS: CREATE PRODUCT
+    // ==============================
+    .addCase(createProduct.pending, (state) => {
+      state.createProductStatus = "loading";
+    })
+    .addCase(createProduct.fulfilled, (state) => {
+      state.createProductStatus = "succeeded";
+    })
+    .addCase(createProduct.rejected, (state, action) => {
+      state.createProductStatus = "failed";
+      state.createProductError = action.error.message;
+    })
+    // ==============================
+    // SET STATUS: UPDATE PRODUCT
+    // ==============================
     .addCase(updateProduct.pending, (state) => {
       state.updateProductStatus = "loading";
     })
@@ -28,6 +52,9 @@ export const productExtraReducers = (builder) => {
       state.updateProductStatus = "failed";
       state.updateProductError = action.error.message;
     })
+    // ==============================
+    // SET STATUS: DELETE PRODUCT
+    // ==============================
     .addCase(deleteProduct.pending, (state) => {
       state.deleteProductStatus = "loading";
     })

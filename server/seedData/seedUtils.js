@@ -76,10 +76,16 @@ const seedProductData = (categories) => {
         details: details,
         price: getRandomPrice(), // Between 0 and 500
         quantity: Math.floor(Math.random() * 10), // Between 0 and 10
-        image: {
-          cloudinaryId: "seed",
-          url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819607/samples/logo.png",
-        },
+        image: [
+          {
+            cloudinaryId: "sampleId1",
+            url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819601/samples/shoe.jpg",
+          },
+          {
+            cloudinaryId: "sampleId2",
+            url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819606/samples/cup-on-a-table.jpg",
+          },
+        ],
         isFeatured: Math.random() > 0.9, // 10% chance of being featured
       };
 
@@ -140,9 +146,7 @@ const seedOrderData = (seededProducts) => {
 };
 
 // |===== SEED SHOP DATA TO SHOP COLLECTION =====|
-const seedShopData = (
-  seededAdmin,
-) => {
+const seedShopData = (seededAdmin) => {
   const shopData = {
     name: "My Shop Template",
     moto: "The convenient shop template for your business!",
