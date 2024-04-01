@@ -9,7 +9,7 @@ const cloudConfig = {
 };
 
 // Uploads an image file to Cloudinary. Returns the image's public ID.
-const uploadImages = async (imagePaths) => {
+const uploadImages = async (imagesDataUrls) => {
   // Use the uploaded file's name as the asset's public ID and
   // allow overwriting the asset with new versions
   const options = {
@@ -20,8 +20,10 @@ const uploadImages = async (imagePaths) => {
   };
 
   try {
-    // Upload the images
-    const uploadPromises = imagePaths.map(imagePath => cloudinary.uploader.upload(imagePath, options));
+    // Upload the images to Cloudinary
+    const uploadPromises = imagesDataUrls.map((imageDataUrl) =>
+      cloudinary.uploader.upload(imageDataUrl, options)
+    );
     const results = await Promise.all(uploadPromises);
     return results;
   } catch (error) {
@@ -29,4 +31,28 @@ const uploadImages = async (imagePaths) => {
   }
 };
 
-module.exports = { uploadImages, cloudConfig };
+// Updates an image in Cloudinary. Returns the updated image's public ID (cloudinaryId) and URL.
+const updateImage = async (imageData) => {
+  const options = {
+    public_id: imageData.cloudinaryId,
+    overwrite: true, // Overwrite the image if it already exists
+    invalidate: true, // Invalidate the old image so the new one is displayed
+  };
+
+  try {
+    // Update the image in Cloudinary
+    const result = await cloudinary.uploader.upload(imageData.dataURL, options);
+
+    // In our new image array of objects, after submitting the updated image to cloudinary,
+    // we are replacing the old image URL with the new one and removing the dataURL property.
+    return {
+      cloudinaryId: imageData.cloudinaryId,
+      url: result.url,
+      _id: imageData._id,
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports = { uploadImages, updateImage, cloudConfig };

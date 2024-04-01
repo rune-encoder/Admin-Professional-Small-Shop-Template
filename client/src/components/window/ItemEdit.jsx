@@ -97,10 +97,11 @@ export default function ItemEdit() {
     }
   }, [selectedProduct]);
 
-  useEffect(() => {
-    console.log("selectedImages:", selectedImages);
-    console.log("displayImage:", displayImage);
-  }, [selectedImages, displayImage]);
+  // useEffect(() => {
+  //   console.log("selectedImages:", selectedImages);
+  //   console.log(typeof selectedImages);
+  //   console.log("displayImage:", displayImage);
+  // }, [selectedImages, displayImage]);
   // !WORKING: ===================================
 
   useEffect(() => {
@@ -259,10 +260,16 @@ export default function ItemEdit() {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
+    // Remove the __typename property from the selected images array
+    // __typename is removed from images so the input will match the server's expected input.
+    const imageData = selectedImages.map(({ __typename, ...image }) => image);
+
+    // Create a new object with the form state and the selected images.
+    // This object will match the input object expected by the server.
+    let input = { ...formState, image: imageData };
+
     // Wait for the product to be updated before fetching the products again.
-    await dispatch(
-      updateProduct({ id: selectedProduct._id, input: formState })
-    );
+    await dispatch(updateProduct({ id: selectedProduct._id, input }));
 
     // Refresh the products list global state by fetching the products again. (Server or Cache)
     dispatch(getProducts());

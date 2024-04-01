@@ -9,7 +9,11 @@ const {
   ApolloError,
 } = require("apollo-server-express");
 
-const { uploadImages, cloudConfig } = require("../utils/imageUploader");
+const {
+  uploadImages,
+  updateImage,
+  cloudConfig,
+} = require("../utils/imageUploader");
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 
@@ -192,7 +196,6 @@ const resolvers = {
 
     createProduct: withAuth(async (parent, { input }, context) => {
       try {
-        // !DO NOT DELETE: WORKING CODE
         // Configure Cloudinary with the cloudConfig object
         cloudinary.config(cloudConfig);
 
@@ -201,22 +204,9 @@ const resolvers = {
 
         // Create an array of objects with the cloudinary ID and URL
         const imageParams = results.map((result) => ({
-          cloudinaryId: result.asset_id,
+          cloudinaryId: result.public_id,
           url: result.url, // Public (Choose private [secure_url] or public [url] URL)
         }));
-
-        // !Delete and Uncomment top when done fixing category issue.
-        // const imageParams = [
-        //   {
-        //     cloudinaryId: "sampleId3",
-        //     url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819601/samples/shoe.jpg",
-        //   },
-        //   {
-        //     cloudinaryId: "sampleId4",
-        //     url: "https://res.cloudinary.com/ddx7byopv/image/upload/v1699819606/samples/cup-on-a-table.jpg",
-        //   },
-        // ];
-        // !=========================================
 
         // Replace the image array of strings with the object with the returned cloudinary ID and URL
         input.image = imageParams;
@@ -231,10 +221,35 @@ const resolvers = {
     }, adminLevel.EDITOR),
 
     updateProduct: withAuth(async (parent, { _id, input }, context) => {
-      return await Product.findByIdAndUpdate(_id, input, {
-        new: true,
-        runValidators: true,
-      });
+      // Configure Cloudinary with the cloudConfig object
+      cloudinary.config(cloudConfig);
+
+      // Iterate over the input.image array which contains objects with data of the images.
+      const updatedImages = await Promise.all(
+        input.image.map(async (imageData) => {
+          // If the image object has a dataURL property
+          if (imageData.dataURL) {
+            // Use the Cloudinary API to update the image.
+            // Replace the url with the new image URL and remove the dataURL property.
+            return await updateImage(imageData);
+          }
+
+          // If the image object doesn't have a dataURL property, leave it as it is
+          return imageData;
+        })
+      );
+
+      // Update the product with the new data.
+      const updatedProduct = await Product.findByIdAndUpdate(
+        _id,
+        { ...input, image: updatedImages },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      return updatedProduct;
     }, adminLevel.EDITOR),
 
     deleteProduct: withAuth(async (parent, { _id }, context) => {

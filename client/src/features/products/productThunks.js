@@ -80,6 +80,8 @@ export const createProduct = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, input }) => {
+    console.log({ id, input })
+    
     const { data } = await client.mutate({
       mutation: UPDATE_PRODUCT,
       variables: { id, input },

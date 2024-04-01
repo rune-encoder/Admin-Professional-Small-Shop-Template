@@ -131,6 +131,25 @@ input ProductInput {
     isFeatured: Boolean
 }
 
+# TEST INPUT
+input ImageInput {
+    cloudinaryId: String
+    url: String
+    _id: ID
+    dataURL: String
+}
+
+input TestInput {
+    category: ID
+    name: String
+    shortDescription: String
+    details: String
+    price: Float
+    quantity: Int
+    image: [ImageInput]
+    isFeatured: Boolean
+}
+
 # |==================== QUERIES ====================|
 type Query {
     getAdmin(_id: ID!): Admin
@@ -157,7 +176,7 @@ type Mutation {
     deleteCategory(_id: ID!): Category
 
     createProduct(input: ProductInput!): Product
-    updateProduct(_id: ID!, input: ProductInput!): Product
+    updateProduct(_id: ID!, input: TestInput!): Product
     deleteProduct(_id: ID!): Product
 }
 `;
