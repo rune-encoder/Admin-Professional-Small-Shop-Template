@@ -80,8 +80,6 @@ export const createProduct = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, input }) => {
-    console.log({ id, input })
-    
     const { data } = await client.mutate({
       mutation: UPDATE_PRODUCT,
       variables: { id, input },
@@ -97,13 +95,17 @@ export const updateProduct = createAsyncThunk(
 // Delete a product on the server
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (id) => {
+  async ({ id, images }) => {
+    console.log(id)
+    console.log(images)
+
     const { data } = await client.mutate({
       mutation: DELETE_PRODUCT,
-      variables: { id },
+      variables: { id, images },
 
       // Apollo update function: Manual changes to the Apollo cache
       update: (cache, { data }) => {
+        console.log("tunk", data);
         // Get the Apollo cache id of the deleted product
         const productCacheId = cache.identify(data.deleteProduct);
 

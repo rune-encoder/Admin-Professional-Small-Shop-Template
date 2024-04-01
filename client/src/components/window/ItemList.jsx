@@ -55,10 +55,14 @@ export default function ItemList() {
   // ==============================
   // Event Handlers Section
   // ==============================
-  const handleDeleteProduct = async (productId) => {
-    // Wait for the product to be deleted
-    await dispatch(deleteProduct(productId));
+  const handleDeleteProduct = async (product) => {
+    // Get the product id and images
+    let productId = product._id;
+    let productImages = product.image.map(({ __typename, ...rest }) => rest);
 
+    // Wait for the product to be deleted
+    await dispatch(deleteProduct({ id: productId, images: productImages }));
+    
     // Refresh the products list global state by fetching the products again. (Server or Cache)
     dispatch(getProducts());
   };
@@ -109,7 +113,7 @@ export default function ItemList() {
                   data-action="Delete"
                   onClick={(event) => {
                     event.stopPropagation();
-                    handleDeleteProduct(product._id);
+                    handleDeleteProduct(product);
                   }}
                 >
                   <BsTrash />
