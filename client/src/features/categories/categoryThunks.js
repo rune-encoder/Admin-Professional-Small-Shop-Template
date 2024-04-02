@@ -8,7 +8,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 
 // Import Mutations
-import { UPDATE_CATEGORY } from "../../utils/mutations";
+import { UPDATE_CATEGORY, DELETE_CATEGORY } from "../../utils/mutations";
 
 // Fetch all categories from the server
 export const getCategories = createAsyncThunk(
@@ -32,5 +32,26 @@ export const updateCategory = createAsyncThunk(
     });
 
     return data?.updateCategory || [];
+  }
+);
+
+export const deleteCategory = createAsyncThunk(
+  "categories/deleteCategory",
+  async (id) => {
+    const { data } = await client.mutate({
+      mutation: DELETE_CATEGORY,
+      variables: { id },
+
+      // Apollo update function: Manual changes to the Apollo cache
+      update: (cache, { data }) => {
+        // Get the Apollo cache id of the deleted product
+        const productCacheId = cache.identify(data.deleteCategory);
+
+        // Remove the deleted product from the Apollo cache
+        cache.evict({ id: productCacheId });
+      },
+    });
+
+    return data?.deleteCategory || [];
   }
 );

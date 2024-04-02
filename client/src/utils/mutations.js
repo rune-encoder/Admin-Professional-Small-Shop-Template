@@ -15,12 +15,21 @@ export const LOGIN_ADMIN = gql`
 `;
 
 export const UPDATE_CATEGORY = gql`
-mutation updateCategory($id: ID!, $name: String!) {
-  updateCategory(_id: $id, name: $name) {
-    _id
-    name
+  mutation updateCategory($id: ID!, $name: String!) {
+    updateCategory(_id: $id, name: $name) {
+      _id
+      name
+    }
   }
-}
+`;
+
+export const DELETE_CATEGORY = gql`
+  mutation deleteCategory($id: ID!) {
+    deleteCategory(_id: $id) {
+      _id
+      name
+    }
+  }
 `;
 
 export const CREATE_PRODUCT = gql`

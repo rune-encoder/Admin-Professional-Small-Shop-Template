@@ -98,7 +98,7 @@ export default function ItemList() {
               <td>{product.price}</td>
               <td>01/01/10</td>
               <td>{product.quantity}</td>
-              <td>{product.category.name}</td>
+              <td>{product.category ? product.category.name : ""}</td>
               <td className="table__action-cell">
                 <button
                   data-action="Update"

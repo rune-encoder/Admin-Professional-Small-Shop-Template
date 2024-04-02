@@ -15,7 +15,11 @@ import {
 } from "../../features/categories/categorySelectors";
 
 // Import Redux Thunks
-import { getCategories, updateCategory } from "../../features/categories/categoryThunks";
+import {
+  getCategories,
+  updateCategory,
+  deleteCategory,
+} from "../../features/categories/categoryThunks";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
@@ -65,7 +69,12 @@ export default function CategoryList() {
   const handleUpdateCategory = async (categoryId) => {
     await dispatch(updateCategory({ id: categoryId, name: formState.name }));
     dispatch(getCategories());
-  }
+  };
+
+  const handleDeleteCategory = async (categoryId) => {
+    await dispatch(deleteCategory(categoryId));
+    dispatch(getCategories());
+  };
 
   return (
     <>
@@ -117,7 +126,6 @@ export default function CategoryList() {
                         data-action="Cancel"
                         onClick={(event) => {
                           event.stopPropagation();
-                          // handleDeleteProduct(product);
                         }}
                       >
                         <TiCancelOutline />
@@ -140,7 +148,7 @@ export default function CategoryList() {
                         data-action="Delete"
                         onClick={(event) => {
                           event.stopPropagation();
-                          // handleDeleteProduct(product);
+                          handleDeleteCategory(category._id);
                         }}
                       >
                         <BsTrash />

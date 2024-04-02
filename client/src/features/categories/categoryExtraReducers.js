@@ -1,7 +1,7 @@
 // Summary: This file contains the extra reducers for the category slice.
 
 // Import Thunks
-import { getCategories, updateCategory } from "./categoryThunks";
+import { getCategories, updateCategory, deleteCategory } from "./categoryThunks";
 
 // Define the extra reducers for the category slice
 export const categoryExtraReducers = (builder) => {
@@ -32,5 +32,18 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(updateCategory.rejected, (state) => {
       state.updateCategoryStatus = "failed";
+    })
+    // ==============================
+    // SET STATUS: DELETE PRODUCT
+    // ==============================
+    .addCase(deleteCategory.pending, (state) => {
+      state.deleteCategoryStatus = "loading";
+    })
+    .addCase(deleteCategory.fulfilled, (state) => {
+      state.deleteCategoryStatus = "succeeded";
+      state.currentCategory = null;
+    })
+    .addCase(deleteCategory.rejected, (state) => {
+      state.deleteCategoryStatus = "failed";
     });
 };

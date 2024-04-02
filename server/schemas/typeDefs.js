@@ -38,7 +38,7 @@ type Image {
 type Product {
     _id: ID
     createdAt: String
-    category: Category!
+    category: Category
     name: String!
     shortDescription: String
     details: String
