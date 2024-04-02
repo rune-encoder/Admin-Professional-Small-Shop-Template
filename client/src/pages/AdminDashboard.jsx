@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 
 // Import Redux Selectors
-import { selectMenu } from "../features/menuSlice";
+import { selectDisplayMenu } from "../features/menuSlice";
 
 // Import Components
 import Window from "../components/window/Window";
@@ -14,16 +14,16 @@ import ItemDetails from "../components/window/ItemDetails";
 import ItemList from "../components/window/ItemList";
 
 export default function AdminDashboard() {
-  const menuState = useSelector(selectMenu);
+  const activeMenu = useSelector(selectDisplayMenu);
 
   return (
     <>
-      {menuState.store && <Window title="Store" />}
-      {menuState.categories && <Window title="Categories">
+      {activeMenu === "store" && <Window title="Store" />}
+      {activeMenu === "categories" && <Window title="Categories">
         <CategoryList />
         </Window>
         }
-      {menuState.products && (
+      {activeMenu === "products"&& (
         <Window title="Products">
           <Toolbar />
           <div className="window__content row-no-gutters">
