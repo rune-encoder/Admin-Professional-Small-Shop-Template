@@ -15,7 +15,7 @@ import {
 } from "../../features/categories/categorySelectors";
 
 // Import Redux Thunks
-import { getCategories } from "../../features/categories/categoryThunks";
+import { getCategories, updateCategory } from "../../features/categories/categoryThunks";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
@@ -23,14 +23,6 @@ import { BsSave, BsTrash } from "react-icons/bs";
 import { TiCancelOutline } from "react-icons/ti";
 
 export default function CategoryList() {
-  // !Delete: Used to check re-renders of the component
-  // const renderCount = useRef(0);
-
-  // useEffect(() => {
-  //   renderCount.current = renderCount.current + 1;
-  //   console.log(`ItemEdit has rendered ${renderCount.current} times`);
-  // });
-  // ! ==========>
   // ==============================
   // useState Hooks Section
   // ==============================
@@ -70,6 +62,11 @@ export default function CategoryList() {
   // ==============================
   // Event Handlers Section
   // ==============================
+  const handleUpdateCategory = async (categoryId) => {
+    await dispatch(updateCategory({ id: categoryId, name: formState.name }));
+    dispatch(getCategories());
+  }
+
   return (
     <>
       <div className="window__content--wrapper col-sm-12 col-md-7">
@@ -111,9 +108,7 @@ export default function CategoryList() {
                         data-action="Save"
                         onClick={(event) => {
                           event.stopPropagation();
-                          dispatch(
-                            setCategoryMode({ mode: "update", category })
-                          );
+                          handleUpdateCategory(category._id);
                         }}
                       >
                         <BsSave />

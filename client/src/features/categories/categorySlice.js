@@ -8,7 +8,10 @@ const initialState = {
   currentCategory: null,
   categoryMode: null,
   categories: [],
-  status: "idle",
+  getCategoriesStatus: "idle",
+  createCategoryStatus: "idle",
+  updateCategoryStatus: "idle",
+  deleteCategoryStatus: "idle",
 };
 
 // Create the categories slice

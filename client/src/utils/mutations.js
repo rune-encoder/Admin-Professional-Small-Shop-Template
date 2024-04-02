@@ -14,6 +14,15 @@ export const LOGIN_ADMIN = gql`
   }
 `;
 
+export const UPDATE_CATEGORY = gql`
+mutation updateCategory($id: ID!, $name: String!) {
+  updateCategory(_id: $id, name: $name) {
+    _id
+    name
+  }
+}
+`;
+
 export const CREATE_PRODUCT = gql`
   mutation createProduct($input: ProductInput!) {
     createProduct(input: $input) {
