@@ -13,23 +13,31 @@ import Toolbar from "../components/window/Toolbar";
 import ItemDetails from "../components/window/ItemDetails";
 import ItemList from "../components/window/ItemList";
 
+import AdminList from "../components/window/AdminsList";
+
 export default function AdminDashboard() {
   const activeMenu = useSelector(selectDisplayMenu);
 
   return (
     <>
       {activeMenu === "store" && <Window title="Store" />}
-      {activeMenu === "categories" && <Window title="Categories">
-        <CategoryList />
+      {activeMenu === "categories" && (
+        <Window title="Categories">
+          <CategoryList />
         </Window>
-        }
-      {activeMenu === "products"&& (
+      )}
+      {activeMenu === "products" && (
         <Window title="Products">
           <Toolbar />
           <div className="window__content row-no-gutters">
             <ItemDetails />
             <ItemList />
           </div>
+        </Window>
+      )}
+      {activeMenu === "admins" && (
+        <Window title="Admins">
+          <AdminList />
         </Window>
       )}
     </>

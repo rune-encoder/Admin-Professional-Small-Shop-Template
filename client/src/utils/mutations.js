@@ -112,3 +112,14 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
+
+export const CREATE_ADMIN = gql`
+mutation adminCreate($username: String!, $email: String!, $password: String!, $permission: String!) {
+  adminCreate(username: $username, email: $email, password: $password, permission: $permission) {
+    _id
+    email
+    username
+    permission
+  }
+}
+`;

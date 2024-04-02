@@ -35,16 +35,14 @@ export default function Sidebar() {
       icon: <MdOutlineShoppingCart />,
       isOpen: activeMenu === "products",
     },
-  ];  
+  ];
 
   // CREATE MENU BUTTONS FOR EACH STORE MENU ITEM
   const storeMenuMap = storeMenu.map((item) => {
     return (
       <button
         key={item.name}
-        className={`sidebar-menu__button ${
-          item.isOpen ? "disabled" : ""
-        }`}
+        className={`sidebar-menu__button ${item.isOpen ? "disabled" : ""}`}
         disabled={activeMenu === item.name}
         onClick={() => dispatch(changeMenuDisplay(item.name))}
       >
@@ -81,10 +79,15 @@ export default function Sidebar() {
         <span className="sidebar__text">Report</span>
       </Link>
 
-      <Link to="/Admins" className="sidebar__links">
+      <button
+        className={`sidebar__links ${
+          activeMenu === "admins" ? "disabled" : ""
+        }`}
+        onClick={() => dispatch(changeMenuDisplay("admins"))}
+      >
         <FaUsers className="sidebar__icon" />
         <span className="sidebar__text">Admins</span>
-      </Link>
+      </button>
     </aside>
   );
 }

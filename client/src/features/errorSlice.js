@@ -33,6 +33,10 @@ const errorSlice = createSlice({
   name: "error",
   initialState,
   reducers: {
+    setLatestErrorMessage: (state, action) => {
+      state.latestErrorMessage = action.payload;
+      state.showErrorModal = true;
+    },
     toggleErrorModal: (state, action) => {
       state.showErrorModal = action.payload;
     },
@@ -57,7 +61,7 @@ const errorSlice = createSlice({
 });
 
 // Actions
-export const { updateErrorMessage, toggleErrorModal } = errorSlice.actions;
+export const { setLatestErrorMessage, toggleErrorModal } = errorSlice.actions;
 
 // Selectors
 export const selectLatestErrorMessage = (state) =>

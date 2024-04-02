@@ -4,6 +4,7 @@ import Auth from "../utils/auth";
 
 // Initial state
 const initialState = {
+  // !Revisit: Security Risk?
   adminData: Auth.loggedIn() ? Auth.getProfile().authenticatedAdmin : false,
 };
 
