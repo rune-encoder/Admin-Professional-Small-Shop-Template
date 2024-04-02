@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Import Thunks
-import { getCategories, updateCategory, deleteCategory } from "./categories/categoryThunks";
+import {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "./categories/categoryThunks";
 import {
   getProducts,
   createProduct,
@@ -34,9 +39,16 @@ const errorSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // ==============================
+      // SET ERROR STATUS: CATEGORIES
+      // ==============================
       .addCase(getCategories.rejected, handleRejected)
-      .addCase(updateCategory.rejected, handleRejected) 
+      .addCase(createCategory.rejected, handleRejected)
+      .addCase(updateCategory.rejected, handleRejected)
       .addCase(deleteCategory.rejected, handleRejected)
+      // ==============================
+      // SET ERROR STATUS: PRODUCTS
+      // ==============================
       .addCase(getProducts.rejected, handleRejected)
       .addCase(createProduct.rejected, handleRejected)
       .addCase(updateProduct.rejected, handleRejected)

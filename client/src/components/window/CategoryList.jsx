@@ -67,6 +67,14 @@ export default function CategoryList() {
   // ==============================
   // Event Handlers Section
   // ==============================
+  const handleCreateCategory = async () => {
+    // Wait for the category to be created.
+    await dispatch(createCategory(formState.name));
+
+    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
+    dispatch(getCategories());
+  };
+
   const handleUpdateCategory = async (categoryId) => {
     // Wait for the category to be updated.
     await dispatch(updateCategory({ id: categoryId, name: formState.name }));
@@ -100,8 +108,7 @@ export default function CategoryList() {
           <button
             onClick={async (e) => {
               e.preventDefault();
-              await dispatch(createCategory(formState.name));
-              dispatch(getCategories());
+              handleCreateCategory();
             }}
           >
             <BsSave />

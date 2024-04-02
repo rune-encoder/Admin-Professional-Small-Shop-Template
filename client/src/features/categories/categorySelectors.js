@@ -10,3 +10,11 @@ export const selectCategoryMode = (state) => state.categories.categoryMode;
 export const selectGetCategories = (state) => state.categories.categories;
 export const selectGetCategoriesStatus = (state) => state.categories.status;
 
+// Selector for: CREATE_CATEGORY
+export const selectCreateCategoryStatus = (state) => state.categories.createCategoryStatus;
+
+// Selector for: UPDATE_CATEGORY
+export const selectUpdateCategoryStatus = (state) => state.categories.updateCategoryStatus;
+
+// Selector for: DELETE_CATEGORY
+export const selectDeleteCategoryStatus = (state) => state.categories.deleteCategoryStatus;
