@@ -84,7 +84,7 @@ export const updateProduct = createAsyncThunk(
       mutation: UPDATE_PRODUCT,
       variables: { id, input },
 
-      //Note: Apollo automatically updates the cache with the new product due to normalization.
+      //Note: Apollo automatically updates the cache with the new product due to the cache normalization feature
     });
 
     // Return the updated product from the server

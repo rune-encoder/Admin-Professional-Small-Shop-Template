@@ -14,6 +14,15 @@ export const LOGIN_ADMIN = gql`
   }
 `;
 
+export const CREATE_CATEGORY = gql`
+  mutation createCategory($name: String!) {
+    createCategory(name: $name) {
+      _id
+      name
+    }
+  }
+`;
+
 export const UPDATE_CATEGORY = gql`
   mutation updateCategory($id: ID!, $name: String!) {
     updateCategory(_id: $id, name: $name) {

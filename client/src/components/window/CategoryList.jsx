@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ import {
 // Import Redux Thunks
 import {
   getCategories,
+  createCategory,
   updateCategory,
   deleteCategory,
 } from "../../features/categories/categoryThunks";
@@ -67,18 +68,57 @@ export default function CategoryList() {
   // Event Handlers Section
   // ==============================
   const handleUpdateCategory = async (categoryId) => {
+    // Wait for the category to be updated.
     await dispatch(updateCategory({ id: categoryId, name: formState.name }));
+
+    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
     dispatch(getCategories());
   };
 
   const handleDeleteCategory = async (categoryId) => {
+    // Wait for the category to be deleted..
     await dispatch(deleteCategory(categoryId));
+
+    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
     dispatch(getCategories());
   };
 
   return (
     <>
+      {categoryMode === "create" && (
+        <div className="window__content--wrapper col-sm-12 col-md-5">
+          <form>
+            <input
+              type="text"
+              placeholder="Category Name"
+              value={formState.name}
+              onChange={(event) => {
+                setFormState({ name: event.target.value });
+              }}
+            />
+          </form>
+          <button
+            onClick={async (e) => {
+              e.preventDefault();
+              await dispatch(createCategory(formState.name));
+              dispatch(getCategories());
+            }}
+          >
+            <BsSave />
+          </button>
+        </div>
+      )}
+
       <div className="window__content--wrapper col-sm-12 col-md-7">
+        <button
+          onClick={() => {
+            setFormState({ name: "" });
+            dispatch(setCategoryMode({ mode: "create", category: null }));
+          }}
+        >
+          Create + Button
+        </button>
+
         <table>
           <thead>
             <tr>
