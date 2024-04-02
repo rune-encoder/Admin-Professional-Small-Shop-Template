@@ -3,7 +3,7 @@
 // Selector for: Selecting the product of interest for (editing, deleting, etc.)
 export const selectCurrentProduct = (state) => state.products.currentProduct;
 
-// Selectors for: Toggling the product edit mode (true/false)
+// Selectors for: Toggling the product edit mode (view, update, create, etc.)
 export const selectProductMode = (state) =>
   state.products.productMode;
 

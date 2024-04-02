@@ -7,6 +7,8 @@ import { selectMenu } from "../features/menuSlice";
 // Import Components
 import Window from "../components/window/Window";
 
+import CategoryList from "../components/window/CategoryList";
+
 import Toolbar from "../components/window/Toolbar";
 import ItemDetails from "../components/window/ItemDetails";
 import ItemList from "../components/window/ItemList";
@@ -17,7 +19,10 @@ export default function AdminDashboard() {
   return (
     <>
       {menuState.store && <Window title="Store" />}
-      {menuState.categories && <Window title="Categories" />}
+      {menuState.categories && <Window title="Categories">
+        <CategoryList />
+        </Window>
+        }
       {menuState.products && (
         <Window title="Products">
           <Toolbar />

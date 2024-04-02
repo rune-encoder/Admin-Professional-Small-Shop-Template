@@ -15,6 +15,5 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(getCategories.rejected, (state, action) => {
       state.status = "failed";
-      state.error = action.error.message;
     });
 };
