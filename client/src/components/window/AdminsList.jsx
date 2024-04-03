@@ -1,3 +1,5 @@
+// ! Revisit: Refactor
+
 // Import React Hooks
 import { useState, useEffect } from "react";
 
@@ -14,18 +16,24 @@ import { setLatestErrorMessage } from "../../features/errorSlice";
 import { QUERY_ADMINS } from "../../utils/queries";
 
 // Import Mutations
-import { CREATE_ADMIN } from "../../utils/mutations";
+import {
+  CREATE_ADMIN,
+  UPDATE_ADMIN,
+  DELETE_ADMIN,
+} from "../../utils/mutations";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
-import { BsSave, BsTrash } from "react-icons/bs";
-import { TiCancelOutline } from "react-icons/ti";
+import { BsTrash } from "react-icons/bs";
 
 export default function AdminsList() {
   // ==============================
   // useState Hooks Section
   // ==============================
-  const [formData, setFormData] = useState({
+  const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const [adminMode, setAdminMode] = useState(null);
+
+  const [formState, setFormState] = useState({
     username: "",
     email: "",
     password: "",
@@ -36,6 +44,10 @@ export default function AdminsList() {
   // useDispatch Hooks Section
   // ==============================
   //   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(selectedAdmin);
+    console.log(formState);
+  }, [selectedAdmin, formState]);
 
   // ==============================
   // QUERY SECTION
@@ -53,6 +65,22 @@ export default function AdminsList() {
     },
   });
 
+  const [updateAdmin] = useMutation(UPDATE_ADMIN, {
+    refetchQueries: [{ query: QUERY_ADMINS }],
+    onError: (error) => {
+      console.error(error);
+      // dispatch(setLatestErrorMessage(error));
+    },
+  });
+
+  const [deleteAdmin] = useMutation(DELETE_ADMIN, {
+    refetchQueries: [{ query: QUERY_ADMINS }],
+    onError: (error) => {
+      console.error(error);
+      // dispatch(setLatestErrorMessage(error));
+    },
+  });
+
   // ==============================
   // DATA PREPROCESSING SECTION
   // ==============================
@@ -66,27 +94,71 @@ export default function AdminsList() {
   }
 
   const admins = adminData?.getAdmins || [];
-  console.log(admins);
 
   // ==============================
   // Event Handlers Section
   // ==============================
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormState({ ...formState, [name]: value });
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleCreateAdminSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await createAdmin({ variables: { ...formData } });
-      setFormData({
+      await createAdmin({ variables: { ...formState } });
+      setFormState({
         username: "",
         email: "",
         password: "",
         permission: "viewer",
       });
+      setAdminMode(null);
+    } catch (error) {
+      console.error(error);
+      //   dispatch(setLatestErrorMessage(error));
+    }
+  };
+
+  const handleUpdateAdminSubmit = async (e) => {
+    e.preventDefault();
+
+    const filteredFormState = Object.entries(formState).reduce(
+      (newFormState, [key, value]) => {
+        if (value !== "" && value !== false) {
+          newFormState[key] = value;
+        }
+        return newFormState;
+      },
+      {}
+    );
+
+    console.log(filteredFormState);
+
+    try {
+      await updateAdmin({
+        variables: {
+          id: selectedAdmin._id,
+          ...filteredFormState,
+        },
+      });
+      setFormState({
+        username: "",
+        email: "",
+        password: "",
+        permission: "viewer",
+      });
+      setAdminMode(null);
+    } catch (error) {
+      console.error(error);
+      //   dispatch(setLatestErrorMessage(error));
+    }
+  };
+
+  const handleDeleteAdmin = async (adminData) => {
+    try {
+      await deleteAdmin({ variables: { id: adminData._id } });
     } catch (error) {
       console.error(error);
       //   dispatch(setLatestErrorMessage(error));
@@ -95,62 +167,128 @@ export default function AdminsList() {
 
   return (
     <>
-      <div className="window__content--wrapper col-sm-12 col-md-5">
-        <form onSubmit={handleFormSubmit}>
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="permission">Permission:</label>
-            <select
-              id="permission"
-              name="permission"
-              value={formData.permission}
-              onChange={handleChange}
-              required
-            >
-              <option value="viewer">Viewer</option>
-              <option value="editor">Editor</option>
-              <option value="manager">Manager</option>
-              <option value="owner">Owner</option>
-            </select>
-          </div>
-          <button type="submit">Create User</button>
-        </form>
-      </div>
+      {adminMode === "create" && (
+        <div className="window__content--wrapper col-sm-12 col-md-5">
+          <form onSubmit={handleCreateAdminSubmit}>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formState.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formState.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                value={formState.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="permission">Permission:</label>
+              <select
+                id="permission"
+                name="permission"
+                value={formState.permission}
+                onChange={handleChange}
+                required
+              >
+                <option value="viewer">Viewer</option>
+                <option value="editor">Editor</option>
+                <option value="manager">Manager</option>
+                <option value="owner">Owner</option>
+              </select>
+            </div>
+            <button type="submit">Create User</button>
+          </form>
+        </div>
+      )}
+
+      {adminMode === "update" && (
+        <div className="window__content--wrapper col-sm-12 col-md-5">
+          <form onSubmit={handleUpdateAdminSubmit}>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formState.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formState.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                value={formState.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="permission">Permission:</label>
+              <select
+                id="permission"
+                name="permission"
+                value={formState.permission}
+                onChange={handleChange}
+                required
+              >
+                <option value="viewer">Viewer</option>
+                <option value="editor">Editor</option>
+                <option value="manager">Manager</option>
+                <option value="owner">Owner</option>
+              </select>
+            </div>
+            <button type="submit">Update User</button>
+          </form>
+        </div>
+      )}
 
       <div className="window__content--wrapper col-sm-12 col-md-7">
+        <button
+          onClick={() => {
+            setAdminMode("create");
+          }}
+        >
+          Create + Button
+        </button>
+
         <table>
           <thead>
             <tr>
@@ -176,7 +314,15 @@ export default function AdminsList() {
                     data-action="Update"
                     onClick={(event) => {
                       event.stopPropagation();
-                      //   dispatch(setadminMode({ mode: "update", admin }));
+                      console.log("click");
+                      setSelectedAdmin(admin);
+                      setAdminMode("update");
+                      setFormState({
+                        username: admin.username,
+                        email: admin.email,
+                        password: "",
+                        permission: admin.permission,
+                      });
                     }}
                   >
                     <FiEdit />
@@ -185,7 +331,7 @@ export default function AdminsList() {
                     data-action="Delete"
                     onClick={(event) => {
                       event.stopPropagation();
-                      //   handleDeleteadmin(admin);
+                      handleDeleteAdmin(admin);
                     }}
                   >
                     <BsTrash />

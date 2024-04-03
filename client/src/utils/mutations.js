@@ -114,12 +114,56 @@ export const DELETE_PRODUCT = gql`
 `;
 
 export const CREATE_ADMIN = gql`
-mutation adminCreate($username: String!, $email: String!, $password: String!, $permission: String!) {
-  adminCreate(username: $username, email: $email, password: $password, permission: $permission) {
-    _id
-    email
-    username
-    permission
+  mutation adminCreate(
+    $username: String!
+    $email: String!
+    $password: String!
+    $permission: String!
+  ) {
+    adminCreate(
+      username: $username
+      email: $email
+      password: $password
+      permission: $permission
+    ) {
+      _id
+      email
+      username
+      permission
+    }
   }
-}
+`;
+
+export const UPDATE_ADMIN = gql`
+  mutation adminUpdate(
+    $id: ID!
+    $username: String
+    $email: String
+    $password: String
+    $permission: String
+  ) {
+    adminUpdate(
+      _id: $id
+      username: $username
+      email: $email
+      password: $password
+      permission: $permission
+    ) {
+      _id
+      username
+      email
+      permission
+    }
+  }
+`;
+
+export const DELETE_ADMIN = gql`
+  mutation adminDelete($id: ID!) {
+    adminDelete(_id: $id) {
+      _id
+      username
+      email
+      permission
+    }
+  }
 `;
