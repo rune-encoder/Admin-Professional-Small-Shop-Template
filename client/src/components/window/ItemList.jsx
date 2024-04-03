@@ -60,6 +60,8 @@ export default function ItemList() {
     let productId = product._id;
     let productImages = product.image.map(({ __typename, ...rest }) => rest);
 
+    dispatch(setProductMode({ mode: null, product: null }));
+
     // Wait for the product to be deleted
     await dispatch(deleteProduct({ id: productId, images: productImages }));
     

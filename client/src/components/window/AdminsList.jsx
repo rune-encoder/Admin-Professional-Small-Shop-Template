@@ -44,10 +44,6 @@ export default function AdminsList() {
   // useDispatch Hooks Section
   // ==============================
   //   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(selectedAdmin);
-    console.log(formState);
-  }, [selectedAdmin, formState]);
 
   // ==============================
   // QUERY SECTION
@@ -133,8 +129,6 @@ export default function AdminsList() {
       },
       {}
     );
-
-    console.log(filteredFormState);
 
     try {
       await updateAdmin({
@@ -314,7 +308,6 @@ export default function AdminsList() {
                     data-action="Update"
                     onClick={(event) => {
                       event.stopPropagation();
-                      console.log("click");
                       setSelectedAdmin(admin);
                       setAdminMode("update");
                       setFormState({
