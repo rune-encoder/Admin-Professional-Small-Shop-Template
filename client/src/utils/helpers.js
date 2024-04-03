@@ -22,6 +22,7 @@ export function filterProducts(products, searchTerm) {
 }
 
 export function sortProducts(products, sortType) {
+    // Create a copy of the products array to avoid mutating the original array.
   let sortedProducts = [...products];
 
   switch (sortType) {

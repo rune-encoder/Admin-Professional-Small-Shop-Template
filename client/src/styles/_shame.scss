@@ -1,29 +1,29 @@
 // ! Revisit
-header h5 {
-  @include respond-to("xl") {
-    color: gray;
-  }
+// header h5 {
+//   @include respond-to("xl") {
+//     color: gray;
+//   }
 
-  @include respond-to("lg") {
-    color: green;
-  }
+//   @include respond-to("lg") {
+//     color: green;
+//   }
 
-  @include respond-to("md") {
-    color: blue;
-  }
+//   @include respond-to("md") {
+//     color: blue;
+//   }
 
-  @include respond-to("sm") {
-    color: red;
-  }
+//   @include respond-to("sm") {
+//     color: red;
+//   }
 
-  @include respond-to("xs") {
-    color: yellow;
-  }
+//   @include respond-to("xs") {
+//     color: yellow;
+//   }
 
-  @include respond-to("xxl") {
-    color: purple;
-  }
-}
+//   @include respond-to("xxl") {
+//     color: purple;
+//   }
+// }
 
 .rbg {
     background-color: rgb(151, 80, 80);
