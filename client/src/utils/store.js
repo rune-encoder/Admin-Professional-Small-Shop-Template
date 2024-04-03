@@ -3,6 +3,7 @@ import adminReducer from "../features/adminSlice/";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import menuReducer from "../features/menuSlice";
 import errorReducer from "../features/errorSlice";
+import toolbarReducer from "../features/toolbarSlice";
 
 import categoriesReducer from "../features/categories/categorySlice";
 import productsReducer from "../features/products/productSlice";
@@ -54,6 +55,7 @@ export const store = configureStore({
     error: errorReducer,
     products: productsReducer,
     categories: categoriesReducer,
+    toolbar: toolbarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),
