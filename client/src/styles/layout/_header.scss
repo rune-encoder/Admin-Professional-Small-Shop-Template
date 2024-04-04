@@ -3,11 +3,12 @@
 // ==============================
 header {
   @include apply-flex(row, space-between, center);
-  @include apply-gradient("light", "shade-1");
-  @include apply-box-shadow("shade-10", 50, $y: 0.1rem);
+  @include apply-space("padding", -10, "y");
+  @include apply-space("padding", -5, "x");
 
   position: relative;
   width: 100%;
+  background: var(--light);
 }
 
 // HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
@@ -19,8 +20,16 @@ header {
 // LOGO SECTION
 // ==============================
 .header__logo {
-  @include apply-space("margin", -5, "x");
-  @include apply-space("padding", -5, "x");
+  @include apply-flex(row, center, center);
+  @include apply-space("gap", -15);
+
+  white-space: nowrap;
+}
+
+.header__logo h5 {
+  @include respond-to("sm") {
+    @include set-typography("light", 1, $compact-line-height);
+  }
 }
 
 // ==============================
@@ -29,6 +38,10 @@ header {
 .header__title {
   @include apply-font-family("ysabeau-sc");
   @include set-typography("bold");
+
+  @include respond-to("sm") {
+    display: none;
+  }
 }
 
 // ==============================
@@ -36,32 +49,32 @@ header {
 // ==============================
 .mini-navbar {
   @include apply-flex(row, center, center);
-  @include apply-space("margin", -5, "x");
-  @include apply-space("padding", -5, "x");
-  @include apply-space("gap", -10);
+  @include apply-space("gap", -15);
 }
 
 // MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
 .mini-navbar__section {
   @include apply-flex(column, center);
-  @include apply-space("padding", -5, "y");
 }
 
 // MINI-NAVBAR: USER ICON
 .mini-navbar__user-icon {
-  font-size: modular-scale(4);
+  font-size: modular-scale(3);
 }
 
 // MINI-NAVBAR: OPEN  & CLOSE DROPDOWN BUTTON
 .mini-navbar__button {
-  @include apply-space("padding-top", -5);
+  @include apply-flex(row, center, center);
 
   color: var(--shade-19);
-  font-size: modular-scale(3);
 
   &:hover {
     color: var(--selection);
   }
+}
+
+.mini-navbar__button svg {
+  font-size: modular-scale(1);
 }
 
 // ==============================

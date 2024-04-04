@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
 import { useSelector, useDispatch } from "react-redux";
 import { changeMenuDisplay, selectDisplayMenu } from "../features/menuSlice";
 
-import { FaUsers } from "react-icons/fa";
-import { FaShop } from "react-icons/fa6";
+import { IoHomeOutline } from "react-icons/io5";
+import { RiListCheck3 } from "react-icons/ri";
+import { PiUsersFourLight } from "react-icons/pi";
 import {
-  MdLocalShipping,
+  MdOutlineLocalShipping,
   MdQueryStats,
-  MdOutlineStore,
-  MdOutlineCategory,
-  MdOutlineShoppingCart,
 } from "react-icons/md";
 
 export default function Sidebar() {
@@ -19,75 +14,26 @@ export default function Sidebar() {
   const activeMenu = useSelector(selectDisplayMenu);
   const dispatch = useDispatch();
 
-  // <======= STATE SIDEBAR: (MOUSE HOVER) =======>
-  const [isHovered, setIsHovered] = useState(false);
-
-  // SIDEBAR STORE BUTTON: MENU ITEMS
-  const storeMenu = [
-    { name: "store", icon: <MdOutlineStore />, isOpen: activeMenu === "store" },
-    {
-      name: "categories",
-      icon: <MdOutlineCategory />,
-      isOpen: activeMenu === "categories",
-    },
-    {
-      name: "products",
-      icon: <MdOutlineShoppingCart />,
-      isOpen: activeMenu === "products",
-    },
+  const buttons = [
+    { Icon: IoHomeOutline, text: "Home", menu: "home" },
+    { Icon: RiListCheck3, text: "Listings", menu: "listings" },
+    { Icon: MdOutlineLocalShipping, text: "Orders", menu: "orders" },
+    { Icon: MdQueryStats, text: "Reports", menu: "reports" },
+    { Icon: PiUsersFourLight, text: "Admins", menu: "admins" },
   ];
-
-  // CREATE MENU BUTTONS FOR EACH STORE MENU ITEM
-  const storeMenuMap = storeMenu.map((item) => {
-    return (
-      <button
-        key={item.name}
-        className={`sidebar-menu__button ${item.isOpen ? "disabled" : ""}`}
-        disabled={activeMenu === item.name}
-        onClick={() => dispatch(changeMenuDisplay(item.name))}
-      >
-        {item.icon} {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
-      </button>
-    );
-  });
 
   return (
     <aside className="sidebar__aside">
-      <div
-        className="sidebar__links"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <FaShop className="sidebar__icon" />
-        <span className="sidebar__text">Store</span>
-
-        {isHovered && (
-          <menu className="sidebar-menu__section">
-            <div className="sidebar-menu__hover-filler"></div>
-            {storeMenuMap}
-          </menu>
-        )}
-      </div>
-
-      <Link to="/Orders" className="sidebar__links">
-        <MdLocalShipping className="sidebar__icon" />
-        <span className="sidebar__text">Orders</span>
-      </Link>
-
-      <Link to="/Report" className="sidebar__links">
-        <MdQueryStats className="sidebar__icon" />
-        <span className="sidebar__text">Report</span>
-      </Link>
-
-      <button
-        className={`sidebar__links ${
-          activeMenu === "admins" ? "disabled" : ""
-        }`}
-        onClick={() => dispatch(changeMenuDisplay("admins"))}
-      >
-        <FaUsers className="sidebar__icon" />
-        <span className="sidebar__text">Admins</span>
-      </button>
+      {buttons.map(({ Icon, text, menu }) => (
+        <button
+          key={menu}
+          className={`sidebar__buttons ${activeMenu === menu ? "disabled" : ""}`}
+          onClick={() => dispatch(changeMenuDisplay(menu))}
+        >
+          <Icon className="sidebar__icon" />
+          <span className="sidebar__text">{text}</span>
+        </button>
+      ))}
     </aside>
   );
 }

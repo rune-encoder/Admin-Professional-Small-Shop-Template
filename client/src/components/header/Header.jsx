@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import MiniNavbar from "./MiniNavbar";
 import MiniNavDropdown from "./MiniNavDropdown";
 
+import { RxHamburgerMenu } from "react-icons/rx";
+
 export default function Header() {
   return (
     <>
-      <header className="roboto-condensed-250">
-        <Link to="/" className="header__logo">
+      <header>
+        <div className="header__logo">
           <h5>ᚱuᚢe-Eᚢcᛟdeᚱ</h5>
-        </Link>
+        </div>
 
         <span className="header__title">Admin Portal</span>
 

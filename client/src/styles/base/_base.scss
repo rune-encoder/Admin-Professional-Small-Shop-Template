@@ -3,10 +3,21 @@
 .content {
   @include apply-flex(column);
 
-  flex-grow: 1; // Expand to fill available space
   height: 100vh;
+  flex-grow: 1; // Expand to fill available space
 
-  // WRAPS APP'S MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
+  // Inner container
+  &__inner {
+    @include apply-flex(row);
+
+    flex-grow: 1; // Expand to fill available space
+
+    // Inner content container for mobile.
+    @include respond-to("sm") {
+      @include apply-flex(column-reverse);
+    }
+  }
+
   &__main {
     flex-grow: 1; // Expand to fill available space
     overflow-y: auto;
@@ -29,7 +40,7 @@ input[type="reset"] {
   margin: 0;
 }
 
-// BASE LINK STYLES 
+// BASE LINK STYLES
 a {
   text-decoration: none;
   color: inherit;

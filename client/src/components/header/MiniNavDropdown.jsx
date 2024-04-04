@@ -8,8 +8,7 @@ import {
   selectIsDarkModeEnabled,
 } from "../../features/themeSlice";
 
-import { RxHamburgerMenu } from "react-icons/rx";
-import { GrClose } from "react-icons/gr";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import {
   IoLogOutOutline,
   IoSunnyOutline,
@@ -34,11 +33,11 @@ export default function MiniNavDropdown() {
       {/* <======= ICON: OPEN AND CLOSE MENU =======> */}
       {isDropdownOpen ? (
         <button className="mini-navbar__button">
-          <GrClose onClick={() => toggleDropdown()} />
+          <IoIosArrowUp onClick={() => toggleDropdown()} />
         </button>
       ) : (
         <button className="mini-navbar__button">
-          <RxHamburgerMenu onClick={() => toggleDropdown()} />
+          <IoIosArrowDown onClick={() => toggleDropdown()} />
         </button>
       )}
       {/* <======= DROPDOWN MENU CONTENT =======> */}
