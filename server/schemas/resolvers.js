@@ -261,6 +261,7 @@ const resolvers = {
       await deleteImages(images);
 
       // Delete the product from the database
+      // !Revisit Fix: Delete breaks sometimes. 
       return await Product.findByIdAndDelete(_id);
     }, adminLevel.EDITOR),
   },

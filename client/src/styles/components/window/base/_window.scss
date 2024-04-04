@@ -27,18 +27,6 @@
   @extend %window-tab--layout;
 }
 
-// TAB: CLOSE BUTTON
-.window__tab button {
-  @extend %window-tab__button--layout;
-  @include apply-border("shade-10", $border-radius-sm);
-
-  &:hover {
-    @include apply-gradient("shade-5", "shade-8", to bottom left);
-
-    color: var(--selection);
-  }
-}
-
 // ==============================
 // WINDOW BODY SECTION
 // ==============================

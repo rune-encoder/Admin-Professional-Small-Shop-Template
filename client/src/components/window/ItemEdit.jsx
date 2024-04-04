@@ -110,7 +110,7 @@ export default function ItemEdit() {
     if (selectedProduct && productMode === "update") {
       setFormState({
         name: selectedProduct.name,
-        category: selectedProduct.category._id,
+        category: selectedProduct.category ? selectedProduct.category._id : "",
         price: selectedProduct.price,
         quantity: selectedProduct.quantity,
         isFeatured: selectedProduct.isFeatured,

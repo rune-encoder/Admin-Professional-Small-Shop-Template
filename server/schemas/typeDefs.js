@@ -38,7 +38,7 @@ type Image {
 type Product {
     _id: ID
     createdAt: String
-    category: Category!
+    category: Category
     name: String!
     shortDescription: String
     details: String
@@ -131,28 +131,27 @@ input ProductInput {
     isFeatured: Boolean
 }
 
-# TEST INPUT
-input TestTwo {
-    cloudinaryId: String
-    url: String
-    _id: ID
-}
-
-input ImageInput {
+input ImageUpdateInput {
     cloudinaryId: String
     url: String
     _id: ID
     dataURL: String
 }
 
-input TestInput {
+input ImageDeleteInput {
+    cloudinaryId: String
+    url: String
+    _id: ID
+}
+
+input ProductUpdateInput {
     category: ID
     name: String
     shortDescription: String
     details: String
     price: Float
     quantity: Int
-    image: [ImageInput]
+    image: [ImageUpdateInput]
     isFeatured: Boolean
 }
 
@@ -182,8 +181,8 @@ type Mutation {
     deleteCategory(_id: ID!): Category
 
     createProduct(input: ProductInput!): Product
-    updateProduct(_id: ID!, input: TestInput!): Product
-    deleteProduct(_id: ID!, images: [TestTwo]): Product
+    updateProduct(_id: ID!, input: ProductUpdateInput!): Product
+    deleteProduct(_id: ID!, images: [ImageDeleteInput]): Product
 }
 `;
 

@@ -33,3 +33,14 @@ export const QUERY_PRODUCTS = gql`
     }
   }
 `;
+
+export const QUERY_ADMINS = gql`
+query getAdminsByFilter($filters: AdminFilterInput) {
+  getAdmins(filters: $filters) {
+    _id
+    username
+    email
+    permission
+  }
+}
+`;

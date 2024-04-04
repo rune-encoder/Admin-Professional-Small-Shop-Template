@@ -13,11 +13,16 @@ import {
   selectGetProductsStatus,
 } from "../../features/products/productSelectors";
 
+import { selectSearchTerm, selectSortType } from "../../features/toolbarSlice";
+
 // Import Redux Thunks
 import {
   getProducts,
   deleteProduct,
 } from "../../features/products/productThunks";
+
+// Import Helpers
+import { filterProducts, sortProducts } from "../../utils/helpers";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";
@@ -38,6 +43,11 @@ export default function ItemList() {
   // ==============================
   const products = useSelector(selectGetProducts);
   const getProductsStatus = useSelector(selectGetProductsStatus);
+  const searchTerm = useSelector(selectSearchTerm);
+  const sortType = useSelector(selectSortType);
+
+  const filteredProducts = filterProducts(products, searchTerm);
+  const sortedProducts = sortProducts(filteredProducts, sortType);
 
   // ==============================
   // useDispatch Hooks Section
@@ -60,9 +70,11 @@ export default function ItemList() {
     let productId = product._id;
     let productImages = product.image.map(({ __typename, ...rest }) => rest);
 
+    dispatch(setProductMode({ mode: null, product: null }));
+
     // Wait for the product to be deleted
     await dispatch(deleteProduct({ id: productId, images: productImages }));
-    
+
     // Refresh the products list global state by fetching the products again. (Server or Cache)
     dispatch(getProducts());
   };
@@ -87,7 +99,7 @@ export default function ItemList() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {sortedProducts.map((product) => (
             <tr
               key={product._id}
               onClick={() => {
@@ -98,7 +110,7 @@ export default function ItemList() {
               <td>{product.price}</td>
               <td>01/01/10</td>
               <td>{product.quantity}</td>
-              <td>{product.category.name}</td>
+              <td>{product.category ? product.category.name : ""}</td>
               <td className="table__action-cell">
                 <button
                   data-action="Update"

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMenuItem, selectMenu } from "../features/menuSlice";
+import { changeMenuDisplay, selectDisplayMenu } from "../features/menuSlice";
 
 import { FaUsers } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
@@ -16,7 +16,7 @@ import {
 
 export default function Sidebar() {
   // <======= REDUX STATE: MENU ITEM (OPEN/CLOSE) =======>
-  const isActive = useSelector(selectMenu);
+  const activeMenu = useSelector(selectDisplayMenu);
   const dispatch = useDispatch();
 
   // <======= STATE SIDEBAR: (MOUSE HOVER) =======>
@@ -24,16 +24,16 @@ export default function Sidebar() {
 
   // SIDEBAR STORE BUTTON: MENU ITEMS
   const storeMenu = [
-    { name: "store", icon: <MdOutlineStore />, isOpen: isActive.store },
+    { name: "store", icon: <MdOutlineStore />, isOpen: activeMenu === "store" },
     {
       name: "categories",
       icon: <MdOutlineCategory />,
-      isOpen: isActive.categories,
+      isOpen: activeMenu === "categories",
     },
     {
       name: "products",
       icon: <MdOutlineShoppingCart />,
-      isOpen: isActive.products,
+      isOpen: activeMenu === "products",
     },
   ];
 
@@ -42,11 +42,9 @@ export default function Sidebar() {
     return (
       <button
         key={item.name}
-        className={`sidebar-menu__button ${
-          isActive[item.name] ? "disabled" : ""
-        }`}
-        disabled={isActive[item.name]}
-        onClick={() => dispatch(toggleMenuItem({ [item.name]: true }))}
+        className={`sidebar-menu__button ${item.isOpen ? "disabled" : ""}`}
+        disabled={activeMenu === item.name}
+        onClick={() => dispatch(changeMenuDisplay(item.name))}
       >
         {item.icon} {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
       </button>
@@ -81,10 +79,15 @@ export default function Sidebar() {
         <span className="sidebar__text">Report</span>
       </Link>
 
-      <Link to="/Admins" className="sidebar__links">
+      <button
+        className={`sidebar__links ${
+          activeMenu === "admins" ? "disabled" : ""
+        }`}
+        onClick={() => dispatch(changeMenuDisplay("admins"))}
+      >
         <FaUsers className="sidebar__icon" />
         <span className="sidebar__text">Admins</span>
-      </Link>
+      </button>
     </aside>
   );
 }

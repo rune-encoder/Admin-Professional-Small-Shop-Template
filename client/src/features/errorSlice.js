@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Import Thunks
-import { getCategories } from "./categories/categoryThunks";
+import {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "./categories/categoryThunks";
 import {
   getProducts,
   createProduct,
@@ -28,13 +33,26 @@ const errorSlice = createSlice({
   name: "error",
   initialState,
   reducers: {
+    setLatestErrorMessage: (state, action) => {
+      state.latestErrorMessage = action.payload;
+      state.showErrorModal = true;
+    },
     toggleErrorModal: (state, action) => {
       state.showErrorModal = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
+      // ==============================
+      // SET ERROR STATUS: CATEGORIES
+      // ==============================
       .addCase(getCategories.rejected, handleRejected)
+      .addCase(createCategory.rejected, handleRejected)
+      .addCase(updateCategory.rejected, handleRejected)
+      .addCase(deleteCategory.rejected, handleRejected)
+      // ==============================
+      // SET ERROR STATUS: PRODUCTS
+      // ==============================
       .addCase(getProducts.rejected, handleRejected)
       .addCase(createProduct.rejected, handleRejected)
       .addCase(updateProduct.rejected, handleRejected)
@@ -43,7 +61,7 @@ const errorSlice = createSlice({
 });
 
 // Actions
-export const { updateErrorMessage, toggleErrorModal } = errorSlice.actions;
+export const { setLatestErrorMessage, toggleErrorModal } = errorSlice.actions;
 
 // Selectors
 export const selectLatestErrorMessage = (state) =>

@@ -96,3 +96,14 @@
 // .col {
 //   @include make-col(1, 12, 15px); // Adjust size and total columns as needed
 // }
+
+// .content__main {
+//   height: 100vh;
+//   margin: 0;
+//   background-size: cover;
+//   background-image:
+//     radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), rgba(255,255,255,0.1), transparent 50%),
+//     radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), rgba(255,255,255,0.1), transparent 50%),
+//     radial-gradient(circle at 60% 80%, rgba(255,255,255,0.1), rgba(255,255,255,0.1), transparent 50%),
+//     linear-gradient(to right, #3a6186, #89253e);
+// }

@@ -84,7 +84,7 @@ export const updateProduct = createAsyncThunk(
       mutation: UPDATE_PRODUCT,
       variables: { id, input },
 
-      //Note: Apollo automatically updates the cache with the new product due to normalization.
+      //Note: Apollo automatically updates the cache with the new product due to the cache normalization feature
     });
 
     // Return the updated product from the server
@@ -96,16 +96,12 @@ export const updateProduct = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, images }) => {
-    console.log(id)
-    console.log(images)
-
     const { data } = await client.mutate({
       mutation: DELETE_PRODUCT,
       variables: { id, images },
 
       // Apollo update function: Manual changes to the Apollo cache
       update: (cache, { data }) => {
-        console.log("tunk", data);
         // Get the Apollo cache id of the deleted product
         const productCacheId = cache.identify(data.deleteProduct);
 
