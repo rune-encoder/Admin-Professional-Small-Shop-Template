@@ -1,9 +1,5 @@
-import { Link } from "react-router-dom";
-
 import MiniNavbar from "./MiniNavbar";
 import MiniNavDropdown from "./MiniNavDropdown";
-
-import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Header() {
   return (

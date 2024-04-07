@@ -1,0 +1,116 @@
+.admin-page--wrapper {
+  @include apply-font-family("roboto");
+  @include apply-flex(column);
+  @include apply-space("padding", 1, "x");
+
+  height: 100%;
+}
+
+// ==============================
+// TOOLBAR SECTION
+// ==============================
+.toolbar {
+  @include apply-flex(column);
+  @include apply-space("padding", -5, "y");
+
+  border-bottom: solid 1px var(--shade-10);
+}
+
+// ==============================
+// TITLE & TOOLS SECTION (TOP ROW)
+// ==============================
+// CONTAINER FOR TITLE & TOOLS
+.toolbar-title__section {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "y");
+
+  position: relative;
+}
+
+// TOOLBAR TITLE (LEFT SIDE)
+.toolbar-title {
+  @include set-typography("medium", 1, $compact-line-height);
+}
+
+// TOOLBAR BUTTON CONTAINER (RIGHT SIDE)
+.toolbar-btn__wrapper {
+  @include apply-flex(row, center, center);
+  @include apply-space("gap", -10);
+}
+
+// TOOLBAR BUTTONS
+.toolbar-btn {
+  // !Revisit Gap on create button not right
+  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -10, "y");
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+
+  background: var(--shade-1);
+  border-radius: $border-radius-lg;
+
+  &--selected {
+    background: var(--shade-5);
+  }
+}
+
+// ==============================
+// SEARCHBAR SECTION (BOTTOM ROW)
+// ==============================
+// CONTAINER FOR SEARCHBAR
+.toolbar__searchbar {
+  @include apply-flex(column, center, center);
+  @include apply-space("padding", -10, "y");
+
+  position: relative;
+}
+
+// SEARCHBAR ICON
+.toolbar__searchbar-icon {
+  color: var(--always-dark);
+  position: absolute;
+
+  // ! Revisit: Positioning 10px
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// SEARCHBAR INPUT
+.toolbar__searchbar-input {
+  @include apply-space("padding", -10, "y");
+
+  width: 100%;
+  height: 100%;
+  border-radius: $border-radius-lg;
+  border: none;
+
+  // ! Revisit: Padding left 30px
+  padding-left: 30px;
+}
+
+// ==============================
+// DROPDOWN MENU SECTION (HIDDEN)
+// ==============================
+// DROPDOWN MENU CONTAINER
+.toolbar__dropdown-menu {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding-left", -5);
+  @include apply-space("padding-right", 5);
+  @include apply-position(absolute, 100%);
+  @extend %submenu--layout;
+  @extend %submenu--style;
+
+  transform: translateX(-40%);
+}
+
+// DROPDOWN MENU BUTTONS
+.toolbar__dropdown-menu-btn {
+  @include set-typography("light", 0, $compact-line-height);
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+
+  svg {
+    @include set-typography($step: -1);
+  }
+}

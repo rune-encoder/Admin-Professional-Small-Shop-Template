@@ -22,6 +22,9 @@ import ItemDetails from "../components/window/ItemDetails";
 import ItemList from "../components/window/ItemList";
 import AdminList from "../components/window/AdminsList";
 
+import Home from "../components/admin/Home.jsx";
+import Listings from "../components/admin/Listings.jsx";
+
 export default function AdminDashboard() {
   const activeMenu = useSelector(selectDisplayMenu);
   const showErrorModal = useSelector(selectShowErrorModal);
@@ -32,16 +35,20 @@ export default function AdminDashboard() {
         <Login />
       ) : (
         <>
-        <div className="content">
-          <Header />
-          <div className="content__inner">
-            <Sidebar />
-            <div className="content__main">
-            Hi
+          <div className="content">
+            <Header />
+            <div className="content__inner">
+              <Sidebar />
+              <div className="content__main">
+                {activeMenu === "home" && <Home />}
+                {activeMenu === "listings" && (
+                  <Listings>
+                    <Toolbar title={"Listings"} />
+                  </Listings>
+                )}
               </div>
             </div>
-
-        </div>
+          </div>
           {/* <div className="content">
             <Header />
             <div className="content__inner">

@@ -3,6 +3,8 @@
   @include apply-font-family("inter");
   @include set-typography("normal", 0, $base-line-height);
 
+  // color-scheme: light dark;
+
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

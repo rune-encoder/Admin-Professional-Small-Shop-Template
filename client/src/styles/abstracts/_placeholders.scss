@@ -16,7 +16,6 @@
   @include apply-font-family("inter");
   @include apply-gradient("light", "shade-1", to right top);
   @include apply-border("shade-10", $border-radius-sm);
-  @include apply-box-shadow("shade-10", 10);
   @include set-typography("light");
 }
 

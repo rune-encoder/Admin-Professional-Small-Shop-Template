@@ -1,27 +1,27 @@
 // ! Revisit
 .header__logo {
   @include respond-to("xxl") {
-    color: purple;
+    color: rgba(128, 0, 128, 0.493);
   }
 
   @include respond-to("xl") {
-    color: gray;
+    color: rgba(128, 128, 128, 0.527);
   }
 
   @include respond-to("lg") {
-    color: green;
+    color: rgba(0, 128, 0, 0.452);
   }
 
   @include respond-to("md") {
-    color: blue;
+    color: rgba(0, 0, 255, 0.507);
   }
 
   @include respond-to("sm") {
-    color: rgb(197, 178, 9);
+    color: rgba(197, 178, 9, 0.473);
   }
 
   @include respond-to("xs") {
-    color: rgb(255, 0, 106);
+    color: rgba(255, 0, 106, 0.466);
   }
 }
 
