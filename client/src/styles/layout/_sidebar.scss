@@ -10,14 +10,18 @@ $sidebar-width: rem(55px);
   @include apply-space("padding-top", 15);
   @include apply-font-family("roboto-condensed");
   @include set-typography("medium");
+  @include apply-position(sticky, $top: $header-height);
 
   min-width: $sidebar-width;
+  height: calc(100vh - #{$header-height});
   background: var(--light);
   color: var(--shade-25);
+  z-index: 1;
 
   // <========== Media Query =========>
   @include respond-to("sm") {
     @include apply-flex(row, space-around, center);
+    @include apply-position(sticky, $bottom: 0);
 
     height: $sidebar-height;
     padding: 0;

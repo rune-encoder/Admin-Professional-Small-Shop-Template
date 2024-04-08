@@ -14,7 +14,6 @@
 #root {
   display: flex;
   flex-grow: 1; // Expand to fill available space
-  overflow-x: hidden; // Prevent horizontal scrollbar
   max-width: 100%;
   min-height: 100vh;
   color: var(--dark);

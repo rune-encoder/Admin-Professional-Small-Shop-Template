@@ -8,11 +8,18 @@ header {
   @include apply-flex(row, space-between, center);
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", 0, "x");
+  @include apply-position(sticky, $top: 0);
 
-  position: relative;
+  // position: relative;
   width: 100%;
   background: var(--light);
   height: $header-height;
+  z-index: 2;
+
+  // <========== Media Query =========>
+  @include respond-to("sm") {
+    @include apply-position(sticky, $top: 0);
+  }
 }
 
 // HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
@@ -64,7 +71,7 @@ header {
 }
 
 .header__username {
-  @include set-typography("medium", 0)
+  @include set-typography("medium", 0);
 }
 
 .header__permission {

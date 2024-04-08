@@ -1,8 +1,9 @@
 .admin-page--wrapper {
   @include apply-font-family("roboto");
   @include apply-flex(column);
-  @include apply-space("padding", 1, "x");
+  // @include apply-space("padding", 1, "x");
 
+  position: relative;
   height: 100%;
 }
 
@@ -12,8 +13,11 @@
 .toolbar {
   @include apply-flex(column);
   @include apply-space("padding", -5, "y");
+  @include apply-space("padding", 1, "x");
+  @include apply-position(sticky, $top: $header-height);
 
   border-bottom: solid 1px var(--shade-15);
+  background: var(--shade-3)
 }
 
 // ==============================

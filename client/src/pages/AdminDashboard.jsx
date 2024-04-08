@@ -40,15 +40,18 @@ export default function AdminDashboard() {
             <div className="content__inner">
               <Sidebar />
               <div className="content__main">
-                {activeMenu === "home" && <Home />}
-                {activeMenu === "listings" && (
-                  <Listings>
-                    <Toolbar title={"Listings"} />
-                  </Listings>
-                )}
+
+                  {activeMenu === "home" && <Home />}
+                  {activeMenu === "listings" && (
+                    <Listings>
+                      <Toolbar title={"Listings"} />
+                    </Listings>
+                  )}
+
               </div>
             </div>
           </div>
+
           {/* <div className="content">
             <Header />
             <div className="content__inner">

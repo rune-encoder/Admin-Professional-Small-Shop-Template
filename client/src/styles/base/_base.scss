@@ -3,13 +3,14 @@
 .content {
   @include apply-flex(column);
 
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100%;
   flex-grow: 1; // Expand to fill available space
 
   // Inner container
   &__inner {
     @include apply-flex(row);
-
+    
     flex-grow: 1; // Expand to fill available space
 
     // Inner content container for mobile.
@@ -20,7 +21,7 @@
 
   &__main {
     flex-grow: 1; // Expand to fill available space
-    overflow-y: auto;
+    // overflow-y: auto;
     height: 100%;
   }
 }
