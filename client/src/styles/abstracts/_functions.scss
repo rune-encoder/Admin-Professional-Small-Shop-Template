@@ -151,7 +151,7 @@
   }
 
   // Define the increment/decrement value for generating shades.
-  $step: 4; // Recommended values: 1, 2, 4, 5, 10, 20. Other values will work too.
+  $step: 3; // Recommended values: 1, 2, 4, 5, 10, 20. Other values will work too.
 
   // Initialize name counter for shades.
   // (Example: '1' in 'shade-1' used in var(--shade-1))

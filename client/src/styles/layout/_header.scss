@@ -1,14 +1,18 @@
+// VARIABLES: DIMENSIONS FOR THE SIDEBAR
+$header-height: rem(55px);
+
 // ==============================
 // HEADER SECTION
 // ==============================
 header {
   @include apply-flex(row, space-between, center);
-  @include apply-space("padding", -10, "y");
-  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", 0, "x");
 
   position: relative;
   width: 100%;
   background: var(--light);
+  height: $header-height;
 }
 
 // HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
@@ -27,6 +31,7 @@ header {
 }
 
 .header__logo h5 {
+  // <========== Media Query =========>
   @include respond-to("sm") {
     @include set-typography("light", 1, $compact-line-height);
   }
@@ -39,13 +44,14 @@ header {
   @include apply-font-family("ysabeau-sc");
   @include set-typography("bold");
 
+  // <========== Media Query =========>
   @include respond-to("sm") {
     display: none;
   }
 }
 
 // ==============================
-// MINI-NAVBAR SECTION SECTION
+// MINI-NAVBAR SECTION
 // ==============================
 .mini-navbar {
   @include apply-flex(row, center, center);
@@ -57,9 +63,19 @@ header {
   @include apply-flex(column, center);
 }
 
+.header__username {
+  @include set-typography("medium", 0)
+}
+
+.header__permission {
+  @include set-typography("medium", -1);
+
+  color: var(--shade-20);
+}
+
 // MINI-NAVBAR: USER ICON
 .mini-navbar__user-icon {
-  font-size: modular-scale(3);
+  font-size: modular-scale(3.5);
 }
 
 // MINI-NAVBAR: OPEN  & CLOSE DROPDOWN BUTTON

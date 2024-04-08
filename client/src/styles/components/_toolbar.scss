@@ -13,7 +13,7 @@
   @include apply-flex(column);
   @include apply-space("padding", -5, "y");
 
-  border-bottom: solid 1px var(--shade-10);
+  border-bottom: solid 1px var(--shade-15);
 }
 
 // ==============================
@@ -35,13 +35,13 @@
 // TOOLBAR BUTTON CONTAINER (RIGHT SIDE)
 .toolbar-btn__wrapper {
   @include apply-flex(row, center, center);
-  @include apply-space("gap", -10);
+  @include apply-space("gap", -5);
 }
 
 // TOOLBAR BUTTONS
 .toolbar-btn {
   // !Revisit Gap on create button not right
-  @include apply-space("padding", -5, "x");
+  @include apply-space("padding", 1, "x");
   @include apply-space("padding", -10, "y");
   @extend %icon-text__button--layout;
   @extend %icon-text__button--style;
@@ -50,7 +50,7 @@
   border-radius: $border-radius-lg;
 
   &--selected {
-    background: var(--shade-5);
+    background: var(--shade-13);
   }
 }
 
@@ -71,14 +71,14 @@
   position: absolute;
 
   // ! Revisit: Positioning 10px
-  left: 10px;
+  left: rem(10px);
   top: 50%;
   transform: translateY(-50%);
 }
 
 // SEARCHBAR INPUT
 .toolbar__searchbar-input {
-  @include apply-space("padding", -10, "y");
+  @include apply-space("padding", -5, "y");
 
   width: 100%;
   height: 100%;
@@ -86,7 +86,7 @@
   border: none;
 
   // ! Revisit: Padding left 30px
-  padding-left: 30px;
+  padding-left: rem(30px);
 }
 
 // ==============================
@@ -101,7 +101,7 @@
   @extend %submenu--layout;
   @extend %submenu--style;
 
-  transform: translateX(-40%);
+  transform: translateX(-55%);
 }
 
 // DROPDOWN MENU BUTTONS
@@ -110,6 +110,7 @@
   @extend %icon-text__button--layout;
   @extend %icon-text__button--style;
 
+  // Button Icon Size
   svg {
     @include set-typography($step: -1);
   }

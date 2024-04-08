@@ -1,3 +1,5 @@
+// !Refactor: Organize and clean up code.
+
 // Import React Hooks
 import { useState } from "react";
 
@@ -81,12 +83,12 @@ export default function Toolbar({ title }) {
             {sortType !== "none" || null ? (
               <>
                 <currentOption.Icon />
-                <span>{currentOption.label}</span>
+                {currentOption.label}
               </>
             ) : (
               <>
                 <PiArrowsDownUpLight />
-                <span>Sort</span>
+                Sort
               </>
             )}
           </button>
@@ -95,7 +97,7 @@ export default function Toolbar({ title }) {
 
           <button className="toolbar-btn">
             <IoAddOutline />
-            <span>Create</span>
+            Create
           </button>
         </div>
       </div>

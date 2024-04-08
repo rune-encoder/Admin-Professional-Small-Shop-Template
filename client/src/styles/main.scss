@@ -16,6 +16,8 @@
 @import "./base/typography";
 @import "./components/scrollbar";
 @import "./components/error-window/error-window";
+@import "./components/toolbar";
+
 // @import "./components/window/base/window";
 // @import "./components/window/base/toolbar";
 // @import "./components/window/base/content";
@@ -24,12 +26,13 @@
 // @import "./components/window/subcomponents/item-form";
 // @import "./components/window/subcomponents/item-list";
 // @import "./components/window/subcomponents/img-preview";
+
 @import "./layout/sidebar";
 @import "./layout/header";
+
 // @import "./layout/footer";
 @import "./pages/login";
 @import "./shame";
-@import "./test";
 
 // !Revisit
 // DARK THEME COLORS

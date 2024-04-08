@@ -1,5 +1,6 @@
 // VARIABLES: DIMENSIONS FOR THE SIDEBAR
-$sidebar--min-width: rem(68px);
+$sidebar-height: rem(55px);
+$sidebar-width: rem(55px);
 
 // ==============================
 // SIDEBAR SECTION
@@ -9,14 +10,16 @@ $sidebar--min-width: rem(68px);
   @include apply-space("padding-top", 15);
   @include apply-font-family("roboto-condensed");
   @include set-typography("medium");
-  @include apply-gradient("light", "shade-1", 60deg);
 
-  min-width: $sidebar--min-width;
-  color: var(--shade-22);
+  min-width: $sidebar-width;
+  background: var(--light);
+  color: var(--shade-25);
 
+  // <========== Media Query =========>
   @include respond-to("sm") {
     @include apply-flex(row, space-around, center);
 
+    height: $sidebar-height;
     padding: 0;
   }
 }
@@ -24,6 +27,7 @@ $sidebar--min-width: rem(68px);
 // SIDEBAR BUTTONS: GROUP
 .sidebar__buttons {
   @include apply-flex(column, center, center);
+  @include apply-space("padding", -5, "x");
   @include apply-space("padding", -2, "y");
   @include apply-space("gap", -10);
 
@@ -35,11 +39,12 @@ $sidebar--min-width: rem(68px);
 
   // Style of sidebar button on hover
   &:hover {
-    @include apply-gradient("shade-18", "shade-22", 140deg);
+    @include apply-gradient("shade-22", "shade-24", 140deg);
 
-    color: var(--shade-4);
+    color: var(--shade-3);
   }
 
+  // <========== Media Query =========>
   @include respond-to("sm") {
     @include apply-flex(column, center, center);
     @include apply-space("padding", -10, "y");
@@ -50,16 +55,13 @@ $sidebar--min-width: rem(68px);
 // SIDEBAR BUTTON: ICON
 .sidebar__icon {
   font-size: modular-scale(2);
-
-  @include respond-to("sm") {
-    font-size: modular-scale(1);
-  }
 }
 
 // SIDEBAR BUTTON: TEXT
 .sidebar__text {
-  font-size: modular-scale(-1);
+  font-size: modular-scale(0);
 
+  // <========== Media Query =========>
   @include respond-to("sm") {
     font-size: modular-scale(-1);
   }
