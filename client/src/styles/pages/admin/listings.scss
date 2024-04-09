@@ -1,33 +1,115 @@
-$listings-row-height: 120px;
+$listings-row-height: rem(120px);
 $listings-row-width: 100%;
 
+// ==============================
+// PRODUCT LIST: CONTAINER
+// ==============================
+// Contains all the rows of products.
+.listings-products {
+  @include apply-space("padding-top", -5);
+}
+
+// ==============================
+// PRODUCT LIST: ROWS (INDIVIDUAL)
+// ==============================
 .item-row {
-    @include apply-flex(row, space-around, center);
+  position: relative;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25% 25%;
+  width: $listings-row-width;
+  height: $listings-row-height;
+  background: var(--shade-1);
 
-    width: $listings-row-width;
-    min-height: $listings-row-height;
+  &:nth-child(odd) {
+    background-color: var(--shade-3);
+  }
 
-    border: solid red 1px;
+  // SWIPE FUNCTIONALITY: HORIZONTAL SCROLL
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; // For Firefox
+  -ms-overflow-style: none; // For IE and Edge
+  &::-webkit-scrollbar {
+    display: none; /* // For Chrome, Safari, and Opera */
+  }
+
+  // SUBTLE BORDER BOTTOM EFFECT
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 75%;
+    border-bottom: solid 1px var(--shade-10);
+    transition: all 0.3s;
+  }
 }
 
-.image-wrapper {
-    // width: 100%;
-    // height: 100%;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+// PRODUCT LIST: ROW (HOVER EFFECT)
+.item-row:hover,
+.item-row:focus {
+  background-color: var(--shade-5);
 
-    height: 100px;
-    width: 100px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0%;
+    border-bottom: solid 1px var(--shade-20);
+  }
 }
 
-.image-layout {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    object-position: center;
-  }
-  
-  .product-list {
-    @include apply-space("padding", -5, "y");
-  }
+// ==============================
+// PRODUCT LIST: INDIVIDUAL CELLS
+// ==============================
+// Apply spacing to each cell.
+.item-cell {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", -5, "x");
+}
+
+// ==============================
+// COLUMN #1: PRODUCT IMAGE
+// ==============================
+.item__img-wrapper {
+  height: calc(
+    $listings-row-height - halved-modular-scale(-5) - halved-modular-scale(-5)
+  );
+}
+
+.item__img-layout {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+// ==============================
+// COLUMN #2: NAME & CATEGORY
+// ==============================
+.item__product-name {
+}
+
+.item__product-category {
+}
+
+// ==============================
+// COLUMN #3: PRODUCT DATE
+// ==============================
+.item__product-date {
+}
+
+// ==============================
+// COLUMN #4: PRODUCT PRICE
+// ==============================
+.item__product-price {
+}
+
+// ==============================
+// COLUMN #5: PRODUCT ACTIONS
+// ==============================
+.hidden-div {
+}

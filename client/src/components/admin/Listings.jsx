@@ -93,23 +93,33 @@ export default function Listings({ children }) {
         dispatch(setProductMode({ mode: "view", product }));
       }}
     >
-      <div className="image-wrapper">
-        <img
-          src={product.image[0].url}
-          alt={product.name}
-          className="image-layout"
-        />
+      <div className="item-cell">
+        <div className="item__img-wrapper">
+          <img
+            src={product.image[0].url}
+            alt={product.name}
+            className="item__img-layout"
+          />
+        </div>
       </div>
 
-      <div>
-        <div className="product-name">{product.name}</div>
-        <div className="product-category">
+      <div className="item-cell">
+        <div className="item__product-name">{product.name}</div>
+        <div className="item__product-category">
           {product.category ? product.category.name : ""}
         </div>
       </div>
 
-      <div className="product-date">01/01/10</div>
-      <div className="product-price">{product.price}</div>
+      <div className="item-cell">
+        <div className="item__product-date">01/01/10</div>
+      </div>
+
+      <div className="item-cell">
+        <div className="item__product-price">{product.price}</div>
+      </div>
+      <div className="item-cell">
+        <div className="hidden-div">hidden</div>
+      </div>
     </div>
   ));
 
@@ -117,7 +127,7 @@ export default function Listings({ children }) {
     <div className="admin-page--wrapper">
       {children}
 
-      <div className="product-list">{productRow}</div>
+      <div className="listings-products">{productRow}</div>
     </div>
   );
 }

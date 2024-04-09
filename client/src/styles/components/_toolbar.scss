@@ -1,3 +1,4 @@
+// ! Revisit: Not in the correct location (admin-page--wrapper)
 .admin-page--wrapper {
   @include apply-font-family("roboto");
   @include apply-flex(column);
@@ -16,8 +17,18 @@
   @include apply-space("padding", 1, "x");
   @include apply-position(sticky, $top: $header-height);
 
-  border-bottom: solid 1px var(--shade-15);
-  background: var(--shade-3)
+  background: var(--shade-3);
+
+  // Border bottom
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%; 
+    bottom: 0; 
+    transform: translateX(-50%);
+    width: calc(100% - halved-modular-scale(1) - halved-modular-scale(1)); 
+    border-bottom: solid 1px var(--shade-15); 
+  }
 }
 
 // ==============================
