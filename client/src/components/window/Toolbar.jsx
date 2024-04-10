@@ -9,11 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 // Import Redux Actions
 import { setSearchTerm, setSortType } from "../../features/toolbarSlice";
 import { setProductMode } from "../../features/products/productSlice";
+import { setListType } from "../../features/toolbarSlice";
 
 // Import Redux Selectors
-import { selectSortType } from "../../features/toolbarSlice";
+import { selectSortType, selectListType } from "../../features/toolbarSlice";
 
 // Import React Icons
+import { MdOutlineShoppingCart, MdOutlineCategory } from "react-icons/md";
 import { PiArrowsDownUpLight } from "react-icons/pi";
 import { IoSearch, IoAddOutline } from "react-icons/io5";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
@@ -32,6 +34,7 @@ export default function Toolbar({ title }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const sortType = useSelector(selectSortType);
+  const listType = useSelector(selectListType);
 
   const dispatch = useDispatch();
 
@@ -110,6 +113,27 @@ export default function Toolbar({ title }) {
           placeholder="Search"
           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
+      </div>
+
+      <div className="list-selection">
+        <button
+          className={`list-selection__btn ${
+            listType === "products" ? "list-selection__btn--active" : ""
+          }`}
+          onClick={() => dispatch(setListType({ mode: "products" }))}
+        >
+          <MdOutlineShoppingCart />
+          Products
+        </button>
+        <button
+          className={`list-selection__btn ${
+            listType === "categories" ? "list-selection__btn--active" : ""
+          }`}
+          onClick={() => dispatch(setListType({ mode: "categories" }))}
+        >
+          <MdOutlineCategory />
+          Categories
+        </button>
       </div>
     </div>
   );

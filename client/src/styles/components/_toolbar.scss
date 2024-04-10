@@ -65,7 +65,7 @@
   border-radius: $border-radius-lg;
 
   &--selected {
-    background: var(--shade-13);
+    background: var(--shade-8);
   }
 }
 
@@ -105,6 +105,30 @@
 }
 
 // ==============================
+// LIST SELECTION (HIDDEN)
+// ==============================
+// Select product or category list
+.list-selection {
+  @include apply-flex(row, space-evenly, center);
+  @include apply-space("padding-top", -10);
+
+  background-color: var(--shade-3);
+}
+
+.list-selection__btn {
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+  
+  background: var(--shade-1);
+  border-radius: $border-radius-lg;
+  width: 45%;
+
+  &--active {
+    background: var(--shade-8);
+  }
+}
+
+// ==============================
 // DROPDOWN MENU SECTION (HIDDEN)
 // ==============================
 // DROPDOWN MENU CONTAINER
@@ -117,6 +141,7 @@
   @extend %submenu--style;
 
   transform: translateX(-55%);
+  z-index: 1;
 }
 
 // DROPDOWN MENU BUTTONS

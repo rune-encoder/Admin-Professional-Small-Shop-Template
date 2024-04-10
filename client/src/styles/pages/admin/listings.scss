@@ -5,23 +5,27 @@ $listings-row-width: 100%;
 // PRODUCT LIST: CONTAINER
 // ==============================
 // Contains all the rows of products.
-.listings-products {
-  @include apply-space("padding-top", -5);
+.listings {
+  @include apply-font-family("roboto-condensed");
 }
 
 // ==============================
 // PRODUCT LIST: ROWS (INDIVIDUAL)
 // ==============================
-.item-row {
-  position: relative;
+[class^="item-row"] {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25% 25%;
-  width: $listings-row-width;
   height: $listings-row-height;
+  width: $listings-row-width;
   background: var(--shade-1);
+  z-index: 0;
 
   &:nth-child(odd) {
-    background-color: var(--shade-3);
+    background-color: var(--shade-2);
+  }
+
+  // PRODUCT LIST: ROW (HOVER EFFECT)
+  &:hover, &:focus {
+    background-color: var(--shade-5);
   }
 
   // SWIPE FUNCTIONALITY: HORIZONTAL SCROLL
@@ -32,34 +36,16 @@ $listings-row-width: 100%;
   &::-webkit-scrollbar {
     display: none; /* // For Chrome, Safari, and Opera */
   }
-
-  // SUBTLE BORDER BOTTOM EFFECT
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 75%;
-    border-bottom: solid 1px var(--shade-10);
-    transition: all 0.3s;
-  }
 }
 
-// PRODUCT LIST: ROW (HOVER EFFECT)
-.item-row:hover,
-.item-row:focus {
-  background-color: var(--shade-5);
+// PRODUCTS: GRID COLUMNS LAYOUT
+.item-row--product {
+  grid-template-columns: 25% 30% 25% 20% 20% 20%;
+}
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 0%;
-    border-bottom: solid 1px var(--shade-20);
-  }
+// CATEGORIES: GRID COLUMNS LAYOUT
+.item-row--category {
+  grid-template-columns: 60% 20% 20%;
 }
 
 // ==============================
@@ -90,26 +76,105 @@ $listings-row-width: 100%;
 // ==============================
 // COLUMN #2: NAME & CATEGORY
 // ==============================
-.item__product-name {
+[class^="item-name"] {
+  @include apply-space("padding-left", -10);
+}
+
+.item-name--category {
+  @include set-typography("normal", 3, $base-line-height);
+
+  input {
+    @include set-typography("normal", 2, $base-line-height);
+    @include apply-border("shade-15", $border-radius-sm);
+    @extend %form-input--style;
+    
+    width: 100%;
+  }
 }
 
 .item__product-category {
+  @include set-typography("normal", -1, $base-line-height);
+
+  color: var(--shade-13);
 }
 
 // ==============================
 // COLUMN #3: PRODUCT DATE
 // ==============================
 .item__product-date {
+  @include apply-space("padding-left", -10);
 }
 
 // ==============================
 // COLUMN #4: PRODUCT PRICE
 // ==============================
 .item__product-price {
+  @include apply-space("padding-left", -10);
+}
+
+.item__product-quantity {
+  @include set-typography("normal", -1, $base-line-height);
+
+  color: var(--shade-13);
 }
 
 // ==============================
-// COLUMN #5: PRODUCT ACTIONS
+// COLUMN #5: ACTIONS (HIDDEN)
 // ==============================
-.hidden-div {
+// Apply spacing to the hidden actions cells. (Update & Delete)
+.item-cell--actions {
+  @include apply-space("padding", 5, "y");
+  @include apply-space("padding", -10, "x");
+}
+
+// Apply styling to action buttons. (Update & Delete)
+[class^="item-cell__btn"] {
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+
+  border-radius: $border-radius-sm;
+  height: 100%;
+  width: 100%;
+}
+
+// Apply color to action buttons. (Update, Delete, Cancel, Save)
+.item-cell__btn {
+  &--update {
+    background-color: var(--success-btn-light);
+    border: solid 1px var(--success-btn-dark);
+  }
+
+  &--delete {
+    background-color: var(--err-btn-light);
+    border: solid 1px var(--err-btn-dark);
+  }
+
+  &--cancel {
+    background-color: var(--cancel-btn-light);
+    border: solid 1px var(--cancel-btn-dark);
+  }
+
+  &--save {
+    background-color: var(--save-btn-light);
+    border: solid 1px var(--save-btn-dark);
+  }
+}
+
+// ==============================
+// PRODUCT LIST: UTILITIES
+// ==============================
+// Product List labels.
+.item-label {
+  @include apply-flex(row, start, center);
+  @include apply-space("gap", -15);
+  @include set-typography("normal", -1, $base-line-height);
+
+  color: var(--shade-13);
+}
+
+// Used to wrap content within a cell (item-cell) to apply flex properties.
+.item-wrapper {
+  @include apply-flex(column, space-between, start);
+
+  height: 100%;
 }

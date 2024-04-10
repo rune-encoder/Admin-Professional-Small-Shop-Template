@@ -254,10 +254,19 @@ $base-light-theme: (
   // Error Window Color Gradients: 
   "err-window-dark": hsl(0, 90%, 80%), 
   "err-window-light": hsl(0, 65%, 68%), 
-  "err-btn-dark": hsl(0, 75%, 80%), 
-  "err-btn-light":  hsl(0, 75%, 68%), 
+  "err-btn-dark": hsl(0, 50%, 75%), 
+  "err-btn-light":  hsl(0, 75%, 70%), 
   "err-content-dark": hsl(0, 75%, 92%), 
   "err-content-light": hsl(0, 90%, 80%),
+
+  "success-btn-dark": hsl(120, 50%, 75%),
+  "success-btn-light": hsl(120, 75%, 70%),
+
+  "cancel-btn-dark": hsl(30, 50%, 75%),
+  "cancel-btn-light": hsl(30, 75%, 70%),
+
+  "save-btn-dark": hsl(210, 50%, 75%),
+  "save-btn-light": hsl(210, 75%, 70%),
 );
 
 /// A map of colors used for the dark theme.
@@ -295,6 +304,15 @@ $base-dark-theme: (
   "err-btn-light": hsl(0, 75%, 32%),
   "err-content-dark": hsl(0, 75%, 8%),
   "err-content-light": hsl(0, 90%, 20%),
+
+  "success-btn-dark": hsl(120, 75%, 20%),
+  "success-btn-light": hsl(120, 75%, 32%),
+
+  "cancel-btn-dark": hsl(30, 75%, 20%),
+  "cancel-btn-light": hsl(30, 80%, 40%),
+
+  "save-btn-dark": hsl(210, 75%, 20%),
+  "save-btn-light": hsl(210, 75%, 32%),
 );
 
 /// This map is used to set all the *light theme* colors, shades, etc. that are used in the application.
