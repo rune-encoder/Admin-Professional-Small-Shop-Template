@@ -51,13 +51,13 @@ export default function Categories() {
   // ==============================
   // useEffect Hooks Section
   // ==============================
+  // Fetch categories from the server for the list when the component mounts
   useEffect(() => {
-    // Fetch categories from the server for the list when the component mounts
     dispatch(getCategories());
   }, [dispatch]);
 
+  // Set the form state to the selected category's name if the categoryMode is "update" and a category is selected.
   useEffect(() => {
-    // Set the form state to the selected category's name
     if (selectedCategory && categoryMode === "update") {
       setFormState({
         name: selectedCategory.name,
@@ -65,8 +65,8 @@ export default function Categories() {
     }
   }, [selectedCategory, categoryMode]);
 
+  // Reset the form state when categoryMode changes to "create"
   useEffect(() => {
-    // Reset the form state when categoryMode changes to "create"
     if (categoryMode === "create") {
       setFormState({
         name: "",
@@ -75,32 +75,84 @@ export default function Categories() {
   }, [categoryMode]);
 
   // ==============================
+  // Helper Functions Section
+  // ==============================
+  // Helper function: Handle category actions (create, update, delete).
+  // Used with the createCategory, updateCategory, and deleteCategory thunks.
+  const handleCategoryAction = async (action, data) => {
+    // Wait for the category action to completed.
+    await dispatch(action(data));
+    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
+    dispatch(getCategories());
+  };
+
+  // Helper function: Render action buttons for the category list.
+  // See configuration object for the buttonConfig for button types.
+  const renderButton = (type, onClick, stopPropagation = true) => {
+    const { className, action, icon: Icon } = buttonConfig[type];
+    return (
+      <div className="item-cell--actions">
+        <button
+          className={className}
+          data-action={action}
+          onClick={(event) => {
+            if (stopPropagation) event.stopPropagation();
+            onClick(event);
+          }}
+        >
+          <Icon />
+          {action}
+        </button>
+      </div>
+    );
+  };
+
+  // ==============================
   // Event Handlers Section
   // ==============================
-  const handleCreateCategory = async () => {
-    // Wait for the category to be created.
-    await dispatch(createCategory(formState.name));
 
-    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
-    dispatch(getCategories());
+  // Handler: Create a category.
+  const handleCreateCategory = () =>
+    handleCategoryAction(createCategory, formState.name);
+
+  // Handler: Update a category.
+  const handleUpdateCategory = (categoryId) =>
+    handleCategoryAction(updateCategory, {
+      id: categoryId,
+      name: formState.name,
+    });
+
+  // Handler: Delete a category.
+  const handleDeleteCategory = (categoryId) =>
+    handleCategoryAction(deleteCategory, categoryId);
+
+  // ==============================
+  // Configurations Section
+  // ==============================
+  // Configuration object for the buttons
+  const buttonConfig = {
+    save: { className: "item-cell__btn--save", action: "Save", icon: BsSave },
+    cancel: {
+      className: "item-cell__btn--cancel",
+      action: "Cancel",
+      icon: TiCancelOutline,
+    },
+    update: {
+      className: "item-cell__btn--update",
+      action: "Update",
+      icon: FiEdit,
+    },
+    delete: {
+      className: "item-cell__btn--delete",
+      action: "Delete",
+      icon: BsTrash,
+    },
   };
 
-  const handleUpdateCategory = async (categoryId) => {
-    // Wait for the category to be updated.
-    await dispatch(updateCategory({ id: categoryId, name: formState.name }));
-
-    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
-    dispatch(getCategories());
-  };
-
-  const handleDeleteCategory = async (categoryId) => {
-    // Wait for the category to be deleted..
-    await dispatch(deleteCategory(categoryId));
-
-    // Refresh the categories list global state by fetching the categories again. (Server or Cache).
-    dispatch(getCategories());
-  };
-
+  // ==============================
+  // Render Section
+  // ==============================
+  // Render a list of categories with action buttons for each category.
   const categoryRows = categories.map((category) => (
     <div
       key={category._id}
@@ -136,71 +188,28 @@ export default function Categories() {
       {categoryMode === "update" && selectedCategory?._id === category._id ? (
         <>
           {/* SAVE CELL SECTION */}
-          <div className="item-cell--actions">
-            <button
-              className="item-cell__btn--save"
-              data-action="Save"
-              onClick={(event) => {
-                event.stopPropagation();
-                handleUpdateCategory(category._id);
-              }}
-            >
-              <BsSave />
-              Save
-            </button>
-          </div>
+          {renderButton("save", () => handleUpdateCategory(category._id))}
 
           {/* CANCEL CELL SECTION */}
-          <div className="item-cell--actions">
-            <button
-              className="item-cell__btn--cancel"
-              data-action="Cancel"
-              onClick={(event) => {
-                event.stopPropagation();
-                dispatch(setCategoryMode({ mode: "view", category }));
-              }}
-            >
-              <TiCancelOutline />
-              Cancel
-            </button>
-          </div>
+          {renderButton("cancel", () =>
+            dispatch(setCategoryMode({ mode: "view", category }))
+          )}
         </>
       ) : (
         <>
           {/* UPDATE CELL SECTION */}
-          <div className="item-cell--actions">
-            <button
-              className="item-cell__btn--update"
-              data-action="Update"
-              onClick={(event) => {
-                event.stopPropagation();
-                dispatch(setCategoryMode({ mode: "update", category }));
-              }}
-            >
-              <FiEdit />
-              Update
-            </button>
-          </div>
+          {renderButton("update", () =>
+            dispatch(setCategoryMode({ mode: "update", category }))
+          )}
 
           {/* DELETE CELL SECTION */}
-          <div className="item-cell--actions">
-            <button
-              className="item-cell__btn--delete"
-              data-action="Delete"
-              onClick={(event) => {
-                event.stopPropagation();
-                handleDeleteCategory(category._id);
-              }}
-            >
-              <BsTrash />
-              Delete
-            </button>
-          </div>
+          {renderButton("delete", () => handleDeleteCategory(category._id))}
         </>
       )}
     </div>
   ));
 
+  // Render a category create row with action buttons for creating a new category.
   const categoryCreateRow = (
     <div className="item-row--category">
       {/* CATEGORY NAME CELL */}
@@ -226,34 +235,12 @@ export default function Categories() {
       </div>
 
       {/* SAVE CELL SECTION */}
-      <div className="item-cell--actions">
-        <button
-          className="item-cell__btn--save"
-          data-action="Save"
-          onClick={async (e) => {
-            e.preventDefault();
-            handleCreateCategory();
-          }}
-        >
-          <BsSave />
-          Save
-        </button>
-      </div>
+      {renderButton("save", handleCreateCategory, false)}
 
       {/* CANCEL CELL SECTION */}
-      <div className="item-cell--actions">
-        <button
-          className="item-cell__btn--cancel"
-          data-action="Cancel"
-          onClick={(event) => {
-            event.stopPropagation();
-            dispatch(setCategoryMode({ mode: null, category: null }));
-          }}
-        >
-          <TiCancelOutline />
-          Cancel
-        </button>
-      </div>
+      {renderButton("cancel", () =>
+        dispatch(setCategoryMode({ mode: null, category: null }))
+      )}
     </div>
   );
 
