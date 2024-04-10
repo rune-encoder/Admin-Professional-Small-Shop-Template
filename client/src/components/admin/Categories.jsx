@@ -65,6 +65,15 @@ export default function Categories() {
     }
   }, [selectedCategory, categoryMode]);
 
+  useEffect(() => {
+    // Reset the form state when categoryMode changes to "create"
+    if (categoryMode === "create") {
+      setFormState({
+        name: "",
+      });
+    }
+  }, [categoryMode]);
+
   // ==============================
   // Event Handlers Section
   // ==============================
@@ -92,8 +101,7 @@ export default function Categories() {
     dispatch(getCategories());
   };
 
-  console.log(categories);
-  const categoryRow = categories.map((category) => (
+  const categoryRows = categories.map((category) => (
     <div
       key={category._id}
       className="item-row--category"
@@ -107,7 +115,7 @@ export default function Categories() {
           <MdOutlineCategory />
           Category:
         </div>
-        
+
         <div className="item-name--category">
           {categoryMode === "update" &&
           selectedCategory?._id === category._id ? (
@@ -193,5 +201,67 @@ export default function Categories() {
     </div>
   ));
 
-  return <div className="listings">{categoryRow}</div>;
+  const categoryCreateRow = (
+    <div className="item-row--category">
+      {/* CATEGORY NAME CELL */}
+      <div className="item-cell">
+        <div className="item-label">
+          <MdOutlineCategory />
+          Category:
+        </div>
+
+        <div className="item-name--category">
+          <input
+            type="text"
+            placeholder="new category..."
+            value={formState.name}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+            onChange={(event) => {
+              setFormState({ name: event.target.value });
+            }}
+          />
+        </div>
+      </div>
+
+      {/* SAVE CELL SECTION */}
+      <div className="item-cell--actions">
+        <button
+          className="item-cell__btn--save"
+          data-action="Save"
+          onClick={async (e) => {
+            e.preventDefault();
+            handleCreateCategory();
+          }}
+        >
+          <BsSave />
+          Save
+        </button>
+      </div>
+
+      {/* CANCEL CELL SECTION */}
+      <div className="item-cell--actions">
+        <button
+          className="item-cell__btn--cancel"
+          data-action="Cancel"
+          onClick={(event) => {
+            event.stopPropagation();
+            dispatch(setCategoryMode({ mode: null, category: null }));
+          }}
+        >
+          <TiCancelOutline />
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="listings">
+      {categoryMode === "create" && categoryCreateRow}
+
+      {categoryRows}
+    </div>
+  );
 }

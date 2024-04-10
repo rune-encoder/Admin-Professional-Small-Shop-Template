@@ -145,14 +145,28 @@ export default function Products() {
       </div>
 
       <div className="item-cell--actions">
-        <button className="item-cell__btn--update">
+        <button
+          className="item-cell__btn--update"
+          data-action="Update"
+          onClick={(event) => {
+            event.stopPropagation();
+            dispatch(setProductMode({ mode: "update", product }));
+          }}
+        >
           <FiEdit />
           Update
         </button>
       </div>
 
       <div className="item-cell--actions">
-        <button className="item-cell__btn--delete">
+        <button
+          className="item-cell__btn--delete"
+          data-action="Delete"
+          onClick={(event) => {
+            event.stopPropagation();
+            handleDeleteProduct(product);
+          }}
+        >
           <BsTrash />
           Delete
         </button>

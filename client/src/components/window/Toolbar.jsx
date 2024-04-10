@@ -9,10 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 // Import Redux Actions
 import { setSearchTerm, setSortType } from "../../features/toolbarSlice";
 import { setProductMode } from "../../features/products/productSlice";
+import { setCategoryMode } from "../../features/categories/categorySlice";
 import { setListType } from "../../features/toolbarSlice";
 
 // Import Redux Selectors
 import { selectSortType, selectListType } from "../../features/toolbarSlice";
+import { selectProductMode } from "../../features/products/productSelectors";
+import { selectCategoryMode } from "../../features/categories/categorySelectors";
 
 // Import React Icons
 import { MdOutlineShoppingCart, MdOutlineCategory } from "react-icons/md";
@@ -32,6 +35,9 @@ import {
 
 export default function Toolbar({ title }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const productMode = useSelector(selectProductMode);
+  const categoryMode = useSelector(selectCategoryMode);
 
   const sortType = useSelector(selectSortType);
   const listType = useSelector(selectListType);
@@ -98,7 +104,21 @@ export default function Toolbar({ title }) {
 
           {isDropdownOpen && dropdownMenu}
 
-          <button className="toolbar-btn">
+          <button
+            className={`toolbar-btn ${
+              listType === "categories" && categoryMode === "create" || 
+              listType === "products" && productMode === "create"
+                ? "toolbar-btn--selected disabled"
+                : ""
+            }`}
+            onClick={() => {
+              if (listType === "categories") {
+                dispatch(setCategoryMode({ mode: "create", category: null }));
+              } else if (listType === "products") {
+                dispatch(setProductMode({ mode: "create", product: null }));
+              }
+            }}
+          >
             <IoAddOutline />
             Create
           </button>
@@ -118,7 +138,7 @@ export default function Toolbar({ title }) {
       <div className="list-selection">
         <button
           className={`list-selection__btn ${
-            listType === "products" ? "list-selection__btn--active" : ""
+            listType === "products" ? "list-selection__btn--selected disabled" : ""
           }`}
           onClick={() => dispatch(setListType({ mode: "products" }))}
         >
@@ -127,7 +147,7 @@ export default function Toolbar({ title }) {
         </button>
         <button
           className={`list-selection__btn ${
-            listType === "categories" ? "list-selection__btn--active" : ""
+            listType === "categories" ? "list-selection__btn--selected disabled" : ""
           }`}
           onClick={() => dispatch(setListType({ mode: "categories" }))}
         >

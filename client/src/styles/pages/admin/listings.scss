@@ -83,6 +83,7 @@ $listings-row-width: 100%;
 .item-name--category {
   @include set-typography("normal", 3, $base-line-height);
 
+  // Category input to update category.
   input {
     @include set-typography("normal", 2, $base-line-height);
     @include apply-border("shade-15", $border-radius-sm);
