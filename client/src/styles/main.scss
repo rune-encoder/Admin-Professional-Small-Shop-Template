@@ -8,30 +8,36 @@
 @import "./abstracts/variables";
 @import "./abstracts/mixins";
 @import "./abstracts/placeholders";
+
 @import "./vendor/google-fonts";
 @import "./vendor/_bootstrap/index.scss";
+
 @import "./base/reset";
 @import "./base/root";
 @import "./base/base";
 @import "./base/typography";
-@import "./layout/header";
-@import "./layout/sidebar";
+
 @import "./components/scrollbar";
-@import "./components/error-window/error-window";
-@import "./components/toolbar";
-@import "./pages/admin/listings";
+
+@import "./components/admin/login";
+@import "./components/admin/header";
+@import "./components/admin/sidebar";
+@import "./components/admin/error";
+@import "./components/admin/toolbar";
+
+@import "./pages//admin//listings";
+
+@import "./layout/admin/test";
+
+@import "./pages/admin/listings/product-view.scss";
 
 // @import "./components/window/base/window";
-// @import "./components/window/base/toolbar";
-// @import "./components/window/base/content";
 // @import "./components/window/subcomponents/item-details";
 // @import "./components/window/subcomponents/item-view";
 // @import "./components/window/subcomponents/item-form";
 // @import "./components/window/subcomponents/item-list";
 // @import "./components/window/subcomponents/img-preview";
 
-// @import "./layout/footer";
-@import "./pages/login";
 @import "./shame";
 
 // !Revisit

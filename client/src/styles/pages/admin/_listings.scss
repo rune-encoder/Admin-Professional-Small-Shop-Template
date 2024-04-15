@@ -41,7 +41,7 @@ $listings-row-width: 100%;
 
 // PRODUCTS: GRID COLUMNS LAYOUT
 .item-row--product {
-  grid-template-columns: 25% 30% 25% 20% 20% 20%;
+  grid-template-columns: 25% 30% 25% 20% 20% 20% 20%;
 }
 
 // CATEGORIES: GRID COLUMNS LAYOUT
@@ -160,6 +160,11 @@ $listings-row-width: 100%;
   &--save {
     background-color: var(--save-btn-light);
     border: solid 1px var(--save-btn-dark);
+  }
+
+  &--view {
+    background-color: var(--view-btn-light);
+    border: solid 1px var(--view-btn-dark);
   }
 }
 

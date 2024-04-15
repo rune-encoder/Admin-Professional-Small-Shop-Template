@@ -1,0 +1,90 @@
+// WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
+.content {
+  @include apply-flex(column);
+
+  min-height: 100vh;
+  max-height: 100%;
+  flex-grow: 1; // Expand to fill available space
+
+  // Inner container
+  &__inner {
+    @include apply-flex(row);
+
+    flex-grow: 1; // Expand to fill available space
+
+    // Inner content container for mobile.
+    @include respond-to("sm") {
+      @include apply-flex(column-reverse);
+    }
+
+    // border: solid green   1px;
+  }
+
+  &__main {
+    flex-grow: 1; // Expand to fill available space
+    // overflow-y: auto;
+    height: 100%;
+
+    // border: solid red 1px;
+  }
+}
+
+// ! Revisit: Not in the correct location (admin-page--wrapper)
+.admin-page--wrapper {
+  @include apply-font-family("roboto");
+
+  @include apply-flex(column);
+  // @include apply-space("padding", 1, "x");
+
+  //   position: relative;
+  //   height: 100%;
+
+  //   border: solid 1px rgb(11, 40, 133);
+
+  @media screen and (min-width: 992px) {
+    @include apply-flex(row, space-between, flex-start);
+  }
+}
+
+.listings--wrapper {
+  @include apply-flex(column);
+  // @include apply-space("padding", 1, "x");
+
+  position: relative;
+  height: 100%;
+
+//   border: solid 1px rgb(11, 40, 133);
+
+  @media screen and (min-width: 992px) {
+    // border: solid red 3px;
+    width: 50%;
+    overflow-y: auto;
+    height: calc(100vh - $header-height);
+  }
+
+  &[data-boolean="false"] {
+    width: 100%;
+  }
+}
+
+.details--wrapper {
+  display: none;
+  width: 50%;
+  height: calc(100vh - $header-height);
+
+  overflow-y: auto;
+
+  background-color: var(--shade-3);
+
+//   border: solid green 2px;
+
+  &[data-boolean="true"] {
+    display: block;
+  }
+
+  &[data-boolean="false"] {
+    display: none;
+  }
+}
+
+//   !===============================

@@ -48,13 +48,7 @@ export function ProductRow({ product }) {
   );
 
   return (
-    <div
-      key={product._id}
-      className="item-row--product"
-      onClick={() => {
-        dispatch(setProductMode({ mode: "view", product }));
-      }}
-    >
+    <div key={product._id} className="item-row--product">
       <div className="item-cell">
         <div className="item__img-wrapper">
           <img
@@ -109,6 +103,11 @@ export function ProductRow({ product }) {
           </div>
         </div>
       </div>
+
+      <ActionButtons
+        type="view"
+        onClick={() => dispatch(setProductMode({ mode: "view", product }))}
+      />
 
       <ActionButtons
         type="update"

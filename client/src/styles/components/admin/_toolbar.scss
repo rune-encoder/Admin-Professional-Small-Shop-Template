@@ -1,13 +1,3 @@
-// ! Revisit: Not in the correct location (admin-page--wrapper)
-.admin-page--wrapper {
-  @include apply-font-family("roboto");
-  @include apply-flex(column);
-  // @include apply-space("padding", 1, "x");
-
-  position: relative;
-  height: 100%;
-}
-
 // ==============================
 // TOOLBAR SECTION
 // ==============================
@@ -16,6 +6,11 @@
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", 1, "x");
   @include apply-position(sticky, $top: $header-height);
+
+  // ! Revisit: Media Query
+  @media screen and (min-width: 992px) {
+    @include apply-position(sticky, $top: 0);
+  }
 
   background: var(--shade-3);
 

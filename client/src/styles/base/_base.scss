@@ -1,30 +1,4 @@
 // <===== BASE APP STRUCTURE SECTION =====>
-// WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
-.content {
-  @include apply-flex(column);
-
-  min-height: 100vh;
-  max-height: 100%;
-  flex-grow: 1; // Expand to fill available space
-
-  // Inner container
-  &__inner {
-    @include apply-flex(row);
-    
-    flex-grow: 1; // Expand to fill available space
-
-    // Inner content container for mobile.
-    @include respond-to("sm") {
-      @include apply-flex(column-reverse);
-    }
-  }
-
-  &__main {
-    flex-grow: 1; // Expand to fill available space
-    // overflow-y: auto;
-    height: 100%;
-  }
-}
 
 // BASE UTILITIES STYLES
 button,

@@ -267,6 +267,9 @@ $base-light-theme: (
 
   "save-btn-dark": hsl(210, 50%, 75%),
   "save-btn-light": hsl(210, 75%, 70%),
+
+  "view-btn-dark": hsl(270, 50%, 75%),
+  "view-btn-light": hsl(270, 75%, 70%),
 );
 
 /// A map of colors used for the dark theme.
@@ -313,6 +316,10 @@ $base-dark-theme: (
 
   "save-btn-dark": hsl(210, 75%, 20%),
   "save-btn-light": hsl(210, 75%, 32%),
+
+  "view-btn-dark": hsl(270, 75%, 20%),
+  "view-btn-light": hsl(270, 75%, 32%),
+
 );
 
 /// This map is used to set all the *light theme* colors, shades, etc. that are used in the application.

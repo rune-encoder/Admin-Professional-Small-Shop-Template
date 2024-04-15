@@ -90,13 +90,7 @@ export function CategoryRow({ category, formState, setFormState }) {
   );
 
   return (
-    <div
-      key={category._id}
-      className="item-row--category"
-      onClick={() => {
-        dispatch(setCategoryMode({ mode: "view", category }));
-      }}
-    >
+    <div key={category._id} className="item-row--category">
       {/* CATEGORY NAME CELL */}
       <div className="item-cell">
         <div className="item-label">
@@ -133,7 +127,7 @@ export function CategoryRow({ category, formState, setFormState }) {
           <ActionButtons
             type="cancel"
             onClick={() =>
-              dispatch(setCategoryMode({ mode: "view", category }))
+              dispatch(setCategoryMode({ mode: null, category: null }))
             }
           />
         </>

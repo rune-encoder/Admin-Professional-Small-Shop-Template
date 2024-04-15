@@ -32,7 +32,7 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(createCategory.fulfilled, (state, action) => {
       state.createCategoryStatus = "succeeded";
-      state.categoryMode = "view";
+      state.categoryMode = null;
       state.currentCategory = action.payload;
     })
     .addCase(createCategory.rejected, (state) => {
@@ -46,7 +46,7 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(updateCategory.fulfilled, (state, action) => {
       state.updateCategoryStatus = "succeeded";
-      state.categoryMode = "view";
+      state.categoryMode = null;
       state.currentCategory = action.payload;
     })
     .addCase(updateCategory.rejected, (state) => {

@@ -1,5 +1,5 @@
 import { FiEdit } from "react-icons/fi";
-import { BsSave, BsTrash } from "react-icons/bs";
+import { BsSave, BsTrash, BsEye } from "react-icons/bs";
 import { TiCancelOutline } from "react-icons/ti";
 
 import { IoHomeOutline } from "react-icons/io5";
@@ -11,6 +11,11 @@ import {
 } from "react-icons/md";
 
 export const btnActionConfig = {
+  view: {
+    className: "item-cell__btn--view",
+    action: "View",
+    icon: BsEye,
+  },
   save: {
     className: "item-cell__btn--save",
     action: "Save",
