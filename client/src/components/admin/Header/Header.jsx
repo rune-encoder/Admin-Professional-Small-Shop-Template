@@ -1,5 +1,4 @@
-import MiniNavbar from "./MiniNavbar";
-import MiniNavDropdown from "./MiniNavDropdown";
+import { MiniNavbar, MiniNavDropdown } from "./index.js";
 
 export function Header() {
   return (

@@ -15,7 +15,7 @@ import {
   IoMoonOutline,
 } from "react-icons/io5";
 
-export default function MiniNavDropdown() {
+export function MiniNavDropdown() {
   // <======= REDUX STATE: THEME (DARK/LIGHT) =======>
   const isDarkMode = useSelector(selectIsDarkModeEnabled);
   const dispatch = useDispatch();

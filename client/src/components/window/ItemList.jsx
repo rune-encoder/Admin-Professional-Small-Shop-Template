@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";

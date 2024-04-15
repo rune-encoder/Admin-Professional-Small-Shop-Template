@@ -3,7 +3,7 @@ import { selectAdmin } from "../../../features/adminSlice";
 
 import { PiUserCircleLight } from "react-icons/pi";
 
-export default function MiniNavbar({ children }) {
+export function MiniNavbar({ children }) {
   const adminData = useSelector(selectAdmin);
 
   return (

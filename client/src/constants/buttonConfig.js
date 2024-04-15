@@ -2,7 +2,15 @@ import { FiEdit } from "react-icons/fi";
 import { BsSave, BsTrash } from "react-icons/bs";
 import { TiCancelOutline } from "react-icons/ti";
 
-export const buttonConfig = {
+import { IoHomeOutline } from "react-icons/io5";
+import { RiListCheck3 } from "react-icons/ri";
+import { PiUsersFourLight } from "react-icons/pi";
+import {
+  MdOutlineLocalShipping,
+  MdQueryStats,
+} from "react-icons/md";
+
+export const btnActionConfig = {
   save: {
     className: "item-cell__btn--save",
     action: "Save",
@@ -24,3 +32,11 @@ export const buttonConfig = {
     icon: BsTrash,
   },
 };
+
+export const btnSidebarConfig = [
+  { Icon: IoHomeOutline, text: "Home", menu: "home" },
+  { Icon: RiListCheck3, text: "Listings", menu: "listings" },
+  { Icon: MdOutlineLocalShipping, text: "Orders", menu: "orders" },
+  { Icon: MdQueryStats, text: "Reports", menu: "reports" },
+  { Icon: PiUsersFourLight, text: "Admins", menu: "admins" },
+];
