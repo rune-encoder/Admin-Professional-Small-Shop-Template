@@ -1,3 +1,6 @@
+// Import React Hooks
+import { useCallback } from "react";
+
 // Import Redux Hooks
 import { useDispatch } from "react-redux";
 
@@ -32,8 +35,9 @@ export function CreateCategory({ formState, setFormState }) {
   // Event Handlers Section
   // ==============================
   // Handler: Create a category.
-  const handleCreateCategory = () =>
+  const handleCreateCategory = useCallback(() => {
     handleCategoryAction(createCategory, formState.name);
+  }, [handleCategoryAction, createCategory, formState.name]);
 
   return (
     <div className="item-row--category">

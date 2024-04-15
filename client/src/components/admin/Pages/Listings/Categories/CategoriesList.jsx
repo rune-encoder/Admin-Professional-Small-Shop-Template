@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -24,17 +24,9 @@ import { sortCategories } from "../../../../../utils/helpers/categories/sort";
 
 // Import Components
 import { CreateCategory } from "./CreateCategory";
-import { CategoryRows } from "./CategoryRows";
+import { CategoryRow } from "./CategoryRow";
 
 export function CategoriesList() {
-  // !Delete: Used to check re-renders of the component
-  const renderCount = useRef(0);
-
-  useEffect(() => {
-    renderCount.current = renderCount.current + 1;
-    console.log(`Categories has rendered ${renderCount.current} times`);
-  });
-  // ! ==========>
   // ==============================
   // useState Hooks Section
   // ==============================
@@ -75,13 +67,15 @@ export function CategoriesList() {
       {categoryMode === "create" && (
         <CreateCategory formState={formState} setFormState={setFormState} />
       )}
-      {
-        <CategoryRows
-          categories={sortedCategories}
+
+      {sortedCategories.map((category) => (
+        <CategoryRow
+          key={category._id}
+          category={category}
           formState={formState}
           setFormState={setFormState}
         />
-      }
+      ))}
     </div>
   );
 }

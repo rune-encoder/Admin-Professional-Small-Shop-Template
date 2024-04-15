@@ -31,8 +31,10 @@ export const productExtraReducers = (builder) => {
     .addCase(createProduct.pending, (state) => {
       state.createProductStatus = "loading";
     })
-    .addCase(createProduct.fulfilled, (state) => {
+    .addCase(createProduct.fulfilled, (state, action) => {
       state.createProductStatus = "succeeded";
+      state.productMode = "view";
+      state.currentProduct = action.payload;
     })
     .addCase(createProduct.rejected, (state, action) => {
       state.createProductStatus = "failed";
@@ -46,6 +48,7 @@ export const productExtraReducers = (builder) => {
     })
     .addCase(updateProduct.fulfilled, (state, action) => {
       state.updateProductStatus = "succeeded";
+      state.productMode = "view";
       state.currentProduct = action.payload;
     })
     .addCase(updateProduct.rejected, (state, action) => {
@@ -61,7 +64,7 @@ export const productExtraReducers = (builder) => {
     .addCase(deleteProduct.fulfilled, (state) => {
       state.deleteProductStatus = "succeeded";
       state.currentProduct = null;
-      state.productEditMode = false;
+      state.productMode = null;
     })
     .addCase(deleteProduct.rejected, (state, action) => {
       state.deleteProductStatus = "failed";

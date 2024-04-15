@@ -1,4 +1,4 @@
 import { Home } from "./Home";
-import { Listings, CategoriesList, Products } from "./Listings";
+import { Listings, CategoriesList, ProductsList } from "./Listings";
 
-export { Home, Listings, CategoriesList, Products };
+export { Home, Listings, CategoriesList, ProductsList };

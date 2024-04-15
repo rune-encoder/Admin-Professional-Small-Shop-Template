@@ -1,5 +1,5 @@
 import { Listings } from './Listings';
 import { CategoriesList } from './Categories';
-import { Products } from './Products';
+import { ProductsList } from './Products';
 
-export { Listings, CategoriesList, Products };
+export { Listings, CategoriesList, ProductsList };

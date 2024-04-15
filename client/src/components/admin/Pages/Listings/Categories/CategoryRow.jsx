@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 // Import Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ import {
 } from "../../../../../features/categories/categoryThunks";
 
 // COMPONENT: CREATES A ROW FOR EACH CATEGORY AND HANDLES CATEGORY UPDATE/DELETE
-export function CategoryRows({ categories, formState, setFormState }) {
+export function CategoryRow({ category, formState, setFormState }) {
   // ==============================
   // Custom Hooks Section
   // ==============================
@@ -71,17 +71,25 @@ export function CategoryRows({ categories, formState, setFormState }) {
   // Event Handlers Section
   // ==============================
   // Handler: Update a category.
-  const handleUpdateCategory = (categoryId) =>
-    handleCategoryAction(updateCategory, {
-      id: categoryId,
-      name: formState.name,
-    });
+  const handleUpdateCategory = useCallback(
+    (categoryId) => {
+      handleCategoryAction(updateCategory, {
+        id: categoryId,
+        name: formState.name,
+      });
+    },
+    [handleCategoryAction, updateCategory, formState.name]
+  );
 
   // Handler: Delete a category.
-  const handleDeleteCategory = (categoryId) =>
-    handleCategoryAction(deleteCategory, categoryId);
+  const handleDeleteCategory = useCallback(
+    (categoryId) => {
+      handleCategoryAction(deleteCategory, categoryId);
+    },
+    [handleCategoryAction, deleteCategory]
+  );
 
-  return categories.map((category) => (
+  return (
     <div
       key={category._id}
       className="item-row--category"
@@ -147,5 +155,5 @@ export function CategoryRows({ categories, formState, setFormState }) {
         </>
       )}
     </div>
-  ));
+  );
 }

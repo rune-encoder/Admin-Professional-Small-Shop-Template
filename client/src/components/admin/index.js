@@ -1,7 +1,7 @@
 import { Header } from "./Header";
 import { Login } from "./Login";
 
-import { Home, Listings, CategoriesList, Products } from "./Pages";
+import { Home, Listings, CategoriesList, ProductsList } from "./Pages";
 
 import { Toolbar } from "./Tools";
 import { Sidebar } from "./Sidebar";
@@ -13,7 +13,7 @@ export {
   Home,
   Listings,
   CategoriesList,
-  Products,
+  ProductsList,
   Sidebar,
   Toolbar,
   ErrorMessage,

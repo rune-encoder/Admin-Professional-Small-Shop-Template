@@ -144,36 +144,3 @@ export function Toolbar({ title }) {
     </div>
   );
 }
-
-// !Erase when not needed.
-// {/* <button
-//   className="toolbar__btn col-2"
-//   onClick={() => dispatch(setProductMode({ mode: "new" }))}
-// >
-//   <IoIosAddCircleOutline /> New
-// </button>
-// <div className="toolbar__btn col-2">
-//   <PiArrowsDownUpLight /> Sort
-//   <select onChange={(event) => dispatch(setSortType(event.target.value))}>
-//     <option value="none">None</option>
-//     <option value="name-asc">Name (A-Z)</option>
-//     <option value="name-desc">Name (Z-A)</option>
-//     <option value="date-asc">Date (oldest first)</option>
-//     <option value="date-desc">Date (newest first)</option>
-//     <option value="price-asc">Price (low to high)</option>
-//     <option value="price-desc">Price (high to low)</option>
-//     <option value="stock-asc">Stock (low to high)</option>
-//     <option value="stock-desc">Stock (high to low)</option>
-//   </select>
-// </div>
-// <button className="toolbar__btn col-2">
-//   <IoIosArrowDown /> View
-// </button>
-// <div className="toolbar__searchbar col-6">
-//   <IoIosSearch />
-//   <input
-//     type="text"
-//     placeholder="Search"
-//     onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-//   />
-// </div> */}

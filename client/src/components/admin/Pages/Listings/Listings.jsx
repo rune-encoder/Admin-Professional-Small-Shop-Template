@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { selectListType } from "../../../../features/toolbarSlice";
 
 // Import Components
-import { Products, CategoriesList } from "./index.js";
+import { ProductsList, CategoriesList } from "./index.js";
 
 export function Listings({ children }) {
   const listType = useSelector(selectListType);
@@ -14,7 +14,7 @@ export function Listings({ children }) {
     <div className="admin-page--wrapper">
       {children}
 
-      {listType === "products" && <Products />}
+      {listType === "products" && <ProductsList />}
 
       {listType === "categories" && <CategoriesList />}
     </div>
