@@ -2,13 +2,12 @@
 import { useSelector } from "react-redux";
 
 // Import Redux Selectors
-import { selectListType } from "../../features/toolbarSlice";
+import { selectListType } from "../../../../features/toolbarSlice";
 
 // Import Components
-import Products from "./Products";
-import Categories from "./Categories";
+import { Products, Categories } from "./index.js";
 
-export default function Listings({ children }) {
+export function Listings({ children }) {
   const listType = useSelector(selectListType);
 
   return (

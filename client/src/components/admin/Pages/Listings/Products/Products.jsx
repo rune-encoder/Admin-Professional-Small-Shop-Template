@@ -5,24 +5,25 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Import Redux Actions
-import { setProductMode } from "../../features/products/productSlice";
+import { setProductMode } from "../../../../../features/products/productSlice";
 
 // Import Redux Selectors
 import {
   selectGetProducts,
   selectGetProductsStatus,
-} from "../../features/products/productSelectors";
+} from "../../../../../features/products/productSelectors";
 
-import { selectSearchTerm, selectSortType } from "../../features/toolbarSlice";
+import { selectSearchTerm, selectSortType } from "../../../../../features/toolbarSlice";
 
 // Import Redux Thunks
 import {
   getProducts,
   deleteProduct,
-} from "../../features/products/productThunks";
+} from "../../../../../features/products/productThunks";
 
 // Import Helpers
-import { filterProducts, sortProducts } from "../../utils/helpers";
+import { filterProducts } from "../../../../../utils/helpers/products/filter";
+import { sortProducts } from "../../../../../utils/helpers/products/sort";
 
 // Import React Icons
 import { IoPricetagOutline } from "react-icons/io5";
@@ -34,7 +35,7 @@ import {
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-export default function Products() {
+export function Products() {
   // ==============================
   // useSelector Hooks Section
   // ==============================

@@ -22,7 +22,7 @@ import {
 } from "../../features/products/productThunks";
 
 // Import Helpers
-import { filterProducts, sortProducts } from "../../utils/helpers";
+// import { filterProducts, sortProducts } from "../../utils/helpers/helpers";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";

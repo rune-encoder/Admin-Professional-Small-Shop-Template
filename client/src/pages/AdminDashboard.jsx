@@ -1,4 +1,4 @@
-import Auth from "../utils/auth";
+import Auth from "../utils/auth/auth.js";
 
 // Import Redux Hooks
 import { useSelector } from "react-redux";
@@ -8,22 +8,15 @@ import { selectDisplayMenu } from "../features/menuSlice";
 import { selectShowErrorModal } from "../features/errorSlice";
 
 // Import Components
-import Login from "../pages/Login.jsx";
-import Header from "../components/header/Header.jsx";
-import Sidebar from "../components/Sidebar";
-import ErrorMessage from "../components/error/ErrorMessage.jsx";
-
-import Test from "../components/Test";
-
-import Window from "../components/window/Window";
-import CategoryList from "../components/window/CategoryList";
-import Toolbar from "../components/window/Toolbar";
-import ItemDetails from "../components/window/ItemDetails";
-import ItemList from "../components/window/ItemList";
-import AdminList from "../components/window/AdminsList";
-
-import Home from "../components/admin/Home.jsx";
-import Listings from "../components/admin/Listings.jsx";
+import {
+  Header,
+  Sidebar,
+  Login,
+  Toolbar,
+  ErrorMessage,
+  Home,
+  Listings,
+} from "../components/admin/";
 
 export default function AdminDashboard() {
   const activeMenu = useSelector(selectDisplayMenu);
@@ -40,14 +33,12 @@ export default function AdminDashboard() {
             <div className="content__inner">
               <Sidebar />
               <div className="content__main">
-
-                  {activeMenu === "home" && <Home />}
-                  {activeMenu === "listings" && (
-                    <Listings>
-                      <Toolbar title={"Listings"} />
-                    </Listings>
-                  )}
-
+                {activeMenu === "home" && <Home />}
+                {activeMenu === "listings" && (
+                  <Listings>
+                    <Toolbar title={"Listings"} />
+                  </Listings>
+                )}
               </div>
             </div>
           </div>

@@ -7,33 +7,25 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Import Redux Actions
-import { setSearchTerm, setSortType } from "../../features/toolbarSlice";
-import { setProductMode } from "../../features/products/productSlice";
-import { setCategoryMode } from "../../features/categories/categorySlice";
-import { setListType } from "../../features/toolbarSlice";
+import { setSearchTerm, setSortType } from "../../../features/toolbarSlice";
+import { setProductMode } from "../../../features/products/productSlice";
+import { setCategoryMode } from "../../../features/categories/categorySlice";
+import { setListType } from "../../../features/toolbarSlice";
 
 // Import Redux Selectors
-import { selectSortType, selectListType } from "../../features/toolbarSlice";
-import { selectProductMode } from "../../features/products/productSelectors";
-import { selectCategoryMode } from "../../features/categories/categorySelectors";
+import { selectSortType, selectListType } from "../../../features/toolbarSlice";
+import { selectProductMode } from "../../../features/products/productSelectors";
+import { selectCategoryMode } from "../../../features/categories/categorySelectors";
+
+// Import Constants
+import { getSortOptions } from "../../../constants/sortOptions";
 
 // Import React Icons
 import { MdOutlineShoppingCart, MdOutlineCategory } from "react-icons/md";
 import { PiArrowsDownUpLight } from "react-icons/pi";
 import { IoSearch, IoAddOutline } from "react-icons/io5";
-import { IoMdRemoveCircleOutline } from "react-icons/io";
-import {
-  FaSortAlphaDown,
-  FaSortAlphaUpAlt,
-  FaSortNumericDown,
-  FaSortNumericUpAlt,
-  FaSortAmountDown,
-  FaSortAmountUp,
-  FaLongArrowAltUp,
-  FaLongArrowAltDown,
-} from "react-icons/fa";
 
-export default function Toolbar({ title }) {
+export function Toolbar({ title }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const productMode = useSelector(selectProductMode);
@@ -44,17 +36,7 @@ export default function Toolbar({ title }) {
 
   const dispatch = useDispatch();
 
-  const sortOptions = [
-    { Icon: IoMdRemoveCircleOutline, value: "none", label: "None" },
-    { Icon: FaSortAlphaDown, value: "name-asc", label: "Name" },
-    { Icon: FaSortAlphaUpAlt, value: "name-desc", label: "Name" },
-    { Icon: FaLongArrowAltUp, value: "date-asc", label: "Date" },
-    { Icon: FaLongArrowAltDown, value: "date-desc", label: "Date" },
-    { Icon: FaSortNumericDown, value: "price-asc", label: "Price" },
-    { Icon: FaSortNumericUpAlt, value: "price-desc", label: "Price" },
-    { Icon: FaSortAmountUp, value: "stock-asc", label: "Stock" },
-    { Icon: FaSortAmountDown, value: "stock-desc", label: "Stock" },
-  ];
+  const sortOptions = getSortOptions(listType);
 
   const dropdownMenu = (
     <>
@@ -106,8 +88,8 @@ export default function Toolbar({ title }) {
 
           <button
             className={`toolbar-btn ${
-              listType === "categories" && categoryMode === "create" || 
-              listType === "products" && productMode === "create"
+              (listType === "categories" && categoryMode === "create") ||
+              (listType === "products" && productMode === "create")
                 ? "toolbar-btn--selected disabled"
                 : ""
             }`}
@@ -138,7 +120,9 @@ export default function Toolbar({ title }) {
       <div className="list-selection">
         <button
           className={`list-selection__btn ${
-            listType === "products" ? "list-selection__btn--selected disabled" : ""
+            listType === "products"
+              ? "list-selection__btn--selected disabled"
+              : ""
           }`}
           onClick={() => dispatch(setListType({ mode: "products" }))}
         >
@@ -147,7 +131,9 @@ export default function Toolbar({ title }) {
         </button>
         <button
           className={`list-selection__btn ${
-            listType === "categories" ? "list-selection__btn--selected disabled" : ""
+            listType === "categories"
+              ? "list-selection__btn--selected disabled"
+              : ""
           }`}
           onClick={() => dispatch(setListType({ mode: "categories" }))}
         >

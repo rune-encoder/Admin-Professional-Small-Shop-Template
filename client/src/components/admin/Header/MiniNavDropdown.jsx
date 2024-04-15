@@ -1,4 +1,4 @@
-import Auth from "../../utils/auth";
+import Auth from "../../../utils/auth/auth.js";
 
 import { useState } from "react";
 
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleTheme,
   selectIsDarkModeEnabled,
-} from "../../features/themeSlice";
+} from "../../../features/themeSlice.js";
 
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import {

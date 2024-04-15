@@ -1,7 +1,7 @@
 import MiniNavbar from "./MiniNavbar";
 import MiniNavDropdown from "./MiniNavDropdown";
 
-export default function Header() {
+export function Header() {
   return (
     <>
       <header>

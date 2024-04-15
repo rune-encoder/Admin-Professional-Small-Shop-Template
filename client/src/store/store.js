@@ -1,4 +1,4 @@
-import { configureStore, createListenerMiddleware, current } from "@reduxjs/toolkit";
+import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
 import adminReducer from "../features/adminSlice/";
 import themeReducer, { toggleTheme } from "../features/themeSlice/";
 import menuReducer from "../features/menuSlice";

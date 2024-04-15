@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { changeMenuDisplay, selectDisplayMenu } from "../features/menuSlice";
+import { changeMenuDisplay, selectDisplayMenu } from "../../../features/menuSlice";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { RiListCheck3 } from "react-icons/ri";
@@ -9,7 +9,7 @@ import {
   MdQueryStats,
 } from "react-icons/md";
 
-export default function Sidebar() {
+export function Sidebar() {
   // <======= REDUX STATE: MENU ITEM (OPEN/CLOSE) =======>
   const activeMenu = useSelector(selectDisplayMenu);
   const dispatch = useDispatch();

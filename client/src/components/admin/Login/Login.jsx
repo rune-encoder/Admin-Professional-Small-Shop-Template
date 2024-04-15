@@ -1,11 +1,11 @@
-import Auth from "../utils/auth";
+import Auth from "../../../utils/auth/auth";
 
 import { useState, useEffect } from "react";
 
-import { LOGIN_ADMIN } from "../utils/mutations";
+import { LOGIN_ADMIN } from "../../../utils/graphql/mutations";
 import { useMutation } from "@apollo/client";
 
-export default function Login() {
+export function Login() {
   const [formState, setFormState] = useState({
     username: "",
     password: "",

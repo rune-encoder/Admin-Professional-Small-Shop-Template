@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectAdmin } from "../../features/adminSlice";
+import { selectAdmin } from "../../../features/adminSlice";
 
 import { PiUserCircleLight } from "react-icons/pi";
 

@@ -1,18 +1,20 @@
 // Import React Hooks
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
 
 // Import Redux Actions
-import { setCategoryMode } from "../../features/categories/categorySlice";
+import { setCategoryMode } from "../../../../../features/categories/categorySlice";
 
 // Import Redux Selectors
 import {
   selectGetCategories,
   selectCurrentCategory,
   selectCategoryMode,
-} from "../../features/categories/categorySelectors";
+} from "../../../../../features/categories/categorySelectors";
+
+import { selectSearchTerm, selectSortType } from "../../../../../features/toolbarSlice";
 
 // Import Redux Thunks
 import {
@@ -20,15 +22,27 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
-} from "../../features/categories/categoryThunks";
+} from "../../../../../features/categories/categoryThunks";
+
+// Import Helpers
+import { filterCategories } from "../../../../../utils/helpers/categories/filter";
+import { sortCategories } from "../../../../../utils/helpers/categories/sort";
+
+// Import Constraints
+import { buttonConfig } from "../../../../../constants/buttonConfig";
 
 // Import React Icons
-import { FiEdit } from "react-icons/fi";
-import { BsSave, BsTrash } from "react-icons/bs";
-import { TiCancelOutline } from "react-icons/ti";
 import { MdOutlineCategory } from "react-icons/md";
 
-export default function Categories() {
+export function Categories() {
+  // !Delete: Used to check re-renders of the component
+  const renderCount = useRef(0);
+
+  useEffect(() => {
+    renderCount.current = renderCount.current + 1;
+    console.log(`Categories has rendered ${renderCount.current} times`);
+  });
+  // ! ==========>
   // ==============================
   // useState Hooks Section
   // ==============================
@@ -42,6 +56,15 @@ export default function Categories() {
   const categories = useSelector(selectGetCategories);
   const selectedCategory = useSelector(selectCurrentCategory);
   const categoryMode = useSelector(selectCategoryMode);
+
+  const searchTerm = useSelector(selectSearchTerm);
+  const sortType = useSelector(selectSortType);
+
+  // ==============================
+  // Processed Data Section
+  // ==============================
+  const filteredCategories = filterCategories(categories, searchTerm);
+  const sortedCategories = sortCategories(filteredCategories, sortType);
 
   // ==============================
   // useDispatch Hooks Section
@@ -110,7 +133,6 @@ export default function Categories() {
   // ==============================
   // Event Handlers Section
   // ==============================
-
   // Handler: Create a category.
   const handleCreateCategory = () =>
     handleCategoryAction(createCategory, formState.name);
@@ -127,33 +149,10 @@ export default function Categories() {
     handleCategoryAction(deleteCategory, categoryId);
 
   // ==============================
-  // Configurations Section
-  // ==============================
-  // Configuration object for the buttons
-  const buttonConfig = {
-    save: { className: "item-cell__btn--save", action: "Save", icon: BsSave },
-    cancel: {
-      className: "item-cell__btn--cancel",
-      action: "Cancel",
-      icon: TiCancelOutline,
-    },
-    update: {
-      className: "item-cell__btn--update",
-      action: "Update",
-      icon: FiEdit,
-    },
-    delete: {
-      className: "item-cell__btn--delete",
-      action: "Delete",
-      icon: BsTrash,
-    },
-  };
-
-  // ==============================
   // Render Section
   // ==============================
   // Render a list of categories with action buttons for each category.
-  const categoryRows = categories.map((category) => (
+  const categoryRows = sortedCategories.map((category) => (
     <div
       key={category._id}
       className="item-row--category"

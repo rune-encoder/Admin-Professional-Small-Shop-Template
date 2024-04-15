@@ -1,19 +1,19 @@
 // Import the apollo client
-import { client } from "../../utils/apolloClient";
+import { client } from "../../utils/apollo/apolloClient";
 
 // Import Redux Toolkit
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Import Queries
-import { QUERY_PRODUCTS } from "../../utils/queries";
-import { QUERY_CATEGORIES } from "../../utils/queries";
+import { QUERY_PRODUCTS } from "../../utils/graphql/queries";
+import { QUERY_CATEGORIES } from "../../utils/graphql/queries";
 
 // Import Mutations
 import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
-} from "../../utils/mutations";
+} from "../../utils/graphql/mutations";
 
 // Fetch all products from the server
 export const getProducts = createAsyncThunk(

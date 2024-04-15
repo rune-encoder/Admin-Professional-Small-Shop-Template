@@ -13,14 +13,14 @@ import { useDispatch } from "react-redux";
 import { setLatestErrorMessage } from "../../features/errorSlice";
 
 // Import Queries
-import { QUERY_ADMINS } from "../../utils/queries";
+import { QUERY_ADMINS } from "../../utils/graphql/queries";
 
 // Import Mutations
 import {
   CREATE_ADMIN,
   UPDATE_ADMIN,
   DELETE_ADMIN,
-} from "../../utils/mutations";
+} from "../../utils/graphql/mutations";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";

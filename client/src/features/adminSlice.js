@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import Auth from "../utils/auth";
+import Auth from "../utils/auth/auth.js";
 
 // Initial state
 const initialState = {
