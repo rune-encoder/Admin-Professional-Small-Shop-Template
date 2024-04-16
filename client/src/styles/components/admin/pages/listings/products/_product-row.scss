@@ -1,0 +1,61 @@
+// Summary: This contains styles used in ProductRow.jsx.
+// Styles from `_listings.scss` are extended and applied in ProductRow.jsx.
+
+// Usage: Used for containing the image of the product in the row.
+// Using the row's height calculate the height of the image wrapper to provide even spacing.
+.product-row__img-wrapper {
+  height: calc(
+    $listings-row-height - halved-modular-scale(-5) - halved-modular-scale(-5)
+  );
+}
+
+// Usage: Used to set the image properties in the row.
+.product-row__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: $border-radius-md;
+}
+
+// PRODUCT: ITEM-CELL SLIDE SIZES
+// Applys changes to the varialbe slide size for each product cell.
+// Usage: Used to specify the size of each cell in the row and add other styles.
+// Note: This attribute selector carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
+// Note: Used in conjunction with `.item-cell` from `listings.scss`.
+.embla__slide--product {
+  &:nth-child(1) {
+    flex: 0 0 25%;
+    min-width: 0;
+  }
+
+  &:nth-child(2) {
+    flex: 0 0 30%;
+    min-width: 0;
+  }
+
+  &:nth-child(3) {
+    flex: 0 0 25%;
+    min-width: 0;
+  }
+
+  &:nth-child(4) {
+    flex: 0 0 20%;
+    min-width: 0;
+  }
+
+  &:nth-child(5) {
+    flex: 0 0 20%;
+    min-width: 0;
+  }
+
+  &:nth-child(6) {
+    flex: 0 0 20%;
+    min-width: 0;
+  }
+
+  &:nth-child(7) {
+    flex: 0 0 20%;
+    min-width: 0;
+  }
+}

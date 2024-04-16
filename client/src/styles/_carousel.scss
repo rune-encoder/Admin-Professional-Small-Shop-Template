@@ -10,12 +10,11 @@ Carousel Structure:
 */
 
 /* MAIN CONTAINER: Styles for the main container of the carousel */
-.embla {
+[class^="embla"] {
   position: relative;
-  overflow: hidden;
 }
 
-.embla__viewport {
+[class^="embla__viewport"] {
   /* Cursor style for the slide */
   cursor: grab;
 
@@ -32,7 +31,7 @@ Carousel Structure:
 }
 
 /* SLIDE CONTAINER: Styles for the container of all slides in the carousel */
-.embla__container {
+[class^="embla__container"] {
   display: flex;
 }
 

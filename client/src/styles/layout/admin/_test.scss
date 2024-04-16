@@ -4,11 +4,14 @@
 
   min-height: calc(100 * var(--vh));
   max-height: 100%;
+  width: 100%;
   flex-grow: 1; // Expand to fill available space
 
   // Inner container
   &__inner {
     @include apply-flex(row);
+
+    // overflow: hidden;
 
     flex-grow: 1; // Expand to fill available space
 
@@ -46,25 +49,26 @@
   }
 }
 
-// ! Revisit: Fix media querys
+// ! Revisit: Fix media querys IMPORTANT
 .listings--wrapper {
   @include apply-flex(column);
-  // @include apply-space("padding", 1, "x");
 
   position: relative;
-  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-//   border: solid 1px rgb(11, 40, 133);
-
-  @media screen and (min-width: 992px) {
-    // border: solid red 3px;
-    width: 50%;
-    overflow-y: auto;
-    height: calc(100 * var(--vh) - #{$header-height});
-  }
+  width: 50%;
+  height: calc(100 * var(--vh) - #{$header-height});
 
   &[data-boolean="false"] {
     width: 100%;
+  }
+
+  @include respond-to("md") {
+    @include apply-glass-effect("opacity-light", 25px);
+    width: 100%;
+
+    height: calc(100 * var(--vh) - #{$header-height} - #{$sidebar-height});
   }
 }
 
@@ -72,14 +76,13 @@
   display: none;
   width: 50%;
 
-// border: solid 1px rgb(153, 159, 179);
+  // border: solid 1px rgb(153, 159, 179);
 
   overflow-y: auto;
   overflow-x: hidden;
 
   background-color: var(--shade-3);
   height: calc(100 * var(--vh) - #{$header-height});
-
 
   &[data-boolean="true"] {
     display: flex;
@@ -90,15 +93,15 @@
     display: none;
   }
 
-
   @include respond-to("md") {
-      @include apply-glass-effect("opacity-light", 25px);
+    @include apply-glass-effect("opacity-light", 25px);
 
     position: fixed;
-    z-index: 1;
-    height: calc(100 * var(--vh) - #{$header-height} - #{$sidebar-height} + 1px);
+    z-index: 4;
+    height: calc(
+      100 * var(--vh) - #{$header-height} - #{$sidebar-height} + 1px
+    );
     width: 100%;
-
   }
 }
 

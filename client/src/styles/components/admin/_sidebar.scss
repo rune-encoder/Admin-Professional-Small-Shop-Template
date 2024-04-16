@@ -16,7 +16,7 @@ $sidebar-width: rem(55px);
   height: calc(100 * var(--vh) - #{$header-height});
   background: var(--light);
   color: var(--shade-25);
-  z-index: 2;
+  z-index: 5;
 
   // <========== Media Query =========>
   @include respond-to("md") {

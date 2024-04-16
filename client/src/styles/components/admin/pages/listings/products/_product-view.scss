@@ -184,14 +184,14 @@
 }
 
 // Style for all values.
-.item-value {
-  @include set-typography("medium", 1, $base-line-height);
+// .item-value {
+//   @include set-typography("medium", 1, $base-line-height);
 
-  // If there is no value, display in red
-  &--danger {
-    color: var(--err-btn-light);
-  }
-}
+//   // If there is no value, display in red
+//   &--danger {
+//     color: var(--err-btn-light);
+//   }
+// }
 
 // Style for icons that represent boolean values.
 .item-value svg {

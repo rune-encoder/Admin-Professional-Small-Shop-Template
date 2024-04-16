@@ -48,7 +48,7 @@ export function CreateCategory({ formState, setFormState }) {
           Category:
         </div>
 
-        <div className="item-name--category">
+        <div className="item-value--category">
           <input
             type="text"
             placeholder="new category..."

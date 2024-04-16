@@ -4,14 +4,21 @@ $listings-row-width: 100%;
 // ==============================
 // LIST: CONTAINER
 // ==============================
-// Contains all the rows of products or categories.
+// Container for all listings. (Products, Categories)
 .listings {
   @include apply-font-family("roboto-condensed");
+
+  z-index: 0;
 }
 
 // ==============================
 // LIST: ROW (INDIVIDUAL)
 // ==============================
+// Note: NOT to be used with Embla Carousel.
+// Usage: Used for constructing a new row with a static grid layout.
+// Important: Only for row components that require a grid layout.
+// Important: Ensure the use of --(modifier) and include a property of grid-template-columns to define the layout.
+// Example: .item-row--category { grid-template-columns: 60% 20% 20%; }
 [class^="item-row"] {
   display: grid;
   height: $listings-row-height;
@@ -25,156 +32,78 @@ $listings-row-width: 100%;
   }
 
   // LIST: ROW (HOVER EFFECT)
-  // ! Revisit: Maybe
   &:hover,
   &:focus {
-    background-color: var(--shade-5);
-  }
-
-  // SWIPE FUNCTIONALITY: HORIZONTAL SCROLL
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none; // For Firefox
-  -ms-overflow-style: none; // For IE and Edge
-  &::-webkit-scrollbar {
-    display: none; /* // For Chrome, Safari, and Opera */
+    background-color: var(--shade-3);
   }
 }
 
-// PRODUCTS: GRID COLUMNS LAYOUT
-.item-row--product {
-  grid-template-columns: 25% 30% 25% 20% 20% 20% 20%;
-}
+// Note: DO NOT use with a static grid. Used with Embla Carousel.
+// Note: This attribute selector carries over styles from the `.embla` attribute selector in `carousel.scss`.
+// Usage: Used for constructing a new row with Embla Carousel.
+// Important: Ensure the use of --(modifier) to expand the styles for the specific item.
+[class^="embla__item-row"] {
+  height: $listings-row-height;
+  width: $listings-row-width;
+  background: var(--shade-1);
+  transition: all 0.3s ease-out;
+  z-index: 0;
+  cursor: grab;
 
-// CATEGORIES: GRID COLUMNS LAYOUT
-.item-row--category {
-  grid-template-columns: 60% 20% 20%;
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:nth-child(odd) {
+    background-color: var(--shade-2);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--shade-3);
+  }
 }
 
 // ==============================
-// LIST: INDIVIDUAL CELLS
+// LIST: CELLS (INDIVIDUAL)
 // ==============================
-// Apply spacing to each cell.
+// Usage: Used to specify a (individual) cell in a row.
+// Use with the `.item-row` class to specify the cells in the row
+// Applies spacing to the cell.
 .item-cell {
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
 }
 
 // ==============================
-// PRODUCT COLUMN #1: PRODUCT IMAGE
+// LIST: UTILITIES
 // ==============================
-.item__img-wrapper {
-  height: calc(
-    $listings-row-height - halved-modular-scale(-5) - halved-modular-scale(-5)
-  );
-}
-
-.item__img-layout {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: $border-radius-md;
-}
-
-// ==============================
-// PRODUCT COLUMN #2: NAME & CATEGORY
-// ==============================
-[class^="item-name"] {
+// Used to specify a value of a item in a cell.
+// Applys padding to the left of the value for indentation.
+// Important: Ensure the use of --(modifier) to expand the styles for the specific item.
+// Example: .item-value--subtle { color: var(--shade-13); }
+[class^="item-value"] {
   @include apply-space("padding-left", -10);
-}
 
-.item-name--category {
-  @include set-typography("normal", 3, $base-line-height);
+  @include respond-to("sm") {
+    @include set-typography("normal", 0, $compact-line-height);
 
-  // Category input to update category.
-  input {
-    @include apply-font-family("roboto-condensed");
-    @include set-typography("normal", 2, $base-line-height);
-    @include apply-border("shade-15", $border-radius-sm);
-    @extend %form-input--style;
-
-    width: 100%;
   }
 }
 
-.item__product-category {
-  @include set-typography("normal", -1, $base-line-height);
+// Expands on the syles from the `.item-value` attribute selector.
+.item-value {
+  // Subtle visual for the value.
+  &--subtle {
+    @include set-typography("normal", -1, $base-line-height);
 
-  color: var(--shade-13);
-}
-
-// ==============================
-// PRODUCT COLUMN #3: PRODUCT DATE
-// ==============================
-.item__product-date {
-  @include apply-space("padding-left", -10);
-}
-
-// ==============================
-// PRODUCT COLUMN #4: PRODUCT PRICE
-// ==============================
-.item__product-price {
-  @include apply-space("padding-left", -10);
-}
-
-.item__product-quantity {
-  @include set-typography("normal", -1, $base-line-height);
-
-  color: var(--shade-13);
-}
-
-// ==============================
-// PRODUCT COLUMN #5 & #6: ACTIONS (HIDDEN)
-// ==============================
-// Apply spacing to the hidden actions cells. (Update & Delete)
-.item-cell--actions {
-  @include apply-space("padding", 5, "y");
-  @include apply-space("padding", -10, "x");
-}
-
-// Apply styling to action buttons. (Update, Delete, Cancel, Save)
-[class^="item-cell__btn"] {
-  @extend %icon-text__button--layout;
-  @extend %icon-text__button--style;
-
-  border-radius: $border-radius-sm;
-  height: 100%;
-  width: 100%;
-}
-
-// Apply color to action buttons. (Update, Delete, Cancel, Save)
-.item-cell__btn {
-  &--update {
-    background-color: var(--success-btn-light);
-    border: solid 1px var(--success-btn-dark);
-  }
-
-  &--delete, &--close {
-    background-color: var(--err-btn-light);
-    border: solid 1px var(--err-btn-dark);
-  }
-
-  &--cancel {
-    background-color: var(--cancel-btn-light);
-    border: solid 1px var(--cancel-btn-dark);
-  }
-
-  &--save {
-    background-color: var(--save-btn-light);
-    border: solid 1px var(--save-btn-dark);
-  }
-
-  &--view {
-    background-color: var(--view-btn-light);
-    border: solid 1px var(--view-btn-dark);
+    color: var(--shade-13);
   }
 }
 
-// ==============================
-// PRODUCT LIST: UTILITIES
-// ==============================
-// List labels.
+// Used to specify a label for a item in a cell.
+// Usage: Item label must have a Icon and Name.
+// Applys style, layout and typography of the icon and name.
 .item-label {
   @include apply-flex(row, start, center);
   @include apply-space("gap", -15);
@@ -183,7 +112,8 @@ $listings-row-width: 100%;
   color: var(--shade-13);
 }
 
-// Used to wrap content within a cell (item-cell) to apply flex properties.
+// Usage: If content within a call contains more than one item...
+// Use to wrap content within a cell and provide spacing between the items.
 .item-wrapper {
   @include apply-flex(column, space-between, start);
 
