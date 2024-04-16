@@ -36,6 +36,8 @@
 .embla__slide--views {
   width: calc(30% - 10px);
   height: rem(120px);
+
+  border: solid 1px var(--shade-15);
 }
 
 // Wrapper for each individual image in the slider.
@@ -123,7 +125,7 @@
 }
 
 // Spacing and background color for all sections under the image.
-[class^="view__item-section"] {
+[class^="view__item-row"] {
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", 0, "x");
 
@@ -133,6 +135,7 @@
     background-color: var(--shade-2);
   }
 
+  // Mobile: Change background color to opacity.
   @include respond-to("md") {
     background-color: var(--opacity-shade-1);
 
@@ -143,7 +146,7 @@
 }
 
 // Different layouts for sections under the image.
-.view__item-section {
+.view__item-row {
   // Section #3 - #4: Layout for the product and category section.
   &--flex-row {
     @include apply-flex(row, start, center);
@@ -184,28 +187,28 @@
 }
 
 // Style for all values.
-// .item-value {
-//   @include set-typography("medium", 1, $base-line-height);
+.view__item-value {
+  @include set-typography("medium", 1, $base-line-height);
 
-//   // If there is no value, display in red
-//   &--danger {
-//     color: var(--err-btn-light);
-//   }
-// }
+  // If there is no value, display in red
+  &--danger {
+    color: var(--err-btn-light);
+  }
+}
 
 // Style for icons that represent boolean values.
-.item-value svg {
+.view__item-value svg {
   @include apply-flex(row, center, center);
   @include set-typography("bold", 2, $base-line-height);
 
   filter: drop-shadow(0 0 5px var(--shade-1));
 }
 
-.item-value svg[data-boolean="true"] {
+.view__item-value svg[data-boolean="true"] {
   color: var(--success);
 }
 
-.item-value svg[data-boolean="false"] {
+.view__item-value svg[data-boolean="false"] {
   color: var(--danger);
 }
 

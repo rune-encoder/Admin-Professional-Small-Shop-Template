@@ -41,11 +41,12 @@ $sidebar-width: rem(55px);
   text-align: center;
   user-select: none;
 
+  // !Revisit: Make so no hover effects on phone mode
   // Style of sidebar button on hover
   &:hover {
-    @include apply-gradient("shade-22", "shade-24", 140deg);
+    // @include apply-gradient("shade-22", "shade-24", 140deg);
 
-    color: var(--shade-3);
+    // color: var(--shade-3);
   }
 
   // <========== Media Query =========>

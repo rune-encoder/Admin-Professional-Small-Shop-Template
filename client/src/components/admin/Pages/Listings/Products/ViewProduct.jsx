@@ -98,22 +98,22 @@ export function ViewProduct() {
 
       {/* Product Data */}
       <section className="view__item-details">
-        <section className="view__item-section--flex-row">
+        <section className="view__item-row--flex-row">
           <div className="view__item-label">
             <MdOutlineShoppingCart /> Product:
           </div>
 
-          <span className="item-value">{selectedProduct.name}</span>
+          <span className="view__item-value">{selectedProduct.name}</span>
         </section>
 
-        <section className="view__item-section--flex-row">
+        <section className="view__item-row--flex-row">
           <div className="view__item-label">
             <MdOutlineCategory /> Category:
           </div>
 
           <span
-            className={`item-value ${
-              selectedProduct.category ? "" : "item-value--danger"
+            className={`view__item-value ${
+              selectedProduct.category ? "" : "view__item-value--danger"
             }`}
           >
             {selectedProduct.category
@@ -122,11 +122,11 @@ export function ViewProduct() {
           </span>
         </section>
 
-        <section className="view__item-section--grid">
+        <section className="view__item-row--grid">
           <div className="view__item-cell">
             <div className="view__item-cell-group">
               <div className="view__item-label">In Stock:</div>
-              <span className="item-value">
+              <span className="view__item-value">
                 {selectedProduct.inStock ? (
                   <IoMdCheckmarkCircleOutline data-boolean="true" />
                 ) : (
@@ -137,7 +137,7 @@ export function ViewProduct() {
 
             <div className="view__item-cell-group">
               <div className="view__item-label">Featured:</div>
-              <span className="item-value">
+              <span className="view__item-value">
                 {selectedProduct.isFeatured ? (
                   <IoMdCheckmarkCircleOutline data-boolean="true" />
                 ) : (
@@ -150,23 +150,23 @@ export function ViewProduct() {
           <div className="view__item-cell">
             <div className="view__item-cell-group">
               <div className="view__item-label">Price:</div>
-              <span className="item-value">${selectedProduct.price}</span>
+              <span className="view__item-value">${selectedProduct.price}</span>
             </div>
             <div className="view__item-cell-group">
               <div className="view__item-label">Quantity:</div>
-              <span className="item-value">{selectedProduct.quantity}</span>
+              <span className="view__item-value">{selectedProduct.quantity}</span>
             </div>
           </div>
         </section>
 
-        <section className="view__item-section--flex-col">
+        <section className="view__item-row--flex-col">
           <div className="view__item-label">Description:</div>
-          <p className="item-value">{selectedProduct.shortDescription}</p>
+          <p className="view__item-value">{selectedProduct.shortDescription}</p>
         </section>
 
-        <section className="view__item-section--flex-col">
+        <section className="view__item-row--flex-col">
           <div className="view__item-label">Details:</div>
-          <p className="item-value">{selectedProduct.details}</p>
+          <p className="view__item-value">{selectedProduct.details}</p>
         </section>
       </section>
     </div>
