@@ -1,5 +1,5 @@
 // Import React Hooks
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ import {
 } from "../../features/products/productThunks";
 
 // Import Helpers
-import { filterProducts, sortProducts } from "../../utils/helpers";
+// import { filterProducts, sortProducts } from "../../utils/helpers/helpers";
 
 // Import React Icons
 import { FiEdit } from "react-icons/fi";

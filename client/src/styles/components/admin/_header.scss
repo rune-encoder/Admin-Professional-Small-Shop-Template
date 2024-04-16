@@ -1,0 +1,124 @@
+// VARIABLES: DIMENSIONS FOR THE SIDEBAR
+$header-height: rem(55px);
+
+// ==============================
+// HEADER SECTION
+// ==============================
+header {
+  @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", 0, "x");
+  @include apply-position(sticky, $top: 0);
+
+  // position: relative;
+  width: 100%;
+  background: var(--light);
+  height: $header-height;
+  z-index: 2;
+
+  // <========== Media Query =========>
+  @include respond-to("sm") {
+    @include apply-position(sticky, $top: 0);
+  }
+}
+
+// HEADER TEXT UTILITY: DE-EMPHASIZE TEXT STYLE
+.header__text--subtle {
+  @extend %text--subtle;
+}
+
+// ==============================
+// LOGO SECTION
+// ==============================
+.header__logo {
+  @include apply-flex(row, center, center);
+  @include apply-space("gap", -15);
+
+  white-space: nowrap;
+}
+
+.header__logo h5 {
+  // <========== Media Query =========>
+  @include respond-to("sm") {
+    @include set-typography("light", 1, $compact-line-height);
+  }
+}
+
+// ==============================
+// TITLE SECTION
+// ==============================
+.header__title {
+  @include apply-font-family("ysabeau-sc");
+  @include set-typography("bold");
+
+  // <========== Media Query =========>
+  @include respond-to("sm") {
+    display: none;
+  }
+}
+
+// ==============================
+// MINI-NAVBAR SECTION
+// ==============================
+.mini-navbar {
+  @include apply-flex(row, center, center);
+  @include apply-space("gap", -15);
+}
+
+// MINI-NAVBAR SECTION: (USERNAME & ADMIN LEVEL)
+.mini-navbar__section {
+  @include apply-flex(column, center);
+}
+
+.header__username {
+  @include set-typography("medium", 0);
+}
+
+.header__permission {
+  @include set-typography("medium", -1);
+
+  color: var(--shade-20);
+}
+
+// MINI-NAVBAR: USER ICON
+.mini-navbar__user-icon {
+  font-size: modular-scale(3.5);
+}
+
+// MINI-NAVBAR: OPEN  & CLOSE DROPDOWN BUTTON
+.mini-navbar__button {
+  @include apply-flex(row, center, center);
+
+  color: var(--shade-19);
+
+  &:hover {
+    color: var(--selection);
+  }
+}
+
+.mini-navbar__button svg {
+  font-size: modular-scale(1);
+}
+
+// ==============================
+// DROPDOWN MENU SECTION (Hidden)
+// ==============================
+.dropdown-menu__section {
+  @include apply-position(
+    absolute,
+    calc(100% + modular-scale(-5)),
+    modular-scale(-5)
+  );
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", -5, "x");
+  @extend %submenu--layout;
+  @extend %submenu--style;
+
+  z-index: 2;
+}
+
+// DROPDOWN MENU: BUTTONS
+.dropdown-menu__button {
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+}

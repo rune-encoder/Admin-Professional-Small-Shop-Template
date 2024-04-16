@@ -1,18 +1,4 @@
 // <===== BASE APP STRUCTURE SECTION =====>
-// WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
-.content {
-  @include apply-flex(column);
-
-  flex-grow: 1; // Expand to fill available space
-  height: 100vh;
-
-  // WRAPS APP'S MAIN CONTENT (EXCLUDES HEADER AND FOOTER)
-  &__main {
-    flex-grow: 1; // Expand to fill available space
-    overflow-y: auto;
-    height: 100%;
-  }
-}
 
 // BASE UTILITIES STYLES
 button,
@@ -29,7 +15,7 @@ input[type="reset"] {
   margin: 0;
 }
 
-// BASE LINK STYLES 
+// BASE LINK STYLES
 a {
   text-decoration: none;
   color: inherit;

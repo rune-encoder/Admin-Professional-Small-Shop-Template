@@ -1,0 +1,129 @@
+/* 
+Carousel Structure:
+  - .embla (Main container)
+    - .embla__viewport (Visible area container)
+      - .embla__container (Container for all slides)
+        - .embla__slide (Each slide)
+    - .embla__controls (Container for radio/dot buttons and arrow buttons)
+      - .embla__button (Arrow button)
+      - .embla__dot (Radio button)
+*/
+
+/* MAIN CONTAINER: Styles for the main container of the carousel */
+.embla {
+  position: relative;
+  overflow: hidden;
+}
+
+.embla__viewport {
+  /* Cursor style for the slide */
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+/* If carousel is hovered: show the control buttons */
+.embla:hover .embla__button,
+.embla:hover .embla__dot {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* SLIDE CONTAINER: Styles for the container of all slides in the carousel */
+.embla__container {
+  display: flex;
+}
+
+/* SLIDE (INDIVIDUAL): Styles for each slide in the carousel */
+[class^="embla__slide"] {
+  /* Position to help with button absolute positioning */
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  /* Varialbe slide sizes */
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* CONTAINER FOR CONTROLS: Contains radio/dot buttons */
+[class^="embla__controls"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTROL BUTTONS: Styles for the control buttons (arrows) for the carousel */
+.embla__controls-btn--prev {
+  /* Layout: Position the button to the left */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.embla__controls-btn--next {
+  /* Layout: Position the button to the right */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+/* CONTROL/ARROW BUTTON: Styles for the control buttons (arrows) for the carousel */
+.embla__button {
+  /* Hide the arrow buttons */
+  opacity: 0;
+
+  /* Transition opacity when hovered */
+  transition: all 0.3s ease-out;
+  color: var(--danger);
+
+  svg {
+    font-size: 3.5rem;
+  }
+
+  /* On hover: change color of the arrow button */
+  &:hover {
+    color: var(--dark);
+  }
+
+  /* On click: reduce the size of the arrow button slightly */
+  &:active {
+    transform: scale(0.8);
+  }
+}
+
+/* DOT/RADIO BUTTON: Styles for the dot buttons for the carousel */
+.embla__dot {
+  /* Hide the radio buttons */
+  opacity: 0;
+  /* Transition opacity when hovered */
+  transition: all 0.3s ease-out;
+
+  svg {
+    /* Transition individual buttons when hovered */
+    transition: all 0.3s ease-out;
+    font-size: 1.5rem;
+    color: var(--danger);
+  }
+
+  /* On hover: change color of the radio button */
+  &:hover {
+    svg {
+      color: var(--dark);
+    }
+  }
+
+  /* If selected: increase the size of the radio button */
+  &--selected {
+    transform: scale(1.2);
+  }
+
+  /* If not selected: reduce the size of the radio button */
+  &:not(.embla__dot--selected) {
+    transform: scale(0.8);
+  }
+}

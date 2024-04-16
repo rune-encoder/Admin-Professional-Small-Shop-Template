@@ -16,7 +16,6 @@
   @include apply-font-family("inter");
   @include apply-gradient("light", "shade-1", to right top);
   @include apply-border("shade-10", $border-radius-sm);
-  @include apply-box-shadow("shade-10", 10);
   @include set-typography("light");
 }
 
@@ -66,7 +65,7 @@
 // Make text subtle
 %text--subtle {
   font-size: modular-scale(-2);
-  color: var(--shade-15);
+  color: var(--shade-20);
 }
 
 // ==============================
@@ -82,7 +81,7 @@
   &::placeholder {
     @include apply-text-shadow("shade-5");
 
-    color: var(--shade-18);
+    color: var(--shade-13);
   }
 }
 
@@ -108,7 +107,7 @@
 // Window layout for tab buttons
 %window-tab__button--layout {
   @include apply-flex(row, center, center);
-  @include apply-space("padding", -10);
+  @include apply-space("padding", -1);
 }
 
 

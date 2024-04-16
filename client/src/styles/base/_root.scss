@@ -3,6 +3,8 @@
   @include apply-font-family("inter");
   @include set-typography("normal", 0, $base-line-height);
 
+  // color-scheme: light dark;
+
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -10,12 +12,10 @@
 }
 
 #root {
-  @include apply-gradient("shade-3", "shade-5");
-
   display: flex;
   flex-grow: 1; // Expand to fill available space
-  overflow-x: hidden; // Prevent horizontal scrollbar
   max-width: 100%;
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh));
   color: var(--dark);
+  background: var(--shade-3);
 }

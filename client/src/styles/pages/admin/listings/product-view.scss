@@ -1,0 +1,227 @@
+// ==============================
+// PRODUCT VIEW: STYLES
+// ==============================
+.product-view {
+  @include apply-font-family("roboto-condensed");
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+// ==============================
+// VIEW SECTION #1: DISPLAY IMAGE
+// ==============================
+.view__item-img-wrapper {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", -5, "x");
+  @include apply-flex(row, center);
+
+  height: rem(300px);
+}
+
+.view__item-img-layout {
+  @include apply-box-shadow("dark", 5);
+
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: $border-radius-md;
+}
+
+// ==============================
+// VIEW SECTION #2: VIEW IMAGES
+// ==============================
+// Slide width for the images slider.
+.embla__slide--views {
+  width: calc(30% - 10px);
+  height: rem(120px);
+}
+
+// Wrapper for each individual image in the slider.
+.slide-img-wrapper {
+  @include apply-space("margin", -5, "x");
+  @include apply-space("padding", -5, "y");
+}
+
+// Image layout for the images in the slider.
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  cursor: pointer;
+  border-radius: $border-radius-md;
+  transition: all 0.1s ease-out;
+
+  &:hover {
+    @include apply-box-shadow("dark", 5);
+
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
+
+// Effect: Add border to the top and bottom of the image slider.
+.embla__view-images {
+  &::before {
+    transition: all 0.3s ease-out;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: calc(100% - halved-modular-scale(1) - halved-modular-scale(1));
+    border-bottom: solid 1px var(--shade-15);
+  }
+
+  &::after {
+    transition: all 0.3s ease-out;
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: calc(100% - halved-modular-scale(1) - halved-modular-scale(1));
+    border-bottom: solid 1px var(--shade-15);
+  }
+}
+
+// Hover effect for the border on the top and bottom of the image slider.
+.embla__view-images:hover {
+  &::before {
+    width: 85%;
+  }
+
+  &::after {
+    width: 85%;
+  }
+}
+
+// ==============================
+// VIEW SECTION #3 - #7 (DETAILS)
+// ==============================
+
+// Section #3: Style for the product data cells.
+.view__item-cell {
+  @include apply-space("padding", 0, "x");
+}
+
+// Section #3: Layout for the itmes in the product data cells.
+.view__item-cell-group {
+  @include apply-flex(row, space-between, center);
+}
+
+// Layout for container holding section 3 to 7 under the image section.
+.view__item-details {
+  @include apply-flex(column, center);
+
+  flex-grow: 1;
+}
+
+// Spacing and background color for all sections under the image.
+[class^="view__item-section"] {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", 0, "x");
+
+  background-color: var(--shade-1);
+
+  &:nth-child(odd) {
+    background-color: var(--shade-2);
+  }
+
+  @include respond-to("md") {
+    background-color: var(--opacity-shade-1);
+
+    &:nth-child(odd) {
+      background-color: var(--opacity-shade-2);
+    }
+  }
+}
+
+// Different layouts for sections under the image.
+.view__item-section {
+  // Section #3 - #4: Layout for the product and category section.
+  &--flex-row {
+    @include apply-flex(row, start, center);
+    @include apply-space("gap", -5);
+  }
+
+  // Section #5: Layout for the grid to display the product data.
+  &--grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  //   Section #6 - #7: Layout for the product details and description.
+  &--flex-col {
+    @include apply-flex(column, center, start);
+
+    // Add indentation to paragraph text.
+    p {
+      @include apply-space("padding-left", 0);
+    }
+  }
+}
+
+// ==============================
+// PRODUCT VIEW UTILITIES
+// ==============================
+// Style and spacing for all labels.
+.view__item-label {
+  @include apply-flex(row, start, center);
+  @include apply-space("gap", -15);
+  @include set-typography("medium", 1, $base-line-height);
+
+  color: var(--shade-13);
+
+  @include respond-to("md") {
+    color: var(--shade-20);
+  }
+}
+
+// Style for all values.
+.item-value {
+  @include set-typography("medium", 1, $base-line-height);
+
+  // If there is no value, display in red
+  &--danger {
+    color: var(--err-btn-light);
+  }
+}
+
+// Style for icons that represent boolean values.
+.item-value svg {
+  @include apply-flex(row, center, center);
+  @include set-typography("bold", 2, $base-line-height);
+
+  filter: drop-shadow(0 0 5px var(--shade-1));
+}
+
+.item-value svg[data-boolean="true"] {
+  color: var(--success);
+}
+
+.item-value svg[data-boolean="false"] {
+  color: var(--danger);
+}
+
+// Window close button
+.view__close-btn {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.view__close-btn .item-cell--actions {
+  @include apply-space("padding", 1, "x");
+  @include apply-space("padding", -5, "y");
+}
+
+.view__close-btn .item-cell--actions .item-cell__btn--close {
+  @include apply-space("padding", 1, "x");
+  @include apply-space("padding", -5, "y");
+}

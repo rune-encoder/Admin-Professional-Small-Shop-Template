@@ -29,10 +29,11 @@ export const categoryExtraReducers = (builder) => {
     // ==============================
     .addCase(createCategory.pending, (state) => {
       state.createCategoryStatus = "loading";
-      state.categoryMode = "view";
     })
-    .addCase(createCategory.fulfilled, (state) => {
+    .addCase(createCategory.fulfilled, (state, action) => {
       state.createCategoryStatus = "succeeded";
+      state.categoryMode = null;
+      state.currentCategory = action.payload;
     })
     .addCase(createCategory.rejected, (state) => {
       state.createCategoryStatus = "failed";
@@ -45,8 +46,8 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(updateCategory.fulfilled, (state, action) => {
       state.updateCategoryStatus = "succeeded";
+      state.categoryMode = null;
       state.currentCategory = action.payload;
-      state.categoryMode = "view";
     })
     .addCase(updateCategory.rejected, (state) => {
       state.updateCategoryStatus = "failed";
@@ -59,6 +60,7 @@ export const categoryExtraReducers = (builder) => {
     })
     .addCase(deleteCategory.fulfilled, (state) => {
       state.deleteCategoryStatus = "succeeded";
+      state.categoryMode = null;
       state.currentCategory = null;
     })
     .addCase(deleteCategory.rejected, (state) => {
