@@ -1,3 +1,7 @@
+// !Important =======================================
+// !Revisit: Important Layout Structure. 
+// !Important =======================================
+
 // WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
 .content {
   @include apply-flex(column);
