@@ -2,7 +2,7 @@
 .content {
   @include apply-flex(column);
 
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh));
   max-height: 100%;
   flex-grow: 1; // Expand to fill available space
 
@@ -13,7 +13,7 @@
     flex-grow: 1; // Expand to fill available space
 
     // Inner content container for mobile.
-    @include respond-to("sm") {
+    @include respond-to("md") {
       @include apply-flex(column-reverse);
     }
 
@@ -46,6 +46,7 @@
   }
 }
 
+// ! Revisit: Fix media querys
 .listings--wrapper {
   @include apply-flex(column);
   // @include apply-space("padding", 1, "x");
@@ -59,7 +60,7 @@
     // border: solid red 3px;
     width: 50%;
     overflow-y: auto;
-    height: calc(100vh - $header-height);
+    height: calc(100 * var(--vh) - #{$header-height});
   }
 
   &[data-boolean="false"] {
@@ -70,20 +71,34 @@
 .details--wrapper {
   display: none;
   width: 50%;
-  height: calc(100vh - $header-height);
+
+// border: solid 1px rgb(153, 159, 179);
 
   overflow-y: auto;
+  overflow-x: hidden;
 
   background-color: var(--shade-3);
+  height: calc(100 * var(--vh) - #{$header-height});
 
-//   border: solid green 2px;
 
   &[data-boolean="true"] {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   &[data-boolean="false"] {
     display: none;
+  }
+
+
+  @include respond-to("md") {
+      @include apply-glass-effect("opacity-light", 25px);
+
+    position: fixed;
+    z-index: 1;
+    height: calc(100 * var(--vh) - #{$header-height} - #{$sidebar-height} + 1px);
+    width: 100%;
+
   }
 }
 

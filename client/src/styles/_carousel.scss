@@ -11,6 +11,7 @@ Carousel Structure:
 
 /* MAIN CONTAINER: Styles for the main container of the carousel */
 .embla {
+  position: relative;
   overflow: hidden;
 }
 
@@ -78,7 +79,7 @@ Carousel Structure:
 
   /* Transition opacity when hovered */
   transition: all 0.3s ease-out;
-  color: var(--opac-med);
+  color: var(--danger);
 
   svg {
     font-size: 3.5rem;
@@ -106,7 +107,7 @@ Carousel Structure:
     /* Transition individual buttons when hovered */
     transition: all 0.3s ease-out;
     font-size: 1.5rem;
-    color: var(--opac-med);
+    color: var(--danger);
   }
 
   /* On hover: change color of the radio button */

@@ -1,6 +1,7 @@
 import { FiEdit } from "react-icons/fi";
 import { BsSave, BsTrash, BsEye } from "react-icons/bs";
 import { TiCancelOutline } from "react-icons/ti";
+import { GrClose } from "react-icons/gr";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { RiListCheck3 } from "react-icons/ri";
@@ -35,6 +36,11 @@ export const btnActionConfig = {
     className: "item-cell__btn--delete",
     action: "Delete",
     icon: BsTrash,
+  },
+  close: {
+    className: "item-cell__btn--close",
+    action: "Close",
+    icon: GrClose,
   },
 };
 

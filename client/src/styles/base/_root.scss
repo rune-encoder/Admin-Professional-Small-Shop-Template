@@ -15,7 +15,7 @@
   display: flex;
   flex-grow: 1; // Expand to fill available space
   max-width: 100%;
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh));
   color: var(--dark);
   background: var(--shade-3);
 }

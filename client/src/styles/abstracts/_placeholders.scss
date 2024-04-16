@@ -107,7 +107,7 @@
 // Window layout for tab buttons
 %window-tab__button--layout {
   @include apply-flex(row, center, center);
-  @include apply-space("padding", -10);
+  @include apply-space("padding", -1);
 }
 
 

@@ -17,6 +17,7 @@ $listings-row-width: 100%;
   height: $listings-row-height;
   width: $listings-row-width;
   background: var(--shade-1);
+  transition: all 0.3s ease-out;
   z-index: 0;
 
   &:nth-child(odd) {
@@ -24,6 +25,7 @@ $listings-row-width: 100%;
   }
 
   // LIST: ROW (HOVER EFFECT)
+  // ! Revisit: Maybe
   &:hover,
   &:focus {
     background-color: var(--shade-5);
@@ -72,6 +74,7 @@ $listings-row-width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: $border-radius-md;
 }
 
 // ==============================
@@ -147,7 +150,7 @@ $listings-row-width: 100%;
     border: solid 1px var(--success-btn-dark);
   }
 
-  &--delete {
+  &--delete, &--close {
     background-color: var(--err-btn-light);
     border: solid 1px var(--err-btn-dark);
   }

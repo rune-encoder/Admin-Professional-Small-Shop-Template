@@ -13,13 +13,13 @@ $sidebar-width: rem(55px);
   @include apply-position(sticky, $top: $header-height);
 
   min-width: $sidebar-width;
-  height: calc(100vh - #{$header-height});
+  height: calc(100 * var(--vh) - #{$header-height});
   background: var(--light);
   color: var(--shade-25);
-  z-index: 1;
+  z-index: 2;
 
   // <========== Media Query =========>
-  @include respond-to("sm") {
+  @include respond-to("md") {
     @include apply-flex(row, space-around, center);
     @include apply-position(sticky, $bottom: 0);
 
@@ -49,7 +49,7 @@ $sidebar-width: rem(55px);
   }
 
   // <========== Media Query =========>
-  @include respond-to("sm") {
+  @include respond-to("md") {
     @include apply-flex(column, center, center);
     @include apply-space("padding", -10, "y");
     @include apply-space("gap", -15);
@@ -66,7 +66,7 @@ $sidebar-width: rem(55px);
   font-size: modular-scale(0);
 
   // <========== Media Query =========>
-  @include respond-to("sm") {
+  @include respond-to("md") {
     font-size: modular-scale(-1);
   }
 }
