@@ -71,8 +71,9 @@ export function ViewProduct() {
       <section className="view__item-img-wrapper">
         <img
           className="view__item-img-layout"
-          data-cloudinary-id={displayImage.cloudinaryId}
+          data-cloudinary-id={displayImage._id}
           src={displayImage.url}
+          alt={`Selected image for ${selectedProduct.name}`}
         ></img>
       </section>
 
@@ -80,13 +81,13 @@ export function ViewProduct() {
       <section className="embla embla__view-images">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
-            {selectedProduct.image.map((image) => (
+            {selectedProduct.image.map((image, index) => (
               <div className="embla__slide--views" key={image.cloudinaryId}>
                 <div className="slide-img-wrapper">
                   <img
                     className="slide-img"
                     src={image.url}
-                    alt={selectedProduct.name}
+                    alt={`Selected image ${index}`}
                     onClick={() => setDisplayImage(image)}
                   />
                 </div>

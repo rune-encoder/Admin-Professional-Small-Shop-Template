@@ -339,6 +339,7 @@ export default function ItemEdit() {
                 <div className="product-edit__label-group">
                   <label className="item-label">Price:</label>
                   <input
+                  className="view__item-value"
                     type="number"
                     name="price"
                     value={formState.price}
@@ -349,6 +350,7 @@ export default function ItemEdit() {
                 <div className="product-edit__label-group">
                   <label className="item-label">Quantity:</label>
                   <input
+                                    className="view__item-value"
                     type="number"
                     name="quantity"
                     value={formState.quantity}
@@ -358,12 +360,7 @@ export default function ItemEdit() {
 
                 <div className="product-edit__label-group">
                   <label className="item-label">Featured:</label>
-                  <input
-                    type="checkbox"
-                    name="isFeatured"
-                    checked={formState.isFeatured}
-                    onChange={handleInputChange}
-                  />
+
                 </div>
               </div>
             </div>
@@ -389,6 +386,7 @@ export default function ItemEdit() {
           <div className="product-edit__description">
             <label className="">Description: </label>
             <textarea
+            className="view__item-value"
               name="shortDescription"
               placeholder="Provide a brief description of the product..."
               value={formState.shortDescription}
@@ -399,6 +397,7 @@ export default function ItemEdit() {
           <div className="product-edit__description">
             <label>Details:</label>
             <textarea
+            className="view__item-value"
               name="details"
               placeholder="Provide a details about the product..."
               value={formState.details}
