@@ -17,13 +17,11 @@ import {
   IoMdCheckmarkCircleOutline,
   IoMdCloseCircleOutline,
 } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
-
-// Import Components
-import { ActionButtons } from "../../../Tools";
 
 export function ViewProduct() {
   // ==============================
@@ -59,12 +57,13 @@ export function ViewProduct() {
     <div className="product-view">
       {/* ! Revisit: Naming */}
       <div className="view__close-btn">
-        <ActionButtons
-          type="close"
-          onClick={() =>
-            dispatch(setProductMode({ mode: null, product: null }))
-          }
-        />
+        <button>
+          <IoArrowBack
+            onClick={() =>
+              dispatch(setProductMode({ mode: null, product: null }))
+            }
+          />
+        </button>
       </div>
 
       {/* Primary Product Image */}
@@ -155,7 +154,9 @@ export function ViewProduct() {
             </div>
             <div className="view__item-cell-group">
               <div className="view__item-label">Quantity:</div>
-              <span className="view__item-value">{selectedProduct.quantity}</span>
+              <span className="view__item-value">
+                {selectedProduct.quantity}
+              </span>
             </div>
           </div>
         </section>

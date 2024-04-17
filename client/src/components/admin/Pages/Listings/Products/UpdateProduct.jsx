@@ -30,13 +30,11 @@ import ImagePreview from "../../../../window/ImagePreview";
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
 
-// Import Components
-import { ActionButtons } from "../../../Tools";
-
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { BsSave, BsTrash } from "react-icons/bs";
+import { IoArrowBack } from "react-icons/io5";
 
 export function UpdateProduct() {
   // ==============================
@@ -295,12 +293,13 @@ export function UpdateProduct() {
     <div className="product-view">
       {/* ! Revisit: Naming */}
       <div className="view__close-btn">
-        <ActionButtons
-          type="close"
-          onClick={() =>
-            dispatch(setProductMode({ mode: null, product: null }))
-          }
-        />
+        <button>
+          <IoArrowBack
+            onClick={() =>
+              dispatch(setProductMode({ mode: null, product: null }))
+            }
+          />
+        </button>
       </div>
 
       {/* Primary Product Image */}

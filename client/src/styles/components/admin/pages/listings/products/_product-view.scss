@@ -216,8 +216,22 @@
 // Window close button
 .view__close-btn {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: halved-modular-scale(0);
+  left: halved-modular-scale(0);
+  
+
+  svg {
+    transition: all 0.3s ease-out;
+    font-size: modular-scale(4);
+    color: var(--shade-20);
+    filter: drop-shadow(0 0 1px var(--always-dark));
+  }
+
+  &:hover {
+    svg {
+      color: var(--selection);
+    }
+  }
 }
 
 .view__close-btn .item-cell--actions {
