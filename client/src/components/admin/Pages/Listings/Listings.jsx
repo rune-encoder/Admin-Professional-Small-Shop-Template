@@ -15,6 +15,7 @@ import { selectProductMode } from "../../../../features/products/productSelector
 
 import { ViewProduct } from "./Products/ViewProduct.jsx";
 import { UpdateProduct } from "./Products/UpdateProduct.jsx";
+import { CreateProduct } from "./Products/CreateProduct.jsx";
 
 export function Listings({ children }) {
   const listType = useSelector(selectListType);
@@ -22,15 +23,15 @@ export function Listings({ children }) {
   const currentProduct = useSelector(selectCurrentProduct);
   const productMode = useSelector(selectProductMode);
 
-  const dataBoolean = productMode === "view" || productMode === "update";
+  const dataBoolean = productMode === "view" || productMode === "update" || productMode === "create";
 
   return (
     <>
       <div className="admin-page--wrapper">
         <div className="details--wrapper" data-boolean={dataBoolean}>
-          
           {productMode === "view" && <ViewProduct />}
           {productMode === "update" && <UpdateProduct />}
+          {productMode === "create" && <CreateProduct />}
         </div>
 
 

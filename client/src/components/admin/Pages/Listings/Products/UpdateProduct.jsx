@@ -27,21 +27,16 @@ import {
 // Import Components
 import ImagePreview from "../../../../window/ImagePreview";
 
-// Import React Icons
-import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { BsSave, BsTrash } from "react-icons/bs";
-
-import {
-  IoMdCheckmarkCircleOutline,
-  IoMdCloseCircleOutline,
-} from "react-icons/io";
-
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
 
 // Import Components
 import { ActionButtons } from "../../../Tools";
+
+// Import React Icons
+import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { BsSave, BsTrash } from "react-icons/bs";
 
 export function UpdateProduct() {
   // ==============================
