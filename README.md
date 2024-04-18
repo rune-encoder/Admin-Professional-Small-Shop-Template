@@ -62,6 +62,7 @@ The project leverages the following technologies:
 - **Development Tools:** ESLint, Stylelint, Nodemon, concurrently
 
 ## Features
+> **Note: Please note, as the project is in the alpha stage, some features are in development**.
 
 This template is designed to provide a comprehensive suite of tools for small shop administrators and hobby crafters. Here are some of the key features that make managing your online shop efficient and user-friendly:
 
