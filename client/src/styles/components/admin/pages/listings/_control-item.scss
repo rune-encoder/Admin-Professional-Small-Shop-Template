@@ -11,30 +11,27 @@
   flex: 1; // Expand to fill the remaining space.
 }
 
-// ! Working =======================================vvv
-
 // ==============================
 // CONTROLLER: IMAGE PREVIEW
 // ==============================
 .preview-image-wrapper {
+  @include apply-flex(row, center, center);
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
-  @include apply-flex(row, center);
 
+  // !Revisit: Make to a variable
   height: rem(300px);
 }
 
 .preview-image {
+  @include apply-box-shadow("dark", 10);
+
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
   object-position: center;
-
-  // @include apply-box-shadow("dark", 5);
-  // border-radius: $border-radius-md;
+  border-radius: $border-radius-md;
 }
-
-// ! Working =======================================^^^
 
 // ==============================
 // CONTROLLER: IMAGES EMBLA CAROUSEL
@@ -72,8 +69,6 @@
   }
 }
 
-// ! Working =======================================vvv
-
 // CONTROL IMAGE: EACH SLIDE AND SIZE
 // Applys changes to the variable slide size for each image in the slider.
 // Usage: Used to specify the size of each slide containing the image in the slider and add other styles.
@@ -81,37 +76,34 @@
 .embla__slide--control-image {
   // Adjust to change the width of the slide containing the image.
   width: calc(
-    30% - 10px
+    35% - 10px
   );
 
   // Keep the height of carousel the same as the rows in listings for visual consistency.
   height: $listings-row-height; 
-
-  // border: solid 1px var(--shade-15);
 }
 
 // Wrapper for each individual image within the slides in the slider.
 // Applies spacing to the image.
 .control-image-wrapper {
+  @include apply-flex(row, center, center);
   @include apply-space("padding", -5, "y");
-
-  // @include apply-space("padding", -5, "x");
+  @include apply-space("padding", -10, "x");
 }
 
 // Configurations for the images in each slide.
 .control-image {
   cursor: pointer;
   transition: all 0.1s ease-out;
-
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   object-position: center;
   border-radius: $border-radius-md;
 
   // When the image is hovered, increase the size of the image slightly.
   &:hover {
-    @include apply-box-shadow("dark", 5);
+    @include apply-box-shadow("dark", 10);
 
     transform: scale(1.05);
   }
@@ -121,8 +113,6 @@
     transform: scale(1);
   }
 }
-
-// ! Working =======================================^^^
 
 // ==============================
 // CONTROLLER: DETAILS CONTAINER
@@ -264,18 +254,22 @@
 // Button to navigate back to the previous page.
 // Applies position, font-size, color, and transition to the button.
 .control__back-btn {
+  @include apply-glass-effect("opacity-shade-1", 10px);
+  @include apply-border("shade-15", 20px);
   @include apply-position(
     fixed,
-    $top: halved-modular-scale(0),
-    $left: halved-modular-scale(0)
+    $top: halved-modular-scale(-5),
+    $left: halved-modular-scale(-10)
   );
 
-  font-size: modular-scale(4);
-  color: var(--shade-20);
+  font-size: modular-scale(3);
   transition: all 0.3s ease-out;
-  filter: drop-shadow(0 0 1px var(--always-dark));
+  color: var(--shade-20);
 
   &:hover {
+    @include apply-border("selection", 20px);
+    
+    filter: drop-shadow(0 0 1px var(--shade-13));
     color: var(--selection);
   }
 }
