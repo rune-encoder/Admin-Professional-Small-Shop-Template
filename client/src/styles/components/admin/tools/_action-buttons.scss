@@ -1,0 +1,47 @@
+// Wrapper that contains the action button element. Used for layout purposes.
+// Note: This class carries over the styles from `.item-cell` in `listings.scss`.
+.item-cell--actions {
+  @include apply-space("padding", 5, "y");
+  @include apply-space("padding", -10, "x");
+}
+
+// Applys styles to all action buttons (Update, Delete, Cancel, Save, Close)
+// Note: Reference the `buttonConfig.js` file to see the button configurations.
+[class^="item-cell__btn"] {
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+
+  border-radius: $border-radius-sm;
+  height: 100%;
+  width: 100%;
+}
+
+// This class carries over the styles from `.item-cell__btn`..
+// Applys styles to specific action buttons (Update, Delete, Cancel, Save, Close)
+.item-cell__btn {
+  &--update {
+    background-color: var(--success-btn-light);
+    border: solid 1px var(--success-btn-dark);
+  }
+
+  &--delete,
+  &--close {
+    background-color: var(--err-btn-light);
+    border: solid 1px var(--err-btn-dark);
+  }
+
+  &--cancel {
+    background-color: var(--cancel-btn-light);
+    border: solid 1px var(--cancel-btn-dark);
+  }
+
+  &--save {
+    background-color: var(--save-btn-light);
+    border: solid 1px var(--save-btn-dark);
+  }
+
+  &--view {
+    background-color: var(--view-btn-light);
+    border: solid 1px var(--view-btn-dark);
+  }
+}

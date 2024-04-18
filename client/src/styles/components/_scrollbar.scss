@@ -17,14 +17,13 @@
 #root ::-webkit-scrollbar-track {
   @include apply-border("shade-5");
 
-  box-shadow: inset 0 0 rem(3px) var(--always-dark);
+  box-shadow: inset 0 0 rem(1px) var(--always-dark);
   background: var(--always-light);
 }
 
 // Scrollbar thumb
 #root ::-webkit-scrollbar-thumb {
   @include apply-gradient("shade-4", "shade-5", 90deg);
-  @include apply-border("shade-10", $border-radius-sm);
 }
 
 #root ::-webkit-scrollbar-thumb:hover {

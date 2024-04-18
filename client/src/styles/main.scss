@@ -23,20 +23,29 @@
 @import "./components/admin/header";
 @import "./components/admin/sidebar";
 @import "./components/admin/error";
-@import "./components/admin/toolbar";
+@import "./components/admin/tools/toolbar";
+@import "./components/admin/tools/action-buttons";
 
 @import "./pages//admin//listings";
 
 @import "./layout/admin/test";
 
-@import "./pages/admin/listings/product-view.scss";
+@import "./components/admin/pages/listings/control-item";
+
+@import "./components/admin/pages/listings/products/product-row";
+
+@import "./components/admin/pages/listings/categories/category-row";
+@import "./components/admin/pages/listings/categories/create-category";
+
 
 // @import "./components/window/base/window";
 // @import "./components/window/subcomponents/item-details";
 // @import "./components/window/subcomponents/item-view";
 // @import "./components/window/subcomponents/item-form";
 // @import "./components/window/subcomponents/item-list";
-// @import "./components/window/subcomponents/img-preview";
+
+@import "./components/window/subcomponents/img-preview";
+
 @import './carousel';
 @import "./shame";
 

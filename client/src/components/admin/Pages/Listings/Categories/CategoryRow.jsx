@@ -98,7 +98,7 @@ export function CategoryRow({ category, formState, setFormState }) {
           Category:
         </div>
 
-        <div className="item-name--category">
+        <div className="item-value--category">
           {categoryMode === "update" &&
           selectedCategory?._id === category._id ? (
             <input

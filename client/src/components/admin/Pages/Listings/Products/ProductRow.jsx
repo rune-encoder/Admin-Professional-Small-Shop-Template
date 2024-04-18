@@ -12,6 +12,9 @@ import {
   deleteProduct,
 } from "../../../../../features/products/productThunks";
 
+// Import Embla Carousel
+import useEmblaCarousel from "embla-carousel-react";
+
 // Import Components
 import { ActionButtons } from "../../../Tools";
 
@@ -28,6 +31,15 @@ export function ProductRow({ product }) {
   // useDispatch Hooks Section
   // ==============================
   const dispatch = useDispatch();
+
+  // ==============================
+  // useEmblaCarousel Hooks Section
+  // ==============================
+  const [emblaRef] = useEmblaCarousel({
+    loop: false,
+    // dragFree: true,
+    // containScroll: "trimSnaps",
+  });
 
   // ==============================
   // Event Handlers Section
@@ -48,76 +60,79 @@ export function ProductRow({ product }) {
   );
 
   return (
-    <div key={product._id} className="item-row--product">
-      <div className="item-cell">
-        <div className="item__img-wrapper">
-          <img
-            src={product.image[0].url}
-            alt={product.name}
-            className="item__img-layout"
-          />
+    <div className="embla__item-row" ref={emblaRef}>
+      <div key={product._id} className="embla__container">
+        <div className="item-cell embla__slide--product">
+          <div className="product-row__img-wrapper">
+            <img
+              src={product.image[0].url}
+              alt={product.name}
+              className="product-row__img"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="item-cell">
-        <div className="item-wrapper">
-          <div className="item-group">
-            <div className="item-label">
-              <MdOutlineShoppingCart />
-              Product:
+        <div className="item-cell embla__slide--product">
+          <div className="item-wrapper">
+            <div className="item-group">
+              <div className="item-label">
+                <MdOutlineShoppingCart />
+                Product:
+              </div>
+              <div className="item-value">{product.name}</div>
             </div>
-            <div className="item-name--product">{product.name}</div>
-          </div>
 
-          <div className="item__product-category">
-            {product.category ? (
-              <>
-                <MdOutlineCategory /> {product.category.name}
-              </>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="item-cell">
-        <div className="item-label">
-          <MdOutlineCalendarToday />
-          Date:
-        </div>
-        <div className="item__product-date">01/01/10</div>
-      </div>
-
-      <div className="item-cell">
-        <div className="item-wrapper">
-          <div className="item-group">
-            <div className="item-label">
-              <IoPricetagOutline />
-              Price:
+            <div className="item-value--subtle">
+              {product.category ? (
+                <>
+                  <MdOutlineCategory /> {product.category.name}
+                </>
+              ) : (
+                ""
+              )}
             </div>
-            <div className="item__product-price">${product.price}</div>
-          </div>
-          <div className="item__product-quantity">
-            Stock: {product.quantity}
           </div>
         </div>
+
+        <div className="item-cell embla__slide--product">
+          <div className="item-label">
+            <MdOutlineCalendarToday />
+            Date:
+          </div>
+          <div className="item-value">01/01/10</div>
+        </div>
+
+        <div className="item-cell embla__slide--product">
+          <div className="item-wrapper">
+            <div className="item-group">
+              <div className="item-label">
+                <IoPricetagOutline />
+                Price:
+              </div>
+              <div className="item-value">${product.price}</div>
+            </div>
+            <div className="item-value--subtle">Stock: {product.quantity}</div>
+          </div>
+        </div>
+
+        <ActionButtons
+          type="view"
+          emblaSlide="embla__slide--product"
+          onClick={() => dispatch(setProductMode({ mode: "view", product }))}
+        />
+
+        <ActionButtons
+          type="update"
+          emblaSlide="embla__slide--product"
+          onClick={() => dispatch(setProductMode({ mode: "update", product }))}
+        />
+
+        <ActionButtons
+          type="delete"
+          emblaSlide="embla__slide--product"
+          onClick={() => handleDeleteProduct(product)}
+        />
       </div>
-
-      <ActionButtons
-        type="view"
-        onClick={() => dispatch(setProductMode({ mode: "view", product }))}
-      />
-
-      <ActionButtons
-        type="update"
-        onClick={() => dispatch(setProductMode({ mode: "update", product }))}
-      />
-
-      <ActionButtons
-        type="delete"
-        onClick={() => handleDeleteProduct(product)}
-      />
     </div>
   );
 }

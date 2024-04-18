@@ -110,4 +110,11 @@
   @include apply-space("padding", -1);
 }
 
-
+// !Revisit: Rename
+%pseudo-border {
+  content: "";
+  transition: all 0.3s ease-out;
+  transform: translateX(-50%);
+  width: calc(100% - halved-modular-scale(1) - halved-modular-scale(1));
+  border-bottom: solid 1px var(--shade-15);
+}

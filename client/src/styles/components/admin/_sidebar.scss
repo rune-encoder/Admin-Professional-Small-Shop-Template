@@ -16,7 +16,7 @@ $sidebar-width: rem(55px);
   height: calc(100 * var(--vh) - #{$header-height});
   background: var(--light);
   color: var(--shade-25);
-  z-index: 2;
+  z-index: 5;
 
   // <========== Media Query =========>
   @include respond-to("md") {
@@ -41,11 +41,12 @@ $sidebar-width: rem(55px);
   text-align: center;
   user-select: none;
 
+  // !Revisit: Make so no hover effects on phone mode
   // Style of sidebar button on hover
   &:hover {
-    @include apply-gradient("shade-22", "shade-24", 140deg);
+    // @include apply-gradient("shade-22", "shade-24", 140deg);
 
-    color: var(--shade-3);
+    // color: var(--shade-3);
   }
 
   // <========== Media Query =========>

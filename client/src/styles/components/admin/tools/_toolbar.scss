@@ -1,3 +1,4 @@
+// ! Revisit: Refactor Media Queries
 // ==============================
 // TOOLBAR SECTION
 // ==============================
@@ -5,24 +6,15 @@
   @include apply-flex(column);
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", 1, "x");
-  @include apply-position(sticky, $top: $header-height);
-
-  // ! Revisit: Media Query
-  @media screen and (min-width: 992px) {
-    @include apply-position(sticky, $top: 0);
-  }
-
+  @include apply-position(sticky, $top: 0);
+  
   background: var(--shade-3);
+  z-index: 3;
 
   // Border bottom
   &::after {
-    content: "";
-    position: absolute;
-    left: 50%; 
-    bottom: 0; 
-    transform: translateX(-50%);
-    width: calc(100% - halved-modular-scale(1) - halved-modular-scale(1)); 
-    border-bottom: solid 1px var(--shade-15); 
+    @include apply-position(absolute, $bottom: 0, $left: 50%);
+    @extend %pseudo-border;
   }
 }
 
@@ -136,7 +128,7 @@
   @extend %submenu--style;
 
   transform: translateX(-55%);
-  z-index: 1;
+  z-index: 3;
 }
 
 // DROPDOWN MENU BUTTONS
