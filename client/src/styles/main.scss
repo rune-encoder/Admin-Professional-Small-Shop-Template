@@ -30,12 +30,13 @@
 
 @import "./layout/admin/test";
 
+@import "./components/admin/pages/listings/control-item";
+
+@import "./components/admin/pages/listings/products/product-row";
+
 @import "./components/admin/pages/listings/categories/category-row";
 @import "./components/admin/pages/listings/categories/create-category";
 
-@import "./components/admin/pages/listings/products/product-row";
-@import "./components/admin/pages/listings/products/product-view";
-@import "./components/admin/pages/listings/products/product-update";
 
 // @import "./components/window/base/window";
 // @import "./components/window/subcomponents/item-details";

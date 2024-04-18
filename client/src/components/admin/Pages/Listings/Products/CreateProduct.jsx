@@ -188,23 +188,21 @@ export function CreateProduct() {
   // ! ==========>
 
   return (
-    <div className="product-view">
-      {/* ! Revisit: Naming */}
-      <div className="view__close-btn">
-        <button>
-          <IoArrowBack
-            onClick={() =>
-              dispatch(setProductMode({ mode: null, product: null }))
-            }
-          />
-        </button>
-      </div>
+    <div className="control-item">
+      {/* Back Button */}
+      <button className="control__back-btn">
+        <IoArrowBack
+          onClick={() =>
+            dispatch(setProductMode({ mode: null, product: null }))
+          }
+        />
+      </button>
 
       {/* Primary Product Image */}
-      <section className="view__item-img-wrapper">
+      <section className="preview-image-wrapper">
         {displayImage && (
           <img
-            className="view__item-img-layout"
+            className="preview-image"
             src={displayImage}
             alt={`View of selected image for the product ${formState.name}`}
           ></img>
@@ -212,22 +210,20 @@ export function CreateProduct() {
       </section>
 
       {/* Product Images Carousel */}
-      <section className="embla embla__view-images">
-        <div className="embla__viewport" ref={emblaRef}>
-          <div className="embla__container">
-            {selectedImages.map((image, index) => (
-              <div className="embla__slide--views" key={index}>
-                <div className="slide-img-wrapper">
-                  <img
-                    className="slide-img"
-                    src={image}
-                    alt={`Selected image ${index}`}
-                    onClick={() => setDisplayImage(image)}
-                  />
-                </div>
+      <section className="embla__control-images" ref={emblaRef}>
+        <div className="embla__container">
+          {selectedImages.map((image, index) => (
+            <div className="embla__slide--control-image" key={index}>
+              <div className="control-image-wrapper">
+                <img
+                  className="control-image"
+                  src={image}
+                  alt={`Selected image ${index}`}
+                  onClick={() => setDisplayImage(image)}
+                />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -245,14 +241,14 @@ export function CreateProduct() {
       </section>
 
       {/* Product Data */}
-      <form className="view__item-details" onSubmit={handleSubmit}>
-        <section className="view__item-row--flex-row">
-          <label className="view__item-label">
+      <form className="control__item-details" onSubmit={handleSubmit}>
+        <section className="control__item-row--flex-row">
+          <label className="control__item-label">
             <MdOutlineShoppingCart /> Product:
           </label>
 
           <input
-            className="view__item-value"
+            className="control__item-value"
             type="text"
             name="name"
             placeholder="Name"
@@ -261,13 +257,13 @@ export function CreateProduct() {
           />
         </section>
 
-        <section className="view__item-row--flex-row">
-          <label className="view__item-label">
+        <section className="control__item-row--flex-row">
+          <label className="control__item-label">
             <MdOutlineCategory /> Category:
           </label>
 
           <select
-            className="view__item-value"
+            className="control__item-value"
             name="category"
             value={formState.category}
             onChange={handleInputChange}
@@ -281,12 +277,12 @@ export function CreateProduct() {
           </select>
         </section>
 
-        <section className="view__item-row--grid">
-          <div className="view__item-cell">
-            <div className="view__item-cell-group">
-              <label className="view__item-label">Price:</label>
+        <section className="control__item-row--grid">
+          <div className="control__item-cell">
+            <div className="control__item-group">
+              <label className="control__item-label">Price:</label>
               <input
-                className="view__item-value"
+                className="control__item-value"
                 type="number"
                 name="price"
                 value={formState.price}
@@ -294,10 +290,10 @@ export function CreateProduct() {
               />
             </div>
 
-            <div className="view__item-cell-group">
-              <label className="view__item-label">Quantity:</label>
+            <div className="control__item-group">
+              <label className="control__item-label">Quantity:</label>
               <input
-                className="view__item-value"
+                className="control__item-value"
                 type="number"
                 name="quantity"
                 value={formState.quantity}
@@ -305,10 +301,10 @@ export function CreateProduct() {
               />
             </div>
 
-            <div className="view__item-cell-group">
-              <label className="view__item-label">Featured:</label>
+            <div className="control__item-group">
+              <label className="control__item-label">Featured:</label>
               <input
-                className="view__item-value"
+                className="control__item-value"
                 type="checkbox"
                 name="isFeatured"
                 checked={formState.isFeatured}
@@ -317,8 +313,8 @@ export function CreateProduct() {
             </div>
           </div>
 
-          <div className="view__item-cell">
-            <div className="view__item-cell-group">
+          <div className="control__item-cell">
+            <div className="control__item-group">
               <button className="" type="submit">
                 <BsSave />
                 Create
@@ -327,11 +323,11 @@ export function CreateProduct() {
           </div>
         </section>
 
-        <section className="view__item-row--grid">
-          <div className="view__item-cell">
-            <label className="view__item-label">Description:</label>
+        <section className="control__item-row--grid">
+          <div className="control__item-cell">
+            <label className="control__item-label">Description:</label>
             <textarea
-              className="view__item-value"
+              className="control__item-value"
               name="shortDescription"
               placeholder="Provide a brief description of the product..."
               value={formState.shortDescription}
@@ -340,9 +336,9 @@ export function CreateProduct() {
           </div>
 
           <div className="iew__item-cell">
-            <label className="view__item-label">Details:</label>
+            <label className="control__item-label">Details:</label>
             <textarea
-              className="view__item-value"
+              className="control__item-value"
               name="details"
               placeholder="Provide a details about the product..."
               value={formState.details}

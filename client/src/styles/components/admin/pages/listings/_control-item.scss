@@ -1,0 +1,281 @@
+// ==============================
+// CONTROLLER: CONTAINER
+// ==============================
+// Container for selected item's overview (or item being created).
+// Contains sections used to view, update, or create a item.
+// Applies flex column layout.
+.control-item {
+  @include apply-font-family("roboto-condensed");
+  @include apply-flex(column);
+
+  flex: 1; // Expand to fill the remaining space.
+}
+
+// ! Working =======================================vvv
+
+// ==============================
+// CONTROLLER: IMAGE PREVIEW
+// ==============================
+.preview-image-wrapper {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", -5, "x");
+  @include apply-flex(row, center);
+
+  height: rem(300px);
+}
+
+.preview-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+
+  // @include apply-box-shadow("dark", 5);
+  // border-radius: $border-radius-md;
+}
+
+// ! Working =======================================^^^
+
+// ==============================
+// CONTROLLER: IMAGES EMBLA CAROUSEL
+// ==============================
+// Usage: Used to create a Embla carousel for the images being viewed, updated, or created.
+// Applies cursor styling and adds an incomplete border to the top and bottom of the image slider for a visual effect.
+// Container for the images slider.
+// Note: This class carries over styles from the `.embla` attribute selector in `carousel.scss`.
+.embla__control-images {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &::before {
+    @include apply-position(absolute, $top: 0, $left: 50%);
+    @extend %pseudo-border;
+  }
+
+  &::after {
+    @include apply-position(absolute, $bottom: 0, $left: 50%);
+    @extend %pseudo-border;
+  }
+}
+
+// When the Embla carousel is hovered, reduce the width of the border for visual effect.
+.embla__control-images:hover {
+  &::before {
+    width: 85%;
+  }
+
+  &::after {
+    width: 85%;
+  }
+}
+
+// ! Working =======================================vvv
+
+// CONTROL IMAGE: EACH SLIDE AND SIZE
+// Applys changes to the variable slide size for each image in the slider.
+// Usage: Used to specify the size of each slide containing the image in the slider and add other styles.
+// Note: This class carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
+.embla__slide--control-image {
+  // Adjust to change the width of the slide containing the image.
+  width: calc(
+    30% - 10px
+  );
+
+  // Keep the height of carousel the same as the rows in listings for visual consistency.
+  height: $listings-row-height; 
+
+  // border: solid 1px var(--shade-15);
+}
+
+// Wrapper for each individual image within the slides in the slider.
+// Applies spacing to the image.
+.control-image-wrapper {
+  @include apply-space("padding", -5, "y");
+
+  // @include apply-space("padding", -5, "x");
+}
+
+// Configurations for the images in each slide.
+.control-image {
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: $border-radius-md;
+
+  // When the image is hovered, increase the size of the image slightly.
+  &:hover {
+    @include apply-box-shadow("dark", 5);
+
+    transform: scale(1.05);
+  }
+
+  // When the image is clicked, reduce the size of the image slightly.
+  &:active {
+    transform: scale(1);
+  }
+}
+
+// ! Working =======================================^^^
+
+// ==============================
+// CONTROLLER: DETAILS CONTAINER
+// ==============================
+// Container for details, actions, and other information for the selected item (or item being created).
+// Contains sections used to display data or fields to update data or create a new item.
+// Applies flex column layout.
+.control__item-details {
+  @include apply-flex(column, center);
+
+  flex-grow: 1; // Expand to fill the remaining space.
+}
+
+// ==============================
+// CONTROLLER: ROW (INDIVIDUAL)
+// ==============================
+// Usage: Used to create a row layout for the data viewed or being inputted.
+// Applies specing and background color to the row.
+// Important: Ensure the use of existing --(modifier) to expand the styles for the specific item.
+// Example: .control__item-row--flex-row: Applies flex row layout to the row.
+[class^="control__item-row"] {
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", 0, "x");
+
+  background-color: var(--shade-1);
+
+  &:nth-child(odd) {
+    background-color: var(--shade-2);
+  }
+
+  // Mobile Mode: Apply opacity to the background color of the row.
+  @include respond-to("md") {
+    background-color: var(--opacity-shade-1);
+
+    &:nth-child(odd) {
+      background-color: var(--opacity-shade-2);
+    }
+  }
+}
+
+// Expands on the syles from the `.control__item-row` attribute selector.
+.control__item-row {
+  // Modifier: Applies flex row layout to the row.
+  &--flex-row {
+    @include apply-flex(row, start, center);
+    @include apply-space("gap", -5);
+  }
+
+  // Modifier: Applies grid layout to the row.
+  &--grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  // Modifier: Applies flex column layout to the row.
+  &--flex-col {
+    @include apply-flex(column, center, start);
+
+    // If there is a <p> tag in this row with an internal column layout, apply padding to the left (for indentation).
+    p {
+      @include apply-space("padding-left", 0);
+    }
+  }
+}
+
+// ==============================
+// CONTROLLER: CELLS (INDIVIDUAL)
+// ==============================
+// Useage: Used to specify a (individual) cell in a row.
+// Use with the `.control__item-row--grid` class to specify the cells in the row grid layout.
+// Applies spacing to the cell.
+.control__item-cell {
+  @include apply-space("padding", 0, "x");
+}
+
+// Usage: Used with the `.control__item-cell` to group related items in a cell.
+// You may use multiple groups in a cell to stack them on top of other groups
+// Applys spacing between related items within the group in the cell.
+// Example: "Price" and "Number".
+.control__item-group {
+  @include apply-flex(row, space-between, center);
+}
+
+// ==============================
+// CONTROLLER: UTILITIES
+// ==============================
+// Used to specify a label for a specific item being viewed, created, or modified.
+// Applies style, layout, typography, and spacing to the label.
+.control__item-label {
+  @include apply-flex(row, start, center);
+  @include apply-space("gap", -15);
+  @include set-typography("medium", 1, $base-line-height);
+
+  color: var(--shade-13);
+
+  // Mobile Mode: When background changes to transparent in mobile mode, lighten the font color for better visibility.
+  @include respond-to("md") {
+    color: var(--shade-20);
+  }
+}
+
+// Used to specify a value for a specific item being viewed, created, or modified.
+// Applies typography settings to the value (font-size, line-height, and font-weight).
+// Important: Ensure the use of --(modifier) to expand the styles for the specific item.
+[class^="control__item-value"] {
+  @include set-typography("medium", 1, $base-line-height);
+}
+
+// Expands on the syles from the `.control__item-value` attribute selector.
+.control__item-value {
+  // If there is no value, display in red. Example: "Category": "None Selected".
+  &--danger {
+    color: var(--err-btn-light);
+  }
+}
+
+// Used to select icons within the `control__item-value` class.
+// Applies layout, font-size, line-height, and color to the icon.
+.control__item-value svg {
+  @include apply-flex(row, center, center);
+  @include set-typography("bold", 2, $base-line-height);
+
+  filter: drop-shadow(0 0 5px var(--shade-1));
+
+  // If the value is a boolean "true" display in green.
+  &[data-boolean="true"] {
+    color: var(--success);
+  }
+
+  // If the value is a boolean "false" display in red.
+  &[data-boolean="false"] {
+    color: var(--danger);
+  }
+}
+
+// ==============================
+// CONTROLLER: BUTTONS
+// ==============================
+// Button to navigate back to the previous page.
+// Applies position, font-size, color, and transition to the button.
+.control__back-btn {
+  @include apply-position(
+    fixed,
+    $top: halved-modular-scale(0),
+    $left: halved-modular-scale(0)
+  );
+
+  font-size: modular-scale(4);
+  color: var(--shade-20);
+  transition: all 0.3s ease-out;
+  filter: drop-shadow(0 0 1px var(--always-dark));
+
+  &:hover {
+    color: var(--selection);
+  }
+}

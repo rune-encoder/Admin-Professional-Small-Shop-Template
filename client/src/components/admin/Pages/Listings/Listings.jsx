@@ -28,7 +28,7 @@ export function Listings({ children }) {
   return (
     <>
       <div className="admin-page--wrapper">
-        <div className="details--wrapper" data-boolean={dataBoolean}>
+        <div className="control-item--wrapper" data-boolean={dataBoolean}>
           {productMode === "view" && <ViewProduct />}
           {productMode === "update" && <UpdateProduct />}
           {productMode === "create" && <CreateProduct />}

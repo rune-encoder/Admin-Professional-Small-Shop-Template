@@ -19,9 +19,9 @@
 }
 
 // PRODUCT: ITEM-CELL SLIDE SIZES
-// Applys changes to the varialbe slide size for each product cell.
+// Applys changes to the variable slide size for each product cell.
 // Usage: Used to specify the size of each cell in the row and add other styles.
-// Note: This attribute selector carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
+// Note: This class carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
 // Note: Used in conjunction with `.item-cell` from `listings.scss`.
 .embla__slide--product {
   &:nth-child(1) {

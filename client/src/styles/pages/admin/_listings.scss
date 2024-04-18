@@ -75,11 +75,31 @@ $listings-row-width: 100%;
   @include apply-space("padding", -5, "x");
 }
 
+// Usage: If content within a cell contains more than one item...
+// or more than one group `.item-group`...
+// Use to wrap content within a cell and provide spacing between the items to separate them.
+.item-wrapper {
+  @include apply-flex(column, space-between, start);
+
+  height: 100%;
+}
+
 // ==============================
 // LIST: UTILITIES
 // ==============================
+// Used to specify a label for a item in a cell.
+// Usage: Item label must have a Icon and Name.
+// Applies style, layout and typography of the icon and name.
+.item-label {
+  @include apply-flex(row, start, center);
+  @include apply-space("gap", -15);
+  @include set-typography("normal", -1, $base-line-height);
+
+  color: var(--shade-13);
+}
+
 // Used to specify a value of a item in a cell.
-// Applys padding to the left of the value for indentation.
+// Applies padding to the left of the value for indentation.
 // Important: Ensure the use of --(modifier) to expand the styles for the specific item.
 // Example: .item-value--subtle { color: var(--shade-13); }
 [class^="item-value"] {
@@ -87,7 +107,6 @@ $listings-row-width: 100%;
 
   @include respond-to("sm") {
     @include set-typography("normal", 0, $compact-line-height);
-
   }
 }
 
@@ -99,23 +118,4 @@ $listings-row-width: 100%;
 
     color: var(--shade-13);
   }
-}
-
-// Used to specify a label for a item in a cell.
-// Usage: Item label must have a Icon and Name.
-// Applys style, layout and typography of the icon and name.
-.item-label {
-  @include apply-flex(row, start, center);
-  @include apply-space("gap", -15);
-  @include set-typography("normal", -1, $base-line-height);
-
-  color: var(--shade-13);
-}
-
-// Usage: If content within a call contains more than one item...
-// Use to wrap content within a cell and provide spacing between the items.
-.item-wrapper {
-  @include apply-flex(column, space-between, start);
-
-  height: 100%;
 }
