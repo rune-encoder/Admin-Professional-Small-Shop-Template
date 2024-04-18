@@ -1,1 +1,5 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9j86O2YOHY0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Admin Template Preview Video
+
+Click on the image below to watch the video preview of the project:
+
+[![Admin Template Preview Video](https://img.youtube.com/vi/9j86O2YOHY0/0.jpg)](https://www.youtube.com/watch?v=9j86O2YOHY0)
