@@ -77,7 +77,7 @@ $form__input--width: rem(125px);
 // Note: This class carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
 .embla__slide--control-image {
   // Adjust to change the width of the slide containing the image.
-  width: calc(35% - 10px);
+  width: calc(35% - 20px);
 
   // Keep the height of carousel the same as the rows in listings for visual consistency.
   height: $listings-row-height;
