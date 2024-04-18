@@ -1,7 +1,7 @@
 # Admin-Professional-Small-Shop-Template [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <br> <p align="center">
-[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://handlebarsjs.com/)
+[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://www.w3schools.com/html/)
 [![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/Overview.en.html)
 [![SASS](https://img.shields.io/badge/Sass-CC6699.svg?style=for-the-badge&logo=Sass&logoColor=white)](https://sass-lang.com/documentation/)
 [![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
@@ -26,16 +26,19 @@
 
 ## Description
 
-Admin-Professional-Small-Shop-Template is a comprehensive front-end web application template designed for hobby crafters, creative project creators, or small business owners who manufacture and sell products. It features an administrative login that enables admins to efficiently manage their inventory and orders on-the-go, particularly catering to mobile users to ensure seamless management directly from a smartphone. These changes will immediately reflect on the presented main shop or hobbist website where clients can see any updates immediately.
+Admin Professional Small Shop Template is a comprehensive front-end web application template designed for hobby crafters, creative project creators, or small business owners who manufacture and sell products.
+
+It features an administrative login that enables admins to efficiently manage their inventory and orders on-the-go, particularly catering to mobile users to ensure seamless management directly from a smartphone. Updates are immediately reflected on the presented main shop or hobbyist website where clients can see any updates immediately.
 
 ## Table of Contents
 
 - [User Story](#user-story)
 - [Technologies Used](#technologies-used)
-- [Usage](#usage)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Detailed Usage Instructions](#detailed-usage-instructions)
 - [Contribution](#contribution)
 - [License](#license)
-- [Screenshots](#screenshots)
 
 ## User Story
 
@@ -56,65 +59,120 @@ The project leverages the following technologies:
 - **Styling:** SASS, Vite
 - **Development Tools:** ESLint, Stylelint, Nodemon, concurrently
 
-## Usage
+## Features
 
-To properly set up and start using the Admin-Professional-Small-Shop-Template, follow these detailed steps:
+This template is designed to provide a comprehensive suite of tools for small shop administrators and hobby crafters. Here are some of the key features that make managing your online shop efficient and user-friendly:
 
-### 1. Prerequisites
+### Complete Management of Products and Categories
 
-- **MongoDB Installed:** Ensure you have **MongoDB** installed and running on your system. If you don't have MongoDB installed, you can download it from the official MongoDB website or use a MongoDB cloud service like MongoDB Atlas.
-  [**Get started with MongoDB**](https://www.mongodb.com/try/download/community)
+- **Full CRUD Capabilities**: Create, Read, Update, and Delete (CRUD) functionalities for products and categories. Changes made in the admin portal are immediately reflected on the shop site, keeping your product listings and categories up-to-date in real-time.
 
-- **Cloudinary Account:** You will need to set up a cloudinary account to use the upload and delete images feature, Sign up for a free Cloudinary account. Once registered, you will receive the credentials needed to configure your environment variables.  
-  [**Get started with Cloudinary**](https://cloudinary.com/)
+### Advanced Admin Control
 
-### 2. Clone the repository
+- **Admin Management**: If you are designated as the owner, you can manage other admin roles, adjusting their privileges as necessary. This feature allows for the tailored distribution of responsibilities among team members.
 
-Clone the repository to your local machine using the following command:
+### Order Tracking and Management
 
-```bash
-git clone [https://github.com/rune-encoder/Admin-Professional-Small-Shop-Template]
-```
+- **Order Status Updates**: View and modify the status of orders with options such as pending, completed, and canceled. This allows for meticulous management of order processing from a single dashboard.
 
-### 3. Install dependencies:
+### Enhanced Data Interaction Tools
 
-- From your `root` directory, run `npm install`.
-- Navigate to the `server` directory and run `npm install`.
-- Navigate to the `client` directory and perform the same operation.
-- Ensure you have a `package-log.json` file on your `root`, `client`, and `server` directory after installation to verify that all dependencies have been correctly installed.
+- **Dynamic Data Tools**: Leverage powerful filtering, sorting, and viewing capabilities to manage large sets of data efficiently. These tools are integrated with state management solutions to ensure a responsive and seamless user experience.
 
-### 4. Seed the database with test data:
+### Analytics
 
-_Note: Ensure MongoDB is installed..._
+- **Traffic and Engagement Metrics**: Gain insights into your shop's performance with analytics features. Track how many people visit your site and view specific products, enabling data-driven decisions to boost engagement and sales.
 
-- To seed the database, run `npm run seed` from the `root` directory.
+These features are designed to enhance the functionality and usability of your online presence, ensuring you have the tools you need to manage your business effectively.
 
-### 5. Set up a `.env` file for Cloudinary and JWT Secret:
+## Quick Start Guide
 
-- You will need a `.env` file in the `root` directory to have access to upload or delete images in the cloudinary API.
-- You will need the cloudinary id, cloudinary api key, and cloudinary api secret. Remember to keep sensitive information safe and private.
-- For the JWT Secret that is any string you intend to use as the secret for JWT.
-- The `.env` file should look like this.
+Follow these steps to quickly set up and start using the Admin Template:
 
-```
-CLOUD_NAME=CLOUDINARY_ID_VALUE
-CLOUD_API_KEY=API_KEY_VALUE
-CLOUD_API_SECRET=API_SECRET_VALUE
-JWT_SECRET=JWT_SECRET_VALUE
-```
+### Prerequisites
 
-### 5. Start the development server:
+- Ensure **MongoDB** is installed and running on your system. [Get started with MongoDB](https://www.mongodb.com/try/download/community).
+- Sign up for a **Cloudinary** account to manage image uploads. [Get started with Cloudinary](https://cloudinary.com/).
 
-- Using `npm run dev` which concurrently runs both backend and frontend developments servers.
+### Setup
 
-### 6. Login:
+1. **Clone the repository:**
 
-- In the seeded data there are preset admin users.
-- They each have different privilages and access.
-- Usernames are `owner`, `manager`, `editor`, and `viewer`.
-- Default passwords for all seeded test users is `password1234`
+   ```bash
+   git clone https://github.com/rune-encoder/Admin-Professional-Small-Shop-Template
+   ```
 
-This setup will allow you to make changes to the template and see updates in real-time, facilitating development and customization of the shop to your needs.
+2. **Install Dependencies:**
+   Run `npm install` in the `root`, `server`, and `client` directories.
+
+3. **Configure Environment:**
+   Create a `.env` file in the `root` directory with the following:
+
+   ```
+   CLOUD_NAME=Cloudinary_ID_VALUE
+   CLOUD_API_KEY=API_KEY_VALUE
+   CLOUD_API_SECRET=API_SECRET_VALUE
+   JWT_SECRET=JWT_SECRET_VALUE
+   ```
+
+4. **Set Up Cloudinary:**
+   Navigate to the Cloudinary dashboard and **create an upload preset named Shop-Template** under the settings.
+
+5. **Seed the Database:**
+   Run `npm run seed` from the `root` directory to populate your database with initial data.
+
+6. **Start the Server:**
+   Execute `npm run dev` to start both backend and frontend servers concurrently.
+
+7. **Log In:**
+   Use predefined credentials such as _owner_, _manager_, _editor_ or _viewer_ with the password _password1234_ to access different admin roles.
+
+## Detailed Usage Instructions
+
+For those who need more detailed guidance or want to understand the setup process more deeply, this section provides comprehensive instructions and additional context on setting up and using the Admin Template.
+
+### Prerequisites Details
+
+Ensure you have **MongoDB** installed and operational, as it is crucial for database operations:
+
+- [Download MongoDB here](https://www.mongodb.com/try/download/community) if it's not installed.
+- Alternatively, you can use MongoDB Atlas for a cloud-based solution, which simplifies some of the local setup requirements.
+
+Setting up a **Cloudinary** account is essential for handling image uploads:
+
+- [Sign up for Cloudinary](https://cloudinary.com/) to obtain the necessary API credentials.
+- This account will manage all media uploads, crucial for product and category images.
+
+### Cloudinary Setup Details
+
+To manage and organize photos uploaded to Cloudinary effectively, it's essential to set up an upload preset. This preset helps keep your project's media files organized, especially if you use Cloudinary for multiple projects. Follow these steps to create an upload preset named "Shop-Template" which the application requires for proper integration:
+
+#### Steps to Create an Upload Preset in Cloudinary:
+
+1. **Log In to Your Cloudinary Account:**
+
+   - Navigate to the Cloudinary dashboard.
+
+2. **Access Settings:**
+
+   - Find the **_Settings_** option, typically located at the bottom left side of the sidebar.
+
+3. **Navigate to the Upload Tab:**
+
+   - Click on the **_Upload_** tab within the Settings menu.
+
+4. **Create the Upload Preset:**
+
+   - Scroll down to the **_Upload Presets_** section and click on **_Add Upload Preset_**.
+
+5. **Configure Your Upload Preset:**
+
+   - In the **_Upload preset name_** field, enter `Shop-Template`.
+   - Set the **_Folder_** name to `Shop-Template` to ensure all uploaded files go into this specific directory.
+   - Leave all other settings at their default values unless specific changes are required for your project.
+
+6. **Save the Preset:**
+   - Click **Save** to finalize the creation of your upload preset.
 
 ## Contribution
 
@@ -124,5 +182,3 @@ Contributions are welcome! Please fork the repository and open a pull request wi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 **The MIT License:** Please refer to the LICENSE in the repository for more details.
-
-## Screenshots
