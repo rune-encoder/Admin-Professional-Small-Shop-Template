@@ -1,3 +1,1 @@
-<video src="client/public/assets/Preview-Admin-Template.mp4" controls="controls" style="max-width: 720px;">
-  Your browser does not support the video tag.
-</video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9j86O2YOHY0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
