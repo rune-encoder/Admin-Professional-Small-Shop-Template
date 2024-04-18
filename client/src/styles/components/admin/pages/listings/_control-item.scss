@@ -1,3 +1,6 @@
+$preview-image-height: rem(300px);
+$form__input--width: rem(125px);
+
 // ==============================
 // CONTROLLER: CONTAINER
 // ==============================
@@ -19,8 +22,7 @@
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -5, "x");
 
-  // !Revisit: Make to a variable
-  height: rem(300px);
+  height: $preview-image-height;
 }
 
 .preview-image {
@@ -75,12 +77,10 @@
 // Note: This class carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
 .embla__slide--control-image {
   // Adjust to change the width of the slide containing the image.
-  width: calc(
-    35% - 10px
-  );
+  width: calc(35% - 10px);
 
   // Keep the height of carousel the same as the rows in listings for visual consistency.
-  height: $listings-row-height; 
+  height: $listings-row-height;
 }
 
 // Wrapper for each individual image within the slides in the slider.
@@ -210,7 +210,7 @@
 
   // Mobile Mode: When background changes to transparent in mobile mode, lighten the font color for better visibility.
   @include respond-to("md") {
-    color: var(--shade-20);
+    color: var(--shade-22);
   }
 }
 
@@ -248,6 +248,50 @@
   }
 }
 
+// ! Working ====================================vvv
+
+.control__item-row {
+  &--flex-row-space {
+    @include apply-flex(row, space-between, center);
+  }
+
+  &--grid-100 {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
+.control__item-cell {
+  // border: solid 1px red;
+}
+
+input.control__item-value,
+select.control__item-value,
+textarea.control__item-value {
+  @extend %form-input--style;
+}
+
+.control__item-value[type="text"],
+select.control__item-value {
+  min-width: $form__input--width;
+  max-width: calc($form__input--width * 1.5);
+}
+
+.control__item-value[type="number"] {
+  min-width: 0;
+  max-width: $form__input--width;
+}
+
+textarea.control__item-value {
+  @include apply-font-family("roboto");
+
+  resize: none;
+  width: 100%;
+  min-height: calc($listings-row-height * 2);
+}
+
+// ! Working ====================================^^^
+
 // ==============================
 // CONTROLLER: BUTTONS
 // ==============================
@@ -268,7 +312,7 @@
 
   &:hover {
     @include apply-border("selection", 20px);
-    
+
     filter: drop-shadow(0 0 1px var(--shade-13));
     color: var(--selection);
   }

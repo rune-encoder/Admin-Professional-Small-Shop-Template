@@ -1,5 +1,5 @@
 // !Important =======================================
-// !Revisit: Important Layout Structure. 
+// !Revisit: Important Layout Structure.
 // !Important =======================================
 
 // WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
@@ -14,24 +14,23 @@
   // Inner container
   &__inner {
     @include apply-flex(row);
-
-    // overflow: hidden;
-
+    
     flex-grow: 1; // Expand to fill available space
-
+    
     // Inner content container for mobile.
     @include respond-to("md") {
       @include apply-flex(column-reverse);
     }
-
+    
+    // overflow: hidden;
     // border: solid green   1px;
   }
 
   &__main {
     flex-grow: 1; // Expand to fill available space
-    // overflow-y: auto;
     height: 100%;
-
+    
+    // overflow-y: auto;
     // border: solid red 1px;
   }
 }
@@ -39,18 +38,16 @@
 // ! Revisit: Not in the correct location (admin-page--wrapper)
 .admin-page--wrapper {
   @include apply-font-family("roboto");
-
   @include apply-flex(column);
-  // @include apply-space("padding", 1, "x");
-
-  //   position: relative;
-  //   height: 100%;
-
-  //   border: solid 1px rgb(11, 40, 133);
 
   @media screen and (min-width: 992px) {
     @include apply-flex(row, space-between, flex-start);
   }
+
+  // @include apply-space("padding", 1, "x");
+  //   position: relative;
+  //   height: 100%;
+  //   border: solid 1px rgb(11, 40, 133);
 }
 
 // ! Revisit: Fix media querys IMPORTANT
@@ -60,7 +57,6 @@
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-
   width: 50%;
   height: calc(100 * var(--vh) - #{$header-height});
 
@@ -70,8 +66,8 @@
 
   @include respond-to("md") {
     @include apply-glass-effect("opacity-light", 25px);
-    width: 100%;
 
+    width: 100%;
     height: calc(100 * var(--vh) - #{$header-height} - #{$sidebar-height});
   }
 }
@@ -81,12 +77,8 @@
 .control-item--wrapper {
   display: none;
   width: 50%;
-
-  // border: solid 1px rgb(153, 159, 179);
-
   overflow-y: auto;
   overflow-x: hidden;
-
   background-color: var(--shade-3);
   height: calc(100 * var(--vh) - #{$header-height});
 
@@ -109,6 +101,8 @@
     );
     width: 100%;
   }
+
+  // border: solid 1px rgb(153, 159, 179);
 }
 
 //   ! Important =======================================

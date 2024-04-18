@@ -242,7 +242,7 @@ export function CreateProduct() {
 
       {/* Product Data */}
       <form className="control__item-details" onSubmit={handleSubmit}>
-        <section className="control__item-row--flex-row">
+        <section className="control__item-row--flex-row-space">
           <label className="control__item-label">
             <MdOutlineShoppingCart /> Product:
           </label>
@@ -257,7 +257,7 @@ export function CreateProduct() {
           />
         </section>
 
-        <section className="control__item-row--flex-row">
+        <section className="control__item-row--flex-row-space">
           <label className="control__item-label">
             <MdOutlineCategory /> Category:
           </label>
@@ -277,7 +277,7 @@ export function CreateProduct() {
           </select>
         </section>
 
-        <section className="control__item-row--grid">
+        <section className="control__item-row--grid-100">
           <div className="control__item-cell">
             <div className="control__item-group">
               <label className="control__item-label">Price:</label>
