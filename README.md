@@ -24,6 +24,8 @@
 
 </p>
 
+> **Note: Please note, as the project is in the alpha stage, features are being updated regularly**.
+
 ## Description
 
 Admin Professional Small Shop Template is a comprehensive front-end web application template designed for hobby crafters, creative project creators, or small business owners who manufacture and sell products.
