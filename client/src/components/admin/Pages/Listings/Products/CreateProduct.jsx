@@ -1,8 +1,12 @@
 // Import React Hooks
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
+
+// Import Custom Hooks
+import { useImageHandler } from "../../../../../hooks/useImageHandler";
+import { useFormState } from "../../../../../hooks/useFormState";
 
 // Import Redux Selectors
 import {
@@ -20,10 +24,8 @@ import {
 } from "../../../../../features/products/productThunks";
 
 // Import Components
-import ImagePreview from "../../../../window/ImagePreview";
-
-// Import Embla Carousel
-import useEmblaCarousel from "embla-carousel-react";
+import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
+import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
@@ -32,10 +34,18 @@ import { IoArrowBack } from "react-icons/io5";
 
 export function CreateProduct() {
   // ==============================
-  // useState Hooks Section
+  // Custom Hooks Section
   // ==============================
-  // Initialize formState with empty values
-  const [formState, setFormState] = useState({
+  const {
+    selectedImages,
+    displayImage,
+    setDisplayImage,
+    setSelectedImages,
+    handleImageChange,
+  } = useImageHandler();
+
+  const { formState, setFormState, handleInputChange } = useFormState({
+    // Initialize formState with empty values
     name: "",
     category: "",
     price: 0,
@@ -44,17 +54,6 @@ export function CreateProduct() {
     shortDescription: "",
     details: "",
   });
-
-  // !WORKING: ===================================
-  // Initialize selectedImages with an empty array. This will hold the data URLs of the images uploaded.
-  const [selectedImages, setSelectedImages] = useState([]);
-
-  // Initialize displayImage with null. This will hold the data URL of the image displayed.
-  const [displayImage, setDisplayImage] = useState(null);
-
-  // ! Revisit: Use loading spinner for uploading state.
-  const [uploading, setUploading] = useState(false);
-  // !WORKING: ===================================
 
   // ==============================
   // useSelector Hooks Section
@@ -77,82 +76,8 @@ export function CreateProduct() {
   }, [dispatch]);
 
   // ==============================
-  // useEmblaCarousel Hooks Section
-  // ==============================
-  const [emblaRef] = useEmblaCarousel({
-    loop: false,
-    dragFree: false,
-    containScroll: "trimSnaps",
-  });
-
-  // ==============================
   // Event Handlers Section
   // ==============================
-  // !WORKING: ===================================
-  const handleImageChange = async (e) => {
-    // Create a new array from the files (or file) selected.
-    const newFiles = Array.from(e.target.files);
-
-    // Create a new promise for the images (or image) to be read.
-    const newImages = newFiles.map((file) => {
-      return new Promise((resolve, reject) => {
-        // Create new instance of the file reader API
-        const reader = new FileReader();
-
-        // Event handler called when the read operation is completed.
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-
-        // Event handler is called when an error occurs while reading the files (or file)
-        // If there is an error, the promise is rejected.
-        reader.onerror = reject;
-
-        // Read the files (or file) and convert them to a data URL.
-        reader.readAsDataURL(file);
-      });
-    });
-
-    try {
-      // Wait for all the images (or image) to settle.
-      // If fulfilled, the array of data URLs is assigned to newDataUrls.
-      const newDataUrls = await Promise.all(newImages);
-
-      // Add the new data URLs to the state of selectedImages array.
-      setSelectedImages((prevImages) => [...prevImages, ...newDataUrls]);
-
-      // Set the displayed image to the first image file uploaded
-      // Note: Noticable when multiple files are uploaded at once.
-      setDisplayImage(newDataUrls[0]);
-    } catch (error) {
-      // If rejected, an error message is logged to the console.
-      console.error("Error reading image files:", error);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    const { name, type, checked, value } = event.target;
-    let newValue;
-
-    if (type === "checkbox") {
-      // Checkbox values are boolean
-      newValue = checked;
-    } else if (name === "price") {
-      // Round the price to 2 decimal places
-      newValue = parseFloat(parseFloat(value).toFixed(2));
-    } else if (name === "quantity") {
-      // Whole numbers only
-      newValue = parseInt(value, 10);
-    } else {
-      newValue = value;
-    }
-
-    setFormState({
-      ...formState,
-      [name]: newValue,
-    });
-  };
-
   const handleSubmit = async (event) => {
     // Prevent the form from refreshing the page
     event.preventDefault();
@@ -199,33 +124,13 @@ export function CreateProduct() {
       </button>
 
       {/* Primary Product Image */}
-      <section className="preview-image-wrapper">
-        {displayImage && (
-          <img
-            className="preview-image"
-            src={displayImage}
-            alt={`View of selected image for the product ${formState.name}`}
-          ></img>
-        )}
-      </section>
+      <ImagePreview displayImage={displayImage} />
 
       {/* Product Images Carousel */}
-      <section className="embla__control-images" ref={emblaRef}>
-        <div className="embla__container">
-          {selectedImages.map((image, index) => (
-            <div className="embla__slide--control-image" key={index}>
-              <div className="control-image-wrapper">
-                <img
-                  className="control-image"
-                  src={image}
-                  alt={`Selected image ${index}`}
-                  onClick={() => setDisplayImage(image)}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ImagesCarousel
+        selectedImages={selectedImages}
+        setDisplayImage={setDisplayImage}
+      />
 
       <section className="choose-file__container">
         <input

@@ -32,6 +32,7 @@ export function Listings({ children }) {
           {productMode === "view" && <ViewProduct />}
           {productMode === "update" && <UpdateProduct />}
           {productMode === "create" && <CreateProduct />}
+
         </div>
 
 
