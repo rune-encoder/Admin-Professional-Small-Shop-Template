@@ -20,7 +20,7 @@ import {
 } from "../../../../../features/products/productThunks";
 
 // Import Components
-import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
+import { DisplayImage } from "./ImagePreview";
 import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
 
 // Import React Icons
@@ -32,7 +32,10 @@ import { useImageHandler } from "../../../../../hooks/useImageHandler";
 
 import { useFormState } from "../../../../../hooks/useFormState";
 
+import { selectProductMode } from "../../../../../features/products/productSelectors";
+
 export function CreateProduct() {
+  const productMode = useSelector(selectProductMode);
 
   const {
     selectedImages,
@@ -52,7 +55,6 @@ export function CreateProduct() {
     shortDescription: "",
     details: "",
   });
-
 
   // !WORKING: ===================================
 
@@ -127,10 +129,13 @@ export function CreateProduct() {
       </button>
 
       {/* Primary Product Image */}
-      <ImagePreview displayImage={displayImage} />
+      <DisplayImage displayImage={displayImage} />
 
       {/* Product Images Carousel */}
-      <ImagesCarousel selectedImages={selectedImages} setDisplayImage={setDisplayImage} />
+      <ImagesCarousel
+        selectedImages={selectedImages}
+        setDisplayImage={setDisplayImage}
+      />
 
       <section className="choose-file__container">
         <input

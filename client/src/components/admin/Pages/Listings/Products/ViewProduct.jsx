@@ -20,6 +20,10 @@ import {
 import { IoArrowBack } from "react-icons/io5";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
+// Import Components
+import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
+import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
+
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -65,32 +69,12 @@ export function ViewProduct() {
       </button>
 
       {/* Primary Product Image */}
-      <section className="preview-image-wrapper">
-        <img
-          className="preview-image"
-          data-cloudinary-id={displayImage._id}
-          src={displayImage.url}
-          alt={`Selected image for ${selectedProduct.name}`}
-        ></img>
-      </section>
+
+      <ImagePreview displayImage={displayImage} />
 
       {/* Product Images Carousel */}
-      <section className="embla__control-images" ref={emblaRef}>
-        <div className="embla__container">
-          {selectedProduct.image.map((image, index) => (
-            <div className="embla__slide--control-image" key={image.cloudinaryId}>
-              <div className="control-image-wrapper">
-                <img
-                  className="control-image"
-                  src={image.url}
-                  alt={`Selected image ${index}`}
-                  onClick={() => setDisplayImage(image)}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ImagesCarousel selectedImages={selectedProduct.image} setDisplayImage={setDisplayImage} />
+
 
       {/* Product Data */}
       <section className="control__item-details">

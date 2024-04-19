@@ -25,7 +25,8 @@ import {
 } from "../../../../../features/products/productThunks";
 
 // Import Components
-import ImagePreview from "../../../../window/ImagePreview";
+import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
+import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
 
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
@@ -187,8 +188,6 @@ export function UpdateProduct() {
         const file = e.target.files[0];
 
         if (file) {
-          setUploading(true);
-
           // Create a new promise for the image to be read.
           const newDataUrl = await new Promise((resolve, reject) => {
             // Create a new instance of the file reader API
@@ -226,8 +225,6 @@ export function UpdateProduct() {
               }
             })
           );
-
-          setUploading(false);
         }
       };
 
@@ -235,7 +232,6 @@ export function UpdateProduct() {
       fileInput.click();
     } catch (error) {
       console.error("Error updating image:", error);
-      setUploading(false);
     }
   };
 
@@ -301,43 +297,13 @@ export function UpdateProduct() {
       </button>
 
       {/* Primary Product Image */}
-      <section className="preview-image-wrapper">
-        {displayImage && (
-          <img
-            className="preview-image"
-            data-cloudinary-id={displayImage.cloudinaryId}
-            src={displayImage.dataURL ? displayImage.dataURL : displayImage.url}
-            alt={`Selected image for ${selectedProduct.name}`}
-          ></img>
-        )}
-      </section>
+      <ImagePreview
+        displayImage={displayImage}
+        selectedProduct={selectedProduct}
+      />
 
       {/* Product Images Carousel */}
-      <section className="embla__control-images" ref={emblaRef}>
-        <div className="embla__container">
-          {selectedImages.map((image, index) => (
-            <div className="embla__slide--control-image" key={image._id}>
-              <div className="control-image-wrapper">
-                <img
-                  className="control-image"
-                  src={image.dataURL ? image.dataURL : image.url}
-                  alt={`Selected image ${index}`}
-                  onClick={() => setDisplayImage(image)}
-                />
-              </div>
-
-              <button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  handleImageUpdate(index);
-                }}
-              >
-                Update
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ImagesCarousel selectedImages={selectedImages} setDisplayImage={setDisplayImage} handleImageUpdate={handleImageUpdate}/>
 
       {/* Product Data */}
       <form className="control__item-details" onSubmit={handleSubmit}>
