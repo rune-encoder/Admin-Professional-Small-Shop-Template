@@ -4,6 +4,10 @@ import { useEffect } from "react";
 // Import Redux Hooks
 import { useSelector, useDispatch } from "react-redux";
 
+// Import Custom Hooks
+import { useImageHandler } from "../../../../../hooks/useImageHandler";
+import { useFormState } from "../../../../../hooks/useFormState";
+
 // Import Redux Selectors
 import {
   selectGetCategories,
@@ -28,12 +32,10 @@ import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 import { BsSave } from "react-icons/bs";
 import { IoArrowBack } from "react-icons/io5";
 
-import { useImageHandler } from "../../../../../hooks/useImageHandler";
-
-import { useFormState } from "../../../../../hooks/useFormState";
-
 export function CreateProduct() {
-
+  // ==============================
+  // Custom Hooks Section
+  // ==============================
   const {
     selectedImages,
     displayImage,
@@ -52,9 +54,6 @@ export function CreateProduct() {
     shortDescription: "",
     details: "",
   });
-
-
-  // !WORKING: ===================================
 
   // ==============================
   // useSelector Hooks Section
@@ -79,8 +78,6 @@ export function CreateProduct() {
   // ==============================
   // Event Handlers Section
   // ==============================
-  // !WORKING: ===================================
-
   const handleSubmit = async (event) => {
     // Prevent the form from refreshing the page
     event.preventDefault();
@@ -130,7 +127,10 @@ export function CreateProduct() {
       <ImagePreview displayImage={displayImage} />
 
       {/* Product Images Carousel */}
-      <ImagesCarousel selectedImages={selectedImages} setDisplayImage={setDisplayImage} />
+      <ImagesCarousel
+        selectedImages={selectedImages}
+        setDisplayImage={setDisplayImage}
+      />
 
       <section className="choose-file__container">
         <input

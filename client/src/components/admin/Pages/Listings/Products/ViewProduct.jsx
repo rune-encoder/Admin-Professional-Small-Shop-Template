@@ -24,9 +24,6 @@ import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
 import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
 
-// Import Embla Carousel
-import useEmblaCarousel from "embla-carousel-react";
-
 export function ViewProduct() {
   // ==============================
   // useSelector Hooks Section
@@ -42,15 +39,6 @@ export function ViewProduct() {
   // useDispatch Hooks Section
   // ==============================
   const dispatch = useDispatch();
-
-  // ==============================
-  // useEmblaCarousel Hooks Section
-  // ==============================
-  const [emblaRef] = useEmblaCarousel({
-    loop: false,
-    dragFree: false,
-    containScroll: "trimSnaps",
-  });
 
   //   !Revisit: Error Handling
   if (!selectedProduct) {
