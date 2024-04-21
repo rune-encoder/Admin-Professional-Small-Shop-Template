@@ -90,7 +90,7 @@ export function ProductControl() {
     dispatch(getCategories());
   }, [dispatch]);
 
-  // Effect for handling selected product
+  // Effect for handling if the product is selected and the product mode is "update"
   useEffect(() => {
     if (selectedProduct && productMode === "update") {
       setSelectedImages(selectedProduct.image);
@@ -107,7 +107,7 @@ export function ProductControl() {
     }
   }, [selectedProduct]);
 
-  // Submit Handler
+  // Handles form submission for creating a new product
   const handleCreateSubmit = async (event) => {
     // Prevent the form from refreshing the page
     event.preventDefault();
@@ -136,6 +136,7 @@ export function ProductControl() {
     setDisplayImage(null);
   };
 
+  // Handles form submission for updating an existing product
   const handleUpdateSubmit = async (event) => {
     // Prevent the form from refreshing the page
     event.preventDefault();
