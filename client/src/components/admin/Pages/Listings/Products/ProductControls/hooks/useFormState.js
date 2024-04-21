@@ -1,8 +1,13 @@
+// Summary: This hook is used to manage the state of a form. 
+// It includes a function to handle input changes and a state to manage the form state.
+
 import { useState } from "react";
 
 export const useFormState = (initialState) => {
+  // Initialize the form state with the initial state.
   const [formState, setFormState] = useState(initialState);
 
+  // Handle input changes
   const handleInputChange = (event) => {
     const { name, type, checked, value } = event.target;
     let newValue;
@@ -20,6 +25,7 @@ export const useFormState = (initialState) => {
       newValue = value;
     }
 
+    // Update the form state with the new value
     setFormState({
       ...formState,
       [name]: newValue,

@@ -5,22 +5,22 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 // Import Custom Hooks
-import { useCategoryAction } from "../../../../../hooks/useAction";
+import { useCategoryAction } from "./hooks/useCategoryAction";
 
 // Import Redux Actions
-import { setCategoryMode } from "../../../../../features/categories/categorySlice";
+import { setCategoryMode } from "../../../../../../features/categories/categorySlice";
 
 // Import Redux Thunks
-import { createCategory } from "../../../../../features/categories/categoryThunks";
+import { createCategory } from "../../../../../../features/categories/categoryThunks";
 
 // Import Components
-import { ActionButtons } from "../../../Tools";
+import { ActionButtons } from "../../../../Tools";
 
 // Import React Icons
 import { MdOutlineCategory } from "react-icons/md";
 
 // COMPONENT: ROW TO CREATE A NEW CATEGORY
-export function CreateCategory({ formState, setFormState }) {
+export function CategoryCreate({ formState, setFormState }) {
   // ==============================
   // Custom Hooks Section
   // ==============================

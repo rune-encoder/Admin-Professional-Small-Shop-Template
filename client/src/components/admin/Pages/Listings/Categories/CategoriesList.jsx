@@ -23,7 +23,7 @@ import { filterCategories } from "../../../../../utils/helpers/categories/filter
 import { sortCategories } from "../../../../../utils/helpers/categories/sort";
 
 // Import Components
-import { CreateCategory } from "./CreateCategory";
+import { CreateCategory } from "./CategoryControls/CategoryCreate";
 import { CategoryRow } from "./CategoryRow";
 
 export function CategoriesList() {

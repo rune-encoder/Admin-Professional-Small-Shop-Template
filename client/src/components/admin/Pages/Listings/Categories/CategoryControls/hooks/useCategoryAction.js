@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { getCategories } from "../features/categories/categoryThunks";
+import { getCategories } from "../../../../../../../features/categories/categoryThunks";
 
 // Custom hook for handling category actions.
 // Used with the createCategory, updateCategory, and deleteCategory thunks.
