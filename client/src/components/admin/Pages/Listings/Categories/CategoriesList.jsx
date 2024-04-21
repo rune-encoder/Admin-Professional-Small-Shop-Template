@@ -23,7 +23,7 @@ import { filterCategories } from "../../../../../utils/helpers/categories/filter
 import { sortCategories } from "../../../../../utils/helpers/categories/sort";
 
 // Import Components
-import { CreateCategory } from "./CategoryControls/CategoryCreate";
+import { CategoryCreate } from "./CategoryControls/CategoryCreate";
 import { CategoryRow } from "./CategoryRow";
 
 export function CategoriesList() {
@@ -65,7 +65,7 @@ export function CategoriesList() {
   return (
     <div className="listings">
       {categoryMode === "create" && (
-        <CreateCategory formState={formState} setFormState={setFormState} />
+        <CategoryCreate formState={formState} setFormState={setFormState} />
       )}
 
       {sortedCategories.map((category) => (
