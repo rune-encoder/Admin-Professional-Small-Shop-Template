@@ -1,3 +1,5 @@
+// !Revisit: Rename Hook for Clarity
+
 import { useDispatch } from "react-redux";
 import { getCategories } from "../features/categories/categoryThunks";
 

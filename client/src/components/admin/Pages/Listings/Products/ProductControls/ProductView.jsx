@@ -1,4 +1,5 @@
-// ! Refactor and Breakdown
+// Summary: This component is responsible for rendering the selected product details in the product management page.
+// It uses the ImagePreview and ImagesCarousel components to display the product images.
 
 // Import React Hooks
 import { useState } from "react";
@@ -7,10 +8,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Import Redux Selectors
-import { selectCurrentProduct } from "../../../../../features/products/productSelectors";
+import { selectCurrentProduct } from "../../../../../../features/products/productSelectors";
 
 // Import Redux Actions
-import { setProductMode } from "../../../../../features/products/productSlice";
+import { setProductMode } from "../../../../../../features/products/productSlice";
 
 // Import React Icons
 import {
@@ -21,10 +22,9 @@ import { IoArrowBack } from "react-icons/io5";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 // Import Components
-import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
-import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
+import { ImagePreview, ImagesCarousel } from "./index";
 
-export function ViewProduct() {
+export function ProductView() {
   // ==============================
   // useSelector Hooks Section
   // ==============================
@@ -57,12 +57,13 @@ export function ViewProduct() {
       </button>
 
       {/* Primary Product Image */}
-
       <ImagePreview displayImage={displayImage} />
 
       {/* Product Images Carousel */}
-      <ImagesCarousel selectedImages={selectedProduct.image} setDisplayImage={setDisplayImage} />
-
+      <ImagesCarousel
+        selectedImages={selectedProduct.image}
+        setDisplayImage={setDisplayImage}
+      />
 
       {/* Product Data */}
       <section className="control__item-details">

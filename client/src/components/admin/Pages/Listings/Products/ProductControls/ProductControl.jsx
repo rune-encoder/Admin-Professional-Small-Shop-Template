@@ -1,3 +1,7 @@
+// Summary: This component is responsible for rendering the product control form. 
+// The form is used to create or update a product. 
+// It uses the ImagePreview and ImagesCarousel components to display the product images.
+
 // Import React Hooks
 import { useEffect } from "react";
 
@@ -5,41 +9,39 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Import Custom Hooks
-import { useImageHandler } from "../../../../../hooks/useImageHandler";
-import { useFormState } from "../../../../../hooks/useFormState";
+import { useImageHandler, useFormState } from "./hooks";
 
 // Import Redux Selectors
 import {
   selectGetCategories,
   selectGetCategoriesStatus,
-} from "../../../../../features/categories/categorySelectors";
+} from "../../../../../../features/categories/categorySelectors";
 
 import {
   selectCurrentProduct,
   selectProductMode,
-} from "../../../../../features/products/productSelectors";
+} from "../../../../../../features/products/productSelectors";
 
 // Import Redux Actions
-import { setProductMode } from "../../../../../features/products/productSlice";
+import { setProductMode } from "../../../../../../features/products/productSlice";
 
 // Import Redux Thunks
-import { getCategories } from "../../../../../features/categories/categoryThunks";
+import { getCategories } from "../../../../../../features/categories/categoryThunks";
 import {
   getProducts,
+  createProduct,
   updateProduct,
-} from "../../../../../features/products/productThunks";
+} from "../../../../../../features/products/productThunks";
 
 // Import Components
-import { ImagePreview } from "../../../Pages/Listings/Products/ImagePreview";
-import { ImagesCarousel } from "../../../Pages/Listings/Products/ImageCarousel";
+import { ImagePreview, ImagesCarousel } from "./index";
 
 // Import React Icons
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { BsSave, BsTrash } from "react-icons/bs";
+import { BsSave } from "react-icons/bs";
 import { IoArrowBack } from "react-icons/io5";
 
-export function UpdateProduct() {
+export function ProductControl() {
   // ==============================
   // Custom Hooks Section
   // ==============================
@@ -48,7 +50,8 @@ export function UpdateProduct() {
     displayImage,
     setDisplayImage,
     setSelectedImages,
-    // handleImageChange,
+    handleImageFileChange,
+    handleImageUpdate,
   } = useImageHandler();
 
   const { formState, setFormState, handleInputChange } = useFormState({
@@ -84,29 +87,14 @@ export function UpdateProduct() {
   // useEffect Hooks Section
   // ==============================
   useEffect(() => {
-    // Fetch the categories for the select dropdown when the component mounts
     dispatch(getCategories());
   }, [dispatch]);
 
-  // !WORKING: ===================================
+  // Effect for handling selected product
   useEffect(() => {
-    if (selectedProduct) {
+    if (selectedProduct && productMode === "update") {
       setSelectedImages(selectedProduct.image);
       setDisplayImage(selectedProduct.image[0]);
-    }
-  }, [selectedProduct]);
-
-  // useEffect(() => {
-  //   console.log("selectedImages:", selectedImages);
-  //   console.log(typeof selectedImages);
-  //   console.log("displayImage:", displayImage);
-  // }, [selectedImages, displayImage]);
-  // !WORKING: ===================================
-
-  useEffect(() => {
-    // ! Revisit: Ideally find a way to merge this with other components
-    // Populate the form with the selected product's data if in update mode
-    if (selectedProduct && productMode === "update") {
       setFormState({
         name: selectedProduct.name,
         category: selectedProduct.category ? selectedProduct.category._id : "",
@@ -117,74 +105,38 @@ export function UpdateProduct() {
         details: selectedProduct.details,
       });
     }
-  }, [selectedProduct, productMode]);
+  }, [selectedProduct]);
 
-  // ==============================
-  // Event Handlers Section
-  // ==============================
-  // !WORKING: ===================================
-  const handleImageUpdate = async (index) => {
-    try {
-      // Create a new input element of type file.
-      const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.name = "image";
-      fileInput.accept = "image/*";
+  // Submit Handler
+  const handleCreateSubmit = async (event) => {
+    // Prevent the form from refreshing the page
+    event.preventDefault();
 
-      // If a file is selected, trigger the onchange event.
-      fileInput.onchange = async (e) => {
-        // Obtain the new selected file.
-        const file = e.target.files[0];
+    // Create a new object with the form state and the selected images.
+    let input = { ...formState, image: selectedImages };
 
-        if (file) {
-          // Create a new promise for the image to be read.
-          const newDataUrl = await new Promise((resolve, reject) => {
-            // Create a new instance of the file reader API
-            const reader = new FileReader();
+    // Wait for the product to be created before fetching the products again.
+    await dispatch(createProduct({ input }));
 
-            // Event handler called when the read operation is completed.
-            reader.onloadend = () => resolve(reader.result);
+    // Refresh the products list global state by fetching the products again. (Server or Cache)
+    dispatch(getProducts());
 
-            // Event handler is called when an error occurs while reading the file
-            // If there is an error, the promise is rejected.
-            reader.onerror = reject;
+    // Reset the form state after the form is submitted.
+    setFormState({
+      name: "",
+      category: "",
+      price: 0,
+      quantity: 0,
+      isFeatured: false,
+      shortDescription: "",
+      details: "",
+    });
 
-            // Read the file and convert it to a data URL.
-            reader.readAsDataURL(file);
-          });
-
-          // Update the selected image with the new data URL.
-          // Nest the new data URL in the selectedImages array at the index of the selected image.
-          setSelectedImages((prevImages) =>
-            // Map throught the previous images array
-            prevImages.map((img, i) => {
-              if (i === index) {
-                // If the current image is the selected image, update the object to include the new data URL.
-                const updatedImage = { ...img, dataURL: newDataUrl };
-
-                // If the updated image is the currently displayed image, update displayImage as well.
-                if (displayImage === img) {
-                  setDisplayImage(updatedImage);
-                }
-
-                // Return the updated image object so it replaces the intended image object in the selectedImages array.
-                return updatedImage;
-              } else {
-                return img;
-              }
-            })
-          );
-        }
-      };
-
-      // Trigger the file input to open the file selection dialog.
-      fileInput.click();
-    } catch (error) {
-      console.error("Error updating image:", error);
-    }
+    setSelectedImages([]);
+    setDisplayImage(null);
   };
 
-  const handleSubmit = async (event) => {
+  const handleUpdateSubmit = async (event) => {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
@@ -203,7 +155,7 @@ export function UpdateProduct() {
     dispatch(getProducts());
   };
 
-  // ! Revisit: Handling Loading State
+  // Loading State
   if (getCategoriesStatus === "loading") {
     return <div>Loading...</div>;
   }
@@ -229,11 +181,34 @@ export function UpdateProduct() {
       <ImagesCarousel
         selectedImages={selectedImages}
         setDisplayImage={setDisplayImage}
-        handleImageUpdate={handleImageUpdate}
+        handleImageUpdate={
+          productMode === "update" ? handleImageUpdate : undefined
+        }
       />
 
-      {/* Product Data */}
-      <form className="control__item-details" onSubmit={handleSubmit}>
+      {/* Choose Image File Input */}
+      {productMode === "create" && (
+        <section className="choose-file__container">
+          <input
+            className="choose-file__input"
+            placeholder="Upload Image"
+            id="image"
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImageFileChange}
+            multiple
+          />
+        </section>
+      )}
+
+      {/* Product Form */}
+      <form
+        className="control__item-details"
+        onSubmit={
+          productMode === "update" ? handleUpdateSubmit : handleCreateSubmit
+        }
+      >
         <section className="control__item-row--flex-row-space">
           <label className="control__item-label">
             <MdOutlineShoppingCart /> Product:
@@ -269,7 +244,7 @@ export function UpdateProduct() {
           </select>
         </section>
 
-        <section className="control__item-row--gri-100">
+        <section className="control__item-row--grid-100">
           <div className="control__item-cell">
             <div className="control__item-group">
               <label className="control__item-label">Price:</label>
@@ -309,21 +284,7 @@ export function UpdateProduct() {
             <div className="control__item-group">
               <button className="" type="submit">
                 <BsSave />
-                Save
-              </button>
-            </div>
-
-            <div className="control__item-group">
-              <button className="" type="button">
-                <IoArrowBackCircleOutline />
-                Cancel
-              </button>
-            </div>
-
-            <div className="control__item-group">
-              <button className="" type="button">
-                <BsTrash />
-                Delete
+                {productMode === "update" ? "Save" : "Create"}
               </button>
             </div>
           </div>
@@ -341,7 +302,7 @@ export function UpdateProduct() {
             />
           </div>
 
-          <div className="control__item-cell">
+          <div className="iew__item-cell">
             <label className="control__item-label">Details:</label>
             <textarea
               className="control__item-value"
