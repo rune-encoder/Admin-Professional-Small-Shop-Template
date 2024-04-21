@@ -302,8 +302,8 @@ textarea.control__item-value {
   @include apply-border("shade-15", 20px);
   @include apply-position(
     fixed,
-    $top: halved-modular-scale(-5),
-    $left: halved-modular-scale(-10)
+    $top: calc($header-height + halved-modular-scale(-5)),
+    $left: calc($sidebar-width + halved-modular-scale(2))
   );
 
   font-size: modular-scale(3);
@@ -315,5 +315,13 @@ textarea.control__item-value {
 
     filter: drop-shadow(0 0 1px var(--shade-13));
     color: var(--selection);
+  }
+
+  @include respond-to("md") {
+    @include apply-position(
+      fixed,
+      $top: halved-modular-scale(-5),
+      $left: halved-modular-scale(-5)
+    );
   }
 }

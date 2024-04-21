@@ -1,5 +1,5 @@
-// Summary: This component is responsible for rendering the product control form. 
-// The form is used to create or update a product. 
+// Summary: This component is responsible for rendering the product control form.
+// The form is used to create or update a product.
 // It uses the ImagePreview and ImagesCarousel components to display the product images.
 
 // Import React Hooks
@@ -90,11 +90,22 @@ export function ProductControl() {
     dispatch(getCategories());
   }, [dispatch]);
 
+  // Effect for handling if the product is selected
+  // If a product is selected, set the selected images and display the first image.
+  // If no product is selected, reset the selected images and display image.
+  useEffect(() => {
+    if (selectedProduct) {
+      setSelectedImages(selectedProduct.image);
+      setDisplayImage(selectedProduct.image[0]);
+    } else {
+      setSelectedImages([]);
+      setDisplayImage(null);
+    }
+  }, [selectedProduct]);
+
   // Effect for handling if the product is selected and the product mode is "update"
   useEffect(() => {
     if (selectedProduct && productMode === "update") {
-      setSelectedImages(selectedProduct.image);
-      setDisplayImage(selectedProduct.image[0]);
       setFormState({
         name: selectedProduct.name,
         category: selectedProduct.category ? selectedProduct.category._id : "",
