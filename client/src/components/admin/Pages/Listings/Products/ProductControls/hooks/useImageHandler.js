@@ -1,4 +1,4 @@
-// Summary: These hooks are used to manage the images of the product in the product management page.
+// Summary: Hook is used to manage the images of the product in the product management page.
 // It includes functions to handle image file changes and image updates.
 // It also includes states to manage the selected images and the displayed image.
 

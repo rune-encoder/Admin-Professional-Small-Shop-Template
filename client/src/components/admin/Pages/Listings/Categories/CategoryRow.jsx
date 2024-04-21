@@ -5,7 +5,7 @@ import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Import Custom Hooks
-import { useCategoryAction } from "../../../../../hooks/useAction";
+import { useCategoryAction } from "./CategoryControls/hooks/useCategoryAction";
 
 // Import Redux Actions
 import { setCategoryMode } from "../../../../../features/categories/categorySlice";
