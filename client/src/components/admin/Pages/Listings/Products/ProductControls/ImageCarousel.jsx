@@ -52,7 +52,7 @@ export function ImagesCarousel({
                 />
               </div>
 
-              {/* Render Update Button */}
+              {/* Render Update Button for update mode*/}
               {handleImageUpdate && (
                 <button
                   onClick={(event) => {

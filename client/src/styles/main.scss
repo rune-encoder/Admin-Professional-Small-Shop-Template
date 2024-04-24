@@ -30,9 +30,11 @@
 
 @import "./layout/admin/test";
 
-@import "./components/admin/pages/listings/control-item";
 
 @import "./components/admin/pages/listings/products/product-row";
+@import "./components/admin/pages/listings/products/control-item";
+@import "./components/admin/pages/listings/products/image-preview";
+@import "./components/admin/pages/listings/products/image-carousel";
 
 @import "./components/admin/pages/listings/categories/category-row";
 @import "./components/admin/pages/listings/categories/create-category";
@@ -44,7 +46,7 @@
 // @import "./components/window/subcomponents/item-form";
 // @import "./components/window/subcomponents/item-list";
 
-@import "./components/window/subcomponents/img-preview";
+// @import "./components/window/subcomponents/img-preview";
 
 @import './carousel';
 @import "./shame";

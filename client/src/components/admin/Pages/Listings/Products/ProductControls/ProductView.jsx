@@ -48,7 +48,7 @@ export function ProductView() {
   return (
     <div className="control-item">
       {/* Back Button */}
-      <button className="control__back-btn">
+      <button className="control__btn-back">
         <IoArrowBack
           onClick={() =>
             dispatch(setProductMode({ mode: null, product: null }))
