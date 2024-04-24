@@ -20,6 +20,8 @@ const toolbarSlice = createSlice({
     },
     setListType: (state, action) => {
       state.listType = action.payload.mode;
+      state.searchTerm = "";
+      state.sortType = "none";
     },
   },
 });

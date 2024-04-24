@@ -13,7 +13,7 @@ import { setCategoryMode } from "../../../features/categories/categorySlice";
 import { setListType } from "../../../features/toolbarSlice";
 
 // Import Redux Selectors
-import { selectSortType, selectListType } from "../../../features/toolbarSlice";
+import { selectSortType, selectListType, selectSearchTerm } from "../../../features/toolbarSlice";
 import { selectProductMode } from "../../../features/products/productSelectors";
 import { selectCategoryMode } from "../../../features/categories/categorySelectors";
 
@@ -33,6 +33,7 @@ export function Toolbar({ title }) {
 
   const sortType = useSelector(selectSortType);
   const listType = useSelector(selectListType);
+  const searchTerm = useSelector(selectSearchTerm);
 
   const dispatch = useDispatch();
 
@@ -62,8 +63,10 @@ export function Toolbar({ title }) {
   return (
     <div className="toolbar">
       <div className="toolbar-title__section">
+        {/* Title */}
         <span className="toolbar-title">{title}</span>
 
+        {/* Toolbar Buttons */}
         <div className="toolbar-btn__wrapper ">
           <button
             className={`toolbar-btn ${
@@ -107,35 +110,46 @@ export function Toolbar({ title }) {
         </div>
       </div>
 
+      {/* Search Bar */}
       <div className="toolbar__searchbar">
         <IoSearch className="toolbar__searchbar-icon" />
         <input
           className="toolbar__searchbar-input"
           type="text"
           placeholder="Search"
+          value={searchTerm || ''}
           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
       </div>
 
       <div className="list-selection">
+        {/* Products Listings */}
         <button
           className={`list-selection__btn ${
             listType === "products"
               ? "list-selection__btn--selected disabled"
               : ""
           }`}
-          onClick={() => dispatch(setListType({ mode: "products" }))}
+          onClick={() => {
+            dispatch(setListType({ mode: "products" }));
+            dispatch(setCategoryMode({ mode: null, category: null }));
+          }}
         >
           <MdOutlineShoppingCart />
           Products
         </button>
+
+        {/* Categories Listings */}
         <button
           className={`list-selection__btn ${
             listType === "categories"
               ? "list-selection__btn--selected disabled"
               : ""
           }`}
-          onClick={() => dispatch(setListType({ mode: "categories" }))}
+          onClick={() => {
+            dispatch(setListType({ mode: "categories" }));
+            dispatch(setProductMode({ mode: null, product: null }));
+          }}
         >
           <MdOutlineCategory />
           Categories

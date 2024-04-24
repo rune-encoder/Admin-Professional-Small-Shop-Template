@@ -217,6 +217,7 @@ textarea.control__item-value {
   font-size: modular-scale(3);
   transition: all 0.3s ease-out;
   color: var(--shade-20);
+  z-index: 1;
 
   &:hover {
     @include apply-border("selection", 20px);
