@@ -217,6 +217,7 @@ textarea.control__item-value {
   font-size: modular-scale(3);
   transition: all 0.3s ease-out;
   color: var(--shade-20);
+  z-index: 1;
 
   &:hover {
     @include apply-border("selection", 20px);
@@ -244,4 +245,13 @@ textarea.control__item-value {
   border: solid 1px var(--save-btn-dark);
   border-radius: $border-radius-sm;
   width: 100%;
+}
+
+// !==================================
+.item-row--admins {
+  grid-template-columns: 30% 30% 20% 20% ;
+}
+
+.item-value--admins {
+  @include set-typography("normal", 3, $base-line-height);
 }

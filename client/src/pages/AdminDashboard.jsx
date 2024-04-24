@@ -16,6 +16,7 @@ import {
   ErrorMessage,
   Home,
   Listings,
+  Admins,
 } from "../components/admin/";
 
 export default function AdminDashboard() {
@@ -38,6 +39,11 @@ export default function AdminDashboard() {
                   <Listings>
                     <Toolbar title={"Listings"} />
                   </Listings>
+                )}
+                {activeMenu === "admins" && (
+                  <Admins>
+                    <Toolbar title={"Admins"} />
+                  </Admins>
                 )}
               </div>
             </div>

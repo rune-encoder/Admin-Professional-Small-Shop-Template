@@ -80,10 +80,14 @@
 }
 
 .control-image__btn {
-  @include apply-position(absolute, $bottom: halved-modular-scale(-5), $right: halved-modular-scale(-10));
-  @include apply-space("padding", -7);
+  @include apply-position(
+    absolute,
+    $bottom: calc(halved-modular-scale(-5) + halved-modular-scale(-15)),
+    $right: calc(halved-modular-scale(-10) + halved-modular-scale(-15))
+  );
+  @include apply-space("padding", -10);
   @include apply-glass-effect("opacity-shade-1", 10px);
-  @include apply-border("shade-15", 20px);
+  @include apply-border("shade-15", $border-radius-sm);
   @extend %icon-text__button--layout;
 
   // !Revisit: Style is used on `control-item.scss` and `control-image.scss` Refactor
@@ -92,10 +96,9 @@
   color: var(--shade-20);
 
   &:hover {
-    @include apply-border("selection", 20px);
+    @include apply-border("selection", $border-radius-sm);
 
     filter: drop-shadow(0 0 1px var(--shade-13));
     color: var(--selection);
   }
-
 }
