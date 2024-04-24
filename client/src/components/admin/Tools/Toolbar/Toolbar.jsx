@@ -21,7 +21,9 @@ export function Toolbar({ title }) {
 
   return (
     <div className="toolbar">
+      {/* Toolbar Title */}
       <ToolbarTitle title={title}>
+        {/* Toolbar Buttons */}
         <ToolbarButtons
           sortType={sortType}
           listType={listType}
@@ -31,6 +33,7 @@ export function Toolbar({ title }) {
           productMode={productMode}
           setProductMode={setProductMode}
         >
+          {/* Dropdown Menu */}
           <DropdownMenu
             sortOptions={sortOptions}
             sortType={sortType}
@@ -43,12 +46,14 @@ export function Toolbar({ title }) {
       <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       {/* List Selection */}
-      <ListTypeButtons
-        listType={listType}
-        setListType={setListType}
-        setCategoryMode={setCategoryMode}
-        setProductMode={setProductMode}
-      />
+      {title === "Listings" && (
+        <ListTypeButtons
+          listType={listType}
+          setListType={setListType}
+          setCategoryMode={setCategoryMode}
+          setProductMode={setProductMode}
+        />
+      )}
     </div>
   );
 }

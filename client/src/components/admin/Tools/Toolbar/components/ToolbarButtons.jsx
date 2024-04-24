@@ -21,9 +21,10 @@ export function ToolbarButtons({
   // Currently selected sort option
   const currentOption = sortOptions.find((option) => option.value === sortType);
 
+  // Toolbar Buttons
   return (
     <>
-      {/* Toolbar Buttons */}
+      {/* Sort Button */}
       <div className="toolbar-btn__wrapper ">
         <button
           className={`toolbar-btn ${
@@ -44,8 +45,10 @@ export function ToolbarButtons({
           )}
         </button>
 
+        {/* Dropdown Menu */}
         {isDropdownOpen && children}
 
+        {/* Create Button */}
         <button
           className={`toolbar-btn ${
             (listType === "categories" && categoryMode === "create") ||

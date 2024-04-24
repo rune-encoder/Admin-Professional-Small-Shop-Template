@@ -16,9 +16,7 @@ import {
 } from "../../../../../features/toolbarSlice";
 
 // Import Redux Thunks
-import {
-  getProducts,
-} from "../../../../../features/products/productThunks";
+import { getProducts } from "../../../../../features/products/productThunks";
 
 // Import Helpers
 import { filterProducts } from "../../../../../utils/helpers/products/filter";

@@ -2,22 +2,12 @@
 import { useDispatch, useSelector } from "react-redux";
 
 // Import Redux Selectors
-// Selector to select the product mode: "view", "update", "create", etc.
 import { selectProductMode } from "../../../../../features/products/productSelectors";
-
-// Selector to select the category mode: "view", "update", "create", etc.
 import { selectCategoryMode } from "../../../../../features/categories/categorySelectors";
 
 // Import Redux Actions
-// Action to set the category mode and current category
-// Ex. setCategoryMode({ mode: "view", category: category })
 import { setCategoryMode } from "../../../../../features/categories/categorySlice";
-
-// Action to set the product mode and current product
-// Ex. setProductMode({ mode: "view", product: product })
 import { setProductMode } from "../../../../../features/products/productSlice";
-
-// Actions for toolbar to set the list type, search term, and sort type
 import {
   setListType,
   setSearchTerm,
@@ -25,7 +15,6 @@ import {
 } from "../../../../../features/toolbarSlice";
 
 // Import Redux Selectors
-// Selectors to select the toolbar's sort type, list type, and search term
 import {
   selectSortType,
   selectListType,
@@ -33,9 +22,14 @@ import {
 } from "../../../../../features/toolbarSlice";
 
 // Import Constants
-// Constraints for the sort options depend on the list type.
 import { getSortOptions } from "../../../../../constants/sortOptions";
 
+/**
+ * Custom hook to manage toolbar state.
+ * Provides an interface to get and set product mode, category mode, sort type, list type, and search term.
+ *
+ * @returns {Object} An object containing the current state and setters for product mode, category mode, sort type, list type, and search term.
+ */
 export function useToolbarState() {
   // ==============================
   // useSelector Hooks Section

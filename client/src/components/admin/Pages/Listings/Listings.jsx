@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 // Import Redux Selectors
 import { selectListType } from "../../../../features/toolbarSlice";
 
-
 // Import Redux Selectors
 import { selectProductMode } from "../../../../features/products/productSelectors.js";
 
 // Import Components
 import { ProductsList, CategoriesList } from "./index.js";
-import { ProductView, ProductControl } from "./Products/ProductControls"
+import { ProductView, ProductControl } from "./Products/ProductControls";
 
 export function Listings({ children }) {
   const listType = useSelector(selectListType);

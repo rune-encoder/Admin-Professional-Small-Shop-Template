@@ -39,37 +39,3 @@ export function ImagePreview({ displayImage, selectedProduct }) {
     </section>
   );
 }
-
-// ! Erase: Reference for different versions of ImagePreview component
-// Create Product Image
-// <section className="preview-image-wrapper">
-//   {displayImage && (
-//     <img
-//       className="preview-image"
-//       src={displayImage}
-//       alt="View of selected image for the product"
-//     ></img>
-//   )}
-// </section>
-
-// Update Product Image
-// <section className="preview-image-wrapper">
-//   {displayImage && (
-//     <img
-//       className="preview-image"
-//       data-cloudinary-id={displayImage.cloudinaryId}
-//       src={displayImage.dataURL ? displayImage.dataURL : displayImage.url}
-//       alt={`Selected image for ${selectedProduct.name}`}
-//     ></img>
-//   )}
-// </section>
-
-// View Product Image
-// <section className="preview-image-wrapper">
-//   <img
-//     className="preview-image"
-//     data-cloudinary-id={displayImage._id}
-//     src={displayImage.url}
-//     alt={`Selected image for ${selectedProduct.name}`}
-//   ></img>
-// </section>
