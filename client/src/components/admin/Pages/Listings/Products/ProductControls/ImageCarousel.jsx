@@ -1,6 +1,9 @@
 // Import Embla Carousel
 import useEmblaCarousel from "embla-carousel-react";
 
+// Import React Icons
+import { BsSave } from "react-icons/bs";
+
 // This is a component for displaying a carousel of product images.
 // It takes three props: selectedImages, setDisplayImage, and handleImageUpdate.
 // selectedImages is an array of images to display.
@@ -50,19 +53,21 @@ export function ImagesCarousel({
                   alt={`Selected image ${index}`}
                   onClick={() => setDisplayImage(image)}
                 />
-              </div>
 
-              {/* Render Update Button for update mode*/}
-              {handleImageUpdate && (
-                <button
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleImageUpdate(index);
-                  }}
-                >
-                  Update
-                </button>
-              )}
+                {/* Render Update Button for update mode*/}
+                {handleImageUpdate && (
+                  <button
+                    className="control-image__btn"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleImageUpdate(index);
+                    }}
+                  >
+                    <BsSave />
+                  </button>
+                )}
+
+              </div>
             </div>
           );
         })}

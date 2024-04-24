@@ -52,6 +52,8 @@
   @include apply-flex(row, center, center);
   @include apply-space("padding", -5, "y");
   @include apply-space("padding", -10, "x");
+
+  position: relative;
 }
 
 // Configurations for the images in each slide.
@@ -75,4 +77,25 @@
   &:active {
     transform: scale(1);
   }
+}
+
+.control-image__btn {
+  @include apply-position(absolute, $bottom: halved-modular-scale(-5), $right: halved-modular-scale(-10));
+  @include apply-space("padding", -7);
+  @include apply-glass-effect("opacity-shade-1", 10px);
+  @include apply-border("shade-15", 20px);
+  @extend %icon-text__button--layout;
+
+  // !Revisit: Style is used on `control-item.scss` and `control-image.scss` Refactor
+  font-size: modular-scale(0);
+  transition: all 0.3s ease-out;
+  color: var(--shade-20);
+
+  &:hover {
+    @include apply-border("selection", 20px);
+
+    filter: drop-shadow(0 0 1px var(--shade-13));
+    color: var(--selection);
+  }
+
 }
