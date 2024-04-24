@@ -1,5 +1,6 @@
-$preview-image-height: rem(300px);
-$form__input--width: rem(125px);
+// Summary: This contains styles used with any item that is being "viewed", "updated", or "created" 
+// It has the styles for the container, details container, row, cell, group, label, value, and buttons.
+// Used currently in `ProductView.jsx` and `PrductControl.jsx`.
 
 // ==============================
 // CONTROLLER: CONTAINER
@@ -12,106 +13,6 @@ $form__input--width: rem(125px);
   @include apply-flex(column);
 
   flex: 1; // Expand to fill the remaining space.
-}
-
-// ==============================
-// CONTROLLER: IMAGE PREVIEW
-// ==============================
-.preview-image-wrapper {
-  @include apply-flex(row, center, center);
-  @include apply-space("padding", -5, "y");
-  @include apply-space("padding", -5, "x");
-
-  height: $preview-image-height;
-}
-
-.preview-image {
-  @include apply-box-shadow("dark", 10);
-
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: $border-radius-md;
-}
-
-// ==============================
-// CONTROLLER: IMAGES EMBLA CAROUSEL
-// ==============================
-// Usage: Used to create a Embla carousel for the images being viewed, updated, or created.
-// Applies cursor styling and adds an incomplete border to the top and bottom of the image slider for a visual effect.
-// Container for the images slider.
-// Note: This class carries over styles from the `.embla` attribute selector in `carousel.scss`.
-.embla__control-images {
-  cursor: grab;
-
-  &:active {
-    cursor: grabbing;
-  }
-
-  &::before {
-    @include apply-position(absolute, $top: 0, $left: 50%);
-    @extend %pseudo-border;
-  }
-
-  &::after {
-    @include apply-position(absolute, $bottom: 0, $left: 50%);
-    @extend %pseudo-border;
-  }
-}
-
-// When the Embla carousel is hovered, reduce the width of the border for visual effect.
-.embla__control-images:hover {
-  &::before {
-    width: 85%;
-  }
-
-  &::after {
-    width: 85%;
-  }
-}
-
-// CONTROL IMAGE: EACH SLIDE AND SIZE
-// Applys changes to the variable slide size for each image in the slider.
-// Usage: Used to specify the size of each slide containing the image in the slider and add other styles.
-// Note: This class carries over styles from the `.embla__slide` attribute selector in `carousel.scss`.
-.embla__slide--control-image {
-  // Adjust to change the width of the slide containing the image.
-  width: calc(35% - 20px);
-
-  // Keep the height of carousel the same as the rows in listings for visual consistency.
-  height: $listings-row-height;
-}
-
-// Wrapper for each individual image within the slides in the slider.
-// Applies spacing to the image.
-.control-image-wrapper {
-  @include apply-flex(row, center, center);
-  @include apply-space("padding", -5, "y");
-  @include apply-space("padding", -10, "x");
-}
-
-// Configurations for the images in each slide.
-.control-image {
-  cursor: pointer;
-  transition: all 0.1s ease-out;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: $border-radius-md;
-
-  // When the image is hovered, increase the size of the image slightly.
-  &:hover {
-    @include apply-box-shadow("dark", 10);
-
-    transform: scale(1.05);
-  }
-
-  // When the image is clicked, reduce the size of the image slightly.
-  &:active {
-    transform: scale(1);
-  }
 }
 
 // ==============================
@@ -161,6 +62,12 @@ $form__input--width: rem(125px);
     @include apply-space("gap", -5);
   }
 
+  // Modifier: Applies flex row layout to the row with the items aligned to the end.
+  &--flex-row-end {
+    @include apply-flex(row, end, center);
+    @include apply-space("gap", -5);
+  }
+
   // Modifier: Applies grid layout to the row.
   &--grid {
     display: grid;
@@ -186,6 +93,8 @@ $form__input--width: rem(125px);
 // Applies spacing to the cell.
 .control__item-cell {
   @include apply-space("padding", 0, "x");
+
+  width: 100%;
 }
 
 // Usage: Used with the `.control__item-cell` to group related items in a cell.
@@ -194,6 +103,7 @@ $form__input--width: rem(125px);
 // Example: "Price" and "Number".
 .control__item-group {
   @include apply-flex(row, space-between, center);
+  @include apply-space("padding", -10, "y");
 }
 
 // ==============================
@@ -248,56 +158,54 @@ $form__input--width: rem(125px);
   }
 }
 
-// ! Working ====================================vvv
-
-.control__item-row {
-  &--flex-row-space {
-    @include apply-flex(row, space-between, center);
-  }
-
-  &--grid-100 {
-    display: grid;
-    grid-template-columns: 100%;
-  }
-}
-
-.control__item-cell {
-  // border: solid 1px red;
-}
-
+// ==============================
+// CONTROLLER: INPUT FIELD STYLES
+// ==============================
+// Applys styles to the input fields in the control item.
 input.control__item-value,
 select.control__item-value,
 textarea.control__item-value {
   @extend %form-input--style;
 }
 
+// Text and Select input field styles.
 .control__item-value[type="text"],
 select.control__item-value {
-  min-width: $form__input--width;
-  max-width: calc($form__input--width * 1.5);
+  width: 100%;
 }
 
+// Number input field styles.
 .control__item-value[type="number"] {
-  min-width: 0;
-  max-width: $form__input--width;
+  width: 50%;
 }
 
+// Checkbox input field styles.
+.control__item-value[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+// Textarea input field styles.
 textarea.control__item-value {
   @include apply-font-family("roboto");
 
-  resize: none;
+  resize: vertical;
   width: 100%;
-  min-height: calc($listings-row-height * 2);
+  min-height: $listings-row-height;
 }
 
-// ! Working ====================================^^^
+// File input field styles.
+.choose-file__input {
+  @include apply-text-shadow("shade-10");
+
+  width: 50%;
+}
 
 // ==============================
 // CONTROLLER: BUTTONS
 // ==============================
 // Button to navigate back to the previous page.
 // Applies position, font-size, color, and transition to the button.
-.control__back-btn {
+.control__btn-back {
   @include apply-glass-effect("opacity-shade-1", 10px);
   @include apply-border("shade-15", 20px);
   @include apply-position(
@@ -324,4 +232,16 @@ textarea.control__item-value {
       $left: halved-modular-scale(-5)
     );
   }
+}
+
+// Button to save the changes made to the item.
+.control__btn-action {
+  @include apply-space("padding", -10, "y");
+  @extend %icon-text__button--layout;
+  @extend %icon-text__button--style;
+
+  background-color: var(--save-btn-light);
+  border: solid 1px var(--save-btn-dark);
+  border-radius: $border-radius-sm;
+  width: 100%;
 }

@@ -1,3 +1,5 @@
+// ! Revisit: Add useCallback
+
 // Summary: This component is responsible for rendering the product control form.
 // The form is used to create or update a product.
 // It uses the ImagePreview and ImagesCarousel components to display the product images.
@@ -175,7 +177,7 @@ export function ProductControl() {
   return (
     <div className="control-item">
       {/* Back Button */}
-      <button className="control__back-btn">
+      <button className="control__btn-back">
         <IoArrowBack
           onClick={() =>
             dispatch(setProductMode({ mode: null, product: null }))
@@ -183,35 +185,23 @@ export function ProductControl() {
         />
       </button>
 
-      {/* Primary Product Image */}
-      <ImagePreview
-        displayImage={displayImage}
-        selectedProduct={selectedProduct}
-      />
-
-      {/* Product Images Carousel */}
-      <ImagesCarousel
-        selectedImages={selectedImages}
-        setDisplayImage={setDisplayImage}
-        handleImageUpdate={
-          productMode === "update" ? handleImageUpdate : undefined
-        }
-      />
-
-      {/* Choose Image File Input */}
-      {productMode === "create" && (
-        <section className="choose-file__container">
-          <input
-            className="choose-file__input"
-            placeholder="Upload Image"
-            id="image"
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleImageFileChange}
-            multiple
+      {selectedImages.length > 1 && (
+        <>
+          {/* Primary Product Image */}
+          <ImagePreview
+            displayImage={displayImage}
+            selectedProduct={selectedProduct}
           />
-        </section>
+
+          {/* Product Images Carousel */}
+          <ImagesCarousel
+            selectedImages={selectedImages}
+            setDisplayImage={setDisplayImage}
+            handleImageUpdate={
+              productMode === "update" ? handleImageUpdate : undefined
+            }
+          />
+        </>
       )}
 
       {/* Product Form */}
@@ -221,7 +211,23 @@ export function ProductControl() {
           productMode === "update" ? handleUpdateSubmit : handleCreateSubmit
         }
       >
-        <section className="control__item-row--flex-row-space">
+        {/* Choose Image File Input */}
+        {productMode === "create" && (
+          <section className="control__item-row--flex-row-end">
+            <input
+              className="choose-file__input"
+              placeholder="Upload Image"
+              id="image"
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageFileChange}
+              multiple
+            />
+          </section>
+        )}
+
+        <section className="control__item-row--grid">
           <label className="control__item-label">
             <MdOutlineShoppingCart /> Product:
           </label>
@@ -236,7 +242,7 @@ export function ProductControl() {
           />
         </section>
 
-        <section className="control__item-row--flex-row-space">
+        <section className="control__item-row--grid">
           <label className="control__item-label">
             <MdOutlineCategory /> Category:
           </label>
@@ -256,7 +262,7 @@ export function ProductControl() {
           </select>
         </section>
 
-        <section className="control__item-row--grid-100">
+        <section className="control__item-row--flex-col">
           <div className="control__item-cell">
             <div className="control__item-group">
               <label className="control__item-label">Price:</label>
@@ -291,18 +297,9 @@ export function ProductControl() {
               />
             </div>
           </div>
-
-          <div className="control__item-cell">
-            <div className="control__item-group">
-              <button className="" type="submit">
-                <BsSave />
-                {productMode === "update" ? "Save" : "Create"}
-              </button>
-            </div>
-          </div>
         </section>
 
-        <section className="control__item-row--grid">
+        <section className="control__item-row--column">
           <div className="control__item-cell">
             <label className="control__item-label">Description:</label>
             <textarea
@@ -314,7 +311,7 @@ export function ProductControl() {
             />
           </div>
 
-          <div className="iew__item-cell">
+          <div className="control__item-cell">
             <label className="control__item-label">Details:</label>
             <textarea
               className="control__item-value"
@@ -324,6 +321,13 @@ export function ProductControl() {
               onChange={handleInputChange}
             />
           </div>
+        </section>
+
+        <section className="control__item-row--flex-col">
+          <button className="control__btn-action" type="submit">
+            <BsSave />
+            {productMode === "update" ? "Save" : "Create"}
+          </button>
         </section>
       </form>
     </div>

@@ -1,0 +1,22 @@
+$preview-image-height: rem(300px);
+
+// ==============================
+// CONTROLLER: IMAGE PREVIEW
+// ==============================
+.preview-image-wrapper {
+  @include apply-flex(row, center, center);
+  @include apply-space("padding", -5, "y");
+  @include apply-space("padding", -5, "x");
+
+  height: $preview-image-height;
+}
+
+.preview-image {
+  @include apply-box-shadow("dark", 10);
+
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: $border-radius-md;
+}
