@@ -185,7 +185,7 @@ export function ProductControl() {
         />
       </button>
 
-      {selectedImages.length > 1 && (
+      {selectedImages.length > 0 && (
         <>
           {/* Primary Product Image */}
           <ImagePreview
