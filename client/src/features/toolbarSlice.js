@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { changeMenuDisplay } from "./menuSlice";
 
 // Initial state for the toolbar slice
 const initialState = {
   searchTerm: "",
-  sortType: 'none',
-  listType: "products",
+  sortType: "none",
 };
 
 // Create the toolbar slice
@@ -18,11 +18,9 @@ const toolbarSlice = createSlice({
     setSortType: (state, action) => {
       state.sortType = action.payload;
     },
-    setListType: (state, action) => {
-      state.listType = action.payload.mode;
-      state.searchTerm = "";
-      state.sortType = "none";
-    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(changeMenuDisplay, () => initialState);
   },
 });
 
@@ -32,7 +30,6 @@ export const { setSearchTerm, setSortType, setListType } = toolbarSlice.actions;
 // Selectors
 export const selectSearchTerm = (state) => state.toolbar.searchTerm;
 export const selectSortType = (state) => state.toolbar.sortType;
-export const selectListType = (state) => state.toolbar.listType;
 
 // Reducer
 export default toolbarSlice.reducer;

@@ -11,8 +11,8 @@ import {
   FaLongArrowAltDown,
 } from "react-icons/fa";
 
-export const getSortOptions = (listType) => {
-  if (listType === "products") {
+export const getSortOptions = (activeMenu) => {
+  if (activeMenu === "products") {
     return [
       { Icon: IoMdRemoveCircleOutline, value: "none", label: "None" },
       { Icon: FaSortAlphaDown, value: "name-asc", label: "Name" },
@@ -26,11 +26,15 @@ export const getSortOptions = (listType) => {
     ];
   }
 
-  if (listType === "categories") {
+  if (activeMenu === "categories") {
     return [
       { Icon: IoMdRemoveCircleOutline, value: "none", label: "None" },
       { Icon: FaSortAlphaDown, value: "name-asc", label: "Name" },
       { Icon: FaSortAlphaUpAlt, value: "name-desc", label: "Name" },
     ];
+  }
+
+  if (activeMenu === "admins") {
+    return [{ Icon: IoMdRemoveCircleOutline, value: "none", label: "None" }];
   }
 };

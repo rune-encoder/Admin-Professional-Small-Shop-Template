@@ -15,7 +15,7 @@ export function Toolbar({ title }) {
     product: { mode: productMode, setMode: setProductMode },
     category: { mode: categoryMode, setMode: setCategoryMode },
     sort: { type: sortType, options: sortOptions, set: setSortType },
-    list: { type: listType, set: setListType },
+    list: { type: activeMenu, set: changeMenuDisplay },
     search: { term: searchTerm, set: setSearchTerm },
   } = useToolbarState();
 
@@ -26,7 +26,7 @@ export function Toolbar({ title }) {
         {/* Toolbar Buttons */}
         <ToolbarButtons
           sortType={sortType}
-          listType={listType}
+          activeMenu={activeMenu}
           sortOptions={sortOptions}
           categoryMode={categoryMode}
           setCategoryMode={setCategoryMode}
@@ -48,8 +48,8 @@ export function Toolbar({ title }) {
       {/* List Selection */}
       {title === "Listings" && (
         <ListTypeButtons
-          listType={listType}
-          setListType={setListType}
+        activeMenu={activeMenu}
+        changeMenuDisplay={changeMenuDisplay}
           setCategoryMode={setCategoryMode}
           setProductMode={setProductMode}
         />

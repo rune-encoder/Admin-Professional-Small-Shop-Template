@@ -7,7 +7,7 @@ import { IoAddOutline } from "react-icons/io5";
 
 export function ToolbarButtons({
   sortType,
-  listType,
+  activeMenu,
   sortOptions,
   categoryMode,
   setCategoryMode,
@@ -51,15 +51,15 @@ export function ToolbarButtons({
         {/* Create Button */}
         <button
           className={`toolbar-btn ${
-            (listType === "categories" && categoryMode === "create") ||
-            (listType === "products" && productMode === "create")
+            (activeMenu === "categories" && categoryMode === "create") ||
+            (activeMenu === "products" && productMode === "create")
               ? "toolbar-btn--selected disabled"
               : ""
           }`}
           onClick={() => {
-            if (listType === "categories") {
+            if (activeMenu === "categories") {
               setCategoryMode({ mode: "create", category: null });
-            } else if (listType === "products") {
+            } else if (activeMenu === "products") {
               setProductMode({ mode: "create", product: null });
             }
           }}
