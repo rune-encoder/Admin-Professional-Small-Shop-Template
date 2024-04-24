@@ -6,10 +6,7 @@ import { GrClose } from "react-icons/gr";
 import { IoHomeOutline } from "react-icons/io5";
 import { RiListCheck3 } from "react-icons/ri";
 import { PiUsersFourLight } from "react-icons/pi";
-import {
-  MdOutlineLocalShipping,
-  MdQueryStats,
-} from "react-icons/md";
+import { MdOutlineLocalShipping, MdQueryStats } from "react-icons/md";
 
 export const btnActionConfig = {
   view: {
@@ -45,9 +42,35 @@ export const btnActionConfig = {
 };
 
 export const btnSidebarConfig = [
-  { Icon: IoHomeOutline, text: "Home", menu: "home" },
-  { Icon: RiListCheck3, text: "Listings", menu: "listings" },
-  { Icon: MdOutlineLocalShipping, text: "Orders", menu: "orders" },
-  { Icon: MdQueryStats, text: "Reports", menu: "reports" },
-  { Icon: PiUsersFourLight, text: "Admins", menu: "admins" },
+  {
+    Icon: IoHomeOutline,
+    text: "Home",
+    menu: "home",
+    disabled: (activeMenu) => activeMenu === "home",
+  },
+  {
+    Icon: RiListCheck3,
+    text: "Listings",
+    menu: "products",
+    disabled: (activeMenu) =>
+      activeMenu === "products" || activeMenu === "categories",
+  },
+  {
+    Icon: MdOutlineLocalShipping,
+    text: "Orders",
+    menu: "orders",
+    disabled: (activeMenu) => activeMenu === "orders",
+  },
+  {
+    Icon: MdQueryStats,
+    text: "Reports",
+    menu: "reports",
+    disabled: (activeMenu) => activeMenu === "reports",
+  },
+  {
+    Icon: PiUsersFourLight,
+    text: "Admins",
+    menu: "admins",
+    disabled: (activeMenu) => activeMenu === "admins",
+  },
 ];

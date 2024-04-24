@@ -2,8 +2,8 @@
 import { MdOutlineShoppingCart, MdOutlineCategory } from "react-icons/md";
 
 export function ListTypeButtons({
-  listType,
-  setListType,
+  activeMenu,
+  changeMenuDisplay,
   setCategoryMode,
   setProductMode,
 }) {
@@ -12,12 +12,12 @@ export function ListTypeButtons({
       {/* Products Listings */}
       <button
         className={`list-selection__btn ${
-          listType === "products"
+          activeMenu === "products"
             ? "list-selection__btn--selected disabled"
             : ""
         }`}
         onClick={() => {
-          setListType({ mode: "products" });
+          changeMenuDisplay("products");
           setCategoryMode({ mode: null, category: null });
         }}
       >
@@ -28,12 +28,12 @@ export function ListTypeButtons({
       {/* Categories Listings */}
       <button
         className={`list-selection__btn ${
-          listType === "categories"
+          activeMenu === "categories"
             ? "list-selection__btn--selected disabled"
             : ""
         }`}
         onClick={() => {
-          setListType({ mode: "categories" });
+          changeMenuDisplay("categories");
           setProductMode({ mode: null, product: null });
         }}
       >

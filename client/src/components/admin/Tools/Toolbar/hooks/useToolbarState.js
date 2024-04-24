@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 // Import Redux Selectors
 import { selectProductMode } from "../../../../../features/products/productSelectors";
 import { selectCategoryMode } from "../../../../../features/categories/categorySelectors";
+import { selectDisplayMenu } from "../../../../../features/menuSlice";
 
 // Import Redux Actions
 import { setCategoryMode } from "../../../../../features/categories/categorySlice";
 import { setProductMode } from "../../../../../features/products/productSlice";
+import { changeMenuDisplay } from "../../../../../features/menuSlice";
 import {
-  setListType,
   setSearchTerm,
   setSortType,
 } from "../../../../../features/toolbarSlice";
@@ -17,7 +18,6 @@ import {
 // Import Redux Selectors
 import {
   selectSortType,
-  selectListType,
   selectSearchTerm,
 } from "../../../../../features/toolbarSlice";
 
@@ -37,7 +37,7 @@ export function useToolbarState() {
   const productMode = useSelector(selectProductMode); // Product mode: "view", "update", "create", etc.
   const categoryMode = useSelector(selectCategoryMode); // Category mode: "view", "update", "create", etc.
   const sortType = useSelector(selectSortType); // Sort type: "none", "asc", "desc", etc.
-  const listType = useSelector(selectListType); // List type: "products", "categories", etc.
+  const activeMenu = useSelector(selectDisplayMenu); // Active menu: "products", "categories", etc.
   const searchTerm = useSelector(selectSearchTerm); // Search term
 
   // ==============================
@@ -48,13 +48,13 @@ export function useToolbarState() {
   // ==============================
   // Constants Section
   // ==============================
-  const sortOptions = getSortOptions(listType); // Get sort options based on the list type
+  const sortOptions = getSortOptions(activeMenu); // Get sort options based on the list type
 
   // ==============================
   // Actions Section
   // ==============================
   const setSort = (value) => dispatch(setSortType(value));
-  const setList = (value) => dispatch(setListType(value));
+  const setMenu = (value) => dispatch(changeMenuDisplay(value));
   const setSearch = (value) => dispatch(setSearchTerm(value));
   const setProduct = (value) => dispatch(setProductMode(value));
   const setCategory = (value) => dispatch(setCategoryMode(value));
@@ -74,8 +74,8 @@ export function useToolbarState() {
       set: setSort,
     },
     list: {
-      type: listType,
-      set: setList,
+      type: activeMenu,
+      set: setMenu,
     },
     search: {
       term: searchTerm,

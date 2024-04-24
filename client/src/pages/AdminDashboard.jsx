@@ -35,7 +35,7 @@ export default function AdminDashboard() {
               <Sidebar />
               <div className="content__main">
                 {activeMenu === "home" && <Home />}
-                {activeMenu === "listings" && (
+                {(activeMenu === "products" || activeMenu === "categories") && (
                   <Listings>
                     <Toolbar title={"Listings"} />
                   </Listings>

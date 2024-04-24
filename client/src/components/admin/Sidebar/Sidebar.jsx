@@ -1,5 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import { changeMenuDisplay, selectDisplayMenu } from "../../../features/menuSlice";
+import {
+  changeMenuDisplay,
+  selectDisplayMenu,
+} from "../../../features/menuSlice";
 
 import { btnSidebarConfig as buttons } from "../../../constants/buttonConfig";
 
@@ -10,10 +13,12 @@ export function Sidebar() {
 
   return (
     <aside className="sidebar__aside">
-      {buttons.map(({ Icon, text, menu }) => (
+      {buttons.map(({ Icon, text, menu, disabled }) => (
         <button
           key={menu}
-          className={`sidebar__buttons ${activeMenu === menu ? "disabled" : ""}`}
+          className={`sidebar__buttons ${
+            disabled && disabled(activeMenu) ? "disabled" : ""
+          }`}
           onClick={() => dispatch(changeMenuDisplay(menu))}
         >
           <Icon className="sidebar__icon" />

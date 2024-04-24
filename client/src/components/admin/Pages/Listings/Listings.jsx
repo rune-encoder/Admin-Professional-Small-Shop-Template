@@ -2,9 +2,7 @@
 import { useSelector } from "react-redux";
 
 // Import Redux Selectors
-import { selectListType } from "../../../../features/toolbarSlice";
-
-// Import Redux Selectors
+import { selectDisplayMenu } from "../../../../features/menuSlice";
 import { selectProductMode } from "../../../../features/products/productSelectors.js";
 
 // Import Components
@@ -12,7 +10,7 @@ import { ProductsList, CategoriesList } from "./index.js";
 import { ProductView, ProductControl } from "./Products/ProductControls";
 
 export function Listings({ children }) {
-  const listType = useSelector(selectListType);
+  const activeMenu = useSelector(selectDisplayMenu);
 
   const productMode = useSelector(selectProductMode);
 
@@ -34,8 +32,8 @@ export function Listings({ children }) {
         <div className="listings--wrapper" data-boolean={dataBoolean}>
           {/* Toolbar */}
           {children}
-          {listType === "products" && <ProductsList />}
-          {listType === "categories" && <CategoriesList />}
+          {activeMenu === "products" && <ProductsList />}
+          {activeMenu === "categories" && <CategoriesList />}
         </div>
       </div>
     </>
