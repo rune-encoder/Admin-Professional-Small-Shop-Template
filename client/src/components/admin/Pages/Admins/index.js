@@ -1,3 +1,3 @@
-import { Admins } from "./Admins";
+import { AdminsList } from "./AdminsList";
 
-export { Admins };
+export { AdminsList };
