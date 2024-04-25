@@ -26,6 +26,12 @@ import {
   DELETE_ADMIN,
 } from "../../../../../utils/graphql/mutations";
 
+/**
+ * Custom hook to manage admins, including fetching, creating, updating, and deleting admins.
+ * Provides an interface to get and set the selected admin and admin mode, form state, and admin data.
+ *
+ * @returns {Object} An object containing the selected admin, admin mode, form state, admin data, and functions for creating, updating, and deleting an admin.
+ */
 export function useAdmins() {
   // State for selected admin and admin mode
   const [selectedAdmin, setSelectedAdmin] = useState(null);
@@ -71,7 +77,7 @@ export function useAdmins() {
   });
 
   // Handle change for form input
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
@@ -149,7 +155,7 @@ export function useAdmins() {
     form: {
       state: formState,
       setState: setFormState,
-      handleChange: handleChange,
+      handleChange: handleInputChange,
     },
     query: {
       loading: loading,

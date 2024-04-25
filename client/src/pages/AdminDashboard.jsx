@@ -41,9 +41,7 @@ export default function AdminDashboard() {
                   </Listings>
                 )}
                 {activeMenu === "admins" && (
-                  <AdminsList>
-                    <Toolbar title={"Admins"} />
-                  </AdminsList>
+                  <AdminsList />
                 )}
               </div>
             </div>
