@@ -68,11 +68,6 @@ export function useToolbarState() {
       mode: categoryMode,
       setMode: setCategory,
     },
-    sort: {
-      type: sortType,
-      options: sortOptions,
-      set: setSort,
-    },
     list: {
       type: activeMenu,
       set: setMenu,
@@ -80,6 +75,11 @@ export function useToolbarState() {
     search: {
       term: searchTerm,
       set: setSearch,
+    },
+    sort: {
+      type: sortType,
+      options: sortOptions,
+      set: setSort,
     },
   };
 }
