@@ -13,6 +13,8 @@ export function ToolbarButtons({
   setCategoryMode,
   productMode,
   setProductMode,
+  mode,
+  setMode,
   children,
 }) {
   // Dropdown menu open state
@@ -52,7 +54,8 @@ export function ToolbarButtons({
         <button
           className={`toolbar-btn ${
             (activeMenu === "categories" && categoryMode === "create") ||
-            (activeMenu === "products" && productMode === "create")
+            (activeMenu === "products" && productMode === "create") ||
+            (activeMenu === "admins" && mode === "create")
               ? "toolbar-btn--selected disabled"
               : ""
           }`}
@@ -61,6 +64,8 @@ export function ToolbarButtons({
               setCategoryMode({ mode: "create", category: null });
             } else if (activeMenu === "products") {
               setProductMode({ mode: "create", product: null });
+            } else if (activeMenu === "admins") {
+              setMode("create");
             }
           }}
         >

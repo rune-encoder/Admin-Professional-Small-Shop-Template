@@ -10,7 +10,7 @@ import {
   Searchbar,
 } from "./components";
 
-export function Toolbar({ title }) {
+export function Toolbar({ title, mode, setMode }) {
   const {
     product: { mode: productMode, setMode: setProductMode },
     category: { mode: categoryMode, setMode: setCategoryMode },
@@ -32,6 +32,8 @@ export function Toolbar({ title }) {
           setCategoryMode={setCategoryMode}
           productMode={productMode}
           setProductMode={setProductMode}
+          mode={mode}
+          setMode={setMode}
         >
           {/* Dropdown Menu */}
           <DropdownMenu
