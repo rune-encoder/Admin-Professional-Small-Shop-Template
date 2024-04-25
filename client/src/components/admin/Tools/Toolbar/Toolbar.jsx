@@ -14,9 +14,9 @@ export function Toolbar({ title }) {
   const {
     product: { mode: productMode, setMode: setProductMode },
     category: { mode: categoryMode, setMode: setCategoryMode },
-    sort: { type: sortType, options: sortOptions, set: setSortType },
     list: { type: activeMenu, set: changeMenuDisplay },
     search: { term: searchTerm, set: setSearchTerm },
+    sort: { type: sortType, options: sortOptions, set: setSortType },
   } = useToolbarState();
 
   return (
