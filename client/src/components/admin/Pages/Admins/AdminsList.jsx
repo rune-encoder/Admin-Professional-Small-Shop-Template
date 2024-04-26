@@ -172,9 +172,9 @@ export function AdminsList({ children }) {
           ) : null}
         </div>
 
-        <div className="listings--wrapper" data-boolean={dataBoolean}>
+        <div className="list--wrapper" data-boolean={dataBoolean}>
           <Toolbar title={"Admins"} mode={adminMode} setMode={setAdminMode} />
-          <div className="listings">
+          <div className="list">
             {admins.map((admin) => (
               <div
                 className="item-row--admins"

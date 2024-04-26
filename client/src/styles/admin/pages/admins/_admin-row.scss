@@ -1,0 +1,17 @@
+// Summary: This contains styles used in AdminsList.jsx
+// Styles from `_list.scss` are extended and applied in AdminsList.jsx.
+
+// ADMIN: ITEM-CELL GRID SIZES
+// Note: This class carries over the styles from `.item-row` in `_list.scss`.
+// Applys changes to the grid-template-columns to define the layout.
+// Usage: Used to specify the size of each cell in the row and add other styles.
+.item-row--admins {
+  grid-template-columns: 30% 30% 20% 20%;
+}
+
+// Extends the styles of the value.
+// Applys changes to the font-size and line-height, and font-weight.
+// Note: This class carries over the styles from `.item-value` in `_list.scss`.
+.item-value--admins {
+  @include set-typography("normal", 3, $base-line-height);
+}
