@@ -1,4 +1,5 @@
 // ! Revisit: Working and Refactoring
+// ! Note: Adjust rules for deleting admin and on backend
 // Impport Custom Hooks
 import { useAdmins } from "./hooks/useAdmins";
 
