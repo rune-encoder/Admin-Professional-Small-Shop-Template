@@ -246,12 +246,3 @@ textarea.control__item-value {
   border-radius: $border-radius-sm;
   width: 100%;
 }
-
-// !==================================
-.item-row--admins {
-  grid-template-columns: 30% 30% 20% 20% ;
-}
-
-.item-value--admins {
-  @include set-typography("normal", 3, $base-line-height);
-}

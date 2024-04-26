@@ -13,7 +13,7 @@ export function ProductsList() {
   }
 
   return (
-    <div className="listings">
+    <div className="list">
       {sortedProducts.map((product) => (
         <ProductRow key={product._id} product={product} />
       ))}

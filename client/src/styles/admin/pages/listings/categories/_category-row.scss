@@ -1,8 +1,8 @@
 // Summary: This contains styles used in CategoryRow.jsx.
-// Styles from `_listings.scss` are extended and applied in CategoryRow.jsx.
+// Styles from `_list.scss` are extended and applied in CategoryRow.jsx.
 
 // CATEGORIES: ITEM-CELL GRID SIZES
-// Note: This class carries over the styles from `.item-row` in `listings.scss`.
+// Note: This class carries over the styles from `.item-row` in `_list.scss`.
 // Applys changes to the grid-template-columns to define the layout.
 // Usage: Used to specify the size of each cell in the row and add other styles.
 .item-row--category {
@@ -11,7 +11,7 @@
 
 // Extends the styles of the value.
 // Applys changes to the font-size and line-height, and font-weight.
-// Note: This class carries over the styles from `.item-value` in `listings.scss`.
+// Note: This class carries over the styles from `.item-value` in `_list.scss`.
 .item-value--category {
   @include set-typography("normal", 3, $base-line-height);
 }

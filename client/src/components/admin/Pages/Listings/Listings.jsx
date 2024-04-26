@@ -29,7 +29,7 @@ export function Listings({ children }) {
           ) : null}
         </div>
 
-        <div className="listings--wrapper" data-boolean={dataBoolean}>
+        <div className="list--wrapper" data-boolean={dataBoolean}>
           {/* Toolbar */}
           {children}
           {activeMenu === "products" && <ProductsList />}

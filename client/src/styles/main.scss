@@ -2,47 +2,49 @@
 @use "sass:map";
 @use "sass:list";
 @use "sass:string";
-@use 'sass:math';
-@use 'sass:meta';
-@import "./abstracts/functions";
-@import "./abstracts/variables";
-@import "./abstracts/mixins";
-@import "./abstracts/placeholders";
+@use "sass:math";
+@use "sass:meta";
+@import "./shared/abstracts/functions";
+@import "./shared/abstracts/variables";
+@import "./shared/abstracts/mixins";
+@import "./shared/abstracts/placeholders";
 
-@import "./vendor/google-fonts";
-@import "./vendor/_bootstrap/index.scss";
+@import "./shared/vendor/google-fonts";
+@import "./shared/vendor/_bootstrap/index.scss";
 
-@import "./base/reset";
-@import "./base/root";
-@import "./base/base";
-@import "./base/typography";
+@import "./shared/base/reset";
+@import "./shared/base/root";
+@import "./shared/base/base";
+@import "./shared/base/typography";
 
-@import "./components/scrollbar";
+@import "./shared/components/scrollbar";
+@import "./shared/components/carousel";
 
-@import "./components/admin/login";
-@import "./components/admin/header";
-@import "./components/admin/sidebar";
-@import "./components/admin/error";
-@import "./components/admin/tools/toolbar";
-@import "./components/admin/tools/action-buttons";
+@import "./admin/pages/login";
+@import "./admin/layout/header";
+@import "./admin/layout/sidebar";
+@import "./admin/layout/toolbar";
 
-@import "./pages//admin//listings";
+@import "./admin/components/error";
+@import "./admin/components/action-buttons";
 
-@import "./layout/admin/test";
+@import "./admin/components/list";
+@import "./admin/components/control-item";
 
+@import "./admin/layout/admin-layout";
 
-@import "./components/admin/pages/listings/products/product-row";
-@import "./components/admin/pages/listings/products/control-item";
-@import "./components/admin/pages/listings/products/image-preview";
-@import "./components/admin/pages/listings/products/image-carousel";
+@import "./admin/pages/listings/products/product-row";
+@import "./admin/pages/listings/products/image-preview";
+@import "./admin/pages/listings/products/image-carousel";
 
-@import "./components/admin/pages/listings/categories/category-row";
-@import "./components/admin/pages/listings/categories/create-category";
+@import "./admin/pages/listings/categories/category-row";
+@import "./admin/pages/listings/categories/create-category";
 
-@import './carousel';
+@import "./admin/pages/admins/admin-row";
+
 @import "./shame";
 
-// !Revisit
+// !Revisit DELETE OR MOVE
 // DARK THEME COLORS
 .dark {
   @include apply-theme-colors($dark-theme);

@@ -10,7 +10,7 @@ export function CategoriesList() {
     useCategories();
 
   return (
-    <div className="listings">
+    <div className="list">
       {categoryMode === "create" && (
         <CategoryCreate formState={formState} setFormState={setFormState} />
       )}

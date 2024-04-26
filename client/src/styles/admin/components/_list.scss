@@ -4,8 +4,8 @@ $listings-row-width: 100%;
 // ==============================
 // LIST: CONTAINER
 // ==============================
-// Container for all listings. (Products, Categories)
-.listings {
+// Container for all lists. (Products, Categories)
+.list {
   @include apply-font-family("roboto-condensed");
 
   z-index: 0;

@@ -2,6 +2,14 @@
 // !Revisit: Important Layout Structure.
 // !Important =======================================
 
+// Layout Structure
+// .content
+//  .content__inner
+//    .content__main
+//    .admin-page--wrapper
+//      .control-item--wrapper
+//    .list--wrapper
+
 // WRAPPER FOR APP'S HEADER, MAIN CONTENT, AND FOOTER (EXCLUDES SIDEBAR)
 .content {
   @include apply-flex(column);
@@ -51,7 +59,7 @@
 }
 
 // ! Revisit: Fix media querys IMPORTANT
-.listings--wrapper {
+.list--wrapper {
   @include apply-flex(column);
 
   position: relative;
